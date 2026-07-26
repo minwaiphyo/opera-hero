@@ -17,11 +17,11 @@ here.
 | Field | Current value |
 |---|---|
 | Active milestone | M1 — Camera laboratory |
-| Milestone status | Not started |
+| Milestone status | In progress |
 | Latest completed milestone | M0 — Decisions and baseline |
 | Current vertical slice | None |
 | Exhibition readiness | 1 — Development shell runs |
-| Last updated | 2026-07-24 |
+| Last updated | 2026-07-26 |
 
 ### Readiness scale
 
@@ -41,7 +41,7 @@ here.
 | ID | Milestone | Status | Progress | Evidence |
 |---|---|---|---:|---|
 | M0 | Decisions and baseline | Complete | 100% | [`verification/m0-baseline.md`](./verification/m0-baseline.md) |
-| M1 | Camera laboratory | Not started | 0% | — |
+| M1 | Camera laboratory | In progress | 15% | [`verification/m1-increment-1.md`](./verification/m1-increment-1.md) |
 | M2 | Landmark laboratory | Blocked by M1 | 0% | — |
 | M3 | Gesture scoring laboratory | Blocked by M2 | 0% | — |
 | M4 | Gameplay state-machine simulator | Blocked by M0 | 0% | — |
@@ -80,6 +80,8 @@ feature to its source, tests, and proof.
 | M0-005 | Automated quality pipeline | M0 | Complete | [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml), [`eslint.config.js`](../../eslint.config.js), [`playwright.config.ts`](../../playwright.config.ts), [`vitest.config.ts`](../../vitest.config.ts) | Unit, build, and browser suites | EV-M0-001–EV-M0-006 |
 | M0-006 | Browser API availability | M0 | Complete | [`src/app/App.tsx`](../../src/app/App.tsx) | Manual target-browser check | EV-M0-011 |
 | M0-007 | Camera and audio diagnostic controls | M0 | Complete | [`src/app/HardwareChecks.tsx`](../../src/app/HardwareChecks.tsx), [`src/styles.css`](../../src/styles.css) | [`src/app/HardwareChecks.test.tsx`](../../src/app/HardwareChecks.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M0-012–EV-M0-016 |
+| M1-001 | Camera domain contracts, error model, and capture constraints | M1 | Complete | [`src/camera/cameraTypes.ts`](../../src/camera/cameraTypes.ts), [`src/camera/cameraErrors.ts`](../../src/camera/cameraErrors.ts), [`src/camera/cameraConstraints.ts`](../../src/camera/cameraConstraints.ts) | [`src/camera/cameraErrors.test.ts`](../../src/camera/cameraErrors.test.ts), [`src/camera/cameraConstraints.test.ts`](../../src/camera/cameraConstraints.test.ts) | EV-M1-001–EV-M1-004 |
+| M1-002 | M0/M1 development navigation scaffold | M1 | Complete | [`src/app/DevelopmentNav.tsx`](../../src/app/DevelopmentNav.tsx), [`src/app/routes.ts`](../../src/app/routes.ts), [`src/labs/camera/CameraLabPlaceholder.tsx`](../../src/labs/camera/CameraLabPlaceholder.tsx), [`src/app/App.tsx`](../../src/app/App.tsx) | [`src/app/routes.test.ts`](../../src/app/routes.test.ts), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M1-003–EV-M1-005 |
 
 ### Registry rules
 
@@ -175,6 +177,11 @@ evidence that it passed.
 | 2026-07-24 | EV-M0-012 | M0 | Camera diagnostic lifecycle suite | jsdom / Vitest 4.1.0 | Passed | Start, explicit stop, unmount cleanup, and permission denial covered |
 | 2026-07-24 | EV-M0-013–016 | M0 | Physical camera, permission, and audio checks | Chrome 150 / Target A | Passed | Project-owner confirmation |
 | 2026-07-24 | EV-M0-017 | M0 | Provisional display decision | Target A | Passed | Laptop selected; television deferred |
+| 2026-07-26 | EV-M1-001 | M1 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 1 |
+| 2026-07-26 | EV-M1-002 | M1 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 1 |
+| 2026-07-26 | EV-M1-003 | M1 | Unit suite | jsdom / Vitest 4.1.0 | Passed | 20 tests across 5 files |
+| 2026-07-26 | EV-M1-004 | M1 | Production build | Target A / Vite 8.0.13 | Passed | Increment 1 |
+| 2026-07-26 | EV-M1-005 | M1 | M0/M1 navigation smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
 
 Recommended evidence ID format: `EV-M2-001`.
 

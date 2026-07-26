@@ -17,6 +17,8 @@ This folder is the project-management and engineering record for Opera Hero.
   plan for the proposed 1 August session.
 - [M0 verification](./verification/m0-baseline.md) — completed evidence for the system
   baseline milestone.
+- [M1 Increment 1 verification](./verification/m1-increment-1.md) — camera contracts,
+  navigation boundary, and automated evidence.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.
