@@ -71,6 +71,8 @@ feature to its source, tests, and proof.
 | PLAN-001 | End-to-end architecture proposal | Planning | Complete | [`ARCHITECTURE.md`](./ARCHITECTURE.md) | Review only | Architecture sections 1–16 |
 | PLAN-002 | Incremental delivery roadmap | Planning | Complete | [`ROADMAP.md`](./ROADMAP.md) | Review only | Milestones M0–M10 defined |
 | PLAN-003 | Development traceability ledger | Planning | Complete | [`DEVELOPMENT_STATUS.md`](./DEVELOPMENT_STATUS.md) | Review only | Ledger structure initialized |
+| PLAN-004 | Dan-role cultural gameplay scope | Planning | Complete | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) | Stakeholder scope review | Three interactions recorded; practitioner detail pending |
+| PLAN-005 | Practitioner reference-capture plan | Planning | Complete | [`practitioner-session-plan.md`](./practitioner-session-plan.md) | Session checklist review | Proposed 1 August session prepared |
 | M0-001 | Strict React/TypeScript application shell | M0 | Complete | [`package.json`](../../package.json), [`src/main.tsx`](../../src/main.tsx), [`vite.config.ts`](../../vite.config.ts) | Build and type checks | EV-M0-001, EV-M0-004 |
 | M0-002 | Browser capability collector | M0 | Complete | [`src/platform/capabilities.ts`](../../src/platform/capabilities.ts) | [`src/platform/capabilities.test.ts`](../../src/platform/capabilities.test.ts) | EV-M0-003 |
 | M0-003 | Hardware baseline dashboard | M0 | Complete | [`src/app/App.tsx`](../../src/app/App.tsx), [`src/styles.css`](../../src/styles.css) | [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M0-005, EV-M0-006 |
@@ -200,6 +202,9 @@ substantial trade-off reasoning.
 | 2026-07-24 | DEC-003 | M0 | Use Google Chrome as provisional kiosk browser | Already installed, Chromium API support, predictable Windows kiosk mode | [`hardware-baseline.md`](./hardware-baseline.md) |
 | 2026-07-24 | DEC-004 | M0 | Use sustained camera presence to enter welcome | Supports unmanned operation while limiting false starts | [`hardware-baseline.md`](./hardware-baseline.md) |
 | 2026-07-24 | DEC-005 | M0 | Treat the laptop and integrated camera as Target A | Allows incremental hardware validation now | [`hardware-baseline.md`](./hardware-baseline.md) |
+| 2026-07-26 | DEC-006 | Planning | Focus the experience on the female Dan role | Stakeholder direction narrows cultural and technical scope | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
+| 2026-07-26 | DEC-007 | Planning | Use Lotus Finger, door-opening actions, and water sleeves as the three interactions | Stakeholder-selected movement progression | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
+| 2026-07-26 | DEC-008 | Planning | Treat practitioner footage as canonical reference, not a sufficient training dataset | One expert reference does not represent visitor variation | [`practitioner-session-plan.md`](./practitioner-session-plan.md) |
 
 Recommended decision ID format: `DEC-###`.
 
@@ -225,10 +230,11 @@ Technical completion does not imply cultural approval.
 | Content ID | Item | Draft source | Reviewer | Status | Approved artifact |
 |---|---|---|---|---|---|
 | — | Story | Not supplied | Not assigned | Pending | — |
-| — | Gesture 1 | Not supplied | Not assigned | Pending | — |
-| — | Gesture 2 | Not supplied | Not assigned | Pending | — |
-| — | Gesture 3 | Not supplied | Not assigned | Pending | — |
-| — | Costume and makeup | Not supplied | Not assigned | Pending | — |
+| ROLE-DAN | Female Dan role focus | Organisers / Kong Chow Wui Koon stakeholder consultation | Master Aw Yeong Peng Mun proposed | Under review | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
+| GESTURE-01 | The Lotus Finger | Stakeholder-selected | Master Aw Yeong Peng Mun proposed | Under review | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
+| GESTURE-02 | Actions to open the door | Stakeholder-selected | Master Aw Yeong Peng Mun proposed | Under review | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
+| GESTURE-03 | The water sleeves | Stakeholder-selected | Master Aw Yeong Peng Mun proposed | Under review | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
+| COSTUME-01 | Physical Dan-role costume and water sleeves | Stakeholder rental offer | Master Aw Yeong Peng Mun proposed | Under review | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
 | — | Narration and pronunciation | Not supplied | Not assigned | Pending | — |
 
 Allowed approval values:

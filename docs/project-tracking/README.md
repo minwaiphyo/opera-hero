@@ -11,6 +11,10 @@ This folder is the project-management and engineering record for Opera Hero.
   mapping, evidence, decisions, and blockers.
 - [Hardware baseline](./hardware-baseline.md) — provisional exhibition hardware and
   display assumptions.
+- [Cultural gameplay scope](./cultural-gameplay-scope.md) — confirmed Dan-role focus,
+  three movement levels, and cultural approval gates.
+- [Practitioner session plan](./practitioner-session-plan.md) — capture and interview
+  plan for the proposed 1 August session.
 - [M0 verification](./verification/m0-baseline.md) — completed evidence for the system
   baseline milestone.
 
