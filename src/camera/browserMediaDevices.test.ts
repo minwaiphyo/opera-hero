@@ -38,4 +38,34 @@ describe("BrowserMediaDevices", () => {
       name: "NotFoundError",
     });
   });
+
+  it("enumerates devices through the browser boundary", async () => {
+    const devices = [{ kind: "videoinput" }] as MediaDeviceInfo[];
+    const enumerateDevices = vi.fn().mockResolvedValue(devices);
+    const adapter = new BrowserMediaDevices(
+      { enumerateDevices } as unknown as MediaDevices,
+      true,
+    );
+
+    await expect(adapter.listDevices()).resolves.toBe(devices);
+  });
+
+  it("subscribes and unsubscribes from browser device changes", () => {
+    const addEventListener = vi.fn();
+    const removeEventListener = vi.fn();
+    const listener = vi.fn();
+    const adapter = new BrowserMediaDevices(
+      {
+        addEventListener,
+        removeEventListener,
+      } as unknown as MediaDevices,
+      true,
+    );
+
+    const unsubscribe = adapter.subscribeToDeviceChanges(listener);
+    expect(addEventListener).toHaveBeenCalledWith("devicechange", listener);
+
+    unsubscribe();
+    expect(removeEventListener).toHaveBeenCalledWith("devicechange", listener);
+  });
 });

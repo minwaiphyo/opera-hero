@@ -39,7 +39,11 @@ function createFakeStream(trackCount = 1) {
 function createPort(
   requestStream: MediaDevicesPort["requestStream"],
 ): MediaDevicesPort {
-  return { requestStream };
+  return {
+    requestStream,
+    listDevices: vi.fn().mockResolvedValue([]),
+    subscribeToDeviceChanges: vi.fn(() => () => undefined),
+  };
 }
 
 function deferred<T>(): Deferred<T> {

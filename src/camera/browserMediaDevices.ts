@@ -30,4 +30,23 @@ export class BrowserMediaDevices implements MediaDevicesPort {
 
     return this.#mediaDevices.getUserMedia(constraints);
   }
+
+  listDevices(): Promise<MediaDeviceInfo[]> {
+    if (!this.#mediaDevices?.enumerateDevices) {
+      return Promise.resolve([]);
+    }
+
+    return this.#mediaDevices.enumerateDevices();
+  }
+
+  subscribeToDeviceChanges(listener: () => void): () => void {
+    if (!this.#mediaDevices?.addEventListener) {
+      return () => undefined;
+    }
+
+    this.#mediaDevices.addEventListener("devicechange", listener);
+    return () => {
+      this.#mediaDevices?.removeEventListener("devicechange", listener);
+    };
+  }
 }
