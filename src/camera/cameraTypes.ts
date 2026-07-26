@@ -48,6 +48,7 @@ export type CameraErrorCode =
   | "request-cancelled"
   | "insecure-context"
   | "device-disconnected"
+  | "service-disposed"
   | "start-failed";
 
 export type CameraFailure = {

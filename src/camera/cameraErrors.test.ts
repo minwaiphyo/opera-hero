@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { createCameraFailure, normalizeCameraError } from "./cameraErrors";
+import {
+  CameraServiceError,
+  createCameraFailure,
+  normalizeCameraError,
+} from "./cameraErrors";
 
 describe("camera error normalization", () => {
   it.each([
@@ -37,5 +41,11 @@ describe("camera error normalization", () => {
       requiresTechnician: false,
       diagnosticName: "device-disconnected",
     });
+  });
+
+  it("preserves an existing CameraServiceError failure", () => {
+    const failure = createCameraFailure("service-disposed");
+
+    expect(normalizeCameraError(new CameraServiceError(failure))).toBe(failure);
   });
 });

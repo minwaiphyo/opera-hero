@@ -9,15 +9,15 @@ export function CameraLabPlaceholder() {
           <p className="eyebrow">Opera Hero · Milestone M1</p>
           <h1>Camera laboratory</h1>
           <p className="lede">
-            The camera contracts and error model are being established first.
-            Live stream lifecycle controls arrive in the next increments.
+            The tested camera lifecycle service now exists behind this page.
+            Live preview controls arrive after device discovery is implemented.
           </p>
         </div>
         <div className="readiness">
           <span className="readiness-dot pending" aria-hidden="true" />
           <div>
-            <strong>Increment 1 implemented</strong>
-            <span>No live camera is activated on this page yet</span>
+            <strong>Increment 2 implemented</strong>
+            <span>The service is intentionally not connected to this page yet</span>
           </div>
         </div>
       </header>
@@ -28,36 +28,36 @@ export function CameraLabPlaceholder() {
             <p className="section-number">Current boundary</p>
             <h2 id="m1-boundary-title">What exists after this increment</h2>
           </div>
-          <span className="tag">Pure domain logic</span>
+          <span className="tag">Headless service</span>
         </div>
         <div className="placeholder-grid">
           <article>
-            <h3>Lifecycle vocabulary</h3>
+            <h3>Single-stream ownership</h3>
             <p>
-              Typed states, sessions, settings, events, stop reasons, and
-              application-safe failures.
+              Repeated starts share one request, while stop, restart, and
+              disposal release every track deterministically.
             </p>
           </article>
           <article>
-            <h3>Error normalization</h3>
+            <h3>Concurrency safety</h3>
             <p>
-              Browser-specific camera exceptions become stable, testable error
-              codes with controlled messages.
+              A late camera request cannot reactivate the camera after a stop,
+              restart, or session reset.
             </p>
           </article>
           <article>
-            <h3>Capture request</h3>
+            <h3>Interruption reporting</h3>
             <p>
-              A validated 720p/30 FPS request that explicitly excludes
-              microphone access.
+              Ended tracks transition to an interrupted state and publish a
+              safe device-disconnected event.
             </p>
           </article>
         </div>
       </section>
 
       <footer>
-        Live camera ownership begins in Increment 2. Device discovery and
-        USB-camera selection follow in Increment 3.
+        Device discovery and USB-camera selection follow in Increment 3. The
+        live laboratory interface follows in Increment 4.
       </footer>
     </main>
   );

@@ -60,7 +60,7 @@ test("opens the M1 camera laboratory placeholder", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Camera laboratory" }),
   ).toBeVisible();
-  await expect(page.getByText("Increment 1 implemented")).toBeVisible();
+  await expect(page.getByText("Increment 2 implemented")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "M0 System baseline" }),
   ).toBeVisible();

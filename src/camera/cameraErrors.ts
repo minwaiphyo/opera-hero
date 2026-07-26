@@ -48,6 +48,12 @@ const ERROR_DEFINITIONS: Record<CameraErrorCode, ErrorDefinition> = {
     recoverable: true,
     requiresTechnician: false,
   },
+  "service-disposed": {
+    code: "service-disposed",
+    message: "The camera service has already been shut down.",
+    recoverable: false,
+    requiresTechnician: false,
+  },
   "start-failed": {
     code: "start-failed",
     message: "The camera could not be started.",
@@ -55,6 +61,16 @@ const ERROR_DEFINITIONS: Record<CameraErrorCode, ErrorDefinition> = {
     requiresTechnician: false,
   },
 };
+
+export class CameraServiceError extends Error {
+  readonly failure: CameraFailure;
+
+  constructor(failure: CameraFailure) {
+    super(failure.message);
+    this.name = "CameraServiceError";
+    this.failure = failure;
+  }
+}
 
 const DOM_ERROR_TO_CODE: Readonly<Record<string, CameraErrorCode>> = {
   NotAllowedError: "permission-denied",
@@ -80,6 +96,10 @@ export function createCameraFailure(
 }
 
 export function normalizeCameraError(error: unknown): CameraFailure {
+  if (error instanceof CameraServiceError) {
+    return error.failure;
+  }
+
   const diagnosticName = readErrorName(error);
   const code: CameraErrorCode =
     DOM_ERROR_TO_CODE[diagnosticName] ?? "start-failed";
