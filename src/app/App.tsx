@@ -3,7 +3,7 @@ import {
   collectBrowserBaseline,
   requiredCapabilitiesPass,
 } from "../platform/capabilities";
-import { CameraLabPlaceholder } from "../labs/camera/CameraLabPlaceholder";
+import { CameraLabPage } from "../labs/camera/CameraLabPage";
 import { DevelopmentNav } from "./DevelopmentNav";
 import { HardwareChecks } from "./HardwareChecks";
 import { resolveAppRoute } from "./routes";
@@ -25,7 +25,7 @@ export function App() {
   const route = resolveAppRoute(window.location.pathname);
 
   if (route === "camera-lab") {
-    return <CameraLabPlaceholder />;
+    return <CameraLabPage />;
   }
 
   return <BaselinePage />;

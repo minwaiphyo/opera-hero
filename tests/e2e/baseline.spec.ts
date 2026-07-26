@@ -54,13 +54,16 @@ test("shows the M0 baseline and required capability result", async ({ page }) =>
   expect(externalRequests).toEqual([]);
 });
 
-test("opens the M1 camera laboratory placeholder", async ({ page }) => {
+test("opens the M1 camera laboratory", async ({ page }) => {
   await page.goto("/lab/camera");
 
   await expect(
     page.getByRole("heading", { name: "Camera laboratory" }),
   ).toBeVisible();
-  await expect(page.getByText("Increment 3 implemented")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Start camera" })).toBeVisible();
+  await expect(page.getByLabel("Available camera")).toBeVisible();
+  await expect(page.getByText("Preview is stopped")).toBeVisible();
+  await expect(page.getByText("No recording or upload")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "M0 System baseline" }),
   ).toBeVisible();
