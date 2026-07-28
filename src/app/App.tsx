@@ -3,7 +3,10 @@ import {
   collectBrowserBaseline,
   requiredCapabilitiesPass,
 } from "../platform/capabilities";
+import { CameraLabPage } from "../labs/camera/CameraLabPage";
+import { DevelopmentNav } from "./DevelopmentNav";
 import { HardwareChecks } from "./HardwareChecks";
+import { resolveAppRoute } from "./routes";
 
 const provisionalProfile = [
   ["Computer", "Lenovo Legion Slim 7 16IRH8"],
@@ -19,11 +22,22 @@ const provisionalProfile = [
 ] as const;
 
 export function App() {
+  const route = resolveAppRoute(window.location.pathname);
+
+  if (route === "camera-lab") {
+    return <CameraLabPage />;
+  }
+
+  return <BaselinePage />;
+}
+
+function BaselinePage() {
   const baseline = useMemo(() => collectBrowserBaseline(), []);
   const ready = requiredCapabilitiesPass(baseline);
 
   return (
     <main>
+      <DevelopmentNav activePage="m0" />
       <header className="hero">
         <div>
           <p className="eyebrow">Opera Hero · Milestone M0</p>

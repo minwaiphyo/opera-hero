@@ -33,6 +33,22 @@ The eventual booth display will probably be a television, but its model, physica
 dimensions, native resolution, refresh rate, overscan behavior, and viewing distance
 are not yet confirmed. Target A remains the laptop display until Target B is available.
 
+## M1 camera validation on Target A
+
+Manual camera-laboratory review on 2026-07-28 confirmed:
+
+- the integrated camera can show the visitor's head, shoulders, arms, and hands within
+  the positioning guide at approximately 1–2 metres;
+- delivered resolution, frame rate, and aspect ratio are reported by the live camera
+  track;
+- stopping, restarting, navigating away, blocking permission, restoring permission,
+  and manual recovery all produce controlled states;
+- the physical standing zone remains provisional until the final camera mount and
+  exhibition USB camera are available.
+
+The one-hour Target A stability result is recorded separately in
+[`verification/m1-increment-6.md`](./verification/m1-increment-6.md).
+
 ## Browser decision
 
 Use stable Google Chrome as the provisional development and kiosk browser.
@@ -70,7 +86,7 @@ camera start/stop and framing diagnostics only.
 
 ## Assumptions requiring later validation
 
-- The integrated camera field of view can include head, shoulders, arms, and hands at
+- The final USB camera field of view can include head, shoulders, arms, and hands at
   1–2 metres.
 - The laptop can be mounted at a suitable height and angle.
 - Exhibition lighting provides adequate front illumination.
