@@ -85,6 +85,7 @@ export function CameraDiagnostics({
           label="Facing mode"
           value={session?.settings.facingMode ?? "—"}
         />
+        <Diagnostic label="Aspect ratio" value={formatAspectRatio(session)} />
         <Diagnostic label="Uptime" value={`${uptimeSeconds}s`} />
         <Diagnostic
           label="Session"
@@ -126,6 +127,30 @@ function formatDeliveredSettings(session: CameraSession | null): string {
 
 function formatNumber(value: number): string {
   return Number.isInteger(value) ? String(value) : value.toFixed(1);
+}
+
+function formatAspectRatio(session: CameraSession | null): string {
+  if (!session) {
+    return "—";
+  }
+
+  const { aspectRatio, width, height } = session.settings;
+  if (width && height && Number.isInteger(width) && Number.isInteger(height)) {
+    const divisor = greatestCommonDivisor(width, height);
+    return `${width / divisor}:${height / divisor}`;
+  }
+
+  const ratio = aspectRatio;
+  return ratio ? `${formatNumber(ratio)}:1` : "Unknown";
+}
+
+function greatestCommonDivisor(first: number, second: number): number {
+  let left = first;
+  let right = second;
+  while (right !== 0) {
+    [left, right] = [right, left % right];
+  }
+  return left;
 }
 
 function shorten(value: string): string {

@@ -45,13 +45,18 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
         <div className="control-column">
           <CameraControls
             devices={camera.devices}
+            failureMessage={camera.failure?.message ?? null}
             loadingDevices={camera.loadingDevices}
+            onCancelRecovery={camera.cancelRecovery}
             onRefresh={() => void camera.refreshDevices()}
             onRestart={() => void camera.restart()}
+            onRetryNow={() => void camera.retryNow()}
             onSelectDevice={(deviceId) => void camera.selectDevice(deviceId)}
             onStart={() => void camera.start()}
             onStop={camera.stop}
             operationPending={camera.operationPending}
+            recoveryAttempt={camera.recoveryAttempt}
+            recoveryScheduled={camera.recoveryScheduled}
             selectedDeviceId={camera.selectedDeviceId}
             status={camera.status}
           />
@@ -66,8 +71,8 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
       </section>
 
       <footer>
-        Increment 4 connects the tested camera and device services to this
-        laboratory. Framing metrics and bounded recovery follow in Increment 5.
+        Increment 5 adds a positioning guide, aspect-ratio diagnostics, and
+        bounded camera recovery. Landmark-based framing detection follows in M2.
       </footer>
     </main>
   );

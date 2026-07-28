@@ -7,6 +7,7 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createCameraFailure } from "../../camera/cameraErrors";
 import type {
   CameraConfig,
   CameraDevice,
@@ -141,6 +142,7 @@ describe("CameraLabPage", () => {
 
   afterEach(() => {
     cleanup();
+    vi.useRealTimers();
     vi.restoreAllMocks();
   });
 
@@ -162,6 +164,8 @@ describe("CameraLabPage", () => {
     expect(service.start).toHaveBeenCalledWith(
       expect.objectContaining({ deviceId: "integrated" }),
     );
+    expect(screen.getByText("Positioning guide")).toBeInTheDocument();
+    expect(screen.getByText("16:9")).toBeInTheDocument();
     expect(screen.getByText("Live · local only")).toBeInTheDocument();
     expect(screen.getAllByText("1280 × 720 @ 30 FPS")).toHaveLength(2);
 
@@ -214,5 +218,80 @@ describe("CameraLabPage", () => {
 
     expect(service.dispose).toHaveBeenCalledOnce();
     expect(catalog.unsubscribe).toHaveBeenCalledOnce();
+  });
+
+  it("automatically retries a recoverable failure", async () => {
+    vi.useFakeTimers();
+    const { runtime, service } = createRuntime();
+    render(<CameraLabPage runtimeFactory={() => runtime} />);
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    act(() => {
+      service.emit({ type: "status-changed", status: "error" });
+      service.emit({
+        type: "failure",
+        failure: createCameraFailure("camera-busy"),
+      });
+    });
+
+    expect(screen.getByText("Recovery attempt 1 of 2")).toBeInTheDocument();
+    expect(service.start).not.toHaveBeenCalled();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(750);
+    });
+
+    expect(service.start).toHaveBeenCalledOnce();
+    expect(screen.getByText("Positioning guide")).toBeInTheDocument();
+  });
+
+  it("allows automatic recovery to be cancelled", async () => {
+    vi.useFakeTimers();
+    const { runtime, service } = createRuntime();
+    render(<CameraLabPage runtimeFactory={() => runtime} />);
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    act(() => {
+      service.emit({
+        type: "failure",
+        failure: createCameraFailure("device-disconnected"),
+      });
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Stop recovery" }));
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
+    });
+    expect(service.start).not.toHaveBeenCalled();
+    expect(screen.getByText("Camera needs attention")).toBeInTheDocument();
+  });
+
+  it("does not automatically retry permission denial", async () => {
+    vi.useFakeTimers();
+    const { runtime, service } = createRuntime();
+    render(<CameraLabPage runtimeFactory={() => runtime} />);
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    act(() => {
+      service.emit({
+        type: "failure",
+        failure: createCameraFailure("permission-denied"),
+      });
+    });
+
+    expect(screen.getByText("Camera needs attention")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Stop recovery" }),
+    ).not.toBeInTheDocument();
+    await act(async () => {
+      await vi.runAllTimersAsync();
+    });
+    expect(service.start).not.toHaveBeenCalled();
   });
 });

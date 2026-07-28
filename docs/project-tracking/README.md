@@ -25,6 +25,8 @@ This folder is the project-management and engineering record for Opera Hero.
   local preferences, and fallback-selection evidence.
 - [M1 Increment 4 verification](./verification/m1-increment-4.md) — live preview,
   lifecycle controls, diagnostics, and manual physical-camera checklist.
+- [M1 Increment 5 verification](./verification/m1-increment-5.md) — positioning
+  guide, aspect-ratio reporting, and bounded camera recovery.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.

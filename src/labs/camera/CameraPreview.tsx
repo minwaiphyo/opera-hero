@@ -34,6 +34,18 @@ export function CameraPreview({ session, status }: CameraPreviewProps) {
         playsInline
         ref={videoRef}
       />
+      {session && (
+        <>
+          <div className="framing-guide" aria-hidden="true">
+            <div className="framing-head" />
+            <div className="framing-shoulders" />
+            <div className="framing-hand framing-hand-left" />
+            <div className="framing-hand framing-hand-right" />
+            <span>Position head, shoulders and hands inside the guide</span>
+          </div>
+          <span className="guide-badge">Positioning guide</span>
+        </>
+      )}
       {!session && (
         <div className="lab-camera-empty">
           <span aria-hidden="true" />

@@ -1,4 +1,5 @@
 import type { CameraDevice, CameraStatus } from "../../camera/cameraTypes";
+import { MAX_CAMERA_RECOVERY_ATTEMPTS } from "../../camera/cameraRecovery";
 
 type CameraControlsProps = {
   devices: CameraDevice[];
@@ -11,6 +12,11 @@ type CameraControlsProps = {
   onRestart: () => void;
   onRefresh: () => void;
   onSelectDevice: (deviceId: string) => void;
+  failureMessage: string | null;
+  recoveryAttempt: number;
+  recoveryScheduled: boolean;
+  onRetryNow: () => void;
+  onCancelRecovery: () => void;
 };
 
 export function CameraControls({
@@ -24,6 +30,11 @@ export function CameraControls({
   onRestart,
   onRefresh,
   onSelectDevice,
+  failureMessage,
+  recoveryAttempt,
+  recoveryScheduled,
+  onRetryNow,
+  onCancelRecovery,
 }: CameraControlsProps) {
   const active = status === "active";
   const transitional =
@@ -74,6 +85,36 @@ export function CameraControls({
           ? "Checking connected cameras…"
           : `${devices.length} camera${devices.length === 1 ? "" : "s"} detected. Names may appear only after permission is granted.`}
       </p>
+
+      {failureMessage && (
+        <div className="recovery-card" role="alert">
+          <strong>
+            {recoveryScheduled
+              ? `Recovery attempt ${recoveryAttempt} of ${MAX_CAMERA_RECOVERY_ATTEMPTS}`
+              : "Camera needs attention"}
+          </strong>
+          <p>{failureMessage}</p>
+          <div className="recovery-actions">
+            <button
+              className="secondary-button"
+              disabled={operationPending}
+              onClick={onRetryNow}
+              type="button"
+            >
+              Retry now
+            </button>
+            {recoveryScheduled && (
+              <button
+                className="text-button"
+                onClick={onCancelRecovery}
+                type="button"
+              >
+                Stop recovery
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="button-row lab-button-row">
         <button

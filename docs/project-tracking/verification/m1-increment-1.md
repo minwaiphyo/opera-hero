@@ -16,7 +16,7 @@ open, own, stop, restart, enumerate, or recover a live camera stream.
 | Camera lifecycle and event vocabulary | [`cameraTypes.ts`](../../../src/camera/cameraTypes.ts) | Compile-time exhaustiveness and dependent unit tests |
 | Browser camera error normalization | [`cameraErrors.ts`](../../../src/camera/cameraErrors.ts) | [`cameraErrors.test.ts`](../../../src/camera/cameraErrors.test.ts) |
 | Validated video-only capture request | [`cameraConstraints.ts`](../../../src/camera/cameraConstraints.ts) | [`cameraConstraints.test.ts`](../../../src/camera/cameraConstraints.test.ts) |
-| M0/M1 development navigation | [`DevelopmentNav.tsx`](../../../src/app/DevelopmentNav.tsx), [`routes.ts`](../../../src/app/routes.ts), [`CameraLabPlaceholder.tsx`](../../../src/labs/camera/CameraLabPlaceholder.tsx) | [`routes.test.ts`](../../../src/app/routes.test.ts), [`baseline.spec.ts`](../../../tests/e2e/baseline.spec.ts) |
+| M0/M1 development navigation | [`DevelopmentNav.tsx`](../../../src/app/DevelopmentNav.tsx), [`routes.ts`](../../../src/app/routes.ts), [`CameraLabPage.tsx`](../../../src/labs/camera/CameraLabPage.tsx) | [`routes.test.ts`](../../../src/app/routes.test.ts), [`baseline.spec.ts`](../../../tests/e2e/baseline.spec.ts) |
 
 ## Automated evidence
 

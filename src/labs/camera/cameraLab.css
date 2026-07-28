@@ -82,6 +82,90 @@
   transform: scaleX(-1);
 }
 
+.framing-guide {
+  position: absolute;
+  inset: 8% 12% 10%;
+  border: 1px dashed rgba(243, 204, 126, 0.62);
+  border-radius: 46% 46% 18% 18%;
+  pointer-events: none;
+}
+
+.framing-guide::before,
+.framing-guide::after {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: #f3cc7e;
+  content: "";
+}
+
+.framing-guide::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.framing-guide::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.framing-head {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: 17%;
+  aspect-ratio: 0.78;
+  border: 1px solid rgba(243, 204, 126, 0.62);
+  border-radius: 48%;
+  transform: translateX(-50%);
+}
+
+.framing-shoulders {
+  position: absolute;
+  top: 31%;
+  left: 50%;
+  width: 57%;
+  height: 34%;
+  border-top: 1px solid rgba(243, 204, 126, 0.62);
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-50%);
+}
+
+.framing-hand {
+  position: absolute;
+  top: 43%;
+  width: 10%;
+  aspect-ratio: 0.72;
+  border: 1px solid rgba(243, 204, 126, 0.62);
+  border-radius: 48%;
+}
+
+.framing-hand-left {
+  left: 9%;
+  transform: rotate(-12deg);
+}
+
+.framing-hand-right {
+  right: 9%;
+  transform: rotate(12deg);
+}
+
+.framing-guide > span {
+  position: absolute;
+  right: 10%;
+  bottom: 5%;
+  left: 10%;
+  color: rgba(255, 239, 207, 0.88);
+  font-size: clamp(0.62rem, 1.2vw, 0.78rem);
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-shadow: 0 1px 5px #08050d;
+}
+
 .lab-camera-empty {
   position: absolute;
   inset: 0;
@@ -134,6 +218,21 @@
   border: 1px solid rgba(110, 211, 160, 0.34);
   border-radius: 2px;
   color: #c4eed4;
+  background: rgba(8, 5, 13, 0.75);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guide-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 7px 9px;
+  border: 1px solid rgba(243, 204, 126, 0.34);
+  border-radius: 2px;
+  color: #f3d79f;
   background: rgba(8, 5, 13, 0.75);
   font-size: 0.68rem;
   font-weight: 750;
@@ -237,6 +336,48 @@
 
 .lab-button-row {
   flex-wrap: wrap;
+}
+
+.recovery-card {
+  margin-bottom: 16px;
+  padding: 14px;
+  border: 1px solid rgba(243, 204, 126, 0.3);
+  background: rgba(111, 78, 30, 0.12);
+}
+
+.recovery-card strong {
+  color: #f3d79f;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.recovery-card p {
+  margin: 7px 0 12px;
+  color: #c8bacb;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.recovery-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.text-button {
+  border: 0;
+  color: #a99cad;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.text-button:hover {
+  color: #eee5ef;
 }
 
 .camera-failure {
