@@ -129,6 +129,29 @@ describe("CameraService", () => {
     expect(service.getStatus()).toBe("stopped");
   });
 
+  it("closes every track across 50 start and stop cycles", async () => {
+    const openedTracks: FakeTrack[] = [];
+    const requestStream = vi.fn(async () => {
+      const { stream, tracks } = createFakeStream(2);
+      openedTracks.push(...tracks);
+      return stream;
+    });
+    const service = createService(requestStream);
+
+    for (let cycle = 0; cycle < 50; cycle += 1) {
+      await service.start();
+      service.stop();
+    }
+
+    expect(requestStream).toHaveBeenCalledTimes(50);
+    expect(openedTracks).toHaveLength(100);
+    for (const track of openedTracks) {
+      expect(track.stop).toHaveBeenCalledOnce();
+    }
+    expect(service.getSession()).toBeNull();
+    expect(service.getStatus()).toBe("stopped");
+  });
+
   it("restarts by stopping the old session before requesting a new one", async () => {
     const first = createFakeStream();
     const second = createFakeStream();

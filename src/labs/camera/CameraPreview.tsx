@@ -4,10 +4,20 @@ import type { CameraSession, CameraStatus } from "../../camera/cameraTypes";
 type CameraPreviewProps = {
   session: CameraSession | null;
   status: CameraStatus;
+  onVideoElement?: (element: HTMLVideoElement | null) => void;
 };
 
-export function CameraPreview({ session, status }: CameraPreviewProps) {
+export function CameraPreview({
+  session,
+  status,
+  onVideoElement,
+}: CameraPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    onVideoElement?.(videoRef.current);
+    return () => onVideoElement?.(null);
+  }, [onVideoElement]);
 
   useEffect(() => {
     const video = videoRef.current;

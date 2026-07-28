@@ -405,6 +405,55 @@
   color: #9c858c;
 }
 
+.soak-progress {
+  height: 6px;
+  overflow: hidden;
+  margin-bottom: 9px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.soak-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #b77a42, #f3cc7e);
+  transition: width 300ms ease;
+}
+
+.soak-caption {
+  margin: 0 0 17px;
+  color: #807584;
+  font-size: 0.72rem;
+}
+
+.soak-caption strong {
+  color: #d8cbd9;
+  font-family: "Cascadia Code", Consolas, monospace;
+}
+
+.lab-status.stability-stable {
+  border-color: rgba(110, 211, 160, 0.38);
+  color: #88dbae;
+}
+
+.lab-status.stability-attention {
+  border-color: rgba(226, 108, 108, 0.42);
+  color: #ed9191;
+}
+
+.lab-status.stability-collecting {
+  border-color: rgba(243, 204, 126, 0.38);
+  color: #f3d79f;
+}
+
+.stability-note {
+  margin: 15px 0 0;
+  color: #766d7a;
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
 .diagnostic-list {
   display: grid;
   grid-template-columns: 1fr 1fr;

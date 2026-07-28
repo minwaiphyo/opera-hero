@@ -156,6 +156,9 @@ describe("CameraLabPage", () => {
       expect(selector).toHaveValue("integrated");
     });
     expect(screen.getByText(/2 cameras detected/)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Stability monitor" }),
+    ).toBeInTheDocument();
 
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: "Start camera" }));

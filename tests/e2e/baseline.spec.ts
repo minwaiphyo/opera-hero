@@ -65,6 +65,9 @@ test("opens the M1 camera laboratory", async ({ page }) => {
   await expect(page.getByText("Preview is stopped")).toBeVisible();
   await expect(page.getByText("No recording or upload")).toBeVisible();
   await expect(
+    page.getByRole("heading", { name: "Stability monitor" }),
+  ).toBeVisible();
+  await expect(
     page.getByRole("link", { name: "M0 System baseline" }),
   ).toBeVisible();
 });

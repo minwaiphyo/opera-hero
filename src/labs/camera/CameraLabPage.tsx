@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { DevelopmentNav } from "../../app/DevelopmentNav";
 import { CameraControls } from "./CameraControls";
 import { CameraDiagnostics } from "./CameraDiagnostics";
 import { CameraPreview } from "./CameraPreview";
+import { CameraStabilityPanel } from "./CameraStabilityPanel";
 import type { CameraLabRuntimeFactory } from "./cameraLabRuntime";
 import { useCameraLab } from "./useCameraLab";
 import "./cameraLab.css";
@@ -12,6 +14,7 @@ type CameraLabPageProps = {
 
 export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
   const camera = useCameraLab(runtimeFactory);
+  const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
 
   return (
     <main>
@@ -36,7 +39,11 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
 
       <section className="camera-workbench" aria-label="Camera workbench">
         <div className="preview-column">
-          <CameraPreview session={camera.session} status={camera.status} />
+          <CameraPreview
+            onVideoElement={setVideoElement}
+            session={camera.session}
+            status={camera.status}
+          />
           <p className="preview-caption">
             The preview is mirrored to match a visitor’s expected reflection.
             Delivered settings come from the active camera track.
@@ -67,12 +74,17 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
             session={camera.session}
             status={camera.status}
           />
+          <CameraStabilityPanel
+            key={camera.session?.id ?? "idle"}
+            session={camera.session}
+            videoElement={videoElement}
+          />
         </div>
       </section>
 
       <footer>
-        Increment 5 adds a positioning guide, aspect-ratio diagnostics, and
-        bounded camera recovery. Landmark-based framing detection follows in M2.
+        M1 validates acquisition, framing, cleanup, recovery, and long-running
+        camera stability before landmark processing begins in M2.
       </footer>
     </main>
   );
