@@ -42,6 +42,7 @@ main {
 
 .development-nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 42px;
   padding-bottom: 16px;

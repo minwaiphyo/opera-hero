@@ -29,6 +29,8 @@ This folder is the project-management and engineering record for Opera Hero.
   guide, aspect-ratio reporting, and bounded camera recovery.
 - [M1 Increment 6 verification](./verification/m1-increment-6.md) — lifecycle
   stress coverage, live stability metrics, and the final Target A soak procedure.
+- [M2 Increment 1 verification](./verification/m2-increment-1.md) — normalized
+  landmark contracts, worker protocol, deterministic simulator, and laboratory shell.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.

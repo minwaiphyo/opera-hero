@@ -1,0 +1,151 @@
+.simulation-notice {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 260px;
+  padding: 14px 16px;
+  border: 1px solid rgba(118, 188, 223, 0.28);
+  background: rgba(66, 137, 174, 0.07);
+}
+
+.simulation-notice > span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #76bcdf;
+  box-shadow: 0 0 16px rgba(118, 188, 223, 0.65);
+}
+
+.simulation-notice p,
+.simulation-notice strong {
+  display: block;
+  margin: 0;
+}
+
+.simulation-notice p {
+  color: #899da8;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.simulation-notice strong {
+  color: #badceb;
+  font-size: 0.78rem;
+}
+
+.landmark-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(350px, 0.8fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.landmark-preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(118, 188, 223, 0.2);
+  background: #08050d;
+}
+
+.landmark-preview canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.simulation-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 7px 9px;
+  border: 1px solid rgba(118, 188, 223, 0.34);
+  color: #badceb;
+  background: rgba(8, 5, 13, 0.8);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.landmark-preview-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding: 32px;
+  color: #766b7a;
+  text-align: center;
+}
+
+.landmark-preview-empty strong {
+  color: #b9aebc;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.landmark-preview-empty p {
+  max-width: 390px;
+  margin: 8px auto 0;
+  font-size: 0.8rem;
+}
+
+.landmark-toolbar {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  margin-top: 12px;
+  padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.landmark-toolbar label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #a99cad;
+  font-size: 0.74rem;
+}
+
+.landmark-toolbar input {
+  accent-color: #f3cc7e;
+}
+
+.simulation-copy {
+  margin: 0 0 18px;
+  color: #8e8292;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.vision-error {
+  padding: 12px;
+  border: 1px solid rgba(226, 108, 108, 0.35);
+  color: #ed9191;
+  background: rgba(117, 39, 51, 0.13);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 940px) {
+  .landmark-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .simulation-notice {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .landmark-workbench {
+    padding-top: 28px;
+  }
+
+  .landmark-toolbar {
+    align-items: start;
+    flex-direction: column;
+    gap: 9px;
+  }
+}

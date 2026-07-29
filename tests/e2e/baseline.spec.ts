@@ -71,3 +71,22 @@ test("opens the M1 camera laboratory", async ({ page }) => {
     page.getByRole("link", { name: "M0 System baseline" }),
   ).toBeVisible();
 });
+
+test("opens and runs the M2 landmark simulator", async ({ page }) => {
+  await page.goto("/lab/landmarks");
+
+  await expect(
+    page.getByRole("heading", { name: "Landmark laboratory" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("No camera or MediaPipe model is active"),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Start simulation" }).click();
+
+  await expect(page.getByText("Deterministic landmark simulator")).toBeVisible();
+  await expect(page.getByText("94%")).toBeVisible();
+  await expect(page.getByText("good", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "M1 Camera laboratory" }),
+  ).toBeVisible();
+});
