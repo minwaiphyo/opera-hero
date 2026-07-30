@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "empty-zone",
+  "description": "Synthetic empty booth zone with no detected pose or hands.",
+  "source": "synthetic",
+  "containsRecordedImagery": false,
+  "frames": [
+    {
+      "offsetMs": 0,
+      "hands": []
+    },
+    {
+      "offsetMs": 50,
+      "hands": []
+    },
+    {
+      "offsetMs": 100,
+      "hands": []
+    },
+    {
+      "offsetMs": 150,
+      "hands": []
+    },
+    {
+      "offsetMs": 200,
+      "hands": []
+    }
+  ]
+}

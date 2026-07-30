@@ -39,6 +39,8 @@ This folder is the project-management and engineering record for Opera Hero.
   latency, throughput, runtime, and backpressure diagnostics.
 - [M2 Increment 5 verification](./verification/m2-increment-5.md) — provisional
   visitor presence, framing, and landmark tracking-quality classification.
+- [M2 Increment 6A verification](./verification/m2-increment-6a.md) — versioned,
+  image-free deterministic landmark replay contract and strict validation.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.
