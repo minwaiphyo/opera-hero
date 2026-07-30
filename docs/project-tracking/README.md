@@ -41,6 +41,8 @@ This folder is the project-management and engineering record for Opera Hero.
   visitor presence, framing, and landmark tracking-quality classification.
 - [M2 Increment 6A verification](./verification/m2-increment-6a.md) — versioned,
   image-free deterministic landmark replay contract and strict validation.
+- [M2 Increment 6B verification](./verification/m2-increment-6b.md) — common
+  landmark-source adapter and deterministic fake-clock replay playback.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.
