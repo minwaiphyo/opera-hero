@@ -167,7 +167,6 @@ describe("CameraLabPage", () => {
     expect(service.start).toHaveBeenCalledWith(
       expect.objectContaining({ deviceId: "integrated" }),
     );
-    expect(screen.getByText("Positioning guide")).toBeInTheDocument();
     expect(screen.getByText("16:9")).toBeInTheDocument();
     expect(screen.getByText("Live · local only")).toBeInTheDocument();
     expect(screen.getAllByText("1280 × 720 @ 30 FPS")).toHaveLength(2);
@@ -247,7 +246,7 @@ describe("CameraLabPage", () => {
     });
 
     expect(service.start).toHaveBeenCalledOnce();
-    expect(screen.getByText("Positioning guide")).toBeInTheDocument();
+    expect(screen.getByText("Live · local only")).toBeInTheDocument();
   });
 
   it("allows automatic recovery to be cancelled", async () => {

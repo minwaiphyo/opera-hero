@@ -49,18 +49,9 @@ export function CameraPreview({
       />
       <canvas aria-hidden="true" className="pose-overlay" ref={canvasRef} />
       {session && (
-        <>
-          <span className={`pose-badge ${poseStatus}`}>
-            {poseMessage(poseStatus)}
-          </span>
-          <div className="framing-guide" aria-hidden="true">
-            <div className="framing-head" />
-            <div className="framing-shoulders" />
-            <div className="framing-hand framing-hand-left" />
-            <div className="framing-hand framing-hand-right" />
-          </div>
-          <span className="guide-badge">Positioning guide</span>
-        </>
+        <span className={`pose-badge ${poseStatus}`}>
+          {poseMessage(poseStatus)}
+        </span>
       )}
       {!session && (
         <div className="lab-camera-empty">
