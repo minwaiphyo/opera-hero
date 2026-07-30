@@ -42,7 +42,7 @@ here.
 |---|---|---|---:|---|
 | M0 | Decisions and baseline | Complete | 100% | [`verification/m0-baseline.md`](./verification/m0-baseline.md) |
 | M1 | Camera laboratory | Implemented — verification pending | 95% | [`verification/m1-increment-1.md`](./verification/m1-increment-1.md), [`verification/m1-increment-2.md`](./verification/m1-increment-2.md), [`verification/m1-increment-3.md`](./verification/m1-increment-3.md), [`verification/m1-increment-4.md`](./verification/m1-increment-4.md), [`verification/m1-increment-5.md`](./verification/m1-increment-5.md), [`verification/m1-increment-6.md`](./verification/m1-increment-6.md) |
-| M2 | Landmark laboratory | In progress | 95% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md), [`verification/m2-increment-3.md`](./verification/m2-increment-3.md), [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-5.md`](./verification/m2-increment-5.md), [`verification/m2-increment-6a.md`](./verification/m2-increment-6a.md), [`verification/m2-increment-6b.md`](./verification/m2-increment-6b.md), [`verification/m2-increment-6c.md`](./verification/m2-increment-6c.md), [`verification/m2-increment-6d.md`](./verification/m2-increment-6d.md) |
+| M2 | Landmark laboratory | In progress | 97% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md), [`verification/m2-increment-3.md`](./verification/m2-increment-3.md), [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-5.md`](./verification/m2-increment-5.md), [`verification/m2-increment-6a.md`](./verification/m2-increment-6a.md), [`verification/m2-increment-6b.md`](./verification/m2-increment-6b.md), [`verification/m2-increment-6c.md`](./verification/m2-increment-6c.md), [`verification/m2-increment-6d.md`](./verification/m2-increment-6d.md), [`verification/m2-increment-7.md`](./verification/m2-increment-7.md) |
 | M3 | Gesture scoring laboratory | Blocked by M2 | 0% | — |
 | M4 | Gameplay state-machine simulator | Blocked by M0 | 0% | — |
 | M5 | First vertical slice | Blocked by M2–M4 | 0% | — |
@@ -99,6 +99,7 @@ feature to its source, tests, and proof.
 | M2-010 | Common vision adapter and deterministic replay clock | M2 | Complete | [`src/vision/visionAdapter.ts`](../../src/vision/visionAdapter.ts), [`src/vision/replay/replayClock.ts`](../../src/vision/replay/replayClock.ts), [`src/vision/replay/replayVisionAdapter.ts`](../../src/vision/replay/replayVisionAdapter.ts) | [`src/vision/replay/replayVisionAdapter.test.ts`](../../src/vision/replay/replayVisionAdapter.test.ts) | EV-M2-035–EV-M2-039 |
 | M2-011 | Landmark replay laboratory and shared live/replay renderer | M2 | Implemented — verification pending | [`src/vision/renderLandmarkFrame.ts`](../../src/vision/renderLandmarkFrame.ts), [`src/vision/replay/replayFixtureCatalog.ts`](../../src/vision/replay/replayFixtureCatalog.ts), [`src/vision/replay/syntheticReplayFixtures.ts`](../../src/vision/replay/syntheticReplayFixtures.ts), [`src/labs/landmarks/LandmarkLabPage.tsx`](../../src/labs/landmarks/LandmarkLabPage.tsx), [`src/labs/landmarks/LandmarkReplayCanvas.tsx`](../../src/labs/landmarks/LandmarkReplayCanvas.tsx), [`src/labs/landmarks/useReplayLandmarkLab.ts`](../../src/labs/landmarks/useReplayLandmarkLab.ts), [`src/labs/landmarks/landmarkLab.css`](../../src/labs/landmarks/landmarkLab.css) | [`src/labs/landmarks/LandmarkLabPage.test.tsx`](../../src/labs/landmarks/LandmarkLabPage.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M2-040–EV-M2-044; physical replay review pending |
 | M2-012 | Readiness-gated landmark capture startup | M2 | Implemented — verification pending | [`src/vision/visionWorkerClient.ts`](../../src/vision/visionWorkerClient.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts) | [`src/vision/visionWorkerClient.test.ts`](../../src/vision/visionWorkerClient.test.ts) | EV-M2-045–EV-M2-049; physical startup review pending |
+| M2-013 | Bounded inference-frame capture | M2 | Complete | [`src/vision/visionCapture.ts`](../../src/vision/visionCapture.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts), [`src/labs/camera/VisionDiagnosticsPanel.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.tsx) | [`src/vision/visionCapture.test.ts`](../../src/vision/visionCapture.test.ts), [`src/labs/camera/VisionDiagnosticsPanel.test.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.test.tsx) | EV-M2-050–EV-M2-055 |
 
 ### Registry rules
 
@@ -275,6 +276,12 @@ evidence that it passed.
 | 2026-07-30 | EV-M2-047 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 113 tests across 23 files |
 | 2026-07-30 | EV-M2-048 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 6D |
 | 2026-07-30 | EV-M2-049 | M2 | M0/M1/M2 navigation smoke suite | Chrome 150 / Target A | Passed | 3 Playwright tests |
+| 2026-07-31 | EV-M2-050 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 7 |
+| 2026-07-31 | EV-M2-051 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 7 |
+| 2026-07-31 | EV-M2-052 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 117 tests across 24 files |
+| 2026-07-31 | EV-M2-053 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 7 |
+| 2026-07-31 | EV-M2-054 | M2 | M0/M1/M2 navigation smoke suite | Chrome 150 / Target A | Passed | 3 Playwright tests |
+| 2026-07-31 | EV-M2-055 | M2 | 640 px inference-input physical comparison | Chrome 150 / Target A, 1–2 metre zone | Passed | Capture p95 93.5 ms; body, two-hand, crossed-hand, finger, and alignment checks passed |
 
 Recommended evidence ID format: `EV-M2-001`.
 
@@ -312,7 +319,7 @@ Recommended decision ID format: `DEC-###`.
 
 | Issue ID | First seen | Milestone | Severity | Status | Description | Related files |
 |---|---|---|---|---|---|---|
-| ISS-M2-001 | 2026-07-30 | M2 | S3 | Open | Target A 30-second capture-to-result p95 measured 100.6 ms against the provisional `<100 ms` target; longer validation and possible tuning required | [`verification/m2-increment-4.md`](./verification/m2-increment-4.md) |
+| ISS-M2-001 | 2026-07-30 | M2 | S3 | Open | Initial Target A capture-to-result p95 was 100.6 ms; the 640 px tuning run improved it to 93.5 ms, but tracking-quality review and longer validation remain required | [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-7.md`](./verification/m2-increment-7.md) |
 
 Recommended issue ID format: `ISS-M2-001`.
 

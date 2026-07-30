@@ -1,6 +1,7 @@
 import { useEffect, useState, type RefObject } from "react";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 import { renderLandmarkFrame } from "../../vision/renderLandmarkFrame";
+import { calculateVisionCaptureSize } from "../../vision/visionCapture";
 import {
   EMPTY_VISION_DIAGNOSTICS,
   VisionDiagnosticsAccumulator,
@@ -87,8 +88,16 @@ export function useLandmarkOverlay(
       // worker can have a different time origin, so carry an epoch-relative
       // high-resolution timestamp across the thread boundary.
       const capturedAtMs = performance.timeOrigin + performance.now();
+      const captureSize = calculateVisionCaptureSize(
+        video.videoWidth,
+        video.videoHeight,
+      );
 
-      void createImageBitmap(video)
+      void createImageBitmap(video, {
+        resizeWidth: captureSize.width,
+        resizeHeight: captureSize.height,
+        resizeQuality: "low",
+      })
         .then((bitmap) => {
           if (cancelled) {
             bitmap.close();

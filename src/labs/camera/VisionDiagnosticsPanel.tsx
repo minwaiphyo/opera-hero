@@ -1,4 +1,5 @@
 import type { VisionDiagnosticsSnapshot } from "../../vision/visionDiagnostics";
+import { VISION_INFERENCE_MAX_EDGE_PX } from "../../vision/visionCapture";
 import type { VisionWorkerState } from "../../vision/visionWorkerClient";
 
 interface VisionDiagnosticsPanelProps {
@@ -24,6 +25,10 @@ export function VisionDiagnosticsPanel({
         <Metric
           label="Pipeline"
           value={`${worker.delegate} · Pose ${worker.poseModel}`}
+        />
+        <Metric
+          label="Inference input"
+          value={`Aspect-fit · max ${VISION_INFERENCE_MAX_EDGE_PX} px`}
         />
         <Metric
           label="Presence / framing"

@@ -49,6 +49,7 @@ describe("VisionDiagnosticsPanel", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("MediaPipe 1.0.0")).toBeInTheDocument();
     expect(screen.getByText("GPU · Pose lite")).toBeInTheDocument();
+    expect(screen.getByText("Aspect-fit · max 640 px")).toBeInTheDocument();
     expect(screen.getByText("present · good")).toBeInTheDocument();
     expect(screen.getByText("91.0% · good")).toBeInTheDocument();
     expect(screen.getByText("94.0%")).toBeInTheDocument();
