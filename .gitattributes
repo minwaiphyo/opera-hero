@@ -1,0 +1,9 @@
+# Normalise line endings so a Windows checkout cannot introduce CRLF diffs
+# that show up as whole-file changes for collaborators on macOS or Linux.
+* text=auto eol=lf
+
+# The MediaPipe models are committed binaries. Git currently detects this by
+# heuristic; stating it outright means a checkout can never line-ending-mangle
+# a model into a corrupt file that only fails at runtime.
+*.task binary
+*.wasm binary
