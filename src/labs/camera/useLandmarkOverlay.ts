@@ -1,24 +1,40 @@
 import { useEffect, useState, type RefObject } from "react";
-import { DrawingUtils, PoseLandmarker } from "@mediapipe/tasks-vision";
+import {
+  DrawingUtils,
+  HandLandmarker,
+  PoseLandmarker,
+} from "@mediapipe/tasks-vision";
+import { createHandDetector } from "../../lib/handDetector";
 import { createPoseDetector } from "../../lib/poseDetector";
 
-export type PoseOverlayStatus = "idle" | "loading" | "tracking" | "error";
-
-const CONNECTOR_COLOUR = "rgba(243, 204, 126, 0.85)";
-const LANDMARK_COLOUR = "#6ed3a0";
-const CONNECTOR_WIDTH = 3;
-const LANDMARK_RADIUS = 3;
+export type LandmarkOverlayStatus = "idle" | "loading" | "tracking" | "error";
 
 /**
- * Runs pose detection against a live <video> and paints the skeleton onto an
- * overlay <canvas>. Detection is read-only: nothing is persisted or uploaded.
+ * Warm gold body, cool cyan hands. The two skeletons meet at the wrist, so
+ * they are separated by hue rather than by shape, and the hand joints are
+ * drawn smaller because 21 points per hand crowd quickly at arm's length.
  */
-export function usePoseOverlay(
+const POSE_CONNECTOR_COLOUR = "rgba(243, 204, 126, 0.85)";
+const POSE_LANDMARK_COLOUR = "#6ed3a0";
+const POSE_CONNECTOR_WIDTH = 3;
+const POSE_LANDMARK_RADIUS = 3;
+
+const HAND_CONNECTOR_COLOUR = "rgba(90, 210, 244, 0.9)";
+const HAND_LANDMARK_COLOUR = "#ff7ad9";
+const HAND_CONNECTOR_WIDTH = 2;
+const HAND_LANDMARK_RADIUS = 2;
+
+/**
+ * Runs pose and hand detection against a live <video> and paints both
+ * skeletons onto an overlay <canvas>. Detection is read-only: nothing is
+ * persisted or uploaded.
+ */
+export function useLandmarkOverlay(
   videoRef: RefObject<HTMLVideoElement | null>,
   canvasRef: RefObject<HTMLCanvasElement | null>,
   enabled: boolean,
-): PoseOverlayStatus {
-  const [status, setStatus] = useState<PoseOverlayStatus>("loading");
+): LandmarkOverlayStatus {
+  const [status, setStatus] = useState<LandmarkOverlayStatus>("loading");
 
   useEffect(() => {
     const video = videoRef.current;
@@ -31,7 +47,8 @@ export function usePoseOverlay(
     }
 
     let cancelled = false;
-    let detector: PoseLandmarker | null = null;
+    let poseDetector: PoseLandmarker | null = null;
+    let handDetector: HandLandmarker | null = null;
     let frameHandle = 0;
     let lastVideoTime = -1;
     const drawingUtils = new DrawingUtils(context);
@@ -39,12 +56,17 @@ export function usePoseOverlay(
     const renderFrame = () => {
       frameHandle = requestAnimationFrame(renderFrame);
 
-      if (!detector || video.readyState < 2 || video.videoWidth === 0) {
+      if (
+        !poseDetector ||
+        !handDetector ||
+        video.readyState < 2 ||
+        video.videoWidth === 0
+      ) {
         return;
       }
 
       // rAF usually outruns the camera. Redrawing only on a fresh video frame
-      // keeps the skeleton from flickering between capture intervals.
+      // keeps the skeletons from flickering between capture intervals.
       if (video.currentTime === lastVideoTime) {
         return;
       }
@@ -62,17 +84,35 @@ export function usePoseOverlay(
 
       context.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Both graphs read the same frame, so they share one timestamp.
+      const timestamp = performance.now();
+
       try {
-        const result = detector.detectForVideo(video, performance.now());
-        for (const landmarks of result.landmarks) {
+        const pose = poseDetector.detectForVideo(video, timestamp);
+        for (const landmarks of pose.landmarks) {
           drawingUtils.drawConnectors(
             landmarks,
             PoseLandmarker.POSE_CONNECTIONS,
-            { color: CONNECTOR_COLOUR, lineWidth: CONNECTOR_WIDTH },
+            { color: POSE_CONNECTOR_COLOUR, lineWidth: POSE_CONNECTOR_WIDTH },
           );
           drawingUtils.drawLandmarks(landmarks, {
-            color: LANDMARK_COLOUR,
-            radius: LANDMARK_RADIUS,
+            color: POSE_LANDMARK_COLOUR,
+            radius: POSE_LANDMARK_RADIUS,
+          });
+        }
+
+        // Drawn second so finger detail stays legible where the hand skeleton
+        // overlaps the body skeleton at the wrist.
+        const hands = handDetector.detectForVideo(video, timestamp);
+        for (const landmarks of hands.landmarks) {
+          drawingUtils.drawConnectors(
+            landmarks,
+            HandLandmarker.HAND_CONNECTIONS,
+            { color: HAND_CONNECTOR_COLOUR, lineWidth: HAND_CONNECTOR_WIDTH },
+          );
+          drawingUtils.drawLandmarks(landmarks, {
+            color: HAND_LANDMARK_COLOUR,
+            radius: HAND_LANDMARK_RADIUS,
           });
         }
       } catch {
@@ -80,14 +120,16 @@ export function usePoseOverlay(
       }
     };
 
-    void createPoseDetector()
-      .then((created) => {
+    void Promise.all([createPoseDetector(), createHandDetector()])
+      .then(([pose, hand]) => {
         if (cancelled) {
-          // StrictMode ran the effect twice; this instance is already orphaned.
-          created.close();
+          // StrictMode ran the effect twice; these instances are orphaned.
+          pose.close();
+          hand.close();
           return;
         }
-        detector = created;
+        poseDetector = pose;
+        handDetector = hand;
         setStatus("tracking");
       })
       .catch(() => {
@@ -101,8 +143,10 @@ export function usePoseOverlay(
     return () => {
       cancelled = true;
       cancelAnimationFrame(frameHandle);
-      detector?.close();
-      detector = null;
+      poseDetector?.close();
+      handDetector?.close();
+      poseDetector = null;
+      handDetector = null;
       context.clearRect(0, 0, canvas.width, canvas.height);
       // Reset so the next camera session starts from "loading" instead of
       // showing the previous session's terminal state.

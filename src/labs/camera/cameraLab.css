@@ -123,6 +123,48 @@
   color: #f0b6b6;
 }
 
+.overlay-legend {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+  background: rgba(8, 5, 13, 0.75);
+  list-style: none;
+}
+
+.overlay-legend li {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #cdc2d0;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.overlay-legend li::before {
+  width: 14px;
+  height: 3px;
+  border-radius: 99px;
+  content: "";
+}
+
+/* Swatches mirror the connector colours in useLandmarkOverlay.ts; change
+   both together or the legend starts lying about what is on screen. */
+.legend-pose::before {
+  background: rgba(243, 204, 126, 0.85);
+}
+
+.legend-hands::before {
+  background: rgba(90, 210, 244, 0.9);
+}
+
 .lab-camera-empty {
   position: absolute;
   inset: 0;

@@ -1,10 +1,6 @@
-import { FilesetResolver, PoseLandmarker } from "@mediapipe/tasks-vision";
+import { PoseLandmarker } from "@mediapipe/tasks-vision";
+import { resolveVisionFileset, type VisionFileset } from "./visionFileset";
 
-/**
- * Both the WASM runtime and the model are vendored under `public/` so the
- * exhibition machine never depends on a CDN reaching the network.
- */
-const WASM_BASE_PATH = "/mediapipe/wasm";
 const MODEL_ASSET_PATH = "/models/pose_landmarker_lite.task";
 
 /**
@@ -14,7 +10,7 @@ const MODEL_ASSET_PATH = "/models/pose_landmarker_lite.task";
  * source goes away, otherwise the WASM heap for that graph is never released.
  */
 export async function createPoseDetector(): Promise<PoseLandmarker> {
-  const vision = await FilesetResolver.forVisionTasks(WASM_BASE_PATH);
+  const vision = await resolveVisionFileset();
 
   try {
     return await createLandmarker(vision, "GPU");
@@ -26,7 +22,7 @@ export async function createPoseDetector(): Promise<PoseLandmarker> {
 }
 
 async function createLandmarker(
-  vision: Awaited<ReturnType<typeof FilesetResolver.forVisionTasks>>,
+  vision: VisionFileset,
   delegate: "CPU" | "GPU",
 ): Promise<PoseLandmarker> {
   return PoseLandmarker.createFromOptions(vision, {

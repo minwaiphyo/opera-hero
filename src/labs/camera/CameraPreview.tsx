@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import type { CameraSession, CameraStatus } from "../../camera/cameraTypes";
-import { usePoseOverlay, type PoseOverlayStatus } from "./usePoseOverlay";
+import {
+  useLandmarkOverlay,
+  type LandmarkOverlayStatus,
+} from "./useLandmarkOverlay";
 
 type CameraPreviewProps = {
   session: CameraSession | null;
@@ -15,7 +18,11 @@ export function CameraPreview({
 }: CameraPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const poseStatus = usePoseOverlay(videoRef, canvasRef, Boolean(session));
+  const overlayStatus = useLandmarkOverlay(
+    videoRef,
+    canvasRef,
+    Boolean(session),
+  );
 
   useEffect(() => {
     onVideoElement?.(videoRef.current);
@@ -49,9 +56,17 @@ export function CameraPreview({
       />
       <canvas aria-hidden="true" className="pose-overlay" ref={canvasRef} />
       {session && (
-        <span className={`pose-badge ${poseStatus}`}>
-          {poseMessage(poseStatus)}
-        </span>
+        <>
+          <span className={`pose-badge ${overlayStatus}`}>
+            {overlayMessage(overlayStatus)}
+          </span>
+          {overlayStatus === "tracking" && (
+            <ul className="overlay-legend" aria-label="Overlay legend">
+              <li className="legend-pose">Body</li>
+              <li className="legend-hands">Hands</li>
+            </ul>
+          )}
+        </>
       )}
       {!session && (
         <div className="lab-camera-empty">
@@ -65,17 +80,17 @@ export function CameraPreview({
   );
 }
 
-function poseMessage(status: PoseOverlayStatus): string {
+function overlayMessage(status: LandmarkOverlayStatus): string {
   if (status === "loading") {
-    return "Pose model loading";
+    return "Landmark models loading";
   }
   if (status === "tracking") {
-    return "Pose overlay on";
+    return "Body + hand overlay on";
   }
   if (status === "error") {
-    return "Pose model failed";
+    return "Landmark models failed";
   }
-  return "Pose overlay off";
+  return "Landmark overlay off";
 }
 
 function previewTitle(status: CameraStatus): string {
