@@ -42,7 +42,7 @@ here.
 |---|---|---|---:|---|
 | M0 | Decisions and baseline | Complete | 100% | [`verification/m0-baseline.md`](./verification/m0-baseline.md) |
 | M1 | Camera laboratory | Implemented — verification pending | 95% | [`verification/m1-increment-1.md`](./verification/m1-increment-1.md), [`verification/m1-increment-2.md`](./verification/m1-increment-2.md), [`verification/m1-increment-3.md`](./verification/m1-increment-3.md), [`verification/m1-increment-4.md`](./verification/m1-increment-4.md), [`verification/m1-increment-5.md`](./verification/m1-increment-5.md), [`verification/m1-increment-6.md`](./verification/m1-increment-6.md) |
-| M2 | Landmark laboratory | In progress | 35% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md) |
+| M2 | Landmark laboratory | In progress | 45% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md) |
 | M3 | Gesture scoring laboratory | Blocked by M2 | 0% | — |
 | M4 | Gameplay state-machine simulator | Blocked by M0 | 0% | — |
 | M5 | First vertical slice | Blocked by M2–M4 | 0% | — |
@@ -91,6 +91,7 @@ feature to its source, tests, and proof.
 | M2-002 | Pose Lite and two-hand detector construction with GPU/CPU fallback | M2 | Complete | [`src/lib/poseDetector.ts`](../../src/lib/poseDetector.ts), [`src/lib/handDetector.ts`](../../src/lib/handDetector.ts) | Physical Target A review; dedicated unit tests pending | EV-M2-006 |
 | M2-003 | Live pose and hand camera overlay prototype | M2 | Complete | [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts), [`src/labs/camera/CameraPreview.tsx`](../../src/labs/camera/CameraPreview.tsx), [`src/labs/camera/cameraLab.css`](../../src/labs/camera/cameraLab.css) | [`src/labs/camera/CameraLabPage.test.tsx`](../../src/labs/camera/CameraLabPage.test.tsx) | EV-M2-003, EV-M2-006 |
 | M2-004 | Model-independent pose and hand frame normalization | M2 | Complete | [`src/vision/visionTypes.ts`](../../src/vision/visionTypes.ts), [`src/vision/mediapipeNormalization.ts`](../../src/vision/mediapipeNormalization.ts) | [`src/vision/mediapipeNormalization.test.ts`](../../src/vision/mediapipeNormalization.test.ts) | EV-M2-001–EV-M2-005 |
+| M2-005 | Typed worker protocol and latest-frame backpressure scheduler | M2 | Complete | [`src/vision/visionWorkerProtocol.ts`](../../src/vision/visionWorkerProtocol.ts), [`src/vision/latestFrameScheduler.ts`](../../src/vision/latestFrameScheduler.ts) | [`src/vision/visionWorkerProtocol.test.ts`](../../src/vision/visionWorkerProtocol.test.ts), [`src/vision/latestFrameScheduler.test.ts`](../../src/vision/latestFrameScheduler.test.ts) | EV-M2-007–EV-M2-011 |
 
 ### Registry rules
 
@@ -224,6 +225,11 @@ evidence that it passed.
 | 2026-07-30 | EV-M2-004 | M2 | Production build and local WASM copy | Target A / Vite 8.0.13 | Passed | Increment 1 |
 | 2026-07-30 | EV-M2-005 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
 | 2026-07-30 | EV-M2-006 | M2 | Live Pose Lite and two-hand overlay | Chrome / Target A | Passed | Project owner confirmed working overlay; detailed performance measurements pending |
+| 2026-07-30 | EV-M2-007 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 2 |
+| 2026-07-30 | EV-M2-008 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 2 |
+| 2026-07-30 | EV-M2-009 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 80 tests across 16 files |
+| 2026-07-30 | EV-M2-010 | M2 | Production build and local WASM copy | Target A / Vite 8.0.13 | Passed | Increment 2 |
+| 2026-07-30 | EV-M2-011 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
 
 Recommended evidence ID format: `EV-M2-001`.
 
