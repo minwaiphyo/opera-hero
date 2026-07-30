@@ -6,12 +6,20 @@ import {
 } from "@mediapipe/tasks-vision";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 import {
+  EMPTY_VISION_DIAGNOSTICS,
+  VisionDiagnosticsAccumulator,
+  type VisionDiagnosticsSnapshot,
+} from "../../vision/visionDiagnostics";
+import {
   createVisionWorker,
   VisionWorkerClient,
   type VisionWorkerState,
 } from "../../vision/visionWorkerClient";
 
-export type LandmarkOverlayState = VisionWorkerState;
+export interface LandmarkOverlayState {
+  worker: VisionWorkerState;
+  diagnostics: VisionDiagnosticsSnapshot;
+}
 
 const POSE_CONNECTOR_COLOUR = "rgba(243, 204, 126, 0.85)";
 const POSE_LANDMARK_COLOUR = "#6ed3a0";
@@ -31,7 +39,10 @@ export function useLandmarkOverlay(
   canvasRef: RefObject<HTMLCanvasElement | null>,
   enabled: boolean,
 ): LandmarkOverlayState {
-  const [state, setState] = useState<LandmarkOverlayState>({ status: "loading" });
+  const [state, setState] = useState<LandmarkOverlayState>({
+    worker: { status: "loading" },
+    diagnostics: EMPTY_VISION_DIAGNOSTICS,
+  });
 
   useEffect(() => {
     const video = videoRef.current;
@@ -46,16 +57,27 @@ export function useLandmarkOverlay(
     let nextFrameId = 0;
     let lastVideoTime = -1;
     let capturePending = false;
+    let lastDiagnosticsPublishedAt = 0;
     const drawingUtils = new DrawingUtils(context);
+    const diagnostics = new VisionDiagnosticsAccumulator();
     const client = new VisionWorkerClient(createVisionWorker(), {
       onStateChange: (nextState) => {
         if (!cancelled) {
-          setState(nextState);
+          setState((current) => ({ ...current, worker: nextState }));
         }
       },
       onFrame: (frame) => {
         if (!cancelled) {
           drawFrame(frame, canvas, context, drawingUtils);
+          const snapshot = diagnostics.record(frame, client.getStats());
+          const now = performance.now();
+          if (now - lastDiagnosticsPublishedAt >= 250) {
+            lastDiagnosticsPublishedAt = now;
+            setState((current) => ({
+              ...current,
+              diagnostics: snapshot,
+            }));
+          }
         }
       },
     });
@@ -89,10 +111,14 @@ export function useLandmarkOverlay(
         })
         .catch(() => {
           if (!cancelled) {
-            setState({
-              status: "error",
-              message: "The camera frame could not be transferred to the worker.",
-            });
+            setState((current) => ({
+              ...current,
+              worker: {
+                status: "error",
+                message:
+                  "The camera frame could not be transferred to the worker.",
+              },
+            }));
           }
         })
         .finally(() => {
@@ -100,7 +126,10 @@ export function useLandmarkOverlay(
         });
     };
 
-    setState({ status: "loading" });
+    setState({
+      worker: { status: "loading" },
+      diagnostics: EMPTY_VISION_DIAGNOSTICS,
+    });
     frameHandle = requestAnimationFrame(captureFrame);
 
     return () => {
@@ -108,11 +137,19 @@ export function useLandmarkOverlay(
       cancelAnimationFrame(frameHandle);
       client.dispose();
       context.clearRect(0, 0, canvas.width, canvas.height);
-      setState({ status: "loading" });
+      setState({
+        worker: { status: "loading" },
+        diagnostics: EMPTY_VISION_DIAGNOSTICS,
+      });
     };
   }, [canvasRef, enabled, videoRef]);
 
-  return enabled ? state : { status: "idle" };
+  return enabled
+    ? state
+    : {
+        worker: { status: "idle" },
+        diagnostics: EMPTY_VISION_DIAGNOSTICS,
+      };
 }
 
 function drawFrame(

@@ -46,6 +46,7 @@ export type VisionWorkerResponse =
       delegate: VisionDelegate;
       poseModel: PoseModelVariant;
       maxHands: number;
+      runtimeVersion: string;
     }
   | {
       type: "result";
@@ -139,7 +140,9 @@ export const isVisionWorkerResponse = (
         (value.delegate === "GPU" || value.delegate === "CPU") &&
         (value.poseModel === "lite" || value.poseModel === "full") &&
         Number.isInteger(value.maxHands) &&
-        (value.maxHands as number) > 0
+        (value.maxHands as number) > 0 &&
+        typeof value.runtimeVersion === "string" &&
+        value.runtimeVersion.length > 0
       );
     case "result":
       return isVisionLandmarkFrame(value.frame);

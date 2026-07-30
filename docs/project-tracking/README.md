@@ -35,6 +35,8 @@ This folder is the project-management and engineering record for Opera Hero.
   protocol, transferable frame ownership, and latest-frame backpressure.
 - [M2 Increment 3 verification](./verification/m2-increment-3.md) — worker-owned
   MediaPipe inference, transferable live frames, and verification checklist.
+- [M2 Increment 4 verification](./verification/m2-increment-4.md) — bounded live
+  latency, throughput, runtime, and backpressure diagnostics.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.

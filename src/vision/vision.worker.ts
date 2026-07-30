@@ -8,6 +8,7 @@ import {
 import createMediaPipeModule from "@mediapipe/tasks-vision/vision_wasm_module_internal.js";
 import wasmModuleBinaryUrl from "@mediapipe/tasks-vision/vision_wasm_module_internal.wasm?url";
 import { normalizeMediaPipeFrame } from "./mediapipeNormalization";
+import { MEDIAPIPE_TASKS_VISION_VERSION } from "./visionRuntime";
 import type {
   VisionDelegate,
   VisionWorkerConfiguration,
@@ -83,6 +84,7 @@ async function initialize(next: VisionWorkerConfiguration): Promise<void> {
           delegate,
           poseModel: next.poseModel,
           maxHands: next.maxHands,
+          runtimeVersion: MEDIAPIPE_TASKS_VISION_VERSION,
         });
         return;
       } catch (error) {

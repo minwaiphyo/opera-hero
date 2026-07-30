@@ -4,6 +4,7 @@ import {
   useLandmarkOverlay,
   type LandmarkOverlayState,
 } from "./useLandmarkOverlay";
+import { VisionDiagnosticsPanel } from "./VisionDiagnosticsPanel";
 
 type CameraPreviewProps = {
   session: CameraSession | null;
@@ -58,26 +59,32 @@ export function CameraPreview({
       {session && (
         <>
           <span
-            className={`pose-badge ${overlayState.status}`}
+            className={`pose-badge ${overlayState.worker.status}`}
             data-execution-context="web-worker"
             title={
-              overlayState.status === "error"
-                ? overlayState.message
+              overlayState.worker.status === "error"
+                ? overlayState.worker.message
                 : undefined
             }
           >
-            {overlayMessage(overlayState)}
+            {overlayMessage(overlayState.worker)}
           </span>
-          {overlayState.status === "error" && (
+          {overlayState.worker.status === "error" && (
             <p className="vision-worker-error" role="alert">
-              {overlayState.message}
+              {overlayState.worker.message}
             </p>
           )}
-          {overlayState.status === "tracking" && (
-            <ul className="overlay-legend" aria-label="Overlay legend">
-              <li className="legend-pose">Body</li>
-              <li className="legend-hands">Hands</li>
-            </ul>
+          {overlayState.worker.status === "tracking" && (
+            <>
+              <VisionDiagnosticsPanel
+                diagnostics={overlayState.diagnostics}
+                worker={overlayState.worker}
+              />
+              <ul className="overlay-legend" aria-label="Overlay legend">
+                <li className="legend-pose">Body</li>
+                <li className="legend-hands">Hands</li>
+              </ul>
+            </>
           )}
         </>
       )}
@@ -93,7 +100,7 @@ export function CameraPreview({
   );
 }
 
-function overlayMessage(state: LandmarkOverlayState): string {
+function overlayMessage(state: LandmarkOverlayState["worker"]): string {
   if (state.status === "loading") {
     return "Vision worker loading";
   }

@@ -48,11 +48,13 @@ describe("VisionWorkerClient", () => {
       delegate: "CPU",
       poseModel: "lite",
       maxHands: 2,
+      runtimeVersion: "1.0.0",
     });
     expect(onStateChange).toHaveBeenCalledWith({
       status: "tracking",
       delegate: "CPU",
       poseModel: "lite",
+      runtimeVersion: "1.0.0",
     });
   });
 

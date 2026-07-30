@@ -18,6 +18,7 @@ export type VisionWorkerState =
       status: "tracking";
       delegate: VisionDelegate;
       poseModel: PoseModelVariant;
+      runtimeVersion: string;
     }
   | { status: "error"; message: string }
   | { status: "idle" };
@@ -106,6 +107,7 @@ export class VisionWorkerClient {
         status: "tracking",
         delegate: value.delegate,
         poseModel: value.poseModel,
+        runtimeVersion: value.runtimeVersion,
       });
       return;
     }

@@ -67,6 +67,7 @@ describe("vision worker protocol guards", () => {
         delegate: "GPU",
         poseModel: "lite",
         maxHands: 2,
+        runtimeVersion: "1.0.0",
       }),
     ).toBe(true);
     expect(
