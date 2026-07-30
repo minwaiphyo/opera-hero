@@ -46,6 +46,7 @@ export const DEFAULT_VISION_WORKER_CONFIGURATION: VisionWorkerConfiguration = {
 export class VisionWorkerClient {
   private readonly scheduler: LatestFrameScheduler;
   private disposed = false;
+  private ready = false;
 
   constructor(
     private readonly worker: WorkerPort,
@@ -70,7 +71,15 @@ export class VisionWorkerClient {
   }
 
   submit(frame: SchedulableVisionFrame): void {
+    if (!this.ready) {
+      frame.bitmap.close();
+      return;
+    }
     this.scheduler.submit(frame);
+  }
+
+  isReady(): boolean {
+    return this.ready && !this.disposed;
   }
 
   getStats(): LatestFrameSchedulerStats {
@@ -82,6 +91,7 @@ export class VisionWorkerClient {
       return;
     }
     this.disposed = true;
+    this.ready = false;
     this.scheduler.dispose();
     this.worker.postMessage({ type: "dispose" } satisfies VisionWorkerRequest);
     this.worker.onmessage = null;
@@ -103,6 +113,7 @@ export class VisionWorkerClient {
     }
 
     if (value.type === "ready") {
+      this.ready = true;
       this.callbacks.onStateChange({
         status: "tracking",
         delegate: value.delegate,
@@ -125,6 +136,9 @@ export class VisionWorkerClient {
         value.code === "initialization-failed" ||
         value.code === "inference-failed"
       ) {
+        if (value.code === "initialization-failed") {
+          this.ready = false;
+        }
         this.callbacks.onStateChange({
           status: "error",
           message: value.message,

@@ -71,6 +71,7 @@ export function useLandmarkOverlay(
     const captureFrame = () => {
       frameHandle = requestAnimationFrame(captureFrame);
       if (
+        !client.isReady() ||
         capturePending ||
         video.readyState < 2 ||
         video.videoWidth === 0 ||

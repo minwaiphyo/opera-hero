@@ -45,6 +45,8 @@ This folder is the project-management and engineering record for Opera Hero.
   landmark-source adapter and deterministic fake-clock replay playback.
 - [M2 Increment 6C verification](./verification/m2-increment-6c.md) — dedicated
   replay laboratory, shared renderer, controls, and tracking-loss fixture.
+- [M2 Increment 6D verification](./verification/m2-increment-6d.md) — worker
+  readiness gating and clean camera-startup state transitions.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.

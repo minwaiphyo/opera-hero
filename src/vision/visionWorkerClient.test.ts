@@ -31,7 +31,10 @@ describe("VisionWorkerClient", () => {
   it("initializes and reports worker-confirmed runtime details", () => {
     const worker = new FakeWorker();
     const onStateChange = vi.fn();
-    new VisionWorkerClient(worker, { onFrame: vi.fn(), onStateChange });
+    const client = new VisionWorkerClient(worker, {
+      onFrame: vi.fn(),
+      onStateChange,
+    });
 
     expect(worker.postMessage).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -56,6 +59,25 @@ describe("VisionWorkerClient", () => {
       poseModel: "lite",
       runtimeVersion: "1.0.0",
     });
+    expect(client.isReady()).toBe(true);
+  });
+
+  it("rejects and closes frames submitted before model initialization", () => {
+    const worker = new FakeWorker();
+    const client = new VisionWorkerClient(worker, {
+      onFrame: vi.fn(),
+      onStateChange: vi.fn(),
+    });
+    const earlyBitmap = bitmap();
+
+    client.submit({ frameId: 1, capturedAtMs: 10, bitmap: earlyBitmap });
+
+    expect(earlyBitmap.close).toHaveBeenCalledOnce();
+    expect(worker.postMessage).not.toHaveBeenCalledWith(
+      expect.objectContaining({ type: "process-frame" }),
+      expect.anything(),
+    );
+    expect(client.getStats().sent).toBe(0);
   });
 
   it("releases backpressure before publishing a valid result", () => {
@@ -64,6 +86,13 @@ describe("VisionWorkerClient", () => {
     const client = new VisionWorkerClient(worker, {
       onFrame,
       onStateChange: vi.fn(),
+    });
+    worker.respond({
+      type: "ready",
+      delegate: "GPU",
+      poseModel: "lite",
+      maxHands: 2,
+      runtimeVersion: "1.0.0",
     });
 
     client.submit({ frameId: 1, capturedAtMs: 10, bitmap: bitmap() });
@@ -82,6 +111,13 @@ describe("VisionWorkerClient", () => {
     const client = new VisionWorkerClient(worker, {
       onFrame: vi.fn(),
       onStateChange,
+    });
+    worker.respond({
+      type: "ready",
+      delegate: "GPU",
+      poseModel: "lite",
+      maxHands: 2,
+      runtimeVersion: "1.0.0",
     });
     client.submit({ frameId: 1, capturedAtMs: 10, bitmap: bitmap() });
 
@@ -122,6 +158,7 @@ describe("VisionWorkerClient", () => {
     client.dispose();
     client.dispose();
 
+    expect(client.isReady()).toBe(false);
     expect(worker.postMessage).toHaveBeenCalledWith({ type: "dispose" });
     expect(worker.terminate).toHaveBeenCalledOnce();
   });
