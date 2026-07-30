@@ -42,7 +42,7 @@ here.
 |---|---|---|---:|---|
 | M0 | Decisions and baseline | Complete | 100% | [`verification/m0-baseline.md`](./verification/m0-baseline.md) |
 | M1 | Camera laboratory | Implemented — verification pending | 95% | [`verification/m1-increment-1.md`](./verification/m1-increment-1.md), [`verification/m1-increment-2.md`](./verification/m1-increment-2.md), [`verification/m1-increment-3.md`](./verification/m1-increment-3.md), [`verification/m1-increment-4.md`](./verification/m1-increment-4.md), [`verification/m1-increment-5.md`](./verification/m1-increment-5.md), [`verification/m1-increment-6.md`](./verification/m1-increment-6.md) |
-| M2 | Landmark laboratory | In progress | 91% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md), [`verification/m2-increment-3.md`](./verification/m2-increment-3.md), [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-5.md`](./verification/m2-increment-5.md), [`verification/m2-increment-6a.md`](./verification/m2-increment-6a.md), [`verification/m2-increment-6b.md`](./verification/m2-increment-6b.md) |
+| M2 | Landmark laboratory | In progress | 95% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md), [`verification/m2-increment-3.md`](./verification/m2-increment-3.md), [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-5.md`](./verification/m2-increment-5.md), [`verification/m2-increment-6a.md`](./verification/m2-increment-6a.md), [`verification/m2-increment-6b.md`](./verification/m2-increment-6b.md), [`verification/m2-increment-6c.md`](./verification/m2-increment-6c.md) |
 | M3 | Gesture scoring laboratory | Blocked by M2 | 0% | — |
 | M4 | Gameplay state-machine simulator | Blocked by M0 | 0% | — |
 | M5 | First vertical slice | Blocked by M2–M4 | 0% | — |
@@ -97,6 +97,7 @@ feature to its source, tests, and proof.
 | M2-008 | Visitor presence, framing, and tracking-quality classification | M2 | Complete | [`src/vision/visionQuality.ts`](../../src/vision/visionQuality.ts), [`src/vision/visionDiagnostics.ts`](../../src/vision/visionDiagnostics.ts), [`src/labs/camera/VisionDiagnosticsPanel.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.tsx) | [`src/vision/visionQuality.test.ts`](../../src/vision/visionQuality.test.ts), [`src/vision/visionDiagnostics.test.ts`](../../src/vision/visionDiagnostics.test.ts), [`src/labs/camera/VisionDiagnosticsPanel.test.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.test.tsx) | EV-M2-024–EV-M2-029 |
 | M2-009 | Versioned deterministic landmark replay contract and validation | M2 | Complete | [`src/vision/replay/visionReplayTypes.ts`](../../src/vision/replay/visionReplayTypes.ts), [`src/vision/replay/visionReplayValidation.ts`](../../src/vision/replay/visionReplayValidation.ts), [`src/vision/replay/fixtures/empty-zone.json`](../../src/vision/replay/fixtures/empty-zone.json) | [`src/vision/replay/visionReplayValidation.test.ts`](../../src/vision/replay/visionReplayValidation.test.ts) | EV-M2-030–EV-M2-034 |
 | M2-010 | Common vision adapter and deterministic replay clock | M2 | Complete | [`src/vision/visionAdapter.ts`](../../src/vision/visionAdapter.ts), [`src/vision/replay/replayClock.ts`](../../src/vision/replay/replayClock.ts), [`src/vision/replay/replayVisionAdapter.ts`](../../src/vision/replay/replayVisionAdapter.ts) | [`src/vision/replay/replayVisionAdapter.test.ts`](../../src/vision/replay/replayVisionAdapter.test.ts) | EV-M2-035–EV-M2-039 |
+| M2-011 | Landmark replay laboratory and shared live/replay renderer | M2 | Implemented — verification pending | [`src/vision/renderLandmarkFrame.ts`](../../src/vision/renderLandmarkFrame.ts), [`src/vision/replay/replayFixtureCatalog.ts`](../../src/vision/replay/replayFixtureCatalog.ts), [`src/vision/replay/syntheticReplayFixtures.ts`](../../src/vision/replay/syntheticReplayFixtures.ts), [`src/labs/landmarks/LandmarkLabPage.tsx`](../../src/labs/landmarks/LandmarkLabPage.tsx), [`src/labs/landmarks/LandmarkReplayCanvas.tsx`](../../src/labs/landmarks/LandmarkReplayCanvas.tsx), [`src/labs/landmarks/useReplayLandmarkLab.ts`](../../src/labs/landmarks/useReplayLandmarkLab.ts), [`src/labs/landmarks/landmarkLab.css`](../../src/labs/landmarks/landmarkLab.css) | [`src/labs/landmarks/LandmarkLabPage.test.tsx`](../../src/labs/landmarks/LandmarkLabPage.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M2-040–EV-M2-044; physical replay review pending |
 
 ### Registry rules
 
@@ -263,6 +264,11 @@ evidence that it passed.
 | 2026-07-30 | EV-M2-037 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 109 tests across 22 files |
 | 2026-07-30 | EV-M2-038 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 6B |
 | 2026-07-30 | EV-M2-039 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-040 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 6C |
+| 2026-07-30 | EV-M2-041 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 6C |
+| 2026-07-30 | EV-M2-042 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 112 tests across 23 files |
+| 2026-07-30 | EV-M2-043 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 6C |
+| 2026-07-30 | EV-M2-044 | M2 | M0/M1/M2 navigation and replay smoke suite | Chrome 150 / Target A | Passed | 3 Playwright tests; replay requested no camera |
 
 Recommended evidence ID format: `EV-M2-001`.
 

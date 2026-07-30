@@ -177,12 +177,13 @@ export class ReplayVisionAdapter implements VisionAdapter {
     );
     this.timer = this.clock.setTimer(() => {
       this.timer = null;
-      this.emitFrame(frame, this.nextFrameIndex);
+      const frameIndex = this.nextFrameIndex;
       this.nextFrameIndex += 1;
       this.emittedFrames += 1;
       this.positionMs = frame.offsetMs;
       this.anchorPositionMs = this.positionMs;
       this.anchorTimeMs = this.clock.now();
+      this.emitFrame(frame, frameIndex);
       this.scheduleNextFrame();
     }, delayMs);
   }

@@ -1,10 +1,6 @@
 import { useEffect, useState, type RefObject } from "react";
-import {
-  DrawingUtils,
-  HandLandmarker,
-  PoseLandmarker,
-} from "@mediapipe/tasks-vision";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
+import { renderLandmarkFrame } from "../../vision/renderLandmarkFrame";
 import {
   EMPTY_VISION_DIAGNOSTICS,
   VisionDiagnosticsAccumulator,
@@ -20,15 +16,6 @@ export interface LandmarkOverlayState {
   worker: VisionWorkerState;
   diagnostics: VisionDiagnosticsSnapshot;
 }
-
-const POSE_CONNECTOR_COLOUR = "rgba(243, 204, 126, 0.85)";
-const POSE_LANDMARK_COLOUR = "#6ed3a0";
-const POSE_CONNECTOR_WIDTH = 3;
-const POSE_LANDMARK_RADIUS = 3;
-const HAND_CONNECTOR_COLOUR = "rgba(90, 210, 244, 0.9)";
-const HAND_LANDMARK_COLOUR = "#ff7ad9";
-const HAND_CONNECTOR_WIDTH = 2;
-const HAND_LANDMARK_RADIUS = 2;
 
 /**
  * Captures transferable video frames, delegates inference to the vision worker,
@@ -58,7 +45,6 @@ export function useLandmarkOverlay(
     let lastVideoTime = -1;
     let capturePending = false;
     let lastDiagnosticsPublishedAt = 0;
-    const drawingUtils = new DrawingUtils(context);
     const diagnostics = new VisionDiagnosticsAccumulator();
     const client = new VisionWorkerClient(createVisionWorker(), {
       onStateChange: (nextState) => {
@@ -68,7 +54,7 @@ export function useLandmarkOverlay(
       },
       onFrame: (frame) => {
         if (!cancelled) {
-          drawFrame(frame, canvas, context, drawingUtils);
+          drawFrame(frame, canvas, context);
           const snapshot = diagnostics.record(frame, client.getStats());
           const now = performance.now();
           if (now - lastDiagnosticsPublishedAt >= 250) {
@@ -156,7 +142,6 @@ function drawFrame(
   frame: VisionLandmarkFrame,
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
-  drawingUtils: DrawingUtils,
 ): void {
   const video = canvas.previousElementSibling;
   if (video instanceof HTMLVideoElement) {
@@ -165,29 +150,5 @@ function drawFrame(
       canvas.height = video.videoHeight;
     }
   }
-  context.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (frame.pose) {
-    drawingUtils.drawConnectors(
-      [...frame.pose.landmarks],
-      PoseLandmarker.POSE_CONNECTIONS,
-      { color: POSE_CONNECTOR_COLOUR, lineWidth: POSE_CONNECTOR_WIDTH },
-    );
-    drawingUtils.drawLandmarks([...frame.pose.landmarks], {
-      color: POSE_LANDMARK_COLOUR,
-      radius: POSE_LANDMARK_RADIUS,
-    });
-  }
-
-  for (const hand of frame.hands) {
-    drawingUtils.drawConnectors(
-      [...hand.landmarks],
-      HandLandmarker.HAND_CONNECTIONS,
-      { color: HAND_CONNECTOR_COLOUR, lineWidth: HAND_CONNECTOR_WIDTH },
-    );
-    drawingUtils.drawLandmarks([...hand.landmarks], {
-      color: HAND_LANDMARK_COLOUR,
-      radius: HAND_LANDMARK_RADIUS,
-    });
-  }
+  renderLandmarkFrame(frame, context);
 }

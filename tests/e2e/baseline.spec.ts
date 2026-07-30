@@ -51,6 +51,9 @@ test("shows the M0 baseline and required capability result", async ({ page }) =>
   await expect(
     page.getByRole("link", { name: "M1 Camera laboratory" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "M2 Landmark laboratory" }),
+  ).toBeVisible();
   expect(externalRequests).toEqual([]);
 });
 
@@ -70,4 +73,46 @@ test("opens the M1 camera laboratory", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "M0 System baseline" }),
   ).toBeVisible();
+});
+
+test("runs the M2 landmark replay laboratory without camera access", async ({
+  page,
+}) => {
+  let cameraRequests = 0;
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator.mediaDevices, "getUserMedia", {
+      configurable: true,
+      value: () => {
+        window.sessionStorage.setItem("unexpected-camera-request", "true");
+        return Promise.reject(new Error("Replay must not request a camera."));
+      },
+    });
+  });
+
+  page.on("console", async () => {
+    cameraRequests =
+      (await page.evaluate(() =>
+        sessionStorage.getItem("unexpected-camera-request"),
+      )) === "true"
+        ? 1
+        : 0;
+  });
+
+  await page.goto("/lab/landmarks");
+
+  await expect(
+    page.getByRole("heading", { name: "Landmark replay laboratory" }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Fixture")).toHaveValue(
+    "tracking-loss-recovery",
+  );
+  await page.getByRole("button", { name: "Play" }).click();
+  await expect(page.getByText("Replay · running")).toBeVisible();
+  await expect(page.getByText(/1\/2|2\/2/)).toBeVisible();
+  expect(cameraRequests).toBe(0);
+  expect(
+    await page.evaluate(() =>
+      sessionStorage.getItem("unexpected-camera-request"),
+    ),
+  ).toBeNull();
 });
