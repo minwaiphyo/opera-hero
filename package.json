@@ -7,7 +7,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "copy:wasm": "mkdir -p public/mediapipe/wasm && cp node_modules/@mediapipe/tasks-vision/wasm/* public/mediapipe/wasm/",
+    "copy:wasm": "node scripts/copy-wasm.mjs",
     "predev": "npm run copy:wasm",
     "dev": "vite",
     "prebuild": "npm run copy:wasm",
