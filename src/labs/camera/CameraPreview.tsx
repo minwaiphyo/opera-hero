@@ -1,5 +1,9 @@
 import { useEffect, useRef } from "react";
 import type { CameraSession, CameraStatus } from "../../camera/cameraTypes";
+import {
+  useLandmarkOverlay,
+  type LandmarkOverlayStatus,
+} from "./useLandmarkOverlay";
 
 type CameraPreviewProps = {
   session: CameraSession | null;
@@ -13,6 +17,12 @@ export function CameraPreview({
   onVideoElement,
 }: CameraPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const overlayStatus = useLandmarkOverlay(
+    videoRef,
+    canvasRef,
+    Boolean(session),
+  );
 
   useEffect(() => {
     onVideoElement?.(videoRef.current);
@@ -44,16 +54,18 @@ export function CameraPreview({
         playsInline
         ref={videoRef}
       />
+      <canvas aria-hidden="true" className="pose-overlay" ref={canvasRef} />
       {session && (
         <>
-          <div className="framing-guide" aria-hidden="true">
-            <div className="framing-head" />
-            <div className="framing-shoulders" />
-            <div className="framing-hand framing-hand-left" />
-            <div className="framing-hand framing-hand-right" />
-            <span>Position head, shoulders and hands inside the guide</span>
-          </div>
-          <span className="guide-badge">Positioning guide</span>
+          <span className={`pose-badge ${overlayStatus}`}>
+            {overlayMessage(overlayStatus)}
+          </span>
+          {overlayStatus === "tracking" && (
+            <ul className="overlay-legend" aria-label="Overlay legend">
+              <li className="legend-pose">Body</li>
+              <li className="legend-hands">Hands</li>
+            </ul>
+          )}
         </>
       )}
       {!session && (
@@ -66,6 +78,19 @@ export function CameraPreview({
       {session && <span className="live-badge">Live · local only</span>}
     </div>
   );
+}
+
+function overlayMessage(status: LandmarkOverlayStatus): string {
+  if (status === "loading") {
+    return "Landmark models loading";
+  }
+  if (status === "tracking") {
+    return "Body + hand overlay on";
+  }
+  if (status === "error") {
+    return "Landmark models failed";
+  }
+  return "Landmark overlay off";
 }
 
 function previewTitle(status: CameraStatus): string {

@@ -6,7 +6,18 @@ on:
 
 jobs:
   quality:
-    runs-on: windows-latest
+    # The exhibition machine runs Windows, but collaborators develop on macOS
+    # and Linux. Verifying all three is what actually keeps the build scripts
+    # portable: a Windows-only matrix already let a `mkdir -p && cp` one-liner
+    # reach main-bound branches undetected.
+    name: quality (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      # Report every platform's result rather than cancelling the rest on the
+      # first failure, so a platform-specific break is obvious at a glance.
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
