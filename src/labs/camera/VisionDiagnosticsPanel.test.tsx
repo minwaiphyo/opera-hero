@@ -18,6 +18,14 @@ const diagnostics: VisionDiagnosticsSnapshot = {
   replacementRate: 0.14,
   inFlight: true,
   pending: false,
+  presence: true,
+  framing: "good",
+  trackingQuality: 0.91,
+  trackingBand: "good",
+  poseVisibility: 0.94,
+  inFrameCoverage: 0.89,
+  handsDetected: 2,
+  upperBodyScale: 0.43,
 };
 
 describe("VisionDiagnosticsPanel", () => {
@@ -41,6 +49,11 @@ describe("VisionDiagnosticsPanel", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("MediaPipe 1.0.0")).toBeInTheDocument();
     expect(screen.getByText("GPU · Pose lite")).toBeInTheDocument();
+    expect(screen.getByText("present · good")).toBeInTheDocument();
+    expect(screen.getByText("91.0% · good")).toBeInTheDocument();
+    expect(screen.getByText("94.0%")).toBeInTheDocument();
+    expect(screen.getByText("2/2 · 89.0%")).toBeInTheDocument();
+    expect(screen.getByText("0.430")).toBeInTheDocument();
     expect(screen.getByText("31.3 ms latest")).toBeInTheDocument();
     expect(screen.getByText("28.5 ms / 46.8 ms")).toBeInTheDocument();
     expect(screen.getByText("36.0 ms / 61.5 ms")).toBeInTheDocument();

@@ -1,5 +1,10 @@
 import type { LatestFrameSchedulerStats } from "./latestFrameScheduler";
 import type { VisionLandmarkFrame } from "./visionTypes";
+import {
+  assessVisionTracking,
+  type TrackingQualityBand,
+  type VisionFraming,
+} from "./visionQuality";
 
 export interface VisionDiagnosticsSnapshot {
   completedFrames: number;
@@ -16,6 +21,14 @@ export interface VisionDiagnosticsSnapshot {
   replacementRate: number;
   inFlight: boolean;
   pending: boolean;
+  presence: boolean;
+  framing: VisionFraming;
+  trackingQuality: number;
+  trackingBand: TrackingQualityBand;
+  poseVisibility: number;
+  inFrameCoverage: number;
+  handsDetected: number;
+  upperBodyScale: number;
 }
 
 interface VisionTimingSample {
@@ -39,6 +52,14 @@ export const EMPTY_VISION_DIAGNOSTICS: VisionDiagnosticsSnapshot = {
   replacementRate: 0,
   inFlight: false,
   pending: false,
+  presence: false,
+  framing: "absent",
+  trackingQuality: 0,
+  trackingBand: "lost",
+  poseVisibility: 0,
+  inFrameCoverage: 0,
+  handsDetected: 0,
+  upperBodyScale: 0,
 };
 
 export class VisionDiagnosticsAccumulator {
@@ -55,6 +76,7 @@ export class VisionDiagnosticsAccumulator {
     frame: VisionLandmarkFrame,
     scheduler: LatestFrameSchedulerStats,
   ): VisionDiagnosticsSnapshot {
+    const assessment = assessVisionTracking(frame);
     this.completedFrames += 1;
     this.samples.push({
       completedAtMs: frame.completedAtMs,
@@ -65,7 +87,17 @@ export class VisionDiagnosticsAccumulator {
       this.samples.shift();
     }
 
-    return this.snapshot(scheduler);
+    return {
+      ...this.snapshot(scheduler),
+      presence: assessment.presence,
+      framing: assessment.framing,
+      trackingQuality: assessment.score,
+      trackingBand: assessment.band,
+      poseVisibility: assessment.poseVisibility,
+      inFrameCoverage: assessment.inFrameCoverage,
+      handsDetected: assessment.handsDetected,
+      upperBodyScale: assessment.upperBodyScale,
+    };
   }
 
   snapshot(
@@ -100,6 +132,14 @@ export class VisionDiagnosticsAccumulator {
           : 0,
       inFlight: scheduler.inFlight,
       pending: scheduler.pending,
+      presence: false,
+      framing: "absent",
+      trackingQuality: 0,
+      trackingBand: "lost",
+      poseVisibility: 0,
+      inFrameCoverage: 0,
+      handsDetected: 0,
+      upperBodyScale: 0,
     };
   }
 }

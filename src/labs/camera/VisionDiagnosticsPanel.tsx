@@ -26,6 +26,30 @@ export function VisionDiagnosticsPanel({
           value={`${worker.delegate} · Pose ${worker.poseModel}`}
         />
         <Metric
+          label="Presence / framing"
+          value={`${diagnostics.presence ? "present" : "absent"} · ${formatLabel(
+            diagnostics.framing,
+          )}`}
+        />
+        <Metric
+          label="Tracking quality"
+          value={`${percentage(diagnostics.trackingQuality)} · ${diagnostics.trackingBand}`}
+        />
+        <Metric
+          label="Pose visibility"
+          value={percentage(diagnostics.poseVisibility)}
+        />
+        <Metric
+          label="Hands / coverage"
+          value={`${diagnostics.handsDetected}/2 · ${percentage(
+            diagnostics.inFrameCoverage,
+          )}`}
+        />
+        <Metric
+          label="Upper-body scale"
+          value={diagnostics.upperBodyScale.toFixed(3)}
+        />
+        <Metric
           label="Inference"
           value={`${milliseconds(diagnostics.latestInferenceMs)} latest`}
         />
@@ -81,4 +105,8 @@ function milliseconds(value: number): string {
 
 function percentage(value: number): string {
   return `${(value * 100).toFixed(1)}%`;
+}
+
+function formatLabel(value: string): string {
+  return value.replaceAll("-", " ");
 }

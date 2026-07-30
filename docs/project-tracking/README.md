@@ -37,6 +37,8 @@ This folder is the project-management and engineering record for Opera Hero.
   MediaPipe inference, transferable live frames, and verification checklist.
 - [M2 Increment 4 verification](./verification/m2-increment-4.md) — bounded live
   latency, throughput, runtime, and backpressure diagnostics.
+- [M2 Increment 5 verification](./verification/m2-increment-5.md) — provisional
+  visitor presence, framing, and landmark tracking-quality classification.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.

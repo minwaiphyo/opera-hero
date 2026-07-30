@@ -49,6 +49,14 @@ describe("VisionDiagnosticsAccumulator", () => {
       replacementRate: 0,
       inFlight: false,
       pending: false,
+      presence: false,
+      framing: "absent",
+      trackingQuality: 0,
+      trackingBand: "lost",
+      poseVisibility: 0,
+      inFrameCoverage: 0,
+      handsDetected: 0,
+      upperBodyScale: 0,
     });
   });
 
