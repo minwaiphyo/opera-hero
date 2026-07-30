@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { CameraSession, CameraStatus } from "../../camera/cameraTypes";
+import { usePoseOverlay, type PoseOverlayStatus } from "./usePoseOverlay";
 
 type CameraPreviewProps = {
   session: CameraSession | null;
@@ -13,6 +14,8 @@ export function CameraPreview({
   onVideoElement,
 }: CameraPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const poseStatus = usePoseOverlay(videoRef, canvasRef, Boolean(session));
 
   useEffect(() => {
     onVideoElement?.(videoRef.current);
@@ -44,14 +47,17 @@ export function CameraPreview({
         playsInline
         ref={videoRef}
       />
+      <canvas aria-hidden="true" className="pose-overlay" ref={canvasRef} />
       {session && (
         <>
+          <span className={`pose-badge ${poseStatus}`}>
+            {poseMessage(poseStatus)}
+          </span>
           <div className="framing-guide" aria-hidden="true">
             <div className="framing-head" />
             <div className="framing-shoulders" />
             <div className="framing-hand framing-hand-left" />
             <div className="framing-hand framing-hand-right" />
-            <span>Position head, shoulders and hands inside the guide</span>
           </div>
           <span className="guide-badge">Positioning guide</span>
         </>
@@ -66,6 +72,19 @@ export function CameraPreview({
       {session && <span className="live-badge">Live · local only</span>}
     </div>
   );
+}
+
+function poseMessage(status: PoseOverlayStatus): string {
+  if (status === "loading") {
+    return "Pose model loading";
+  }
+  if (status === "tracking") {
+    return "Pose overlay on";
+  }
+  if (status === "error") {
+    return "Pose model failed";
+  }
+  return "Pose overlay off";
 }
 
 function previewTitle(status: CameraStatus): string {

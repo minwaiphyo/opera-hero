@@ -82,6 +82,47 @@
   transform: scaleX(-1);
 }
 
+/*
+ * The canvas backing store is sized to the source frame, so it shares the
+ * video's intrinsic aspect ratio. Giving it the same box, the same `cover`
+ * fit and the same mirror means the skeleton crops and flips with the image
+ * instead of drifting away from it.
+ */
+.lab-camera-preview .pose-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+
+.pose-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  padding: 7px 9px;
+  border: 1px solid rgba(243, 204, 126, 0.34);
+  border-radius: 2px;
+  color: #f3d79f;
+  background: rgba(8, 5, 13, 0.75);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pose-badge.tracking {
+  border-color: rgba(110, 211, 160, 0.34);
+  color: #c4eed4;
+}
+
+.pose-badge.error {
+  border-color: rgba(232, 122, 122, 0.42);
+  color: #f0b6b6;
+}
+
 .framing-guide {
   position: absolute;
   inset: 8% 12% 10%;
@@ -152,18 +193,6 @@
 .framing-hand-right {
   right: 9%;
   transform: rotate(12deg);
-}
-
-.framing-guide > span {
-  position: absolute;
-  right: 10%;
-  bottom: 5%;
-  left: 10%;
-  color: rgba(255, 239, 207, 0.88);
-  font-size: clamp(0.62rem, 1.2vw, 0.78rem);
-  letter-spacing: 0.04em;
-  text-align: center;
-  text-shadow: 0 1px 5px #08050d;
 }
 
 .lab-camera-empty {
