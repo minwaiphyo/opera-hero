@@ -30,8 +30,8 @@ framing, and gesture scoring.
 
 | Capability | Implementation | Tests |
 |---|---|---|
-| Local MediaPipe runtime and models | [`visionFileset.ts`](../../../src/lib/visionFileset.ts), [`copy-wasm.mjs`](../../../scripts/copy-wasm.mjs), [`pose_landmarker_lite.task`](../../../public/models/pose_landmarker_lite.task), [`hand_landmarker.task`](../../../public/models/hand_landmarker.task) | Production build and Chrome smoke suite |
-| Pose and hand detector construction | [`poseDetector.ts`](../../../src/lib/poseDetector.ts), [`handDetector.ts`](../../../src/lib/handDetector.ts) | Physical Target A review; dedicated detector tests pending |
+| Local MediaPipe runtime and models | Originally copied to `public/`; superseded by Vite-managed worker asset URLs in [`vision.worker.ts`](../../../src/vision/vision.worker.ts). Model files remain [`pose_landmarker_lite.task`](../../../public/models/pose_landmarker_lite.task) and [`hand_landmarker.task`](../../../public/models/hand_landmarker.task) | Production build and Chrome smoke suite |
+| Pose and hand detector construction | Originally implemented as main-thread factories; superseded by [`vision.worker.ts`](../../../src/vision/vision.worker.ts) in increment 3 | Physical Target A review; worker delegation review pending |
 | Live overlay prototype | [`useLandmarkOverlay.ts`](../../../src/labs/camera/useLandmarkOverlay.ts), [`CameraPreview.tsx`](../../../src/labs/camera/CameraPreview.tsx), [`cameraLab.css`](../../../src/labs/camera/cameraLab.css) | [`CameraLabPage.test.tsx`](../../../src/labs/camera/CameraLabPage.test.tsx), physical Target A review |
 | Model-independent landmark contract | [`visionTypes.ts`](../../../src/vision/visionTypes.ts), [`mediapipeNormalization.ts`](../../../src/vision/mediapipeNormalization.ts) | [`mediapipeNormalization.test.ts`](../../../src/vision/mediapipeNormalization.test.ts) |
 

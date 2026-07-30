@@ -4,155 +4,153 @@ import {
   HandLandmarker,
   PoseLandmarker,
 } from "@mediapipe/tasks-vision";
-import { createHandDetector } from "../../lib/handDetector";
-import { createPoseDetector } from "../../lib/poseDetector";
+import type { VisionLandmarkFrame } from "../../vision/visionTypes";
+import {
+  createVisionWorker,
+  VisionWorkerClient,
+  type VisionWorkerState,
+} from "../../vision/visionWorkerClient";
 
-export type LandmarkOverlayStatus = "idle" | "loading" | "tracking" | "error";
+export type LandmarkOverlayState = VisionWorkerState;
 
-/**
- * Warm gold body, cool cyan hands. The two skeletons meet at the wrist, so
- * they are separated by hue rather than by shape, and the hand joints are
- * drawn smaller because 21 points per hand crowd quickly at arm's length.
- */
 const POSE_CONNECTOR_COLOUR = "rgba(243, 204, 126, 0.85)";
 const POSE_LANDMARK_COLOUR = "#6ed3a0";
 const POSE_CONNECTOR_WIDTH = 3;
 const POSE_LANDMARK_RADIUS = 3;
-
 const HAND_CONNECTOR_COLOUR = "rgba(90, 210, 244, 0.9)";
 const HAND_LANDMARK_COLOUR = "#ff7ad9";
 const HAND_CONNECTOR_WIDTH = 2;
 const HAND_LANDMARK_RADIUS = 2;
 
 /**
- * Runs pose and hand detection against a live <video> and paints both
- * skeletons onto an overlay <canvas>. Detection is read-only: nothing is
- * persisted or uploaded.
+ * Captures transferable video frames, delegates inference to the vision worker,
+ * and paints the normalized results returned to the main thread.
  */
 export function useLandmarkOverlay(
   videoRef: RefObject<HTMLVideoElement | null>,
   canvasRef: RefObject<HTMLCanvasElement | null>,
   enabled: boolean,
-): LandmarkOverlayStatus {
-  const [status, setStatus] = useState<LandmarkOverlayStatus>("loading");
+): LandmarkOverlayState {
+  const [state, setState] = useState<LandmarkOverlayState>({ status: "loading" });
 
   useEffect(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    // A missing 2D context means no environment to draw into (jsdom, for
-    // one), so the overlay stays dormant rather than failing the preview.
     const context = canvas?.getContext("2d") ?? null;
     if (!enabled || !video || !canvas || !context) {
       return;
     }
 
     let cancelled = false;
-    let poseDetector: PoseLandmarker | null = null;
-    let handDetector: HandLandmarker | null = null;
     let frameHandle = 0;
+    let nextFrameId = 0;
     let lastVideoTime = -1;
+    let capturePending = false;
     const drawingUtils = new DrawingUtils(context);
+    const client = new VisionWorkerClient(createVisionWorker(), {
+      onStateChange: (nextState) => {
+        if (!cancelled) {
+          setState(nextState);
+        }
+      },
+      onFrame: (frame) => {
+        if (!cancelled) {
+          drawFrame(frame, canvas, context, drawingUtils);
+        }
+      },
+    });
 
-    const renderFrame = () => {
-      frameHandle = requestAnimationFrame(renderFrame);
-
+    const captureFrame = () => {
+      frameHandle = requestAnimationFrame(captureFrame);
       if (
-        !poseDetector ||
-        !handDetector ||
+        capturePending ||
         video.readyState < 2 ||
-        video.videoWidth === 0
+        video.videoWidth === 0 ||
+        video.currentTime === lastVideoTime
       ) {
         return;
       }
 
-      // rAF usually outruns the camera. Redrawing only on a fresh video frame
-      // keeps the skeletons from flickering between capture intervals.
-      if (video.currentTime === lastVideoTime) {
-        return;
-      }
       lastVideoTime = video.currentTime;
+      capturePending = true;
+      const frameId = nextFrameId++;
+      // performance.now() is relative to the current execution context. A
+      // worker can have a different time origin, so carry an epoch-relative
+      // high-resolution timestamp across the thread boundary.
+      const capturedAtMs = performance.timeOrigin + performance.now();
 
-      // The backing store matches the source frame, so MediaPipe's normalized
-      // landmarks map straight onto it with no extra scaling.
-      if (
-        canvas.width !== video.videoWidth ||
-        canvas.height !== video.videoHeight
-      ) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-      }
-
-      context.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Both graphs read the same frame, so they share one timestamp.
-      const timestamp = performance.now();
-
-      try {
-        const pose = poseDetector.detectForVideo(video, timestamp);
-        for (const landmarks of pose.landmarks) {
-          drawingUtils.drawConnectors(
-            landmarks,
-            PoseLandmarker.POSE_CONNECTIONS,
-            { color: POSE_CONNECTOR_COLOUR, lineWidth: POSE_CONNECTOR_WIDTH },
-          );
-          drawingUtils.drawLandmarks(landmarks, {
-            color: POSE_LANDMARK_COLOUR,
-            radius: POSE_LANDMARK_RADIUS,
-          });
-        }
-
-        // Drawn second so finger detail stays legible where the hand skeleton
-        // overlaps the body skeleton at the wrist.
-        const hands = handDetector.detectForVideo(video, timestamp);
-        for (const landmarks of hands.landmarks) {
-          drawingUtils.drawConnectors(
-            landmarks,
-            HandLandmarker.HAND_CONNECTIONS,
-            { color: HAND_CONNECTOR_COLOUR, lineWidth: HAND_CONNECTOR_WIDTH },
-          );
-          drawingUtils.drawLandmarks(landmarks, {
-            color: HAND_LANDMARK_COLOUR,
-            radius: HAND_LANDMARK_RADIUS,
-          });
-        }
-      } catch {
-        // A single dropped frame is not worth tearing the loop down for.
-      }
+      void createImageBitmap(video)
+        .then((bitmap) => {
+          if (cancelled) {
+            bitmap.close();
+            return;
+          }
+          client.submit({ frameId, capturedAtMs, bitmap });
+        })
+        .catch(() => {
+          if (!cancelled) {
+            setState({
+              status: "error",
+              message: "The camera frame could not be transferred to the worker.",
+            });
+          }
+        })
+        .finally(() => {
+          capturePending = false;
+        });
     };
 
-    void Promise.all([createPoseDetector(), createHandDetector()])
-      .then(([pose, hand]) => {
-        if (cancelled) {
-          // StrictMode ran the effect twice; these instances are orphaned.
-          pose.close();
-          hand.close();
-          return;
-        }
-        poseDetector = pose;
-        handDetector = hand;
-        setStatus("tracking");
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setStatus("error");
-        }
-      });
-
-    frameHandle = requestAnimationFrame(renderFrame);
+    setState({ status: "loading" });
+    frameHandle = requestAnimationFrame(captureFrame);
 
     return () => {
       cancelled = true;
       cancelAnimationFrame(frameHandle);
-      poseDetector?.close();
-      handDetector?.close();
-      poseDetector = null;
-      handDetector = null;
+      client.dispose();
       context.clearRect(0, 0, canvas.width, canvas.height);
-      // Reset so the next camera session starts from "loading" instead of
-      // showing the previous session's terminal state.
-      setStatus("loading");
+      setState({ status: "loading" });
     };
   }, [canvasRef, enabled, videoRef]);
 
-  return enabled ? status : "idle";
+  return enabled ? state : { status: "idle" };
+}
+
+function drawFrame(
+  frame: VisionLandmarkFrame,
+  canvas: HTMLCanvasElement,
+  context: CanvasRenderingContext2D,
+  drawingUtils: DrawingUtils,
+): void {
+  const video = canvas.previousElementSibling;
+  if (video instanceof HTMLVideoElement) {
+    if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+    }
+  }
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (frame.pose) {
+    drawingUtils.drawConnectors(
+      [...frame.pose.landmarks],
+      PoseLandmarker.POSE_CONNECTIONS,
+      { color: POSE_CONNECTOR_COLOUR, lineWidth: POSE_CONNECTOR_WIDTH },
+    );
+    drawingUtils.drawLandmarks([...frame.pose.landmarks], {
+      color: POSE_LANDMARK_COLOUR,
+      radius: POSE_LANDMARK_RADIUS,
+    });
+  }
+
+  for (const hand of frame.hands) {
+    drawingUtils.drawConnectors(
+      [...hand.landmarks],
+      HandLandmarker.HAND_CONNECTIONS,
+      { color: HAND_CONNECTOR_COLOUR, lineWidth: HAND_CONNECTOR_WIDTH },
+    );
+    drawingUtils.drawLandmarks([...hand.landmarks], {
+      color: HAND_LANDMARK_COLOUR,
+      radius: HAND_LANDMARK_RADIUS,
+    });
+  }
 }

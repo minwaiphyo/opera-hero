@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import type { CameraSession, CameraStatus } from "../../camera/cameraTypes";
 import {
   useLandmarkOverlay,
-  type LandmarkOverlayStatus,
+  type LandmarkOverlayState,
 } from "./useLandmarkOverlay";
 
 type CameraPreviewProps = {
@@ -18,7 +18,7 @@ export function CameraPreview({
 }: CameraPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const overlayStatus = useLandmarkOverlay(
+  const overlayState = useLandmarkOverlay(
     videoRef,
     canvasRef,
     Boolean(session),
@@ -57,10 +57,23 @@ export function CameraPreview({
       <canvas aria-hidden="true" className="pose-overlay" ref={canvasRef} />
       {session && (
         <>
-          <span className={`pose-badge ${overlayStatus}`}>
-            {overlayMessage(overlayStatus)}
+          <span
+            className={`pose-badge ${overlayState.status}`}
+            data-execution-context="web-worker"
+            title={
+              overlayState.status === "error"
+                ? overlayState.message
+                : undefined
+            }
+          >
+            {overlayMessage(overlayState)}
           </span>
-          {overlayStatus === "tracking" && (
+          {overlayState.status === "error" && (
+            <p className="vision-worker-error" role="alert">
+              {overlayState.message}
+            </p>
+          )}
+          {overlayState.status === "tracking" && (
             <ul className="overlay-legend" aria-label="Overlay legend">
               <li className="legend-pose">Body</li>
               <li className="legend-hands">Hands</li>
@@ -80,17 +93,17 @@ export function CameraPreview({
   );
 }
 
-function overlayMessage(status: LandmarkOverlayStatus): string {
-  if (status === "loading") {
-    return "Landmark models loading";
+function overlayMessage(state: LandmarkOverlayState): string {
+  if (state.status === "loading") {
+    return "Vision worker loading";
   }
-  if (status === "tracking") {
-    return "Body + hand overlay on";
+  if (state.status === "tracking") {
+    return `Vision worker · ${state.delegate} · Pose ${state.poseModel}`;
   }
-  if (status === "error") {
-    return "Landmark models failed";
+  if (state.status === "error") {
+    return "Vision worker failed";
   }
-  return "Landmark overlay off";
+  return "Vision worker off";
 }
 
 function previewTitle(status: CameraStatus): string {

@@ -12,7 +12,6 @@ export type VisionDelegate = "GPU" | "CPU";
 export type PoseModelVariant = "lite" | "full";
 
 export interface VisionWorkerConfiguration {
-  wasmBasePath: string;
   poseModelPath: string;
   handModelPath: string;
   poseModel: PoseModelVariant;
