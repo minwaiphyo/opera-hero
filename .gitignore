@@ -1,6 +1,13 @@
 node_modules/
 dist/
 
+# Generated from the pinned MediaPipe npm package by the WASM copy script.
+public/mediapipe/
+
+# Practitioner source material stays in approved local/restricted storage. Commit
+# only consented, anonymized landmark fixtures derived from it.
+docs/practitioner-footage/
+
 coverage/
 playwright-report/
 test-results/

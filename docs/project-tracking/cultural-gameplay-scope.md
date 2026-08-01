@@ -21,9 +21,9 @@ cultural explanations more coherent.
 
 | Level | Working interaction | Cultural status | Technical status |
 |---|---|---|---|
-| 1 | The Lotus Finger | Stakeholder-selected; practitioner explanation pending | Not implemented |
-| 2 | Actions to open the door | Stakeholder-selected; exact movement sequence pending | Not implemented |
-| 3 | The water sleeves | Stakeholder-selected; costume and movement constraints pending | Not implemented |
+| 1 | The Lotus Finger; footage uses Orchid Finger/Flower | Practitioner demonstration captured; canonical public name and scoring rules require confirmation | Not implemented; annotation pending |
+| 2 | Actions to open the door | Practitioner demonstration captured; phases and essential features require annotation/review | Not implemented; selected as M3 pilot |
+| 3 | The water sleeves | Demonstrations captured with and without sleeves; costume-aware scoring rules require review | Not implemented; annotation pending |
 
 “Level” currently means one gesture-based story beat inside the approximately
 two-minute experience. It does not imply separate menus, difficulty progression,
@@ -35,15 +35,18 @@ The organisers indicated that Kong Chow Wui Koon can arrange a session with
 **Master Aw Yeong Peng Mun**, described by the organisers as a well-known teacher and
 Singaporean disciple of Cantonese Opera master Hung Sin Nui.
 
-Proposed session:
+Session recorded:
 
 - Date: Saturday, 1 August 2026
 - Time: 9:00–10:30 AM
 - Location: clan association; exact address and room pending
 - Purpose: practitioner demonstration, cultural explanation, and reference capture
 
-Availability and final logistics must be confirmed by the project team with the
-organisers.
+Cleaned positive demonstrations are available for all three movements. These videos
+are canonical reference material from one practitioner, not a diverse training or
+validation dataset. Follow the annotation, fixture, augmentation, scoring-envelope,
+and participant-validation gates in
+[`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md).
 
 ## Costume direction
 
