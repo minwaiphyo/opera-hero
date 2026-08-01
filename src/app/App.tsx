@@ -4,6 +4,7 @@ import {
   requiredCapabilitiesPass,
 } from "../platform/capabilities";
 import { CameraLabPage } from "../labs/camera/CameraLabPage";
+import { LandmarkLabPage } from "../labs/landmarks/LandmarkLabPage";
 import { DevelopmentNav } from "./DevelopmentNav";
 import { HardwareChecks } from "./HardwareChecks";
 import { resolveAppRoute } from "./routes";
@@ -26,6 +27,9 @@ export function App() {
 
   if (route === "camera-lab") {
     return <CameraLabPage />;
+  }
+  if (route === "landmark-lab") {
+    return <LandmarkLabPage />;
   }
 
   return <BaselinePage />;

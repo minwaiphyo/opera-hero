@@ -6,6 +6,10 @@ describe("application route resolution", () => {
     expect(resolveAppRoute("/lab/camera")).toBe("camera-lab");
   });
 
+  it("resolves the landmark laboratory path", () => {
+    expect(resolveAppRoute("/lab/landmarks")).toBe("landmark-lab");
+  });
+
   it("falls back to the system baseline for unknown local paths", () => {
     expect(resolveAppRoute("/")).toBe("baseline");
     expect(resolveAppRoute("/unknown")).toBe("baseline");

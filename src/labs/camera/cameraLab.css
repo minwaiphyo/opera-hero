@@ -123,6 +123,71 @@
   color: #f0b6b6;
 }
 
+.vision-worker-error {
+  position: absolute;
+  right: 16px;
+  bottom: 52px;
+  left: 16px;
+  z-index: 3;
+  margin: 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(232, 122, 122, 0.42);
+  border-radius: 2px;
+  background: rgba(35, 12, 18, 0.9);
+  color: #f7cccc;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.vision-diagnostics {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: min(290px, calc(100% - 32px));
+  padding: 10px 12px;
+  border: 1px solid rgba(110, 211, 160, 0.24);
+  border-radius: 2px;
+  background: rgba(8, 5, 13, 0.82);
+  color: #e7dfea;
+  backdrop-filter: blur(6px);
+}
+
+.vision-diagnostics > p {
+  margin: 0 0 8px;
+  color: #c4eed4;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vision-diagnostics dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 12px;
+  margin: 0;
+}
+
+.vision-diagnostics dl div {
+  min-width: 0;
+}
+
+.vision-diagnostics dt {
+  color: #9c919f;
+  font-size: 0.62rem;
+}
+
+.vision-diagnostics dd {
+  overflow: hidden;
+  margin: 1px 0 0;
+  color: #f5eff7;
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .overlay-legend {
   position: absolute;
   right: 16px;

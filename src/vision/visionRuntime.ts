@@ -1,0 +1,1 @@
+export const MEDIAPIPE_TASKS_VISION_VERSION = "1.0.0";

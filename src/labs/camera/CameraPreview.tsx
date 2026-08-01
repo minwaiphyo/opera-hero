@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 import type { CameraSession, CameraStatus } from "../../camera/cameraTypes";
 import {
   useLandmarkOverlay,
-  type LandmarkOverlayStatus,
+  type LandmarkOverlayState,
 } from "./useLandmarkOverlay";
+import { VisionDiagnosticsPanel } from "./VisionDiagnosticsPanel";
 
 type CameraPreviewProps = {
   session: CameraSession | null;
@@ -18,7 +19,7 @@ export function CameraPreview({
 }: CameraPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const overlayStatus = useLandmarkOverlay(
+  const overlayState = useLandmarkOverlay(
     videoRef,
     canvasRef,
     Boolean(session),
@@ -57,14 +58,33 @@ export function CameraPreview({
       <canvas aria-hidden="true" className="pose-overlay" ref={canvasRef} />
       {session && (
         <>
-          <span className={`pose-badge ${overlayStatus}`}>
-            {overlayMessage(overlayStatus)}
+          <span
+            className={`pose-badge ${overlayState.worker.status}`}
+            data-execution-context="web-worker"
+            title={
+              overlayState.worker.status === "error"
+                ? overlayState.worker.message
+                : undefined
+            }
+          >
+            {overlayMessage(overlayState.worker)}
           </span>
-          {overlayStatus === "tracking" && (
-            <ul className="overlay-legend" aria-label="Overlay legend">
-              <li className="legend-pose">Body</li>
-              <li className="legend-hands">Hands</li>
-            </ul>
+          {overlayState.worker.status === "error" && (
+            <p className="vision-worker-error" role="alert">
+              {overlayState.worker.message}
+            </p>
+          )}
+          {overlayState.worker.status === "tracking" && (
+            <>
+              <VisionDiagnosticsPanel
+                diagnostics={overlayState.diagnostics}
+                worker={overlayState.worker}
+              />
+              <ul className="overlay-legend" aria-label="Overlay legend">
+                <li className="legend-pose">Body</li>
+                <li className="legend-hands">Hands</li>
+              </ul>
+            </>
           )}
         </>
       )}
@@ -80,17 +100,17 @@ export function CameraPreview({
   );
 }
 
-function overlayMessage(status: LandmarkOverlayStatus): string {
-  if (status === "loading") {
-    return "Landmark models loading";
+function overlayMessage(state: LandmarkOverlayState["worker"]): string {
+  if (state.status === "loading") {
+    return "Vision worker loading";
   }
-  if (status === "tracking") {
-    return "Body + hand overlay on";
+  if (state.status === "tracking") {
+    return `Vision worker · ${state.delegate} · Pose ${state.poseModel}`;
   }
-  if (status === "error") {
-    return "Landmark models failed";
+  if (state.status === "error") {
+    return "Vision worker failed";
   }
-  return "Landmark overlay off";
+  return "Vision worker off";
 }
 
 function previewTitle(status: CameraStatus): string {

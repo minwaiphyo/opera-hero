@@ -16,12 +16,12 @@ here.
 
 | Field | Current value |
 |---|---|
-| Active milestone | M1 — Camera laboratory |
-| Milestone status | Implemented — verification pending |
+| Active milestone | M2 — Landmark laboratory |
+| Milestone status | In progress |
 | Latest completed milestone | M0 — Decisions and baseline |
 | Current vertical slice | None |
 | Exhibition readiness | 1 — Development shell runs |
-| Last updated | 2026-07-28 |
+| Last updated | 2026-07-30 |
 
 ### Readiness scale
 
@@ -42,7 +42,7 @@ here.
 |---|---|---|---:|---|
 | M0 | Decisions and baseline | Complete | 100% | [`verification/m0-baseline.md`](./verification/m0-baseline.md) |
 | M1 | Camera laboratory | Implemented — verification pending | 95% | [`verification/m1-increment-1.md`](./verification/m1-increment-1.md), [`verification/m1-increment-2.md`](./verification/m1-increment-2.md), [`verification/m1-increment-3.md`](./verification/m1-increment-3.md), [`verification/m1-increment-4.md`](./verification/m1-increment-4.md), [`verification/m1-increment-5.md`](./verification/m1-increment-5.md), [`verification/m1-increment-6.md`](./verification/m1-increment-6.md) |
-| M2 | Landmark laboratory | Blocked by M1 | 0% | — |
+| M2 | Landmark laboratory | In progress | 97% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md), [`verification/m2-increment-3.md`](./verification/m2-increment-3.md), [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-5.md`](./verification/m2-increment-5.md), [`verification/m2-increment-6a.md`](./verification/m2-increment-6a.md), [`verification/m2-increment-6b.md`](./verification/m2-increment-6b.md), [`verification/m2-increment-6c.md`](./verification/m2-increment-6c.md), [`verification/m2-increment-6d.md`](./verification/m2-increment-6d.md), [`verification/m2-increment-7.md`](./verification/m2-increment-7.md) |
 | M3 | Gesture scoring laboratory | Blocked by M2 | 0% | — |
 | M4 | Gameplay state-machine simulator | Blocked by M0 | 0% | — |
 | M5 | First vertical slice | Blocked by M2–M4 | 0% | — |
@@ -85,8 +85,21 @@ feature to its source, tests, and proof.
 | M1-003 | Single-stream camera lifecycle service | M1 | Complete | [`src/camera/mediaDevicesPort.ts`](../../src/camera/mediaDevicesPort.ts), [`src/camera/browserMediaDevices.ts`](../../src/camera/browserMediaDevices.ts), [`src/camera/cameraService.ts`](../../src/camera/cameraService.ts), [`src/camera/cameraErrors.ts`](../../src/camera/cameraErrors.ts), [`src/camera/cameraTypes.ts`](../../src/camera/cameraTypes.ts) | [`src/camera/browserMediaDevices.test.ts`](../../src/camera/browserMediaDevices.test.ts), [`src/camera/cameraService.test.ts`](../../src/camera/cameraService.test.ts), [`src/camera/cameraErrors.test.ts`](../../src/camera/cameraErrors.test.ts) | EV-M1-006–EV-M1-010 |
 | M1-004 | Camera discovery, preferences, and fallback selection | M1 | Complete | [`src/camera/mediaDevicesPort.ts`](../../src/camera/mediaDevicesPort.ts), [`src/camera/browserMediaDevices.ts`](../../src/camera/browserMediaDevices.ts), [`src/camera/cameraPreferences.ts`](../../src/camera/cameraPreferences.ts), [`src/camera/deviceSelection.ts`](../../src/camera/deviceSelection.ts), [`src/camera/cameraDeviceCatalog.ts`](../../src/camera/cameraDeviceCatalog.ts) | [`src/camera/browserMediaDevices.test.ts`](../../src/camera/browserMediaDevices.test.ts), [`src/camera/cameraPreferences.test.ts`](../../src/camera/cameraPreferences.test.ts), [`src/camera/deviceSelection.test.ts`](../../src/camera/deviceSelection.test.ts), [`src/camera/cameraDeviceCatalog.test.ts`](../../src/camera/cameraDeviceCatalog.test.ts) | EV-M1-011–EV-M1-015 |
 | M1-005 | Live camera laboratory preview, controls, and diagnostics | M1 | Complete | [`src/labs/camera/cameraLabRuntime.ts`](../../src/labs/camera/cameraLabRuntime.ts), [`src/labs/camera/useCameraLab.ts`](../../src/labs/camera/useCameraLab.ts), [`src/labs/camera/CameraPreview.tsx`](../../src/labs/camera/CameraPreview.tsx), [`src/labs/camera/CameraControls.tsx`](../../src/labs/camera/CameraControls.tsx), [`src/labs/camera/CameraDiagnostics.tsx`](../../src/labs/camera/CameraDiagnostics.tsx), [`src/labs/camera/CameraLabPage.tsx`](../../src/labs/camera/CameraLabPage.tsx), [`src/labs/camera/cameraLab.css`](../../src/labs/camera/cameraLab.css), [`src/app/App.tsx`](../../src/app/App.tsx) | [`src/labs/camera/CameraLabPage.test.tsx`](../../src/labs/camera/CameraLabPage.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M1-016–EV-M1-021 |
-| M1-006 | Positioning guide, aspect-ratio diagnostics, and bounded recovery | M1 | Complete | [`src/camera/cameraRecovery.ts`](../../src/camera/cameraRecovery.ts), [`src/labs/camera/useCameraLab.ts`](../../src/labs/camera/useCameraLab.ts), [`src/labs/camera/CameraPreview.tsx`](../../src/labs/camera/CameraPreview.tsx), [`src/labs/camera/CameraControls.tsx`](../../src/labs/camera/CameraControls.tsx), [`src/labs/camera/CameraDiagnostics.tsx`](../../src/labs/camera/CameraDiagnostics.tsx), [`src/labs/camera/cameraLab.css`](../../src/labs/camera/cameraLab.css) | [`src/camera/cameraRecovery.test.ts`](../../src/camera/cameraRecovery.test.ts), [`src/labs/camera/CameraLabPage.test.tsx`](../../src/labs/camera/CameraLabPage.test.tsx) | EV-M1-022–EV-M1-027 |
+| M1-006 | Aspect-ratio diagnostics and bounded recovery | M1 | Complete | [`src/camera/cameraRecovery.ts`](../../src/camera/cameraRecovery.ts), [`src/labs/camera/useCameraLab.ts`](../../src/labs/camera/useCameraLab.ts), [`src/labs/camera/CameraControls.tsx`](../../src/labs/camera/CameraControls.tsx), [`src/labs/camera/CameraDiagnostics.tsx`](../../src/labs/camera/CameraDiagnostics.tsx), [`src/labs/camera/cameraLab.css`](../../src/labs/camera/cameraLab.css) | [`src/camera/cameraRecovery.test.ts`](../../src/camera/cameraRecovery.test.ts), [`src/labs/camera/CameraLabPage.test.tsx`](../../src/labs/camera/CameraLabPage.test.tsx) | EV-M1-022–EV-M1-027; static guide historically verified, then superseded by M2-003 |
 | M1-007 | Lifecycle stress and long-running stability monitor | M1 | Implemented — verification pending | [`src/camera/cameraStability.ts`](../../src/camera/cameraStability.ts), [`src/labs/camera/CameraStabilityPanel.tsx`](../../src/labs/camera/CameraStabilityPanel.tsx), [`src/labs/camera/CameraPreview.tsx`](../../src/labs/camera/CameraPreview.tsx), [`src/labs/camera/CameraLabPage.tsx`](../../src/labs/camera/CameraLabPage.tsx), [`src/labs/camera/cameraLab.css`](../../src/labs/camera/cameraLab.css) | [`src/camera/cameraStability.test.ts`](../../src/camera/cameraStability.test.ts), [`src/camera/cameraService.test.ts`](../../src/camera/cameraService.test.ts), [`src/labs/camera/CameraLabPage.test.tsx`](../../src/labs/camera/CameraLabPage.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M1-028–EV-M1-032; one-hour Target A soak pending |
+| M2-001 | Local MediaPipe runtime and model assets | M2 | Complete | [`package.json`](../../package.json), [`src/vision/vision.worker.ts`](../../src/vision/vision.worker.ts), [`public/models/pose_landmarker_lite.task`](../../public/models/pose_landmarker_lite.task), [`public/models/hand_landmarker.task`](../../public/models/hand_landmarker.task) | Build and browser suites | EV-M2-004–EV-M2-006, EV-M2-015 |
+| M2-002 | Pose Lite and two-hand detector construction with GPU/CPU fallback | M2 | Complete | [`src/vision/vision.worker.ts`](../../src/vision/vision.worker.ts) | Physical Target A review; worker delegation review pending | EV-M2-006, EV-M2-015 |
+| M2-003 | Live pose and hand camera overlay prototype | M2 | Complete | [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts), [`src/labs/camera/CameraPreview.tsx`](../../src/labs/camera/CameraPreview.tsx), [`src/labs/camera/cameraLab.css`](../../src/labs/camera/cameraLab.css) | [`src/labs/camera/CameraLabPage.test.tsx`](../../src/labs/camera/CameraLabPage.test.tsx) | EV-M2-003, EV-M2-006 |
+| M2-004 | Model-independent pose and hand frame normalization | M2 | Complete | [`src/vision/visionTypes.ts`](../../src/vision/visionTypes.ts), [`src/vision/mediapipeNormalization.ts`](../../src/vision/mediapipeNormalization.ts) | [`src/vision/mediapipeNormalization.test.ts`](../../src/vision/mediapipeNormalization.test.ts) | EV-M2-001–EV-M2-005 |
+| M2-005 | Typed worker protocol and latest-frame backpressure scheduler | M2 | Complete | [`src/vision/visionWorkerProtocol.ts`](../../src/vision/visionWorkerProtocol.ts), [`src/vision/latestFrameScheduler.ts`](../../src/vision/latestFrameScheduler.ts) | [`src/vision/visionWorkerProtocol.test.ts`](../../src/vision/visionWorkerProtocol.test.ts), [`src/vision/latestFrameScheduler.test.ts`](../../src/vision/latestFrameScheduler.test.ts) | EV-M2-007–EV-M2-011 |
+| M2-006 | Worker-owned live pose and hand inference pipeline | M2 | Complete | [`src/vision/vision.worker.ts`](../../src/vision/vision.worker.ts), [`src/vision/visionWorkerClient.ts`](../../src/vision/visionWorkerClient.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts), [`src/labs/camera/CameraPreview.tsx`](../../src/labs/camera/CameraPreview.tsx) | [`src/vision/visionWorkerClient.test.ts`](../../src/vision/visionWorkerClient.test.ts), [`src/labs/camera/CameraLabPage.test.tsx`](../../src/labs/camera/CameraLabPage.test.tsx) | EV-M2-012–EV-M2-017 |
+| M2-007 | Bounded live worker performance and backpressure diagnostics | M2 | Complete | [`src/vision/visionDiagnostics.ts`](../../src/vision/visionDiagnostics.ts), [`src/vision/visionRuntime.ts`](../../src/vision/visionRuntime.ts), [`src/labs/camera/VisionDiagnosticsPanel.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.tsx), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts) | [`src/vision/visionDiagnostics.test.ts`](../../src/vision/visionDiagnostics.test.ts), [`src/labs/camera/VisionDiagnosticsPanel.test.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.test.tsx) | EV-M2-018–EV-M2-023 |
+| M2-008 | Visitor presence, framing, and tracking-quality classification | M2 | Complete | [`src/vision/visionQuality.ts`](../../src/vision/visionQuality.ts), [`src/vision/visionDiagnostics.ts`](../../src/vision/visionDiagnostics.ts), [`src/labs/camera/VisionDiagnosticsPanel.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.tsx) | [`src/vision/visionQuality.test.ts`](../../src/vision/visionQuality.test.ts), [`src/vision/visionDiagnostics.test.ts`](../../src/vision/visionDiagnostics.test.ts), [`src/labs/camera/VisionDiagnosticsPanel.test.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.test.tsx) | EV-M2-024–EV-M2-029 |
+| M2-009 | Versioned deterministic landmark replay contract and validation | M2 | Complete | [`src/vision/replay/visionReplayTypes.ts`](../../src/vision/replay/visionReplayTypes.ts), [`src/vision/replay/visionReplayValidation.ts`](../../src/vision/replay/visionReplayValidation.ts), [`src/vision/replay/fixtures/empty-zone.json`](../../src/vision/replay/fixtures/empty-zone.json) | [`src/vision/replay/visionReplayValidation.test.ts`](../../src/vision/replay/visionReplayValidation.test.ts) | EV-M2-030–EV-M2-034 |
+| M2-010 | Common vision adapter and deterministic replay clock | M2 | Complete | [`src/vision/visionAdapter.ts`](../../src/vision/visionAdapter.ts), [`src/vision/replay/replayClock.ts`](../../src/vision/replay/replayClock.ts), [`src/vision/replay/replayVisionAdapter.ts`](../../src/vision/replay/replayVisionAdapter.ts) | [`src/vision/replay/replayVisionAdapter.test.ts`](../../src/vision/replay/replayVisionAdapter.test.ts) | EV-M2-035–EV-M2-039 |
+| M2-011 | Landmark replay laboratory and shared live/replay renderer | M2 | Implemented — verification pending | [`src/vision/renderLandmarkFrame.ts`](../../src/vision/renderLandmarkFrame.ts), [`src/vision/replay/replayFixtureCatalog.ts`](../../src/vision/replay/replayFixtureCatalog.ts), [`src/vision/replay/syntheticReplayFixtures.ts`](../../src/vision/replay/syntheticReplayFixtures.ts), [`src/labs/landmarks/LandmarkLabPage.tsx`](../../src/labs/landmarks/LandmarkLabPage.tsx), [`src/labs/landmarks/LandmarkReplayCanvas.tsx`](../../src/labs/landmarks/LandmarkReplayCanvas.tsx), [`src/labs/landmarks/useReplayLandmarkLab.ts`](../../src/labs/landmarks/useReplayLandmarkLab.ts), [`src/labs/landmarks/landmarkLab.css`](../../src/labs/landmarks/landmarkLab.css) | [`src/labs/landmarks/LandmarkLabPage.test.tsx`](../../src/labs/landmarks/LandmarkLabPage.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M2-040–EV-M2-044; physical replay review pending |
+| M2-012 | Readiness-gated landmark capture startup | M2 | Implemented — verification pending | [`src/vision/visionWorkerClient.ts`](../../src/vision/visionWorkerClient.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts) | [`src/vision/visionWorkerClient.test.ts`](../../src/vision/visionWorkerClient.test.ts) | EV-M2-045–EV-M2-049; physical startup review pending |
+| M2-013 | Bounded inference-frame capture | M2 | Complete | [`src/vision/visionCapture.ts`](../../src/vision/visionCapture.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts), [`src/labs/camera/VisionDiagnosticsPanel.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.tsx) | [`src/vision/visionCapture.test.ts`](../../src/vision/visionCapture.test.ts), [`src/labs/camera/VisionDiagnosticsPanel.test.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.test.tsx) | EV-M2-050–EV-M2-055 |
 
 ### Registry rules
 
@@ -214,6 +227,61 @@ evidence that it passed.
 | 2026-07-28 | EV-M1-030 | M1 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 66 tests across 13 files; includes 50 start/stop cycles and 100 closed tracks |
 | 2026-07-28 | EV-M1-031 | M1 | Production build | Target A / Vite 8.0.13 | Passed | Increment 6 |
 | 2026-07-28 | EV-M1-032 | M1 | Camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-001 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 1 |
+| 2026-07-30 | EV-M2-002 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 1 |
+| 2026-07-30 | EV-M2-003 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 70 tests across 14 files |
+| 2026-07-30 | EV-M2-004 | M2 | Production build and local WASM copy | Target A / Vite 8.0.13 | Passed | Increment 1 |
+| 2026-07-30 | EV-M2-005 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-006 | M2 | Live Pose Lite and two-hand overlay | Chrome / Target A | Passed | Project owner confirmed working overlay; detailed performance measurements pending |
+| 2026-07-30 | EV-M2-007 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 2 |
+| 2026-07-30 | EV-M2-008 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 2 |
+| 2026-07-30 | EV-M2-009 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 80 tests across 16 files |
+| 2026-07-30 | EV-M2-010 | M2 | Production build and local WASM copy | Target A / Vite 8.0.13 | Passed | Increment 2 |
+| 2026-07-30 | EV-M2-011 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-012 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 3 |
+| 2026-07-30 | EV-M2-013 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 3 |
+| 2026-07-30 | EV-M2-014 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 85 tests across 17 files |
+| 2026-07-30 | EV-M2-015 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Separate `vision.worker-*.js` emitted |
+| 2026-07-30 | EV-M2-016 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-017 | M2 | Physical worker inference and overlay review | Chrome / Target A | Passed | Project owner confirmed worker GPU badge plus live Pose Lite body and two-hand overlays |
+| 2026-07-30 | EV-M2-018 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 4 |
+| 2026-07-30 | EV-M2-019 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 4 |
+| 2026-07-30 | EV-M2-020 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 91 tests across 19 files |
+| 2026-07-30 | EV-M2-021 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 4 |
+| 2026-07-30 | EV-M2-022 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-023 | M2 | Short-run worker performance review | Chrome / Target A | Passed with performance follow-up | 20.4 FPS; inference p95 76.1 ms; capture p95 100.6 ms; replacement rate 44.4% |
+| 2026-07-30 | EV-M2-024 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 5 |
+| 2026-07-30 | EV-M2-025 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 5 |
+| 2026-07-30 | EV-M2-026 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 98 tests across 20 files |
+| 2026-07-30 | EV-M2-027 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 5 |
+| 2026-07-30 | EV-M2-028 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-029 | M2 | Physical presence, framing, and tracking-quality review | Chrome / Target A | Passed | Project owner confirmed all expected empty-zone, intended-distance, near/far, hand-loss, and partial-frame classifications |
+| 2026-07-30 | EV-M2-030 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 6A |
+| 2026-07-30 | EV-M2-031 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 6A |
+| 2026-07-30 | EV-M2-032 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 104 tests across 21 files |
+| 2026-07-30 | EV-M2-033 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 6A |
+| 2026-07-30 | EV-M2-034 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-035 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 6B |
+| 2026-07-30 | EV-M2-036 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 6B |
+| 2026-07-30 | EV-M2-037 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 109 tests across 22 files |
+| 2026-07-30 | EV-M2-038 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 6B |
+| 2026-07-30 | EV-M2-039 | M2 | Existing camera laboratory smoke suite | Chrome 150 / Target A | Passed | 2 Playwright tests |
+| 2026-07-30 | EV-M2-040 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 6C |
+| 2026-07-30 | EV-M2-041 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 6C |
+| 2026-07-30 | EV-M2-042 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 112 tests across 23 files |
+| 2026-07-30 | EV-M2-043 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 6C |
+| 2026-07-30 | EV-M2-044 | M2 | M0/M1/M2 navigation and replay smoke suite | Chrome 150 / Target A | Passed | 3 Playwright tests; replay requested no camera |
+| 2026-07-30 | EV-M2-045 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 6D |
+| 2026-07-30 | EV-M2-046 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 6D |
+| 2026-07-30 | EV-M2-047 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 113 tests across 23 files |
+| 2026-07-30 | EV-M2-048 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 6D |
+| 2026-07-30 | EV-M2-049 | M2 | M0/M1/M2 navigation smoke suite | Chrome 150 / Target A | Passed | 3 Playwright tests |
+| 2026-07-31 | EV-M2-050 | M2 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Increment 7 |
+| 2026-07-31 | EV-M2-051 | M2 | ESLint analysis | Target A / Node 24.13.1 | Passed | Increment 7 |
+| 2026-07-31 | EV-M2-052 | M2 | Unit and component suite | jsdom / Vitest 4.1.0 | Passed | 117 tests across 24 files |
+| 2026-07-31 | EV-M2-053 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 7 |
+| 2026-07-31 | EV-M2-054 | M2 | M0/M1/M2 navigation smoke suite | Chrome 150 / Target A | Passed | 3 Playwright tests |
+| 2026-07-31 | EV-M2-055 | M2 | 640 px inference-input physical comparison | Chrome 150 / Target A, 1–2 metre zone | Passed | Capture p95 93.5 ms; body, two-hand, crossed-hand, finger, and alignment checks passed |
 
 Recommended evidence ID format: `EV-M2-001`.
 
@@ -251,7 +319,7 @@ Recommended decision ID format: `DEC-###`.
 
 | Issue ID | First seen | Milestone | Severity | Status | Description | Related files |
 |---|---|---|---|---|---|---|
-| — | — | — | — | — | None recorded | — |
+| ISS-M2-001 | 2026-07-30 | M2 | S3 | Open | Initial Target A capture-to-result p95 was 100.6 ms; the 640 px tuning run improved it to 93.5 ms, but tracking-quality review and longer validation remain required | [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-7.md`](./verification/m2-increment-7.md) |
 
 Recommended issue ID format: `ISS-M2-001`.
 

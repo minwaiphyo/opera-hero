@@ -7,12 +7,8 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "copy:wasm": "node scripts/copy-wasm.mjs",
-    "predev": "npm run copy:wasm",
     "dev": "vite",
-    "prebuild": "npm run copy:wasm",
     "build": "tsc -b && vite build",
-    "pretest:e2e": "npm run copy:wasm",
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "lint": "eslint .",

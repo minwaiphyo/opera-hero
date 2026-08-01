@@ -29,6 +29,26 @@ This folder is the project-management and engineering record for Opera Hero.
   guide, aspect-ratio reporting, and bounded camera recovery.
 - [M1 Increment 6 verification](./verification/m1-increment-6.md) — lifecycle
   stress coverage, live stability metrics, and the final Target A soak procedure.
+- [M2 Increment 1 verification](./verification/m2-increment-1.md) — real Pose Lite
+  and Hand Landmarker overlay baseline plus normalized application contracts.
+- [M2 Increment 2 verification](./verification/m2-increment-2.md) — typed worker
+  protocol, transferable frame ownership, and latest-frame backpressure.
+- [M2 Increment 3 verification](./verification/m2-increment-3.md) — worker-owned
+  MediaPipe inference, transferable live frames, and verification checklist.
+- [M2 Increment 4 verification](./verification/m2-increment-4.md) — bounded live
+  latency, throughput, runtime, and backpressure diagnostics.
+- [M2 Increment 5 verification](./verification/m2-increment-5.md) — provisional
+  visitor presence, framing, and landmark tracking-quality classification.
+- [M2 Increment 6A verification](./verification/m2-increment-6a.md) — versioned,
+  image-free deterministic landmark replay contract and strict validation.
+- [M2 Increment 6B verification](./verification/m2-increment-6b.md) — common
+  landmark-source adapter and deterministic fake-clock replay playback.
+- [M2 Increment 6C verification](./verification/m2-increment-6c.md) — dedicated
+  replay laboratory, shared renderer, controls, and tracking-loss fixture.
+- [M2 Increment 6D verification](./verification/m2-increment-6d.md) — worker
+  readiness gating and clean camera-startup state transitions.
+- [M2 Increment 7 verification](./verification/m2-increment-7.md) —
+  aspect-preserving inference-frame sizing and physical comparison procedure.
 
 The development status ledger is the authoritative answer to “what stage are we at?”
 It must be updated alongside implementation and tests.
