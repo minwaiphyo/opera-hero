@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "fixtures": [
+    {
+      "id": "opening-door-normal-take-1",
+      "gesture": "opening-door",
+      "role": "primary",
+      "input": "docs/practitioner-footage/cleaned/OpeningDoor/OpeningDoorNormalPaceTake1.mp4",
+      "description": "Opening Door normal-pace practitioner reference, take 1"
+    },
+    {
+      "id": "opening-door-normal-take-2",
+      "gesture": "opening-door",
+      "role": "primary",
+      "input": "docs/practitioner-footage/cleaned/OpeningDoor/OpeningDoorNormalPaceTake2.mp4",
+      "description": "Opening Door normal-pace practitioner reference, take 2"
+    },
+    {
+      "id": "opening-door-slow-pilot",
+      "gesture": "opening-door",
+      "role": "diagnostic",
+      "input": "docs/practitioner-footage/cleaned/OpeningDoor/OpeningDoorSlowedPace.mp4",
+      "description": "Opening Door slow practitioner reference pilot"
+    },
+    {
+      "id": "orchid-finger-normal-take-1",
+      "gesture": "orchid-finger",
+      "role": "primary",
+      "input": "docs/practitioner-footage/cleaned/OrchidFinger/OrchidFlowerNormalPaceTake1.mp4",
+      "description": "Orchid Finger normal-pace practitioner reference, take 1"
+    },
+    {
+      "id": "orchid-finger-normal-take-2",
+      "gesture": "orchid-finger",
+      "role": "primary",
+      "input": "docs/practitioner-footage/cleaned/OrchidFinger/OrchidFlowerNormalPaceTake2.mp4",
+      "description": "Orchid Finger normal-pace practitioner reference, take 2"
+    },
+    {
+      "id": "orchid-finger-normal-take-3",
+      "gesture": "orchid-finger",
+      "role": "primary",
+      "input": "docs/practitioner-footage/cleaned/OrchidFinger/OrchidFlowerNormalPaceTake3.MOV",
+      "description": "Orchid Finger normal-pace practitioner reference, take 3"
+    },
+    {
+      "id": "orchid-finger-slow",
+      "gesture": "orchid-finger",
+      "role": "diagnostic",
+      "input": "docs/practitioner-footage/cleaned/OrchidFinger/OrchidFlowerSlowPace.mp4",
+      "description": "Orchid Finger slow practitioner reference"
+    },
+    {
+      "id": "water-sleeves-front-with-sleeves",
+      "gesture": "water-sleeves",
+      "role": "primary",
+      "input": "docs/practitioner-footage/cleaned/WaterSleeves/WaterSleevesZoomedOutNormalPace.mp4",
+      "description": "Water Sleeves front-facing normal-pace practitioner reference with sleeves"
+    },
+    {
+      "id": "water-sleeves-front-without-sleeves",
+      "gesture": "water-sleeves",
+      "role": "supporting",
+      "input": "docs/practitioner-footage/cleaned/WaterSleeves/WaterSleevesWithoutSleevesZoomedOutNormalPace.mp4",
+      "description": "Water Sleeves front-facing normal-pace supporting reference without sleeves"
+    }
+  ]
+}

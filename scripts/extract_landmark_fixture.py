@@ -48,7 +48,7 @@ def main() -> int:
         )
         print(
             f"Wrote {len(fixture['frames'])} frames to {arguments.output} "
-            f"(source {trim.start_ms}–{trim.end_ms} ms)."
+            f"(source {trim.start_ms}-{trim.end_ms} ms)."
         )
         if not trim.detected:
             print(
