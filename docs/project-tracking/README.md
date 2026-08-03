@@ -39,6 +39,7 @@ This folder is the project-management and engineering record for Opera Hero.
 - [M3 Water Sleeves Temporal Trajectory Increment 6](./verification/m3-water-sleeves-trajectory-6.md)
 - [M3 Water Sleeves Reference Envelope Increment 7](./verification/m3-water-sleeves-envelope-7.md)
 - [M3 Water Sleeves Temporal Evaluator Increment 8](./verification/m3-water-sleeves-evaluator-8.md)
+- [M3 Water Sleeves Deterministic Regressions Increment 9](./verification/m3-water-sleeves-regressions-9.md)
   — local practitioner fixture loading, validation, metadata, and replay rendering.
 - [M2 Increment 1 verification](./verification/m2-increment-1.md) — real Pose Lite
   and Hand Landmarker overlay baseline plus normalized application contracts.

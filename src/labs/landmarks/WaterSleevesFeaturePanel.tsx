@@ -4,6 +4,7 @@ import { extractWaterSleevesTrajectory } from "../../domain/gestures/features/wa
 import { WATER_SLEEVES_REFERENCE } from "../../domain/gestures/references/waterSleevesReference";
 import { compareWaterSleevesTrajectory } from "../../domain/gestures/scoring/waterSleevesEnvelope";
 import { evaluateWaterSleevesTrajectory } from "../../domain/gestures/scoring/waterSleevesEvaluator";
+import { runWaterSleevesRegressions } from "../../domain/gestures/scoring/waterSleevesRegressions";
 import type { VisionReplayFixture } from "../../vision/replay/visionReplayTypes";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 
@@ -26,6 +27,10 @@ export function WaterSleevesFeaturePanel({
   const evaluation = useMemo(
     () => evaluateWaterSleevesTrajectory(trajectory, WATER_SLEEVES_REFERENCE),
     [trajectory],
+  );
+  const regressions = useMemo(
+    () => runWaterSleevesRegressions(WATER_SLEEVES_REFERENCE),
+    [],
   );
 
   return (
@@ -134,6 +139,39 @@ export function WaterSleevesFeaturePanel({
                 {result.score === null ? "unavailable" : percentage(result.score)}
               </span>
               <span role="cell">{percentage(result.coverage)}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="water-sleeves-regressions-title">
+        <h3 id="water-sleeves-regressions-title">Deterministic regressions</h3>
+        <p>
+          Synthetic landmark-derived scenarios protect evaluator behaviour. Their
+          expectations are engineering regression bounds, not visitor thresholds.
+        </p>
+        <div className="regression-table" role="table">
+          <div className="feature-coverage-header" role="row">
+            <span role="columnheader">Scenario</span>
+            <span role="columnheader">Score</span>
+            <span role="columnheader">Tracking</span>
+            <span role="columnheader">Result</span>
+          </div>
+          {regressions.map((regression) => (
+            <div key={regression.id} role="row">
+              <span role="cell" title={regression.description}>
+                {signalLabel(regression.id)}
+              </span>
+              <span role="cell">
+                {percentage(regression.evaluation.overallScore)}
+              </span>
+              <span role="cell">{regression.evaluation.trackingStatus}</span>
+              <span
+                className={`regression-result ${regression.passed ? "passed" : "failed"}`}
+                role="cell"
+              >
+                {regression.passed ? "pass" : "fail"}
+              </span>
             </div>
           ))}
         </div>

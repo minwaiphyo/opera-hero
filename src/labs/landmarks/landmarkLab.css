@@ -266,6 +266,36 @@
   color: #d4a0a0;
 }
 
+.regression-table {
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 0.76rem;
+}
+
+.regression-table [role="row"] {
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) 90px 110px 70px;
+  gap: 10px;
+  padding: 8px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.regression-table [role="row"]:first-child {
+  border-top: 0;
+}
+
+.regression-result {
+  text-transform: uppercase;
+}
+
+.regression-result.passed {
+  color: #c4eed4;
+}
+
+.regression-result.failed {
+  color: #d4a0a0;
+}
+
 @media (max-width: 900px) {
   .replay-workbench {
     grid-template-columns: 1fr;
