@@ -22,6 +22,8 @@ describe("WaterSleevesFeaturePanel", () => {
 
     expect(screen.getByText("2/2")).toBeInTheDocument();
     expect(screen.getByText("none")).toBeInTheDocument();
+    expect(screen.getByText(/41 smoothed progress points/)).toBeInTheDocument();
+    expect(screen.getByText(/not yet a visitor pass score/)).toBeInTheDocument();
     expect(
       within(screen.getByRole("region", { name: "Left arm" })).getByText(
         "usable",

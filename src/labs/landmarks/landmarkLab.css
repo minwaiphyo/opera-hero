@@ -182,6 +182,10 @@
   margin-bottom: 12px;
 }
 
+.envelope-summary {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .gesture-feature-summary > div,
 .arm-feature-card {
   padding: 12px;

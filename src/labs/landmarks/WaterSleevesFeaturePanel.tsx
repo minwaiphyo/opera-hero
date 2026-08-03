@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { extractWaterSleevesFrameFeatures } from "../../domain/gestures/features/waterSleevesFeatures";
 import { extractWaterSleevesTrajectory } from "../../domain/gestures/features/waterSleevesTrajectory";
+import { WATER_SLEEVES_REFERENCE } from "../../domain/gestures/references/waterSleevesReference";
+import { compareWaterSleevesTrajectory } from "../../domain/gestures/scoring/waterSleevesEnvelope";
 import type { VisionReplayFixture } from "../../vision/replay/visionReplayTypes";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 
@@ -15,6 +17,10 @@ export function WaterSleevesFeaturePanel({
   const trajectory = useMemo(
     () => extractWaterSleevesTrajectory(fixture),
     [fixture],
+  );
+  const comparison = useMemo(
+    () => compareWaterSleevesTrajectory(trajectory, WATER_SLEEVES_REFERENCE),
+    [trajectory],
   );
 
   return (
@@ -54,6 +60,36 @@ export function WaterSleevesFeaturePanel({
             </div>
           ))}
         </div>
+      </section>
+
+      <section aria-labelledby="water-sleeves-envelope-title">
+        <h3 id="water-sleeves-envelope-title">Reference envelope</h3>
+        <p>
+          Provisional developer comparison against {WATER_SLEEVES_REFERENCE.progressPoints}
+          {" "}smoothed progress points. This is not yet a visitor pass score.
+        </p>
+        <dl className="gesture-feature-summary envelope-summary">
+          <FeatureMetric
+            label="Overall fit"
+            value={percentage(comparison.overallFit)}
+          />
+          <FeatureMetric
+            label="Left arm angle"
+            value={percentage(comparison.signalFit.leftUpperArmAngle)}
+          />
+          <FeatureMetric
+            label="Right arm angle"
+            value={percentage(comparison.signalFit.rightUpperArmAngle)}
+          />
+          <FeatureMetric
+            label="Left elbow path"
+            value={percentage(comparison.signalFit.leftElbowPosition)}
+          />
+          <FeatureMetric
+            label="Right elbow path"
+            value={percentage(comparison.signalFit.rightElbowPosition)}
+          />
+        </dl>
       </section>
 
       {!frame ? (
@@ -154,4 +190,8 @@ function degrees(radians: number): string {
 
 function coordinates(point: { x: number; y: number }): string {
   return `x ${point.x.toFixed(2)} · y ${point.y.toFixed(2)}`;
+}
+
+function percentage(value: number): string {
+  return `${(value * 100).toFixed(1)}%`;
 }

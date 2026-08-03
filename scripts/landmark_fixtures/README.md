@@ -47,6 +47,22 @@ the M2 Landmark Laboratory and mark its visual QA result in your local report.
 The initial batch deliberately excludes half-left and half-right footage. Those
 angles are diagnostic material, not scoring references for the front-facing booth.
 
+## Water Sleeves compact reference
+
+Regenerate the committed, landmark-derived Water Sleeves envelope from the approved
+local fixture and compare the supporting no-sleeves take:
+
+```powershell
+node scripts\generate_water_sleeves_reference.mjs `
+  --input "local-artifacts\landmark-fixtures\water-sleeves-front-with-sleeves.fixture.json" `
+  --output "src\domain\gestures\references\waterSleeves.reference.json" `
+  --compare "local-artifacts\landmark-fixtures\water-sleeves-front-without-sleeves.fixture.json"
+```
+
+The output contains 41 smoothed progress points, broad provisional tolerances, and
+no recorded imagery. It is small enough to commit. The full landmark fixtures remain
+ignored local development artifacts.
+
 ## Tests
 
 ```powershell
