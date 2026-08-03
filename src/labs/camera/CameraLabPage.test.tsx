@@ -24,6 +24,10 @@ import type {
   CameraServiceController,
 } from "./cameraLabRuntime";
 
+vi.mock("./WaterSleevesReferenceGuide", () => ({
+  WaterSleevesReferenceGuide: () => <div>Water Sleeves reference guide</div>,
+}));
+
 const devices: CameraDevice[] = [
   { deviceId: "integrated", label: "Integrated Camera" },
   { deviceId: "external", label: "USB Camera" },

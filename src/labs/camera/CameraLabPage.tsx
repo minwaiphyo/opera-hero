@@ -4,8 +4,11 @@ import { CameraControls } from "./CameraControls";
 import { CameraDiagnostics } from "./CameraDiagnostics";
 import { CameraPreview } from "./CameraPreview";
 import { CameraStabilityPanel } from "./CameraStabilityPanel";
+import { WaterSleevesLiveScoringPanel } from "./WaterSleevesLiveScoringPanel";
+import { WaterSleevesReferenceGuide } from "./WaterSleevesReferenceGuide";
 import type { CameraLabRuntimeFactory } from "./cameraLabRuntime";
 import { useCameraLab } from "./useCameraLab";
+import { useWaterSleevesLiveScoring } from "./useWaterSleevesLiveScoring";
 import "./cameraLab.css";
 
 type CameraLabPageProps = {
@@ -15,9 +18,10 @@ type CameraLabPageProps = {
 export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
   const camera = useCameraLab(runtimeFactory);
   const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
+  const liveScoring = useWaterSleevesLiveScoring(camera.session?.id ?? null);
 
   return (
-    <main>
+    <main className="camera-lab-page">
       <DevelopmentNav activePage="m1" />
       <header className="lab-page-header">
         <div>
@@ -39,11 +43,25 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
 
       <section className="camera-workbench" aria-label="Camera workbench">
         <div className="preview-column">
-          <CameraPreview
-            onVideoElement={setVideoElement}
-            session={camera.session}
-            status={camera.status}
+          <WaterSleevesLiveScoringPanel
+            cameraActive={Boolean(camera.session)}
+            onCancel={liveScoring.cancel}
+            onFinish={liveScoring.finish}
+            onReset={liveScoring.reset}
+            onStart={liveScoring.start}
+            state={liveScoring.state}
           />
+          <div className="live-visual-comparison">
+            <CameraPreview
+              onLandmarkFrame={liveScoring.onFrame}
+              onVideoElement={setVideoElement}
+              session={camera.session}
+              status={camera.status}
+            />
+            <WaterSleevesReferenceGuide
+              restartToken={liveScoring.state.snapshot.attemptId}
+            />
+          </div>
           <p className="preview-caption">
             The preview is mirrored to match a visitor’s expected reflection.
             Delivered settings come from the active camera track.
