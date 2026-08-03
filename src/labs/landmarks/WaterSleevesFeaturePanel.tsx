@@ -3,6 +3,7 @@ import { extractWaterSleevesFrameFeatures } from "../../domain/gestures/features
 import { extractWaterSleevesTrajectory } from "../../domain/gestures/features/waterSleevesTrajectory";
 import { WATER_SLEEVES_REFERENCE } from "../../domain/gestures/references/waterSleevesReference";
 import { compareWaterSleevesTrajectory } from "../../domain/gestures/scoring/waterSleevesEnvelope";
+import { evaluateWaterSleevesTrajectory } from "../../domain/gestures/scoring/waterSleevesEvaluator";
 import type { VisionReplayFixture } from "../../vision/replay/visionReplayTypes";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 
@@ -20,6 +21,10 @@ export function WaterSleevesFeaturePanel({
   );
   const comparison = useMemo(
     () => compareWaterSleevesTrajectory(trajectory, WATER_SLEEVES_REFERENCE),
+    [trajectory],
+  );
+  const evaluation = useMemo(
+    () => evaluateWaterSleevesTrajectory(trajectory, WATER_SLEEVES_REFERENCE),
     [trajectory],
   );
 
@@ -90,6 +95,48 @@ export function WaterSleevesFeaturePanel({
             value={percentage(comparison.signalFit.rightElbowPosition)}
           />
         </dl>
+      </section>
+
+      <section aria-labelledby="water-sleeves-evaluator-title">
+        <h3 id="water-sleeves-evaluator-title">Temporal evaluator</h3>
+        <p>
+          Soft feature membership after constrained temporal alignment. These
+          diagnostics are not a completion threshold.
+        </p>
+        <dl className="gesture-feature-summary envelope-summary">
+          <FeatureMetric
+            label="Soft score"
+            value={percentage(evaluation.overallScore)}
+          />
+          <FeatureMetric
+            label="Tracking coverage"
+            value={percentage(evaluation.trackingCoverage)}
+          />
+          <FeatureMetric
+            label="Tracking status"
+            value={evaluation.trackingStatus}
+          />
+          <FeatureMetric
+            label="Aligned pairs"
+            value={String(evaluation.alignedPairs)}
+          />
+        </dl>
+        <div className="feature-coverage-table" role="table">
+          <div className="feature-coverage-header" role="row">
+            <span role="columnheader">Required signal</span>
+            <span role="columnheader">Soft score</span>
+            <span role="columnheader">Coverage</span>
+          </div>
+          {Object.entries(evaluation.signalScores).map(([signal, result]) => (
+            <div key={signal} role="row">
+              <span role="cell">{signalLabel(signal)}</span>
+              <span role="cell">
+                {result.score === null ? "unavailable" : percentage(result.score)}
+              </span>
+              <span role="cell">{percentage(result.coverage)}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       {!frame ? (
