@@ -19,7 +19,7 @@ packages are not needed by the festival booth runtime.
 ```powershell
 .\.venv\Scripts\python.exe scripts\extract_landmark_fixture.py `
   --input "docs\practitioner-footage\cleaned\OpeningDoor\OpeningDoorSlowedPace.mp4" `
-  --output "test-results\opening-door-slow.fixture.json" `
+  --output "local-artifacts\landmark-fixtures\opening-door-slow.fixture.json" `
   --id "opening-door-slow-pilot" `
   --description "Opening Door slow practitioner reference pilot"
 ```
@@ -27,7 +27,8 @@ packages are not needed by the festival booth runtime.
 The default extraction rate is 20 FPS. Motion must remain above the normalized
 threshold for 250 ms to establish an active edge, and 400 ms of context is retained
 around the detected movement. The JSON `extraction` block records the chosen source
-range. Generated output under `test-results/` is intentionally not committed.
+range. Generated output under `local-artifacts/` is intentionally not committed.
+Do not use `test-results/`; Playwright clears that directory when its suite starts.
 
 ## Tests
 

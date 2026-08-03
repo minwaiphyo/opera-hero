@@ -28,7 +28,8 @@ around detected movement.
 | EV-M3-005 | ESLint | Passed |
 | EV-M3-006 | Production build | Passed |
 
-The pilot output is under ignored `test-results/` and is not part of this commit.
+The pilot output is under ignored `local-artifacts/landmark-fixtures/` and is not part
+of this commit. `test-results/` must not be used because Playwright clears it.
 
 ## Manual review checklist
 
