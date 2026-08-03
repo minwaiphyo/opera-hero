@@ -39,7 +39,7 @@ export interface WaterSleevesFrameFeatures {
 }
 
 export function extractWaterSleevesFrameFeatures(
-  frame: VisionLandmarkFrame,
+  frame: Pick<VisionLandmarkFrame, "capturedAtMs" | "pose">,
 ): WaterSleevesFrameFeatures | null {
   const landmarks = frame.pose?.landmarks;
   if (!landmarks) {

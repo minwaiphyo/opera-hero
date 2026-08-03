@@ -217,7 +217,7 @@ function LandmarkLabWorkbench({
       </section>
 
       {fixture.id.startsWith("water-sleeves-") ? (
-        <WaterSleevesFeaturePanel frame={replay.frame} />
+        <WaterSleevesFeaturePanel fixture={fixture} frame={replay.frame} />
       ) : null}
 
       <footer>

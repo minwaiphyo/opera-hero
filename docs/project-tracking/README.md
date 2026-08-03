@@ -36,6 +36,7 @@ This folder is the project-management and engineering record for Opera Hero.
 - [M3 Practitioner Fixture Batch Increment 3](./verification/m3-fixture-batch-3.md)
 - [M3 Water Sleeves Feature Foundation Increment 4](./verification/m3-water-sleeves-features-4.md)
 - [M3 Water Sleeves Feature Observability Increment 5](./verification/m3-water-sleeves-observability-5.md)
+- [M3 Water Sleeves Temporal Trajectory Increment 6](./verification/m3-water-sleeves-trajectory-6.md)
   — local practitioner fixture loading, validation, metadata, and replay rendering.
 - [M2 Increment 1 verification](./verification/m2-increment-1.md) — real Pose Lite
   and Hand Landmarker overlay baseline plus normalized application contracts.

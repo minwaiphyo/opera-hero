@@ -1,12 +1,21 @@
+import { useMemo } from "react";
 import { extractWaterSleevesFrameFeatures } from "../../domain/gestures/features/waterSleevesFeatures";
+import { extractWaterSleevesTrajectory } from "../../domain/gestures/features/waterSleevesTrajectory";
+import type { VisionReplayFixture } from "../../vision/replay/visionReplayTypes";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 
 export function WaterSleevesFeaturePanel({
+  fixture,
   frame,
 }: {
+  fixture: VisionReplayFixture;
   frame: VisionLandmarkFrame | null;
 }) {
   const features = frame ? extractWaterSleevesFrameFeatures(frame) : null;
+  const trajectory = useMemo(
+    () => extractWaterSleevesTrajectory(fixture),
+    [fixture],
+  );
 
   return (
     <section
@@ -19,6 +28,33 @@ export function WaterSleevesFeaturePanel({
         Pose arms are required. Hand Landmarker detections are ignored because
         costume sleeves obscure the hands.
       </p>
+
+      <section aria-labelledby="water-sleeves-coverage-title">
+        <h3 id="water-sleeves-coverage-title">Sequence coverage</h3>
+        <p>
+          {trajectory.usableFrames}/{trajectory.totalFrames} frames contain at
+          least one usable pose arm. Coverage measures availability, not
+          cultural correctness.
+        </p>
+        <div className="feature-coverage-table" role="table">
+          <div className="feature-coverage-header" role="row">
+            <span role="columnheader">Signal</span>
+            <span role="columnheader">Coverage</span>
+            <span role="columnheader">Use</span>
+          </div>
+          {trajectory.signals.map((assessment) => (
+            <div key={assessment.signal} role="row">
+              <span role="cell">{signalLabel(assessment.signal)}</span>
+              <span role="cell">
+                {(assessment.coverage * 100).toFixed(1)}%
+              </span>
+              <span className={`feature-use ${assessment.recommendedUse}`} role="cell">
+                {assessment.recommendedUse}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {!frame ? (
         <p className="feature-empty">Start the replay to inspect measurements.</p>
@@ -48,6 +84,12 @@ export function WaterSleevesFeaturePanel({
       )}
     </section>
   );
+}
+
+function signalLabel(signal: string): string {
+  return signal
+    .replace(/([A-Z])/g, " $1")
+    .replace(/^./, (character) => character.toUpperCase());
 }
 
 function ArmFeatures({

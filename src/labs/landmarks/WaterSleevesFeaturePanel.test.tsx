@@ -4,20 +4,21 @@ import type {
   VisionLandmark,
   VisionLandmarkFrame,
 } from "../../vision/visionTypes";
+import type { VisionReplayFixture } from "../../vision/replay/visionReplayTypes";
 import { WaterSleevesFeaturePanel } from "./WaterSleevesFeaturePanel";
 
 describe("WaterSleevesFeaturePanel", () => {
   afterEach(cleanup);
 
   it("explains the pose-only policy before replay", () => {
-    render(<WaterSleevesFeaturePanel frame={null} />);
+    render(<WaterSleevesFeaturePanel fixture={fixture()} frame={null} />);
 
     expect(screen.getByText(/Hand Landmarker detections are ignored/)).toBeInTheDocument();
     expect(screen.getByText(/Start the replay/)).toBeInTheDocument();
   });
 
   it("shows usable arm measurements without hand detections", () => {
-    render(<WaterSleevesFeaturePanel frame={poseFrame()} />);
+    render(<WaterSleevesFeaturePanel fixture={fixture()} frame={poseFrame()} />);
 
     expect(screen.getByText("2/2")).toBeInTheDocument();
     expect(screen.getByText("none")).toBeInTheDocument();
@@ -29,13 +30,30 @@ describe("WaterSleevesFeaturePanel", () => {
   });
 
   it("marks wrist-dependent features as occluded without discarding the arm", () => {
-    render(<WaterSleevesFeaturePanel frame={poseFrame(0.1)} />);
+    render(
+      <WaterSleevesFeaturePanel fixture={fixture()} frame={poseFrame(0.1)} />,
+    );
 
     const left = within(screen.getByRole("region", { name: "Left arm" }));
     expect(left.getByText("usable")).toBeInTheDocument();
     expect(left.getAllByText("occluded")).toHaveLength(2);
   });
 });
+
+function fixture(): VisionReplayFixture {
+  const frame = poseFrame();
+  return {
+    schemaVersion: 1,
+    id: "water-sleeves-test",
+    description: "test",
+    source: "synthetic",
+    containsRecordedImagery: false,
+    frames: [
+      { offsetMs: 0, pose: frame.pose, hands: [] },
+      { offsetMs: 50, pose: frame.pose, hands: [] },
+    ],
+  };
+}
 
 function poseFrame(leftWristVisibility = 0.9): VisionLandmarkFrame {
   const landmarks = Array.from({ length: 33 }, () => point(0, 0, 0));
