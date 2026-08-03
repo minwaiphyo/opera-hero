@@ -10,6 +10,7 @@ import {
   VisionReplayValidationError,
 } from "../../vision/replay/visionReplayValidation";
 import { LandmarkReplayCanvas } from "./LandmarkReplayCanvas";
+import { WaterSleevesFeaturePanel } from "./WaterSleevesFeaturePanel";
 import { useReplayLandmarkLab } from "./useReplayLandmarkLab";
 import "./landmarkLab.css";
 
@@ -214,6 +215,10 @@ function LandmarkLabWorkbench({
           </dl>
         </section>
       </section>
+
+      {fixture.id.startsWith("water-sleeves-") ? (
+        <WaterSleevesFeaturePanel frame={replay.frame} />
+      ) : null}
 
       <footer>
         M2 replay mode drives the same normalized renderer and quality rules as

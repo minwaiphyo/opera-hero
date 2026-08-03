@@ -145,8 +145,91 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.gesture-feature-panel {
+  margin-top: 18px;
+  padding: 20px;
+  border: 1px solid rgba(110, 211, 160, 0.24);
+  background: rgba(18, 12, 25, 0.82);
+}
+
+.gesture-feature-panel h2,
+.gesture-feature-panel h3,
+.gesture-feature-panel p,
+.gesture-feature-panel dl {
+  margin-top: 0;
+}
+
+.gesture-feature-panel > p:not(.check-kicker) {
+  color: #b8adb9;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.feature-empty {
+  margin-bottom: 0;
+  padding: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+}
+
+.gesture-feature-summary,
+.arm-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gesture-feature-summary {
+  margin-bottom: 12px;
+}
+
+.gesture-feature-summary > div,
+.arm-feature-card {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(8, 5, 13, 0.5);
+}
+
+.gesture-feature-summary dt,
+.arm-feature-card dt {
+  color: #9c919f;
+  font-size: 0.68rem;
+}
+
+.gesture-feature-summary dd,
+.arm-feature-card dd {
+  margin: 3px 0 0;
+  color: #f5eff7;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.arm-feature-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.arm-feature-card h3 {
+  color: #f3d79f;
+  font-size: 0.82rem;
+}
+
+.arm-feature-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-bottom: 0;
+}
+
+.arm-feature-card p {
+  margin-bottom: 0;
+}
+
 @media (max-width: 900px) {
   .replay-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .gesture-feature-summary,
+  .arm-feature-grid {
     grid-template-columns: 1fr;
   }
 }
