@@ -64,6 +64,14 @@ export function extractWaterSleevesTrajectory(
       rightArm: features?.rightArm ?? null,
     };
   });
+  return createWaterSleevesTrajectory(fixture.id, samples, durationMs);
+}
+
+export function createWaterSleevesTrajectory(
+  fixtureId: string,
+  samples: readonly WaterSleevesTrajectorySample[],
+  durationMs = samples.at(-1)?.offsetMs ?? 0,
+): WaterSleevesTrajectory {
   const signals = ALL_SIGNALS.map((signal) => {
     const available = samples.filter((sample) => hasSignal(sample, signal)).length;
     const coverage = samples.length > 0 ? available / samples.length : 0;
@@ -75,7 +83,7 @@ export function extractWaterSleevesTrajectory(
   });
 
   return {
-    fixtureId: fixture.id,
+    fixtureId,
     durationMs,
     totalFrames: samples.length,
     usableFrames: samples.filter(
