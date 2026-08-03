@@ -52,6 +52,9 @@ export function parseVisionReplayFixture(
   if (value.containsRecordedImagery !== false) {
     throw invalid("Landmark replays must not contain recorded imagery.");
   }
+  if (value.extraction !== undefined) {
+    validateExtractionMetadata(value.extraction, value.source);
+  }
   if (!Array.isArray(value.frames) || value.frames.length === 0) {
     throw invalid("Replay fixture must contain at least one frame.");
   }
@@ -68,6 +71,46 @@ export function parseVisionReplayFixture(
   }
 
   return value as unknown as VisionReplayFixture;
+}
+
+function validateExtractionMetadata(value: unknown, source: unknown): void {
+  if (source !== "practitioner-reference") {
+    throw invalid("Extraction metadata is only valid for practitioner references.");
+  }
+  if (!isRecord(value)) {
+    throw invalid("Extraction metadata must be an object.");
+  }
+  if (typeof value.sourceFile !== "string" || value.sourceFile.trim() === "") {
+    throw invalid("Extraction source file must not be empty.");
+  }
+  for (const field of ["sourceDurationMs", "sampleFps"] as const) {
+    if (!isFiniteNumber(value[field]) || value[field] <= 0) {
+      throw invalid(`Extraction ${field} must be positive.`);
+    }
+  }
+  for (const field of [
+    "trimmedStartMs",
+    "trimmedEndMs",
+    "motionThreshold",
+    "motionSustainMs",
+    "edgePaddingMs",
+  ] as const) {
+    if (!isFiniteNumber(value[field]) || value[field] < 0) {
+      throw invalid(`Extraction ${field} must not be negative.`);
+    }
+  }
+  if (typeof value.motionDetected !== "boolean") {
+    throw invalid("Extraction motionDetected must be boolean.");
+  }
+  const trimmedStartMs = value.trimmedStartMs as number;
+  const trimmedEndMs = value.trimmedEndMs as number;
+  const sourceDurationMs = value.sourceDurationMs as number;
+  if (trimmedEndMs <= trimmedStartMs) {
+    throw invalid("Extraction trim end must be after its start.");
+  }
+  if (trimmedEndMs > sourceDurationMs) {
+    throw invalid("Extraction trim must be inside the source duration.");
+  }
 }
 
 function isVisionReplayFrame(

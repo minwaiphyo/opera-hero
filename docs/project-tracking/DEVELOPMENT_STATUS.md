@@ -16,12 +16,12 @@ here.
 
 | Field | Current value |
 |---|---|
-| Active milestone | M2 — Landmark laboratory |
+| Active milestone | M3 — Gesture scoring laboratory |
 | Milestone status | In progress |
 | Latest completed milestone | M0 — Decisions and baseline |
 | Current vertical slice | None |
 | Exhibition readiness | 1 — Development shell runs |
-| Last updated | 2026-07-30 |
+| Last updated | 2026-08-03 |
 
 ### Readiness scale
 
@@ -43,7 +43,7 @@ here.
 | M0 | Decisions and baseline | Complete | 100% | [`verification/m0-baseline.md`](./verification/m0-baseline.md) |
 | M1 | Camera laboratory | Implemented — verification pending | 95% | [`verification/m1-increment-1.md`](./verification/m1-increment-1.md), [`verification/m1-increment-2.md`](./verification/m1-increment-2.md), [`verification/m1-increment-3.md`](./verification/m1-increment-3.md), [`verification/m1-increment-4.md`](./verification/m1-increment-4.md), [`verification/m1-increment-5.md`](./verification/m1-increment-5.md), [`verification/m1-increment-6.md`](./verification/m1-increment-6.md) |
 | M2 | Landmark laboratory | In progress | 97% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md), [`verification/m2-increment-3.md`](./verification/m2-increment-3.md), [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-5.md`](./verification/m2-increment-5.md), [`verification/m2-increment-6a.md`](./verification/m2-increment-6a.md), [`verification/m2-increment-6b.md`](./verification/m2-increment-6b.md), [`verification/m2-increment-6c.md`](./verification/m2-increment-6c.md), [`verification/m2-increment-6d.md`](./verification/m2-increment-6d.md), [`verification/m2-increment-7.md`](./verification/m2-increment-7.md) |
-| M3 | Gesture scoring laboratory | Blocked by M2 | 0% | — |
+| M3 | Gesture scoring laboratory | In progress | 10% | [`verification/m3-fixture-extraction-1.md`](./verification/m3-fixture-extraction-1.md) |
 | M4 | Gameplay state-machine simulator | Blocked by M0 | 0% | — |
 | M5 | First vertical slice | Blocked by M2–M4 | 0% | — |
 | M6 | Content pipeline | Blocked by M5 | 0% | — |
@@ -100,6 +100,7 @@ feature to its source, tests, and proof.
 | M2-011 | Landmark replay laboratory and shared live/replay renderer | M2 | Implemented — verification pending | [`src/vision/renderLandmarkFrame.ts`](../../src/vision/renderLandmarkFrame.ts), [`src/vision/replay/replayFixtureCatalog.ts`](../../src/vision/replay/replayFixtureCatalog.ts), [`src/vision/replay/syntheticReplayFixtures.ts`](../../src/vision/replay/syntheticReplayFixtures.ts), [`src/labs/landmarks/LandmarkLabPage.tsx`](../../src/labs/landmarks/LandmarkLabPage.tsx), [`src/labs/landmarks/LandmarkReplayCanvas.tsx`](../../src/labs/landmarks/LandmarkReplayCanvas.tsx), [`src/labs/landmarks/useReplayLandmarkLab.ts`](../../src/labs/landmarks/useReplayLandmarkLab.ts), [`src/labs/landmarks/landmarkLab.css`](../../src/labs/landmarks/landmarkLab.css) | [`src/labs/landmarks/LandmarkLabPage.test.tsx`](../../src/labs/landmarks/LandmarkLabPage.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M2-040–EV-M2-044; physical replay review pending |
 | M2-012 | Readiness-gated landmark capture startup | M2 | Implemented — verification pending | [`src/vision/visionWorkerClient.ts`](../../src/vision/visionWorkerClient.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts) | [`src/vision/visionWorkerClient.test.ts`](../../src/vision/visionWorkerClient.test.ts) | EV-M2-045–EV-M2-049; physical startup review pending |
 | M2-013 | Bounded inference-frame capture | M2 | Complete | [`src/vision/visionCapture.ts`](../../src/vision/visionCapture.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts), [`src/labs/camera/VisionDiagnosticsPanel.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.tsx) | [`src/vision/visionCapture.test.ts`](../../src/vision/visionCapture.test.ts), [`src/labs/camera/VisionDiagnosticsPanel.test.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.test.tsx) | EV-M2-050–EV-M2-055 |
+| M3-001 | Offline practitioner landmark fixture extraction | M3 | Implemented — verification pending | [`scripts/extract_landmark_fixture.py`](../../scripts/extract_landmark_fixture.py), [`scripts/landmark_fixtures/motion.py`](../../scripts/landmark_fixtures/motion.py), [`scripts/landmark_fixtures/fixture.py`](../../scripts/landmark_fixtures/fixture.py), [`requirements-fixtures.txt`](../../requirements-fixtures.txt), [`src/vision/replay/visionReplayTypes.ts`](../../src/vision/replay/visionReplayTypes.ts), [`src/vision/replay/visionReplayValidation.ts`](../../src/vision/replay/visionReplayValidation.ts) | [`scripts/tests/test_landmark_fixtures.py`](../../scripts/tests/test_landmark_fixtures.py), [`src/vision/replay/visionReplayValidation.test.ts`](../../src/vision/replay/visionReplayValidation.test.ts) | EV-M3-001–EV-M3-006; manual trim-boundary review pending |
 
 ### Registry rules
 
@@ -282,6 +283,12 @@ evidence that it passed.
 | 2026-07-31 | EV-M2-053 | M2 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Increment 7 |
 | 2026-07-31 | EV-M2-054 | M2 | M0/M1/M2 navigation smoke suite | Chrome 150 / Target A | Passed | 3 Playwright tests |
 | 2026-07-31 | EV-M2-055 | M2 | 640 px inference-input physical comparison | Chrome 150 / Target A, 1–2 metre zone | Passed | Capture p95 93.5 ms; body, two-hand, crossed-hand, finger, and alignment checks passed |
+| 2026-08-03 | EV-M3-001 | M3 | Python edge-trimming and fixture unit tests | Python 3.12.13 | Passed | 4 tests; includes internal-pause preservation |
+| 2026-08-03 | EV-M3-002 | M3 | Real Opening Door slow-video extraction | MediaPipe 0.10.35 / OpenCV | Passed | 156 frames; 8267 ms source; retained 0–7767 ms |
+| 2026-08-03 | EV-M3-003 | M3 | Replay provenance validator tests | Target A / Vitest 4.1.0 | Passed | 8 focused tests; 119 total tests across 24 files |
+| 2026-08-03 | EV-M3-004 | M3 | Strict TypeScript check | Target A / Node 24.13.1 | Passed | Fixture extraction increment 1 |
+| 2026-08-03 | EV-M3-005 | M3 | ESLint analysis | Target A / Node 24.13.1 | Passed | `.venv` excluded from JavaScript lint scope |
+| 2026-08-03 | EV-M3-006 | M3 | Production build and worker bundle | Target A / Vite 8.0.13 | Passed | Existing MediaPipe build warnings unchanged |
 
 Recommended evidence ID format: `EV-M2-001`.
 

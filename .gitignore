@@ -1,5 +1,12 @@
 node_modules/
 dist/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Generated runtime files and private source footage.
+public/mediapipe/
+docs/practitioner-footage/
 
 coverage/
 playwright-report/

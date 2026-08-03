@@ -29,6 +29,9 @@ This folder is the project-management and engineering record for Opera Hero.
   guide, aspect-ratio reporting, and bounded camera recovery.
 - [M1 Increment 6 verification](./verification/m1-increment-6.md) — lifecycle
   stress coverage, live stability metrics, and the final Target A soak procedure.
+- [M3 Fixture Extraction Increment 1](./verification/m3-fixture-extraction-1.md) —
+  offline practitioner landmark extraction, edge-only stationary trimming, and
+  replay provenance validation.
 - [M2 Increment 1 verification](./verification/m2-increment-1.md) — real Pose Lite
   and Hand Landmarker overlay baseline plus normalized application contracts.
 - [M2 Increment 2 verification](./verification/m2-increment-2.md) — typed worker

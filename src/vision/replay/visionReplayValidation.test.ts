@@ -66,6 +66,46 @@ describe("parseVisionReplayFixture", () => {
     ).toThrow("Landmark replays must not contain recorded imagery.");
   });
 
+  it("accepts valid practitioner extraction provenance", () => {
+    const fixture = parseVisionReplayFixture({
+      ...emptyZoneJson,
+      id: "opening-door-pilot",
+      source: "practitioner-reference",
+      extraction: {
+        sourceFile: "OpeningDoorSlowedPace.mp4",
+        sourceDurationMs: 8267,
+        sampleFps: 20,
+        trimmedStartMs: 0,
+        trimmedEndMs: 7767,
+        motionDetected: true,
+        motionThreshold: 0.12,
+        motionSustainMs: 250,
+        edgePaddingMs: 400,
+      },
+    });
+
+    expect(fixture.extraction?.sourceFile).toBe("OpeningDoorSlowedPace.mp4");
+  });
+
+  it("rejects invalid extraction provenance", () => {
+    expect(() =>
+      parseVisionReplayFixture({
+        ...emptyZoneJson,
+        extraction: {
+          sourceFile: "OpeningDoor.mp4",
+          sourceDurationMs: 1000,
+          sampleFps: 20,
+          trimmedStartMs: 0,
+          trimmedEndMs: 800,
+          motionDetected: true,
+          motionThreshold: 0.12,
+          motionSustainMs: 250,
+          edgePaddingMs: 400,
+        },
+      }),
+    ).toThrow("Extraction metadata is only valid for practitioner references.");
+  });
+
   it("uses a dedicated error type for callers", () => {
     expect(() => parseVisionReplayFixture(null)).toThrow(
       VisionReplayValidationError,
