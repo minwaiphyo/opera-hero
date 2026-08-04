@@ -62,6 +62,7 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
             <WaterSleevesReferenceGuide
               restartToken={liveScoring.state.snapshot.attemptId}
             />
+            <AttemptCaptureCue state={liveScoring.state} />
           </div>
           <p className="preview-caption">
             The preview is mirrored to match a visitor’s expected reflection.
@@ -111,4 +112,36 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
       </footer>
     </main>
   );
+}
+
+function AttemptCaptureCue({
+  state,
+}: {
+  state: ReturnType<typeof useWaterSleevesLiveScoring>["state"];
+}) {
+  if (state.capturePhase === "countdown") {
+    return (
+      <div className="attempt-capture-cue" role="status">
+        <strong>{Math.max(1, Math.ceil(state.countdownRemainingMs / 1000))}</strong>
+        <span>Move into the ready position</span>
+      </div>
+    );
+  }
+  if (state.capturePhase === "waiting-for-movement") {
+    return (
+      <div className="attempt-capture-cue ready" role="status">
+        <strong>Ready</strong>
+        <span>Begin the movement when comfortable</span>
+      </div>
+    );
+  }
+  if (state.capturePhase === "recording") {
+    return (
+      <div className="attempt-capture-cue recording" role="status">
+        <strong>Recording</strong>
+        <span>Hold your final position to finish</span>
+      </div>
+    );
+  }
+  return null;
 }

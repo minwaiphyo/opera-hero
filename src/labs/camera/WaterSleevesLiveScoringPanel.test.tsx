@@ -26,11 +26,13 @@ describe("WaterSleevesLiveScoringPanel", () => {
       },
       evaluation: null,
       hasCompletedTrajectory: false,
+      capturePhase: "recording",
+      countdownRemainingMs: 0,
     }, true, { onFinish });
 
     expect(screen.getByText("18")).toBeInTheDocument();
     expect(screen.getByText("17")).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Finish & score" }));
+    fireEvent.click(screen.getByRole("button", { name: "Manual finish" }));
     expect(onFinish).toHaveBeenCalledOnce();
   });
 
@@ -57,6 +59,8 @@ describe("WaterSleevesLiveScoringPanel", () => {
         },
       },
       hasCompletedTrajectory: true,
+      capturePhase: "completed",
+      countdownRemainingMs: 0,
     }, true);
 
     expect(screen.getByText("82.5%")).toBeInTheDocument();
@@ -77,6 +81,8 @@ function idleState(): WaterSleevesLiveScoringState {
     },
     evaluation: null,
     hasCompletedTrajectory: false,
+    capturePhase: "idle",
+    countdownRemainingMs: 0,
   };
 }
 

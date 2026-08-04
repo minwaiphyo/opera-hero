@@ -83,10 +83,54 @@
 }
 
 .live-visual-comparison {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.65fr);
   gap: 12px;
   align-items: start;
+}
+
+.attempt-capture-cue {
+  position: absolute;
+  top: 50%;
+  left: 34%;
+  z-index: 5;
+  display: grid;
+  min-width: 210px;
+  padding: 14px 18px;
+  border: 1px solid rgba(243, 204, 126, 0.55);
+  color: #f7e5bd;
+  background: rgba(8, 5, 13, 0.88);
+  pointer-events: none;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.attempt-capture-cue strong,
+.attempt-capture-cue span {
+  display: block;
+}
+
+.attempt-capture-cue strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.attempt-capture-cue span {
+  margin-top: 3px;
+  color: #c1b3c3;
+  font-size: 0.7rem;
+}
+
+.attempt-capture-cue.ready {
+  border-color: rgba(90, 210, 244, 0.55);
+  color: #bdebf5;
+}
+
+.attempt-capture-cue.recording {
+  border-color: rgba(110, 211, 160, 0.55);
+  color: #bce9ce;
 }
 
 .reference-guide {

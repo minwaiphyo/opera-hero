@@ -25,7 +25,11 @@ export function WaterSleevesLiveScoringPanel({
   onReset,
 }: WaterSleevesLiveScoringPanelProps) {
   const { snapshot, evaluation } = state;
-  const recording = snapshot.status === "recording";
+  const recording = state.capturePhase === "recording";
+  const active =
+    state.capturePhase === "countdown" ||
+    state.capturePhase === "waiting-for-movement" ||
+    recording;
 
   return (
     <section className="lab-panel live-scoring-panel" aria-labelledby="live-scoring-title">
@@ -34,16 +38,16 @@ export function WaterSleevesLiveScoringPanel({
           <p className="eyebrow">M3 developer tool</p>
           <h2 id="live-scoring-title">Water Sleeves live scoring</h2>
         </div>
-        <span className={`lab-status scoring-${snapshot.status}`}>
-          {snapshot.status}
+        <span className={`lab-status scoring-${state.capturePhase}`}>
+          {state.capturePhase.replaceAll("-", " ")}
         </span>
         <div className="lab-button-row live-scoring-actions">
-          <button className="primary-button" disabled={!cameraActive || recording} onClick={onStart}>
+          <button className="primary-button" disabled={!cameraActive || active} onClick={onStart}>
             Start attempt
           </button>
-          <button disabled={!recording} onClick={onFinish}>Finish &amp; score</button>
-          <button disabled={!recording} onClick={onCancel}>Cancel</button>
-          <button disabled={recording || snapshot.status === "idle"} onClick={onReset}>Reset</button>
+          <button disabled={!recording} onClick={onFinish}>Manual finish</button>
+          <button disabled={!active} onClick={onCancel}>Cancel</button>
+          <button disabled={active || state.capturePhase === "idle"} onClick={onReset}>Reset</button>
         </div>
       </div>
       <p className="live-scoring-copy">
@@ -59,6 +63,12 @@ export function WaterSleevesLiveScoringPanel({
       </dl>
 
       {!cameraActive && <p className="scoring-guidance">Start the camera before recording an attempt.</p>}
+      {state.capturePhase === "waiting-for-movement" && (
+        <p className="scoring-guidance">Hold the ready position, then begin when comfortable.</p>
+      )}
+      {recording && (
+        <p className="scoring-guidance">Movement detected. Hold the final position to finish automatically.</p>
+      )}
       {snapshot.status === "completed" && !state.hasCompletedTrajectory && (
         <p className="scoring-guidance">No usable pose-arm tracking was captured. Reset and retry in full view.</p>
       )}

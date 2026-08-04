@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 import {
-  WaterSleevesAttemptBuffer,
+  WaterSleevesAutomaticCapture,
+  type AutomaticCapturePhase,
+} from "../../domain/gestures/live/waterSleevesAutomaticCapture";
+import {
   type LiveAttemptSnapshot,
 } from "../../domain/gestures/live/waterSleevesAttemptBuffer";
 import { WATER_SLEEVES_REFERENCE } from "../../domain/gestures/references/waterSleevesReference";
@@ -12,6 +15,8 @@ import {
 
 export interface WaterSleevesLiveScoringState {
   snapshot: LiveAttemptSnapshot;
+  capturePhase: AutomaticCapturePhase;
+  countdownRemainingMs: number;
   evaluation: WaterSleevesEvaluation | null;
   hasCompletedTrajectory: boolean;
 }
@@ -26,31 +31,44 @@ const IDLE_STATE: WaterSleevesLiveScoringState = {
     usableSamples: 0,
     elapsedMs: 0,
   },
+  capturePhase: "idle",
+  countdownRemainingMs: 0,
   evaluation: null,
   hasCompletedTrajectory: false,
 };
 
 export function useWaterSleevesLiveScoring(sessionId: string | null) {
-  const bufferRef = useRef(new WaterSleevesAttemptBuffer());
+  const captureRef = useRef(new WaterSleevesAutomaticCapture());
   const attemptSequence = useRef(0);
-  const evaluatedStatusRef = useRef<string | null>(null);
+  const evaluatedAttemptRef = useRef<string | null>(null);
+  const sessionRef = useRef(sessionId);
   const [state, setState] = useState<WaterSleevesLiveScoringState>(IDLE_STATE);
 
-  const publish = useCallback(() => {
-    const buffer = bufferRef.current;
-    const snapshot = buffer.getSnapshot();
-    const trajectory = buffer.getTrajectory();
+  const publish = useCallback((nowMs = epochNow()) => {
+    const capture = captureRef.current;
+    const captureSnapshot = capture.advance(nowMs);
+    const snapshot = {
+      ...captureSnapshot.attempt,
+      attemptId: captureSnapshot.attemptId,
+      status:
+        captureSnapshot.phase === "completed" ||
+        captureSnapshot.phase === "timed-out" ||
+        captureSnapshot.phase === "cancelled"
+          ? captureSnapshot.phase
+          : captureSnapshot.attempt.status,
+    } satisfies LiveAttemptSnapshot;
+    const trajectory = capture.getTrajectory();
     let evaluation: WaterSleevesEvaluation | null = null;
-    if (trajectory && evaluatedStatusRef.current === snapshot.status) {
+    if (trajectory && evaluatedAttemptRef.current === snapshot.attemptId) {
       evaluation = evaluateWaterSleevesTrajectory(
         trajectory,
         WATER_SLEEVES_REFERENCE,
       );
     } else if (
       trajectory &&
-      (snapshot.status === "completed" || snapshot.status === "timed-out")
+      (captureSnapshot.phase === "completed" || captureSnapshot.phase === "timed-out")
     ) {
-      evaluatedStatusRef.current = snapshot.status;
+      evaluatedAttemptRef.current = snapshot.attemptId;
       evaluation = evaluateWaterSleevesTrajectory(
         trajectory,
         WATER_SLEEVES_REFERENCE,
@@ -58,23 +76,36 @@ export function useWaterSleevesLiveScoring(sessionId: string | null) {
     }
     setState({
       snapshot,
+      capturePhase: captureSnapshot.phase,
+      countdownRemainingMs: captureSnapshot.countdownRemainingMs,
       evaluation,
       hasCompletedTrajectory: trajectory !== null,
     });
   }, []);
 
   const reset = useCallback(() => {
-    bufferRef.current.reset();
-    evaluatedStatusRef.current = null;
-    setState(stateFromBuffer(bufferRef.current));
+    captureRef.current.reset();
+    evaluatedAttemptRef.current = null;
+    setState(IDLE_STATE);
   }, []);
 
-  useEffect(() => reset(), [reset, sessionId]);
+  useEffect(() => {
+    if (sessionRef.current === sessionId) return;
+    sessionRef.current = sessionId;
+    const timer = window.setTimeout(reset, 0);
+    return () => window.clearTimeout(timer);
+  }, [reset, sessionId]);
+
+  useEffect(() => {
+    if (state.capturePhase !== "countdown") return;
+    const timer = window.setInterval(() => publish(), 100);
+    return () => window.clearInterval(timer);
+  }, [publish, state.capturePhase]);
 
   const start = useCallback(() => {
     attemptSequence.current += 1;
-    evaluatedStatusRef.current = null;
-    bufferRef.current.start(
+    evaluatedAttemptRef.current = null;
+    captureRef.current.start(
       `${sessionId ?? "camera"}-${attemptSequence.current}`,
       epochNow(),
     );
@@ -82,34 +113,29 @@ export function useWaterSleevesLiveScoring(sessionId: string | null) {
   }, [publish, sessionId]);
 
   const finish = useCallback(() => {
-    bufferRef.current.finish(epochNow());
+    captureRef.current.finish(epochNow());
     publish();
   }, [publish]);
 
   const cancel = useCallback(() => {
-    bufferRef.current.cancel();
-    evaluatedStatusRef.current = null;
+    captureRef.current.cancel();
+    evaluatedAttemptRef.current = null;
     publish();
   }, [publish]);
 
   const onFrame = useCallback(
     (frame: VisionLandmarkFrame) => {
-      if (bufferRef.current.getSnapshot().status !== "recording") return;
-      bufferRef.current.push(frame);
-      publish();
+      const phase = captureRef.current.getSnapshot(frame.capturedAtMs).phase;
+      if (
+        phase !== "countdown" &&
+        phase !== "waiting-for-movement" &&
+        phase !== "recording"
+      ) return;
+      captureRef.current.push(frame);
+      publish(frame.capturedAtMs);
     },
     [publish],
   );
 
   return { state, start, finish, cancel, reset, onFrame };
-}
-
-function stateFromBuffer(
-  buffer: WaterSleevesAttemptBuffer,
-): WaterSleevesLiveScoringState {
-  return {
-    snapshot: buffer.getSnapshot(),
-    evaluation: null,
-    hasCompletedTrajectory: false,
-  };
 }
