@@ -4,11 +4,14 @@ import { CameraControls } from "./CameraControls";
 import { CameraDiagnostics } from "./CameraDiagnostics";
 import { CameraPreview } from "./CameraPreview";
 import { CameraStabilityPanel } from "./CameraStabilityPanel";
+import { OpeningDoorLiveScoringPanel } from "./OpeningDoorLiveScoringPanel";
+import { OpeningDoorReferenceGuide } from "./OpeningDoorReferenceGuide";
 import { WaterSleevesLiveScoringPanel } from "./WaterSleevesLiveScoringPanel";
 import { WaterSleevesReferenceGuide } from "./WaterSleevesReferenceGuide";
 import { WaterSleevesTuningPanel } from "./WaterSleevesTuningPanel";
 import type { CameraLabRuntimeFactory } from "./cameraLabRuntime";
 import { useCameraLab } from "./useCameraLab";
+import { useOpeningDoorLiveScoring } from "./useOpeningDoorLiveScoring";
 import { useWaterSleevesLiveScoring } from "./useWaterSleevesLiveScoring";
 import "./cameraLab.css";
 
@@ -19,7 +22,12 @@ type CameraLabPageProps = {
 export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
   const camera = useCameraLab(runtimeFactory);
   const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
-  const liveScoring = useWaterSleevesLiveScoring(camera.session?.id ?? null);
+  const [gesture, setGesture] = useState<"water-sleeves" | "opening-door">("water-sleeves");
+  const waterSleeves = useWaterSleevesLiveScoring(camera.session?.id ?? null);
+  const openingDoor = useOpeningDoorLiveScoring(camera.session?.id ?? null);
+  const liveScoring = gesture === "water-sleeves" ? waterSleeves : openingDoor;
+  const attemptActive = liveScoring.state.capturePhase === "countdown" ||
+    liveScoring.state.capturePhase === "recording";
 
   return (
     <main className="camera-lab-page">
@@ -44,35 +52,72 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
 
       <section className="camera-workbench" aria-label="Camera workbench">
         <div className="preview-column">
-          <WaterSleevesLiveScoringPanel
-            cameraActive={Boolean(camera.session)}
-            onCancel={liveScoring.cancel}
-            onFinish={liveScoring.finish}
-            onReset={liveScoring.reset}
-            onStart={liveScoring.start}
-            state={liveScoring.state}
-          />
+          <label className="camera-select-label" htmlFor="gesture-lab-selector">
+            Gesture laboratory
+          </label>
+          <select
+            className="gesture-lab-selector"
+            id="gesture-lab-selector"
+            disabled={attemptActive}
+            value={gesture}
+            onChange={(event) => {
+              waterSleeves.reset();
+              openingDoor.reset();
+              setGesture(event.target.value as "water-sleeves" | "opening-door");
+            }}
+          >
+            <option value="water-sleeves">Water Sleeves</option>
+            <option value="opening-door">Opening Door</option>
+          </select>
+          {gesture === "water-sleeves" ? (
+            <WaterSleevesLiveScoringPanel
+              cameraActive={Boolean(camera.session)}
+              onCancel={waterSleeves.cancel}
+              onFinish={waterSleeves.finish}
+              onReset={waterSleeves.reset}
+              onStart={waterSleeves.start}
+              state={waterSleeves.state}
+            />
+          ) : (
+            <OpeningDoorLiveScoringPanel
+              cameraActive={Boolean(camera.session)}
+              onCancel={openingDoor.cancel}
+              onFinish={openingDoor.finish}
+              onReset={openingDoor.reset}
+              onStart={openingDoor.start}
+              state={openingDoor.state}
+            />
+          )}
           <div className="live-visual-comparison">
             <CameraPreview
-              onLandmarkFrame={liveScoring.onFrame}
+              onLandmarkFrame={gesture === "water-sleeves" ? waterSleeves.onFrame : openingDoor.onFrame}
               onVideoElement={setVideoElement}
               session={camera.session}
               status={camera.status}
             />
-            <WaterSleevesReferenceGuide
-              playbackEnabled={liveScoring.state.capturePhase !== "countdown"}
-              restartToken={liveScoring.state.snapshot.attemptId}
-            />
+            {gesture === "water-sleeves" ? (
+              <WaterSleevesReferenceGuide
+                playbackEnabled={waterSleeves.state.capturePhase !== "countdown"}
+                restartToken={waterSleeves.state.snapshot.attemptId}
+              />
+            ) : (
+              <OpeningDoorReferenceGuide
+                playbackEnabled={openingDoor.state.capturePhase !== "countdown"}
+                restartToken={openingDoor.state.snapshot.attemptId}
+              />
+            )}
             <AttemptCaptureCue state={liveScoring.state} />
           </div>
           <p className="preview-caption">
             The preview is mirrored to match a visitor’s expected reflection.
             Delivered settings come from the active camera track.
           </p>
-          <WaterSleevesTuningPanel
-            attemptId={liveScoring.state.snapshot.attemptId}
-            evaluation={liveScoring.state.evaluation}
-          />
+          {gesture === "water-sleeves" && (
+            <WaterSleevesTuningPanel
+              attemptId={waterSleeves.state.snapshot.attemptId}
+              evaluation={waterSleeves.state.evaluation}
+            />
+          )}
         </div>
         <div className="control-column">
           <CameraControls
@@ -118,7 +163,10 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
 function AttemptCaptureCue({
   state,
 }: {
-  state: ReturnType<typeof useWaterSleevesLiveScoring>["state"];
+  state: {
+    capturePhase: "idle" | "countdown" | "recording" | "completed" | "timed-out" | "cancelled";
+    countdownRemainingMs: number;
+  };
 }) {
   if (state.capturePhase === "countdown") {
     return (

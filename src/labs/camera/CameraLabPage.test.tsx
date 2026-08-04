@@ -28,6 +28,10 @@ vi.mock("./WaterSleevesReferenceGuide", () => ({
   WaterSleevesReferenceGuide: () => <div>Water Sleeves reference guide</div>,
 }));
 
+vi.mock("./OpeningDoorReferenceGuide", () => ({
+  OpeningDoorReferenceGuide: () => <div>Opening Door reference guide</div>,
+}));
+
 const devices: CameraDevice[] = [
   { deviceId: "integrated", label: "Integrated Camera" },
   { deviceId: "external", label: "USB Camera" },
@@ -274,6 +278,20 @@ describe("CameraLabPage", () => {
     });
     expect(service.start).not.toHaveBeenCalled();
     expect(screen.getByText("Camera needs attention")).toBeInTheDocument();
+  });
+
+  it("switches between Water Sleeves and Opening Door scoring tools", async () => {
+    const { runtime } = createRuntime();
+    render(<CameraLabPage runtimeFactory={() => runtime} />);
+    await screen.findByLabelText("Available camera");
+
+    expect(screen.getByRole("heading", { name: "Water Sleeves live scoring" })).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText("Gesture laboratory"), {
+      target: { value: "opening-door" },
+    });
+
+    expect(screen.getByRole("heading", { name: "Opening Door live scoring" })).toBeInTheDocument();
+    expect(screen.getByText("Opening Door reference guide")).toBeInTheDocument();
   });
 
   it("does not automatically retry permission denial", async () => {

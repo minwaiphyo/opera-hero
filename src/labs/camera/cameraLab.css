@@ -554,6 +554,19 @@
   font-size: 0.8rem;
 }
 
+.gesture-lab-selector {
+  width: min(100%, 320px);
+  height: 42px;
+  margin-bottom: 12px;
+  padding: 0 38px 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  color: #eee5ef;
+  background: #17101e;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
 .camera-select-row select:focus-visible {
   outline: 2px solid #f3cc7e;
   outline-offset: 2px;
