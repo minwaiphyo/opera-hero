@@ -6,6 +6,7 @@ import { CameraPreview } from "./CameraPreview";
 import { CameraStabilityPanel } from "./CameraStabilityPanel";
 import { WaterSleevesLiveScoringPanel } from "./WaterSleevesLiveScoringPanel";
 import { WaterSleevesReferenceGuide } from "./WaterSleevesReferenceGuide";
+import { WaterSleevesTuningPanel } from "./WaterSleevesTuningPanel";
 import type { CameraLabRuntimeFactory } from "./cameraLabRuntime";
 import { useCameraLab } from "./useCameraLab";
 import { useWaterSleevesLiveScoring } from "./useWaterSleevesLiveScoring";
@@ -66,6 +67,10 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
             The preview is mirrored to match a visitor’s expected reflection.
             Delivered settings come from the active camera track.
           </p>
+          <WaterSleevesTuningPanel
+            attemptId={liveScoring.state.snapshot.attemptId}
+            evaluation={liveScoring.state.evaluation}
+          />
         </div>
         <div className="control-column">
           <CameraControls
