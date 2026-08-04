@@ -57,6 +57,7 @@ function observation(
 function evaluation(overallScore: number): WaterSleevesEvaluation {
   return {
     overallScore,
+    movementCompleteness: 1,
     trackingCoverage: 0.9,
     trackingStatus: "good",
     alignedPairs: 40,

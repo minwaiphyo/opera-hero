@@ -48,6 +48,7 @@ describe("WaterSleevesLiveScoringPanel", () => {
       },
       evaluation: {
         overallScore: 0.825,
+        movementCompleteness: 0.9,
         trackingCoverage: 0.95,
         trackingStatus: "good",
         alignedPairs: 44,

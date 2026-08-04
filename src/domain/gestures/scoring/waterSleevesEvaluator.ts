@@ -24,8 +24,10 @@ export type EvaluatorTrackingStatus = GestureTrackingStatus;
 
 export type WaterSleevesSignalScore = GestureSignalScore;
 
-export type WaterSleevesEvaluation =
-  GestureEvaluation<WaterSleevesRequiredSignal>;
+export interface WaterSleevesEvaluation
+  extends GestureEvaluation<WaterSleevesRequiredSignal> {
+  movementCompleteness: number;
+}
 
 interface PointScores {
   leftUpperArmAngle: number | null;
@@ -102,14 +104,66 @@ export function evaluateWaterSleevesTrajectory(
     1,
     trackingCoverage / WATER_SLEEVES_FULL_COVERAGE,
   );
+  const movementCompleteness = calculateMovementCompleteness(trajectory, reference);
 
   return {
-    overallScore: softScore * coverageFactor,
+    overallScore: softScore * coverageFactor * movementCompleteness,
+    movementCompleteness,
     trackingCoverage,
     trackingStatus: trackingStatus(trackingCoverage),
     alignedPairs: path.length,
     signalScores,
   };
+}
+
+function calculateMovementCompleteness(
+  trajectory: WaterSleevesTrajectory,
+  reference: WaterSleevesReferenceEnvelope,
+): number {
+  const ratios = [
+    excursionRatio(
+      scalarRange(trajectory.samples.map((sample) => sample.leftArm?.upperArmAngleRad)),
+      scalarRange(reference.points.map((point) => point.leftUpperArmAngle?.target)),
+    ),
+    excursionRatio(
+      scalarRange(trajectory.samples.map((sample) => sample.rightArm?.upperArmAngleRad)),
+      scalarRange(reference.points.map((point) => point.rightUpperArmAngle?.target)),
+    ),
+    excursionRatio(
+      vectorRange(trajectory.samples.map((sample) => sample.leftArm?.elbowFromShoulder)),
+      vectorRange(reference.points.map((point) => point.leftElbowPosition?.target)),
+    ),
+    excursionRatio(
+      vectorRange(trajectory.samples.map((sample) => sample.rightArm?.elbowFromShoulder)),
+      vectorRange(reference.points.map((point) => point.rightElbowPosition?.target)),
+    ),
+  ].filter((ratio): ratio is number => ratio !== null);
+  return ratios.length
+    ? ratios.reduce((sum, ratio) => sum + ratio, 0) / ratios.length
+    : 0;
+}
+
+function scalarRange(values: readonly (number | null | undefined)[]): number | null {
+  const available = values.filter((value): value is number => value != null);
+  return available.length >= 2 ? Math.max(...available) - Math.min(...available) : null;
+}
+
+function vectorRange(
+  values: readonly ({ x: number; y: number } | null | undefined)[],
+): number | null {
+  const available = values.filter(
+    (value): value is { x: number; y: number } => value != null,
+  );
+  if (available.length < 2) return null;
+  return Math.hypot(
+    Math.max(...available.map(({ x }) => x)) - Math.min(...available.map(({ x }) => x)),
+    Math.max(...available.map(({ y }) => y)) - Math.min(...available.map(({ y }) => y)),
+  );
+}
+
+function excursionRatio(actual: number | null, expected: number | null): number | null {
+  if (actual === null || expected === null || expected <= 0.01) return null;
+  return Math.min(1, actual / (expected * 0.8));
 }
 
 function buildAlignmentMatrix(
@@ -279,6 +333,7 @@ function insideAlignmentWindow(
 function emptyEvaluation(): WaterSleevesEvaluation {
   return {
     overallScore: 0,
+    movementCompleteness: 0,
     trackingCoverage: 0,
     trackingStatus: "insufficient",
     alignedPairs: 0,

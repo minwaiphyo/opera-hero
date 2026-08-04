@@ -22,6 +22,8 @@ export interface WaterSleevesLiveScoringState {
 }
 
 export const WATER_SLEEVES_MINIMUM_RECORDING_MS = 7_700;
+export const WATER_SLEEVES_STILLNESS_THRESHOLD = 0.06;
+export const WATER_SLEEVES_MOTION_RESET_DURATION_MS = 300;
 export const WATER_SLEEVES_MAXIMUM_RECORDING_MS = 20_000;
 export const WATER_SLEEVES_MAXIMUM_SAMPLES = 900;
 
@@ -44,6 +46,9 @@ const IDLE_STATE: WaterSleevesLiveScoringState = {
 export function useWaterSleevesLiveScoring(sessionId: string | null) {
   const captureRef = useRef(new WaterSleevesAutomaticCapture({
     minimumRecordingMs: WATER_SLEEVES_MINIMUM_RECORDING_MS,
+    stillnessThreshold: WATER_SLEEVES_STILLNESS_THRESHOLD,
+    requireMovementBeforeCompletion: false,
+    motionResetDurationMs: WATER_SLEEVES_MOTION_RESET_DURATION_MS,
     maximumDurationMs: WATER_SLEEVES_MAXIMUM_RECORDING_MS,
     maximumSamples: WATER_SLEEVES_MAXIMUM_SAMPLES,
   }));

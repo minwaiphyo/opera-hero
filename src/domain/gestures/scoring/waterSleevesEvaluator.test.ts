@@ -61,6 +61,36 @@ describe("Water Sleeves temporal evaluator", () => {
     expect(evaluation.trackingStatus).toBe("good");
   });
 
+  it("rejects a stationary pose even when it resembles part of the reference", () => {
+    const source = trajectory();
+    const reference = buildWaterSleevesReferenceEnvelope(source, 21);
+    const held = {
+      ...source,
+      samples: source.samples.map((sample) => ({
+        ...sample,
+        leftArm: source.samples[0]!.leftArm,
+        rightArm: source.samples[0]!.rightArm,
+      })),
+    };
+
+    const evaluation = evaluateWaterSleevesTrajectory(held, reference);
+
+    expect(evaluation.movementCompleteness).toBe(0);
+    expect(evaluation.overallScore).toBe(0);
+    expect(evaluation.trackingStatus).toBe("good");
+  });
+
+  it("penalizes substantially reduced movement range", () => {
+    const source = trajectory();
+    const reference = buildWaterSleevesReferenceEnvelope(source, 21);
+    const reduced = scaleMovement(source, 0.35);
+
+    const evaluation = evaluateWaterSleevesTrajectory(reduced, reference);
+
+    expect(evaluation.movementCompleteness).toBeLessThan(0.5);
+    expect(evaluation.overallScore).toBeLessThan(0.5);
+  });
+
   it("returns an explicit insufficient result for an empty sequence", () => {
     const source = trajectory();
     const reference = buildWaterSleevesReferenceEnvelope(source, 21);
@@ -102,6 +132,40 @@ function trajectory(
     usableFrames: frameCount,
     samples,
     signals: [],
+  };
+}
+
+function scaleMovement(
+  source: WaterSleevesTrajectory,
+  scale: number,
+): WaterSleevesTrajectory {
+  const first = source.samples[0]!;
+  return {
+    ...source,
+    samples: source.samples.map((sample) => ({
+      ...sample,
+      leftArm: scaledArm(sample.leftArm, first.leftArm, scale),
+      rightArm: scaledArm(sample.rightArm, first.rightArm, scale),
+    })),
+  };
+}
+
+function scaledArm(
+  armFeatures: WaterSleevesArmFeatures | null,
+  origin: WaterSleevesArmFeatures | null,
+  scale: number,
+): WaterSleevesArmFeatures | null {
+  if (!armFeatures || !origin) return null;
+  return {
+    ...armFeatures,
+    upperArmAngleRad: origin.upperArmAngleRad +
+      (armFeatures.upperArmAngleRad - origin.upperArmAngleRad) * scale,
+    elbowFromShoulder: {
+      x: origin.elbowFromShoulder.x +
+        (armFeatures.elbowFromShoulder.x - origin.elbowFromShoulder.x) * scale,
+      y: origin.elbowFromShoulder.y +
+        (armFeatures.elbowFromShoulder.y - origin.elbowFromShoulder.y) * scale,
+    },
   };
 }
 

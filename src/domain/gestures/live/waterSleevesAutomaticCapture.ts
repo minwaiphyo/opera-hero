@@ -25,6 +25,8 @@ export interface AutomaticCaptureOptions extends WaterSleevesAttemptBufferOption
     previous: VisionLandmarkFrame,
     current: VisionLandmarkFrame,
   ) => number | null;
+  requireMovementBeforeCompletion?: boolean;
+  motionResetDurationMs?: number;
 }
 
 export interface AutomaticCaptureSnapshot {
@@ -40,6 +42,8 @@ const DEFAULTS = {
   stillnessDurationMs: 800,
   minimumRecordingMs: 1500,
   minimumPostMovementMs: 3000,
+  requireMovementBeforeCompletion: true,
+  motionResetDurationMs: 0,
 };
 const COMPLETION_ARMING_MOTION = 0.02;
 
@@ -55,6 +59,7 @@ export class WaterSleevesAutomaticCapture {
   private stillSinceMs: number | null = null;
   private accumulatedMotion = 0;
   private movementObservedAtMs: number | null = null;
+  private movingSinceMs: number | null = null;
 
   constructor(options: AutomaticCaptureOptions = {}) {
     this.options = { ...DEFAULTS, ...options };
@@ -74,6 +79,7 @@ export class WaterSleevesAutomaticCapture {
     this.stillSinceMs = null;
     this.accumulatedMotion = 0;
     this.movementObservedAtMs = null;
+    this.movingSinceMs = null;
     return this.getSnapshot(requestedAtMs);
   }
 
@@ -116,6 +122,7 @@ export class WaterSleevesAutomaticCapture {
     this.stillSinceMs = null;
     this.accumulatedMotion = 0;
     this.movementObservedAtMs = null;
+    this.movingSinceMs = null;
   }
 
   getSnapshot(nowMs: number): AutomaticCaptureSnapshot {
@@ -153,15 +160,23 @@ export class WaterSleevesAutomaticCapture {
     }
 
     if (motion <= this.options.stillnessThreshold) {
+      this.movingSinceMs = null;
       this.stillSinceMs ??= frame.capturedAtMs;
     } else {
-      this.stillSinceMs = null;
+      this.movingSinceMs ??= frame.capturedAtMs;
+      if (
+        frame.capturedAtMs - this.movingSinceMs >=
+        this.options.motionResetDurationMs
+      ) {
+        this.stillSinceMs = null;
+      }
     }
     const elapsedMs = frame.capturedAtMs - this.recordingStartedAtMs;
     if (elapsedMs < this.options.minimumRecordingMs) return;
-    if (this.movementObservedAtMs === null) return;
-    if (
-      frame.capturedAtMs - this.movementObservedAtMs <
+    const movementObservedAtMs = this.movementObservedAtMs;
+    if (this.options.requireMovementBeforeCompletion && movementObservedAtMs === null) return;
+    if (this.options.requireMovementBeforeCompletion &&
+      frame.capturedAtMs - movementObservedAtMs! <
       this.options.minimumPostMovementMs
     ) return;
     if (

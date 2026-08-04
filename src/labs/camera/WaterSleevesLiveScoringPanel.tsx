@@ -69,7 +69,7 @@ export function WaterSleevesLiveScoringPanel({
         <p className="scoring-guidance">No usable pose-arm tracking was captured. Reset and retry in full view.</p>
       )}
       {snapshot.status === "timed-out" && (
-        <p className="scoring-guidance">The 12-second capture limit was reached automatically.</p>
+        <p className="scoring-guidance">The 20-second capture limit was reached automatically.</p>
       )}
 
       {evaluation && (
@@ -81,6 +81,7 @@ export function WaterSleevesLiveScoringPanel({
           </div>
           <dl className="live-scoring-metrics">
             <div><dt>Tracking coverage</dt><dd>{percent(evaluation.trackingCoverage)}</dd></div>
+            <div><dt>Movement completeness</dt><dd>{percent(evaluation.movementCompleteness)}</dd></div>
             <div><dt>Tracking status</dt><dd>{evaluation.trackingStatus}</dd></div>
             <div><dt>Aligned pairs</dt><dd>{evaluation.alignedPairs}</dd></div>
           </dl>

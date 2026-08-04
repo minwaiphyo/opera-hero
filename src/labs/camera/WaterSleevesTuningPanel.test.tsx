@@ -31,6 +31,7 @@ describe("WaterSleevesTuningPanel", () => {
 function evaluation(): WaterSleevesEvaluation {
   return {
     overallScore: 0.82,
+    movementCompleteness: 1,
     trackingCoverage: 0.9,
     trackingStatus: "good",
     alignedPairs: 40,

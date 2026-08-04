@@ -8,6 +8,8 @@ import {
   WATER_SLEEVES_MAXIMUM_RECORDING_MS,
   WATER_SLEEVES_MAXIMUM_SAMPLES,
   WATER_SLEEVES_MINIMUM_RECORDING_MS,
+  WATER_SLEEVES_STILLNESS_THRESHOLD,
+  WATER_SLEEVES_MOTION_RESET_DURATION_MS,
   useWaterSleevesLiveScoring,
 } from "./useWaterSleevesLiveScoring";
 
@@ -16,6 +18,8 @@ afterEach(() => vi.restoreAllMocks());
 describe("useWaterSleevesLiveScoring", () => {
   it("protects the complete first reference cycle from automatic termination", () => {
     expect(WATER_SLEEVES_MINIMUM_RECORDING_MS).toBe(7_700);
+    expect(WATER_SLEEVES_STILLNESS_THRESHOLD).toBe(0.06);
+    expect(WATER_SLEEVES_MOTION_RESET_DURATION_MS).toBe(300);
     expect(WATER_SLEEVES_MAXIMUM_RECORDING_MS).toBeGreaterThan(WATER_SLEEVES_MINIMUM_RECORDING_MS);
     expect(WATER_SLEEVES_MAXIMUM_SAMPLES).toBeGreaterThan(7_700 / 1000 * 60);
   });

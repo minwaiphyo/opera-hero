@@ -98,6 +98,24 @@ describe("WaterSleevesAutomaticCapture", () => {
     expect(capture.push(frame(5_000, 0.502)).phase).toBe("recording");
     expect(capture.push(frame(5_001, 0.503)).phase).toBe("completed");
   });
+
+  it("can finish a stationary first cycle while ignoring isolated jitter spikes", () => {
+    const capture = new WaterSleevesAutomaticCapture({
+      countdownMs: 1,
+      minimumRecordingMs: 1_000,
+      stillnessDurationMs: 500,
+      stillnessThreshold: 0.02,
+      requireMovementBeforeCompletion: false,
+      motionResetDurationMs: 200,
+    });
+    capture.start("stationary-cycle", 0);
+    capture.push(frame(1, 0));
+    capture.push(frame(200, 0.001));
+    capture.push(frame(400, 0.3));
+    capture.push(frame(450, 0.001));
+    expect(capture.push(frame(1_000, 0.002)).phase).toBe("recording");
+    expect(capture.push(frame(1_001, 0.003)).phase).toBe("completed");
+  });
 });
 
 function automaticCapture() {
