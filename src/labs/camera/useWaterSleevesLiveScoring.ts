@@ -128,7 +128,6 @@ export function useWaterSleevesLiveScoring(sessionId: string | null) {
       const phase = captureRef.current.getSnapshot(frame.capturedAtMs).phase;
       if (
         phase !== "countdown" &&
-        phase !== "waiting-for-movement" &&
         phase !== "recording"
       ) return;
       captureRef.current.push(frame);

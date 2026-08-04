@@ -8,8 +8,10 @@ const GUIDE = parseVisionReplayFixture(guideDocument);
 const GUIDE_DURATION_MS = GUIDE.frames.at(-1)?.offsetMs ?? 7700;
 
 export function WaterSleevesReferenceGuide({
+  playbackEnabled = true,
   restartToken,
 }: {
+  playbackEnabled?: boolean;
   restartToken: string | null;
 }) {
   const [revision, setRevision] = useState(0);
@@ -18,20 +20,29 @@ export function WaterSleevesReferenceGuide({
     <GuidePlayback
       key={`${restartToken ?? "idle"}-${revision}`}
       onRestart={() => setRevision((value) => value + 1)}
+      playbackEnabled={playbackEnabled}
     />
   );
 }
 
-function GuidePlayback({ onRestart }: { onRestart: () => void }) {
+function GuidePlayback({
+  onRestart,
+  playbackEnabled,
+}: {
+  onRestart: () => void;
+  playbackEnabled: boolean;
+}) {
   const [frameIndex, setFrameIndex] = useState(0);
 
   useEffect(() => {
+    if (!playbackEnabled) return;
+
     const frameIntervalMs = GUIDE_DURATION_MS / Math.max(1, GUIDE.frames.length - 1);
     const timer = window.setInterval(() => {
       setFrameIndex((current) => (current + 1) % GUIDE.frames.length);
     }, frameIntervalMs);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [playbackEnabled]);
 
   const frame = useMemo(() => normalizedFrame(frameIndex), [frameIndex]);
   const progress = GUIDE.frames[frameIndex]!.offsetMs / GUIDE_DURATION_MS;

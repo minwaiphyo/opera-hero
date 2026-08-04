@@ -28,7 +28,6 @@ export function WaterSleevesLiveScoringPanel({
   const recording = state.capturePhase === "recording";
   const active =
     state.capturePhase === "countdown" ||
-    state.capturePhase === "waiting-for-movement" ||
     recording;
 
   return (
@@ -63,11 +62,8 @@ export function WaterSleevesLiveScoringPanel({
       </dl>
 
       {!cameraActive && <p className="scoring-guidance">Start the camera before recording an attempt.</p>}
-      {state.capturePhase === "waiting-for-movement" && (
-        <p className="scoring-guidance">Hold the ready position, then begin when comfortable.</p>
-      )}
       {recording && (
-        <p className="scoring-guidance">Movement detected. Hold the final position to finish automatically.</p>
+        <p className="scoring-guidance">Recording started. Hold the final position to finish automatically.</p>
       )}
       {snapshot.status === "completed" && !state.hasCompletedTrajectory && (
         <p className="scoring-guidance">No usable pose-arm tracking was captured. Reset and retry in full view.</p>

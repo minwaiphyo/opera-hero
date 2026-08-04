@@ -2,6 +2,10 @@
 
 ## Scope
 
+> Historical note: Increment 14 superseded the three-second countdown and
+> movement-triggered onset described below with a fixed five-second countdown and
+> immediate recording.
+
 This increment removes mouse movement from the scored trajectory by placing an
 automatic boundary detector before the existing bounded attempt buffer.
 
@@ -32,17 +36,19 @@ automatic boundary detector before the existing bounded attempt buffer.
 
 ## Physical verification
 
-- [ ] Start an attempt while one hand is on the mouse.
-- [ ] During the countdown, move both arms into the ready position.
-- [ ] Confirm the state becomes `Ready` without immediately recording.
-- [ ] Make small posture adjustments and confirm recording does not begin.
-- [ ] Begin Water Sleeves and confirm the cue changes to `Recording` promptly.
-- [ ] Pause briefly inside the movement and confirm the attempt remains recording.
-- [ ] Finish the movement and hold the final pose; confirm scoring appears without
+- [x] Start an attempt while one hand is on the mouse.
+- [x] During the countdown, move both arms into the ready position.
+- [x] Confirm the state becomes `Ready` without immediately recording.
+- [x] Make small posture adjustments and confirm recording does not begin.
+- [x] Begin Water Sleeves and confirm the cue changes to `Recording` promptly.
+- [x] Pause briefly inside the movement and confirm the attempt remains recording.
+- [x] Finish the movement and hold the final pose; confirm scoring appears without
   returning to the mouse.
-- [ ] Confirm returning to the mouse after scoring does not alter the result.
-- [ ] Repeat once using manual finish and once using cancel.
-- [ ] Confirm a no-movement attempt remains ready and can be cancelled.
+- [x] Confirm returning to the mouse after scoring does not alter the result.
+- [x] Repeat once using manual finish and once using cancel.
+- [x] Confirm a no-movement attempt remains ready and can be cancelled.
+
+Project-owner physical review passed on 2026-08-04.
 
 ## Interpretation
 

@@ -17,7 +17,7 @@ describe("useWaterSleevesLiveScoring", () => {
     );
 
     act(() => result.current.start());
-    const startEpoch = performance.timeOrigin + 3200;
+    const startEpoch = performance.timeOrigin + 5200;
     act(() => {
       for (let index = 0; index < 41; index += 1) {
         result.current.onFrame(
@@ -25,13 +25,13 @@ describe("useWaterSleevesLiveScoring", () => {
         );
       }
     });
-    now.mockReturnValue(6000);
+    now.mockReturnValue(8000);
     act(() => result.current.finish());
 
     expect(result.current.state.snapshot).toMatchObject({
       status: "completed",
-      bufferedSamples: 38,
-      usableSamples: 38,
+      bufferedSamples: 41,
+      usableSamples: 41,
     });
     expect(result.current.state.evaluation).not.toBeNull();
     expect(result.current.state.evaluation?.alignedPairs).toBeGreaterThan(0);

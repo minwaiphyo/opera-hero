@@ -61,4 +61,4 @@ silently tune or approve a visitor threshold.
 
 Use physical Water Sleeves attempts to verify live score behavior and capture the
 observations needed for conservative scorer tuning before implementing Opening Door
-and Lotus Finger scoring.
+and Orchid Finger scoring.

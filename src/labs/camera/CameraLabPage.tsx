@@ -60,6 +60,7 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
               status={camera.status}
             />
             <WaterSleevesReferenceGuide
+              playbackEnabled={liveScoring.state.capturePhase !== "countdown"}
               restartToken={liveScoring.state.snapshot.attemptId}
             />
             <AttemptCaptureCue state={liveScoring.state} />
@@ -124,14 +125,6 @@ function AttemptCaptureCue({
       <div className="attempt-capture-cue" role="status">
         <strong>{Math.max(1, Math.ceil(state.countdownRemainingMs / 1000))}</strong>
         <span>Move into the ready position</span>
-      </div>
-    );
-  }
-  if (state.capturePhase === "waiting-for-movement") {
-    return (
-      <div className="attempt-capture-cue ready" role="status">
-        <strong>Ready</strong>
-        <span>Begin the movement when comfortable</span>
       </div>
     );
   }

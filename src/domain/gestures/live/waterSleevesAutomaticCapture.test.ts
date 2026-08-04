@@ -3,43 +3,59 @@ import type { VisionLandmark, VisionLandmarkFrame } from "../../../vision/vision
 import { WaterSleevesAutomaticCapture } from "./waterSleevesAutomaticCapture";
 
 describe("WaterSleevesAutomaticCapture", () => {
-  it("counts down, waits through small adjustments, and starts on sustained motion", () => {
-    const capture = automaticCapture();
-    capture.start("attempt-1", 0);
+  it("counts down for five seconds and starts recording immediately", () => {
+    const capture = new WaterSleevesAutomaticCapture();
+    capture.start("timed-start", 0);
 
-    expect(capture.advance(2000)).toMatchObject({
+    expect(capture.advance(4_999)).toMatchObject({
       phase: "countdown",
-      countdownRemainingMs: 1000,
+      countdownRemainingMs: 1,
     });
-    expect(capture.push(frame(3000, 0))).toMatchObject({
-      phase: "waiting-for-movement",
-    });
-    capture.push(frame(3100, 0.005));
-    capture.push(frame(3200, 0.01));
-    expect(capture.getSnapshot(3200).phase).toBe("waiting-for-movement");
-
-    capture.push(frame(3300, 0.08));
-    capture.push(frame(3400, 0.16));
-    expect(capture.push(frame(3500, 0.24))).toMatchObject({
+    expect(capture.advance(5_000)).toMatchObject({
       phase: "recording",
+      attempt: { bufferedSamples: 0 },
+    });
+    expect(capture.push(frame(5_050, 0))).toMatchObject({
       attempt: { bufferedSamples: 1 },
     });
   });
 
+  it("completes only after the post-movement guard and sustained stillness", () => {
+    const capture = new WaterSleevesAutomaticCapture();
+    capture.start("production-finish", 0);
+    capture.push(frame(5_000, 0));
+    capture.push(frame(6_500, 0.5));
+    capture.push(frame(6_600, 0.502));
+
+    expect(capture.push(frame(8_500, 0.504)).phase).toBe("recording");
+    expect(capture.push(frame(9_500, 0.506)).phase).toBe("completed");
+  });
+
+  it("does not mistake the initial ready pose for completed final stillness", () => {
+    const capture = new WaterSleevesAutomaticCapture();
+    capture.start("stationary-ready-pose", 0);
+
+    capture.push(frame(5_000, 0));
+    capture.push(frame(6_500, 0));
+    capture.push(frame(8_000, 0));
+
+    expect(capture.getSnapshot(8_000).phase).toBe("recording");
+  });
+
   it("finishes after sustained stillness but preserves a short internal pause", () => {
     const capture = automaticCapture();
-    startMotion(capture);
+    startRecording(capture);
 
-    capture.push(frame(3700, 0.4));
-    capture.push(frame(3900, 0.4));
-    capture.push(frame(4300, 0.4));
-    capture.push(frame(4400, 0.55));
-    expect(capture.getSnapshot(4400).phase).toBe("recording");
+    capture.push(frame(3_700, 0.4));
+    capture.push(frame(3_900, 0.4));
+    capture.push(frame(4_300, 0.4));
+    capture.push(frame(4_400, 0.55));
+    expect(capture.getSnapshot(4_400).phase).toBe("recording");
 
-    capture.push(frame(5000, 0.7));
-    capture.push(frame(5200, 0.7));
-    capture.push(frame(5700, 0.7));
-    expect(capture.push(frame(6400, 0.7)).phase).toBe("completed");
+    capture.push(frame(5_000, 0.7));
+    capture.push(frame(5_200, 0.7));
+    capture.push(frame(5_700, 0.7));
+    expect(capture.push(frame(6_400, 0.7)).phase).toBe("completed");
     expect(capture.getTrajectory()?.samples.length).toBeGreaterThan(5);
   });
 
@@ -50,31 +66,27 @@ describe("WaterSleevesAutomaticCapture", () => {
     expect(capture.getSnapshot(100).phase).toBe("cancelled");
 
     capture.reset();
-    startMotion(capture);
+    startRecording(capture);
     capture.cancel();
-    expect(capture.getSnapshot(4000).phase).toBe("cancelled");
+    expect(capture.getSnapshot(4_000).phase).toBe("cancelled");
     expect(capture.getTrajectory()).toBeNull();
   });
 });
 
 function automaticCapture() {
   return new WaterSleevesAutomaticCapture({
-    countdownMs: 3000,
-    motionStartThreshold: 0.03,
-    motionStartFrames: 3,
+    countdownMs: 3_000,
     stillnessThreshold: 0.01,
-    stillnessDurationMs: 1000,
-    minimumRecordingMs: 1200,
+    stillnessDurationMs: 1_000,
+    minimumRecordingMs: 1_200,
+    minimumPostMovementMs: 1_000,
   });
 }
 
-function startMotion(capture: WaterSleevesAutomaticCapture) {
+function startRecording(capture: WaterSleevesAutomaticCapture) {
   capture.start("moving", 0);
-  capture.push(frame(3000, 0));
-  capture.push(frame(3100, 0.08));
-  capture.push(frame(3200, 0.16));
-  capture.push(frame(3300, 0.24));
-  expect(capture.getSnapshot(3300).phase).toBe("recording");
+  capture.push(frame(3_000, 0));
+  expect(capture.getSnapshot(3_000).phase).toBe("recording");
 }
 
 function frame(capturedAtMs: number, armOffset: number): VisionLandmarkFrame {

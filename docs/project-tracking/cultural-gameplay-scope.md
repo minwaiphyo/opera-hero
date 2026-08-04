@@ -21,7 +21,7 @@ cultural explanations more coherent.
 
 | Level | Working interaction | Cultural status | Technical status |
 |---|---|---|---|
-| 1 | The Lotus Finger | Stakeholder-selected; practitioner explanation pending | Not implemented |
+| 1 | Orchid Finger | Stakeholder-selected; practitioner explanation pending | Not implemented |
 | 2 | Actions to open the door | Stakeholder-selected; exact movement sequence pending | Not implemented |
 | 3 | The water sleeves | Stakeholder-selected; costume and movement constraints pending | Not implemented |
 

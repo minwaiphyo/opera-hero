@@ -1,8 +1,5 @@
 import type { VisionLandmarkFrame } from "../../../vision/visionTypes";
-import {
-  extractWaterSleevesFrameFeatures,
-  type WaterSleevesFrameFeatures,
-} from "../features/waterSleevesFeatures";
+import { extractWaterSleevesFrameFeatures } from "../features/waterSleevesFeatures";
 import type { WaterSleevesTrajectory } from "../features/waterSleevesTrajectory";
 import {
   WaterSleevesAttemptBuffer,
@@ -12,7 +9,6 @@ import {
 export type AutomaticCapturePhase =
   | "idle"
   | "countdown"
-  | "waiting-for-movement"
   | "recording"
   | "completed"
   | "timed-out"
@@ -20,11 +16,10 @@ export type AutomaticCapturePhase =
 
 export interface AutomaticCaptureOptions {
   countdownMs?: number;
-  motionStartThreshold?: number;
-  motionStartFrames?: number;
   stillnessThreshold?: number;
   stillnessDurationMs?: number;
   minimumRecordingMs?: number;
+  minimumPostMovementMs?: number;
 }
 
 export interface AutomaticCaptureSnapshot {
@@ -35,13 +30,13 @@ export interface AutomaticCaptureSnapshot {
 }
 
 const DEFAULTS = {
-  countdownMs: 3000,
-  motionStartThreshold: 0.035,
-  motionStartFrames: 3,
-  stillnessThreshold: 0.015,
-  stillnessDurationMs: 1200,
+  countdownMs: 5000,
+  stillnessThreshold: 0.025,
+  stillnessDurationMs: 800,
   minimumRecordingMs: 1500,
+  minimumPostMovementMs: 3000,
 };
+const COMPLETION_ARMING_MOTION = 0.02;
 
 export class WaterSleevesAutomaticCapture {
   private readonly options: typeof DEFAULTS;
@@ -49,10 +44,11 @@ export class WaterSleevesAutomaticCapture {
   private phase: AutomaticCapturePhase = "idle";
   private attemptId: string | null = null;
   private countdownEndsAtMs = 0;
-  private previousFeatures: WaterSleevesFrameFeatures | null = null;
-  private consecutiveMotionFrames = 0;
+  private previousFeatures: ReturnType<typeof extractWaterSleevesFrameFeatures> = null;
   private recordingStartedAtMs = 0;
   private stillSinceMs: number | null = null;
+  private accumulatedMotion = 0;
+  private movementObservedAtMs: number | null = null;
 
   constructor(options: AutomaticCaptureOptions = {}) {
     this.options = { ...DEFAULTS, ...options };
@@ -66,25 +62,26 @@ export class WaterSleevesAutomaticCapture {
     this.phase = "countdown";
     this.countdownEndsAtMs = requestedAtMs + this.options.countdownMs;
     this.previousFeatures = null;
-    this.consecutiveMotionFrames = 0;
     this.recordingStartedAtMs = 0;
     this.stillSinceMs = null;
+    this.accumulatedMotion = 0;
+    this.movementObservedAtMs = null;
     return this.getSnapshot(requestedAtMs);
   }
 
   advance(nowMs: number): AutomaticCaptureSnapshot {
     if (this.phase === "countdown" && nowMs >= this.countdownEndsAtMs) {
-      this.phase = "waiting-for-movement";
+      this.phase = "recording";
       this.previousFeatures = null;
+      this.recordingStartedAtMs = this.countdownEndsAtMs;
+      this.buffer.start(this.attemptId!, this.countdownEndsAtMs);
     }
     return this.getSnapshot(nowMs);
   }
 
   push(frame: VisionLandmarkFrame): AutomaticCaptureSnapshot {
     this.advance(frame.capturedAtMs);
-    if (this.phase === "waiting-for-movement") {
-      this.detectStart(frame);
-    } else if (this.phase === "recording") {
+    if (this.phase === "recording") {
       this.capture(frame);
     }
     return this.getSnapshot(frame.capturedAtMs);
@@ -108,8 +105,9 @@ export class WaterSleevesAutomaticCapture {
     this.phase = "idle";
     this.attemptId = null;
     this.previousFeatures = null;
-    this.consecutiveMotionFrames = 0;
     this.stillSinceMs = null;
+    this.accumulatedMotion = 0;
+    this.movementObservedAtMs = null;
   }
 
   getSnapshot(nowMs: number): AutomaticCaptureSnapshot {
@@ -128,29 +126,6 @@ export class WaterSleevesAutomaticCapture {
     return this.buffer.getTrajectory();
   }
 
-  private detectStart(frame: VisionLandmarkFrame): void {
-    const features = extractWaterSleevesFrameFeatures(frame);
-    if (!features || features.usableArmCount === 0) {
-      this.previousFeatures = null;
-      this.consecutiveMotionFrames = 0;
-      return;
-    }
-    const motion = this.previousFeatures
-      ? armMotion(this.previousFeatures, features)
-      : 0;
-    this.consecutiveMotionFrames =
-      motion >= this.options.motionStartThreshold
-        ? this.consecutiveMotionFrames + 1
-        : 0;
-    this.previousFeatures = features;
-    if (this.consecutiveMotionFrames < this.options.motionStartFrames) return;
-
-    this.phase = "recording";
-    this.recordingStartedAtMs = frame.capturedAtMs;
-    this.buffer.start(this.attemptId!, frame.capturedAtMs);
-    this.buffer.push(frame);
-  }
-
   private capture(frame: VisionLandmarkFrame): void {
     const features = extractWaterSleevesFrameFeatures(frame);
     const motion =
@@ -158,36 +133,50 @@ export class WaterSleevesAutomaticCapture {
         ? armMotion(this.previousFeatures, features)
         : Number.POSITIVE_INFINITY;
     if (features) this.previousFeatures = features;
+    if (Number.isFinite(motion)) this.accumulatedMotion += motion;
+    if (
+      this.movementObservedAtMs === null &&
+      this.accumulatedMotion >= COMPLETION_ARMING_MOTION
+    ) {
+      this.movementObservedAtMs = frame.capturedAtMs;
+    }
     const snapshot = this.buffer.push(frame);
     if (snapshot.status === "timed-out") {
       this.phase = "timed-out";
       return;
     }
 
-    const elapsedMs = frame.capturedAtMs - this.recordingStartedAtMs;
-    if (elapsedMs < this.options.minimumRecordingMs) return;
     if (motion <= this.options.stillnessThreshold) {
       this.stillSinceMs ??= frame.capturedAtMs;
-      if (frame.capturedAtMs - this.stillSinceMs >= this.options.stillnessDurationMs) {
-        this.finish(frame.capturedAtMs);
-      }
     } else {
       this.stillSinceMs = null;
+    }
+    const elapsedMs = frame.capturedAtMs - this.recordingStartedAtMs;
+    if (elapsedMs < this.options.minimumRecordingMs) return;
+    if (this.movementObservedAtMs === null) return;
+    if (
+      frame.capturedAtMs - this.movementObservedAtMs <
+      this.options.minimumPostMovementMs
+    ) return;
+    if (
+      this.stillSinceMs !== null &&
+      frame.capturedAtMs - this.stillSinceMs >= this.options.stillnessDurationMs
+    ) {
+      this.finish(frame.capturedAtMs);
     }
   }
 
   private isActive(): boolean {
     return (
       this.phase === "countdown" ||
-      this.phase === "waiting-for-movement" ||
       this.phase === "recording"
     );
   }
 }
 
 function armMotion(
-  previous: WaterSleevesFrameFeatures,
-  current: WaterSleevesFrameFeatures,
+  previous: NonNullable<ReturnType<typeof extractWaterSleevesFrameFeatures>>,
+  current: NonNullable<ReturnType<typeof extractWaterSleevesFrameFeatures>>,
 ): number {
   const distances: number[] = [];
   for (const side of ["leftArm", "rightArm"] as const) {
@@ -199,14 +188,33 @@ function armMotion(
       after.elbowFromShoulder.y - before.elbowFromShoulder.y,
     );
     const angleDistance = Math.abs(
-      Math.atan2(
-        Math.sin(after.upperArmAngleRad - before.upperArmAngleRad),
-        Math.cos(after.upperArmAngleRad - before.upperArmAngleRad),
-      ),
+      angleDelta(after.upperArmAngleRad, before.upperArmAngleRad),
     );
-    distances.push(elbowDistance + angleDistance * 0.15);
+    const wristDistance = before.wristFromShoulder && after.wristFromShoulder
+      ? Math.hypot(
+          after.wristFromShoulder.x - before.wristFromShoulder.x,
+          after.wristFromShoulder.y - before.wristFromShoulder.y,
+        )
+      : 0;
+    const elbowAngleDistance =
+      before.elbowAngleRad !== null && after.elbowAngleRad !== null
+        ? Math.abs(angleDelta(after.elbowAngleRad, before.elbowAngleRad))
+        : 0;
+    distances.push(
+      elbowDistance +
+      angleDistance * 0.15 +
+      wristDistance * 0.5 +
+      elbowAngleDistance * 0.1,
+    );
   }
   return distances.length > 0
     ? distances.reduce((sum, distance) => sum + distance, 0) / distances.length
     : 0;
+}
+
+function angleDelta(current: number, previous: number): number {
+  return Math.atan2(
+    Math.sin(current - previous),
+    Math.cos(current - previous),
+  );
 }
