@@ -122,6 +122,7 @@ feature to its source, tests, and proof.
 | M3-015 | Shared gesture scoring contract | M3 | Complete | [`src/domain/gestures/scoring/gestureScoringContract.ts`](../../src/domain/gestures/scoring/gestureScoringContract.ts), [`src/domain/gestures/scoring/waterSleevesEvaluator.ts`](../../src/domain/gestures/scoring/waterSleevesEvaluator.ts) | [`src/domain/gestures/scoring/gestureScoringContract.test.ts`](../../src/domain/gestures/scoring/gestureScoringContract.test.ts), [`src/domain/gestures/scoring/waterSleevesEvaluator.test.ts`](../../src/domain/gestures/scoring/waterSleevesEvaluator.test.ts) | EV-M3-079–EV-M3-082 |
 | M3-016 | Opening Door normalized frame features | M3 | Complete | [`src/domain/gestures/features/openingDoorFeatures.ts`](../../src/domain/gestures/features/openingDoorFeatures.ts) | [`src/domain/gestures/features/openingDoorFeatures.test.ts`](../../src/domain/gestures/features/openingDoorFeatures.test.ts) | EV-M3-083–EV-M3-086 |
 | M3-017 | Opening Door temporal trajectory and two-take reference envelope | M3 | Complete | [`src/domain/gestures/features/openingDoorTrajectory.ts`](../../src/domain/gestures/features/openingDoorTrajectory.ts), [`src/domain/gestures/scoring/openingDoorEnvelope.ts`](../../src/domain/gestures/scoring/openingDoorEnvelope.ts), [`src/domain/gestures/references/openingDoor.reference.json`](../../src/domain/gestures/references/openingDoor.reference.json), [`src/domain/gestures/references/openingDoorReference.ts`](../../src/domain/gestures/references/openingDoorReference.ts), [`scripts/generate_opening_door_reference.mjs`](../../scripts/generate_opening_door_reference.mjs) | [`src/domain/gestures/features/openingDoorTrajectory.test.ts`](../../src/domain/gestures/features/openingDoorTrajectory.test.ts), [`src/domain/gestures/scoring/openingDoorEnvelope.test.ts`](../../src/domain/gestures/scoring/openingDoorEnvelope.test.ts), [`src/domain/gestures/references/openingDoorReference.test.ts`](../../src/domain/gestures/references/openingDoorReference.test.ts) | EV-M3-087–EV-M3-091 |
+| M3-018 | Opening Door temporal alignment and soft similarity | M3 | Complete | [`src/domain/gestures/scoring/openingDoorEvaluator.ts`](../../src/domain/gestures/scoring/openingDoorEvaluator.ts) | [`src/domain/gestures/scoring/openingDoorEvaluator.test.ts`](../../src/domain/gestures/scoring/openingDoorEvaluator.test.ts) | EV-M3-092–EV-M3-097 |
 
 ### Registry rules
 
@@ -395,6 +396,12 @@ evidence that it passed.
 | 2026-08-04 | EV-M3-089 | M3 | Real two-take Opening Door reference generation | Target A / local practitioner fixtures | Passed | 41 points; take 1 pose/hand coverage 100.0%/83.4%; take 2 100.0%/97.7% |
 | 2026-08-04 | EV-M3-090 | M3 | Full unit and component suite | Target A / Vitest 4.1.0 | Passed | 193 tests across 43 files |
 | 2026-08-04 | EV-M3-091 | M3 | TypeScript, ESLint, and production build | Target A / Node 24.13.1 | Passed | Opening Door reference increment 17; existing MediaPipe build warnings unchanged |
+| 2026-08-04 | EV-M3-092 | M3 | Opening Door canonical and tempo-alignment tests | Target A / Vitest 4.1.0 | Passed | Canonical reconstruction and stretched timing score strongly |
+| 2026-08-04 | EV-M3-093 | M3 | Opening Door optional-hand and tracking tests | Target A / Vitest 4.1.0 | Passed | Missing optional hands preserve pose score; missing required pose is insufficient |
+| 2026-08-04 | EV-M3-094 | M3 | Opening Door displaced-path negative | Target A / Vitest 4.1.0 | Passed | Fully tracked two-shoulder-width displacement scores below 20% |
+| 2026-08-04 | EV-M3-095 | M3 | Real Opening Door fixture evaluation | Target A / local practitioner fixtures | Passed | Normal takes 95.0% and 95.3%; slow diagnostic take 92.6% |
+| 2026-08-04 | EV-M3-096 | M3 | Full unit and component suite | Target A / Vitest 4.1.0 | Passed | 198 tests across 44 files |
+| 2026-08-04 | EV-M3-097 | M3 | TypeScript, ESLint, and production build | Target A / Node 24.13.1 | Passed | Opening Door evaluator increment 18; existing MediaPipe build warnings unchanged |
 
 Recommended evidence ID format: `EV-M2-001`.
 
