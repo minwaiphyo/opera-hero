@@ -1,5 +1,10 @@
 import type { WaterSleevesTrajectory } from "../features/waterSleevesTrajectory";
 import type {
+  GestureEvaluation,
+  GestureSignalScore,
+  GestureTrackingStatus,
+} from "./gestureScoringContract";
+import type {
   ScalarEnvelopeValue,
   VectorEnvelopeValue,
   WaterSleevesEnvelopePoint,
@@ -15,20 +20,12 @@ export type WaterSleevesRequiredSignal =
   | "leftElbowPosition"
   | "rightElbowPosition";
 
-export type EvaluatorTrackingStatus = "good" | "limited" | "insufficient";
+export type EvaluatorTrackingStatus = GestureTrackingStatus;
 
-export interface WaterSleevesSignalScore {
-  score: number | null;
-  coverage: number;
-}
+export type WaterSleevesSignalScore = GestureSignalScore;
 
-export interface WaterSleevesEvaluation {
-  overallScore: number;
-  trackingCoverage: number;
-  trackingStatus: EvaluatorTrackingStatus;
-  alignedPairs: number;
-  signalScores: Record<WaterSleevesRequiredSignal, WaterSleevesSignalScore>;
-}
+export type WaterSleevesEvaluation =
+  GestureEvaluation<WaterSleevesRequiredSignal>;
 
 interface PointScores {
   leftUpperArmAngle: number | null;
