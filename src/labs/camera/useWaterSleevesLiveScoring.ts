@@ -21,6 +21,10 @@ export interface WaterSleevesLiveScoringState {
   hasCompletedTrajectory: boolean;
 }
 
+export const WATER_SLEEVES_MINIMUM_RECORDING_MS = 7_700;
+export const WATER_SLEEVES_MAXIMUM_RECORDING_MS = 20_000;
+export const WATER_SLEEVES_MAXIMUM_SAMPLES = 900;
+
 const epochNow = () => performance.timeOrigin + performance.now();
 const IDLE_STATE: WaterSleevesLiveScoringState = {
   snapshot: {
@@ -38,7 +42,11 @@ const IDLE_STATE: WaterSleevesLiveScoringState = {
 };
 
 export function useWaterSleevesLiveScoring(sessionId: string | null) {
-  const captureRef = useRef(new WaterSleevesAutomaticCapture());
+  const captureRef = useRef(new WaterSleevesAutomaticCapture({
+    minimumRecordingMs: WATER_SLEEVES_MINIMUM_RECORDING_MS,
+    maximumDurationMs: WATER_SLEEVES_MAXIMUM_RECORDING_MS,
+    maximumSamples: WATER_SLEEVES_MAXIMUM_SAMPLES,
+  }));
   const attemptSequence = useRef(0);
   const evaluatedAttemptRef = useRef<string | null>(null);
   const sessionRef = useRef(sessionId);

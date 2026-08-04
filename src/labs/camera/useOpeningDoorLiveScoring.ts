@@ -20,6 +20,10 @@ export interface OpeningDoorLiveScoringState {
   hasCompletedTrajectory: boolean;
 }
 
+export const OPENING_DOOR_MINIMUM_RECORDING_MS = 8_700;
+export const OPENING_DOOR_MAXIMUM_RECORDING_MS = 20_000;
+export const OPENING_DOOR_MAXIMUM_SAMPLES = 900;
+
 const epochNow = () => performance.timeOrigin + performance.now();
 const idleState = (): OpeningDoorLiveScoringState => ({
   snapshot: {
@@ -37,7 +41,11 @@ const idleState = (): OpeningDoorLiveScoringState => ({
 });
 
 export function useOpeningDoorLiveScoring(sessionId: string | null) {
-  const captureRef = useRef(new WaterSleevesAutomaticCapture());
+  const captureRef = useRef(new WaterSleevesAutomaticCapture({
+    minimumRecordingMs: OPENING_DOOR_MINIMUM_RECORDING_MS,
+    maximumDurationMs: OPENING_DOOR_MAXIMUM_RECORDING_MS,
+    maximumSamples: OPENING_DOOR_MAXIMUM_SAMPLES,
+  }));
   const framesRef = useRef<VisionLandmarkFrame[]>([]);
   const attemptSequence = useRef(0);
   const sessionRef = useRef(sessionId);

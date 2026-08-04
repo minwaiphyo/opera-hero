@@ -1,11 +1,22 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { VisionLandmark, VisionLandmarkFrame } from "../../vision/visionTypes";
-import { useOpeningDoorLiveScoring } from "./useOpeningDoorLiveScoring";
+import {
+  OPENING_DOOR_MAXIMUM_RECORDING_MS,
+  OPENING_DOOR_MAXIMUM_SAMPLES,
+  OPENING_DOOR_MINIMUM_RECORDING_MS,
+  useOpeningDoorLiveScoring,
+} from "./useOpeningDoorLiveScoring";
 
 afterEach(() => vi.restoreAllMocks());
 
 describe("useOpeningDoorLiveScoring", () => {
+  it("protects the complete first reference cycle from automatic termination", () => {
+    expect(OPENING_DOOR_MINIMUM_RECORDING_MS).toBe(8_700);
+    expect(OPENING_DOOR_MAXIMUM_RECORDING_MS).toBeGreaterThan(OPENING_DOOR_MINIMUM_RECORDING_MS);
+    expect(OPENING_DOOR_MAXIMUM_SAMPLES).toBeGreaterThan(8_700 / 1000 * 60);
+  });
+
   it("scores captured worker frames and resets for a new camera session", async () => {
     const now = vi.spyOn(performance, "now").mockReturnValue(100);
     const { result, rerender } = renderHook(

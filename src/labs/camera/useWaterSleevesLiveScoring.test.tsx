@@ -4,11 +4,22 @@ import type {
   VisionLandmark,
   VisionLandmarkFrame,
 } from "../../vision/visionTypes";
-import { useWaterSleevesLiveScoring } from "./useWaterSleevesLiveScoring";
+import {
+  WATER_SLEEVES_MAXIMUM_RECORDING_MS,
+  WATER_SLEEVES_MAXIMUM_SAMPLES,
+  WATER_SLEEVES_MINIMUM_RECORDING_MS,
+  useWaterSleevesLiveScoring,
+} from "./useWaterSleevesLiveScoring";
 
 afterEach(() => vi.restoreAllMocks());
 
 describe("useWaterSleevesLiveScoring", () => {
+  it("protects the complete first reference cycle from automatic termination", () => {
+    expect(WATER_SLEEVES_MINIMUM_RECORDING_MS).toBe(7_700);
+    expect(WATER_SLEEVES_MAXIMUM_RECORDING_MS).toBeGreaterThan(WATER_SLEEVES_MINIMUM_RECORDING_MS);
+    expect(WATER_SLEEVES_MAXIMUM_SAMPLES).toBeGreaterThan(7_700 / 1000 * 60);
+  });
+
   it("scores worker landmark frames and resets for a new camera session", async () => {
     const now = vi.spyOn(performance, "now").mockReturnValue(100);
     const { result, rerender } = renderHook(
