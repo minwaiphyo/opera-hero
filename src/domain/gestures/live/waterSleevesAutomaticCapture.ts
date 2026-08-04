@@ -4,6 +4,7 @@ import type { WaterSleevesTrajectory } from "../features/waterSleevesTrajectory"
 import {
   WaterSleevesAttemptBuffer,
   type LiveAttemptSnapshot,
+  type WaterSleevesAttemptBufferOptions,
 } from "./waterSleevesAttemptBuffer";
 
 export type AutomaticCapturePhase =
@@ -14,12 +15,16 @@ export type AutomaticCapturePhase =
   | "timed-out"
   | "cancelled";
 
-export interface AutomaticCaptureOptions {
+export interface AutomaticCaptureOptions extends WaterSleevesAttemptBufferOptions {
   countdownMs?: number;
   stillnessThreshold?: number;
   stillnessDurationMs?: number;
   minimumRecordingMs?: number;
   minimumPostMovementMs?: number;
+  motionEstimator?: (
+    previous: VisionLandmarkFrame,
+    current: VisionLandmarkFrame,
+  ) => number | null;
 }
 
 export interface AutomaticCaptureSnapshot {
@@ -40,11 +45,12 @@ const COMPLETION_ARMING_MOTION = 0.02;
 
 export class WaterSleevesAutomaticCapture {
   private readonly options: typeof DEFAULTS;
-  private readonly buffer = new WaterSleevesAttemptBuffer();
+  private readonly buffer: WaterSleevesAttemptBuffer;
+  private readonly motionEstimator: NonNullable<AutomaticCaptureOptions["motionEstimator"]>;
   private phase: AutomaticCapturePhase = "idle";
   private attemptId: string | null = null;
   private countdownEndsAtMs = 0;
-  private previousFeatures: ReturnType<typeof extractWaterSleevesFrameFeatures> = null;
+  private previousFrame: VisionLandmarkFrame | null = null;
   private recordingStartedAtMs = 0;
   private stillSinceMs: number | null = null;
   private accumulatedMotion = 0;
@@ -52,6 +58,8 @@ export class WaterSleevesAutomaticCapture {
 
   constructor(options: AutomaticCaptureOptions = {}) {
     this.options = { ...DEFAULTS, ...options };
+    this.buffer = new WaterSleevesAttemptBuffer(options);
+    this.motionEstimator = options.motionEstimator ?? poseArmMotion;
   }
 
   start(attemptId: string, requestedAtMs: number): AutomaticCaptureSnapshot {
@@ -61,7 +69,7 @@ export class WaterSleevesAutomaticCapture {
     this.attemptId = attemptId;
     this.phase = "countdown";
     this.countdownEndsAtMs = requestedAtMs + this.options.countdownMs;
-    this.previousFeatures = null;
+    this.previousFrame = null;
     this.recordingStartedAtMs = 0;
     this.stillSinceMs = null;
     this.accumulatedMotion = 0;
@@ -72,7 +80,7 @@ export class WaterSleevesAutomaticCapture {
   advance(nowMs: number): AutomaticCaptureSnapshot {
     if (this.phase === "countdown" && nowMs >= this.countdownEndsAtMs) {
       this.phase = "recording";
-      this.previousFeatures = null;
+      this.previousFrame = null;
       this.recordingStartedAtMs = this.countdownEndsAtMs;
       this.buffer.start(this.attemptId!, this.countdownEndsAtMs);
     }
@@ -104,7 +112,7 @@ export class WaterSleevesAutomaticCapture {
     this.buffer.reset();
     this.phase = "idle";
     this.attemptId = null;
-    this.previousFeatures = null;
+    this.previousFrame = null;
     this.stillSinceMs = null;
     this.accumulatedMotion = 0;
     this.movementObservedAtMs = null;
@@ -127,12 +135,10 @@ export class WaterSleevesAutomaticCapture {
   }
 
   private capture(frame: VisionLandmarkFrame): void {
-    const features = extractWaterSleevesFrameFeatures(frame);
-    const motion =
-      features && this.previousFeatures
-        ? armMotion(this.previousFeatures, features)
-        : Number.POSITIVE_INFINITY;
-    if (features) this.previousFeatures = features;
+    const motion = this.previousFrame
+      ? this.motionEstimator(this.previousFrame, frame) ?? Number.POSITIVE_INFINITY
+      : Number.POSITIVE_INFINITY;
+    this.previousFrame = frame;
     if (Number.isFinite(motion)) this.accumulatedMotion += motion;
     if (
       this.movementObservedAtMs === null &&
@@ -210,6 +216,15 @@ function armMotion(
   return distances.length > 0
     ? distances.reduce((sum, distance) => sum + distance, 0) / distances.length
     : 0;
+}
+
+function poseArmMotion(
+  previousFrame: VisionLandmarkFrame,
+  currentFrame: VisionLandmarkFrame,
+): number | null {
+  const previous = extractWaterSleevesFrameFeatures(previousFrame);
+  const current = extractWaterSleevesFrameFeatures(currentFrame);
+  return previous && current ? armMotion(previous, current) : null;
 }
 
 function angleDelta(current: number, previous: number): number {

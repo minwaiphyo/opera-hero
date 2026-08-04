@@ -1,4 +1,5 @@
 import type { VisionReplayFixture } from "../../../vision/replay/visionReplayTypes";
+import type { VisionLandmarkFrame } from "../../../vision/visionTypes";
 import {
   extractOrchidFingerFrameFeatures,
   type OrchidFingerArmFeatures,
@@ -70,6 +71,27 @@ export function extractOrchidFingerTrajectory(
     };
   });
   return createOrchidFingerTrajectory(fixture.id, samples, durationMs);
+}
+
+export function extractLiveOrchidFingerTrajectory(
+  attemptId: string,
+  frames: readonly VisionLandmarkFrame[],
+): OrchidFingerTrajectory {
+  const startedAtMs = frames[0]?.capturedAtMs ?? 0;
+  const durationMs = Math.max(0, (frames.at(-1)?.capturedAtMs ?? startedAtMs) - startedAtMs);
+  const samples = frames.map((frame) => {
+    const features = extractOrchidFingerFrameFeatures(frame);
+    const offsetMs = frame.capturedAtMs - startedAtMs;
+    return {
+      offsetMs,
+      progress: durationMs > 0 ? offsetMs / durationMs : 0,
+      leftArm: features?.leftArm ?? null,
+      rightArm: features?.rightArm ?? null,
+      leftHand: features?.leftHand ?? null,
+      rightHand: features?.rightHand ?? null,
+    };
+  });
+  return createOrchidFingerTrajectory(`live-${attemptId}`, samples, durationMs);
 }
 
 export function createOrchidFingerTrajectory(

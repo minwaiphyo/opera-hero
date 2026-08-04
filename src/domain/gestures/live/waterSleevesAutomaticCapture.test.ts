@@ -71,6 +71,33 @@ describe("WaterSleevesAutomaticCapture", () => {
     expect(capture.getSnapshot(4_000).phase).toBe("cancelled");
     expect(capture.getTrajectory()).toBeNull();
   });
+
+  it("forwards gesture-specific duration and sample limits to the attempt buffer", () => {
+    const capture = new WaterSleevesAutomaticCapture({
+      countdownMs: 1,
+      maximumDurationMs: 20_000,
+      maximumSamples: 2,
+    });
+    capture.start("bounded", 0);
+    capture.push(frame(1, 0));
+    expect(capture.push(frame(2, 0.1)).phase).toBe("timed-out");
+  });
+
+  it("blocks stillness completion until a gesture-specific minimum duration", () => {
+    const capture = new WaterSleevesAutomaticCapture({
+      countdownMs: 1,
+      stillnessThreshold: 0.02,
+      stillnessDurationMs: 500,
+      minimumPostMovementMs: 0,
+      minimumRecordingMs: 5_000,
+    });
+    capture.start("minimum-duration", 0);
+    capture.push(frame(1, 0));
+    capture.push(frame(100, 0.5));
+    capture.push(frame(1_000, 0.501));
+    expect(capture.push(frame(5_000, 0.502)).phase).toBe("recording");
+    expect(capture.push(frame(5_001, 0.503)).phase).toBe("completed");
+  });
 });
 
 function automaticCapture() {

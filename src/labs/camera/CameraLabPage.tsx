@@ -6,12 +6,15 @@ import { CameraPreview } from "./CameraPreview";
 import { CameraStabilityPanel } from "./CameraStabilityPanel";
 import { OpeningDoorLiveScoringPanel } from "./OpeningDoorLiveScoringPanel";
 import { OpeningDoorReferenceGuide } from "./OpeningDoorReferenceGuide";
+import { OrchidFingerLiveScoringPanel } from "./OrchidFingerLiveScoringPanel";
+import { OrchidFingerReferenceGuide } from "./OrchidFingerReferenceGuide";
 import { WaterSleevesLiveScoringPanel } from "./WaterSleevesLiveScoringPanel";
 import { WaterSleevesReferenceGuide } from "./WaterSleevesReferenceGuide";
 import { WaterSleevesTuningPanel } from "./WaterSleevesTuningPanel";
 import type { CameraLabRuntimeFactory } from "./cameraLabRuntime";
 import { useCameraLab } from "./useCameraLab";
 import { useOpeningDoorLiveScoring } from "./useOpeningDoorLiveScoring";
+import { useOrchidFingerLiveScoring } from "./useOrchidFingerLiveScoring";
 import { useWaterSleevesLiveScoring } from "./useWaterSleevesLiveScoring";
 import "./cameraLab.css";
 
@@ -22,10 +25,11 @@ type CameraLabPageProps = {
 export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
   const camera = useCameraLab(runtimeFactory);
   const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
-  const [gesture, setGesture] = useState<"water-sleeves" | "opening-door">("water-sleeves");
+  const [gesture, setGesture] = useState<"water-sleeves" | "opening-door" | "orchid-finger">("water-sleeves");
   const waterSleeves = useWaterSleevesLiveScoring(camera.session?.id ?? null);
   const openingDoor = useOpeningDoorLiveScoring(camera.session?.id ?? null);
-  const liveScoring = gesture === "water-sleeves" ? waterSleeves : openingDoor;
+  const orchidFinger = useOrchidFingerLiveScoring(camera.session?.id ?? null);
+  const liveScoring = gesture === "water-sleeves" ? waterSleeves : gesture === "opening-door" ? openingDoor : orchidFinger;
   const attemptActive = liveScoring.state.capturePhase === "countdown" ||
     liveScoring.state.capturePhase === "recording";
 
@@ -63,11 +67,13 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
             onChange={(event) => {
               waterSleeves.reset();
               openingDoor.reset();
-              setGesture(event.target.value as "water-sleeves" | "opening-door");
+              orchidFinger.reset();
+              setGesture(event.target.value as "water-sleeves" | "opening-door" | "orchid-finger");
             }}
           >
             <option value="water-sleeves">Water Sleeves</option>
             <option value="opening-door">Opening Door</option>
+            <option value="orchid-finger">Orchid Finger</option>
           </select>
           {gesture === "water-sleeves" ? (
             <WaterSleevesLiveScoringPanel
@@ -78,7 +84,7 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
               onStart={waterSleeves.start}
               state={waterSleeves.state}
             />
-          ) : (
+          ) : gesture === "opening-door" ? (
             <OpeningDoorLiveScoringPanel
               cameraActive={Boolean(camera.session)}
               onCancel={openingDoor.cancel}
@@ -87,10 +93,12 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
               onStart={openingDoor.start}
               state={openingDoor.state}
             />
+          ) : (
+            <OrchidFingerLiveScoringPanel cameraActive={Boolean(camera.session)} onCancel={orchidFinger.cancel} onFinish={orchidFinger.finish} onReset={orchidFinger.reset} onStart={orchidFinger.start} state={orchidFinger.state} />
           )}
           <div className="live-visual-comparison">
             <CameraPreview
-              onLandmarkFrame={gesture === "water-sleeves" ? waterSleeves.onFrame : openingDoor.onFrame}
+              onLandmarkFrame={gesture === "water-sleeves" ? waterSleeves.onFrame : gesture === "opening-door" ? openingDoor.onFrame : orchidFinger.onFrame}
               onVideoElement={setVideoElement}
               session={camera.session}
               status={camera.status}
@@ -100,11 +108,13 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
                 playbackEnabled={waterSleeves.state.capturePhase !== "countdown"}
                 restartToken={waterSleeves.state.snapshot.attemptId}
               />
-            ) : (
+            ) : gesture === "opening-door" ? (
               <OpeningDoorReferenceGuide
                 playbackEnabled={openingDoor.state.capturePhase !== "countdown"}
                 restartToken={openingDoor.state.snapshot.attemptId}
               />
+            ) : (
+              <OrchidFingerReferenceGuide playbackEnabled={orchidFinger.state.capturePhase !== "countdown"} restartToken={orchidFinger.state.snapshot.attemptId} />
             )}
             <AttemptCaptureCue state={liveScoring.state} />
           </div>
