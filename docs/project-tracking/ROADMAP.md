@@ -226,7 +226,8 @@ A measured, replaceable landmark pipeline—still with no game logic.
 
 ### Goal
 
-Build and validate one lenient placeholder gesture as a pure domain module.
+Build transparent, replay-testable scoring for the three stakeholder-selected
+festival gestures and prove each one in the live camera laboratory.
 
 ### Module contract
 
@@ -246,45 +247,48 @@ interface GestureEvaluator {
 
 ### Build
 
-- Start with a placeholder gesture such as “raise one hand.”
-- Extract normalized features:
-  - hand height relative to shoulder;
-  - elbow angle;
-  - arm distance from torso;
-  - motion direction;
-  - landmark confidence.
-- Use soft scoring, temporal smoothing, a short hold, and hysteresis.
-- Create `/lab/gestures` showing feature values and progress.
-- Allow technician-only threshold adjustment in the lab.
-- Save landmark sequences, not camera images, for consented testing.
-- Create synthetic sequences for success, partial attempt, jitter, loss, and timeout.
+- Extract normalized pose and hand landmarks from approved practitioner recordings.
+- Build interpretable features, multi-take reference envelopes where available,
+  dynamic time warping, tracking coverage, and movement completeness.
+- Keep gesture-specific tolerances and evidence visible in developer laboratories.
+- Store compact landmarks and features rather than visitor images or video.
+- Create deterministic success, partial, stationary, jitter, tracking-loss, and
+  incorrect-movement regressions.
+- Integrate all three gestures with worker-owned live inference, reference playback,
+  bounded capture, and clean reset between attempts.
 
 ### Tests
 
 - Evaluator unit tests contain no browser, MediaPipe, or React dependency.
-- Canonical and mirrored attempts work when the gesture allows mirroring.
-- Body size and camera distance do not materially change the outcome.
-- One-frame spikes do not trigger success.
-- A genuine partial attempt progresses.
-- Tracking loss pauses rather than fails.
-- Threshold changes are tested against the same fixture suite.
+- Normalization limits sensitivity to body size, camera distance, and translation.
+- Dynamic time warping tolerates slower sincere performances.
+- Stationary and reduced-range attempts cannot pass through positional resemblance.
+- Missing optional hand evidence remains distinct from incorrect movement.
+- Capture tests cover countdown, first-cycle protection, jitter, bounded timeout,
+  cancellation, and session reset.
+- Browser smoke tests retain the camera and replay laboratory entry points.
 
 ### Exit gate
 
-- The placeholder gesture works for a small diverse test group.
-- False activations are acceptable for the experience.
-- Genuine attempts are accepted without precise imitation.
-- Every scoring change can be regression-tested through replay fixtures.
+- All three festival gestures have practitioner-derived, image-free references.
+- Each evaluator distinguishes a sincere project-owner attempt from a stationary
+  attempt on target hardware, without requiring precise frame timing.
+- Live capture cannot finish before one complete reference cycle and always has a
+  bounded manual or automatic exit.
+- Every scoring change is regression-testable through deterministic landmark data.
+- Formal participant calibration is explicitly deferred; M3 produces provisional
+  soft similarity, not a claimed population-validated pass threshold.
 
 ### Deliverable
 
-One transparent, testable gesture evaluator and a reusable scoring framework.
+Three transparent gesture evaluators, a reusable scoring/capture framework, and a
+live developer laboratory ready to feed the gameplay state machine.
 
 ### Cultural decision point
 
-This is the ideal time to confirm the final two or three opera gestures. For each,
-obtain an expert-approved name, meaning, demonstration reference, important motion
-features, permissible mirroring, and cultural-insight text.
+The three gestures and demonstration references are confirmed. Cultural narration,
+permissible mirroring, and final insight text remain content approvals for later
+gameplay milestones and do not alter the M3 scoring evidence.
 
 ## 8. Milestone 4 — gameplay state-machine simulator
 
