@@ -12,7 +12,10 @@ export type OrchidFingerScoredSignal =
   | "leftPalmPosition" | "rightPalmPosition"
   | "leftPalmDirection" | "rightPalmDirection"
   | "leftHandShape" | "rightHandShape";
-export type OrchidFingerEvaluation = GestureEvaluation<OrchidFingerScoredSignal>;
+export interface OrchidFingerEvaluation
+  extends GestureEvaluation<OrchidFingerScoredSignal> {
+  movementCompleteness: number;
+}
 
 type PointScores = Record<OrchidFingerScoredSignal, number | null>;
 interface AlignmentCell { cost: number; previous: [number, number] | null }
@@ -38,8 +41,32 @@ export function evaluateOrchidFingerTrajectory(trajectory: OrchidFingerTrajector
   const signalScores = Object.fromEntries(SIGNALS.map((signal) => [signal, { score: totals[signal].count ? totals[signal].sum / totals[signal].count : null, coverage: totals[signal].count / path.length }])) as Record<OrchidFingerScoredSignal, GestureSignalScore>;
   const softScore = weightedAverage(Object.fromEntries(SIGNALS.map((signal) => [signal, signalScores[signal].score])) as PointScores);
   const trackingCoverage = requiredSignalCoverage(trajectory);
-  return { overallScore: softScore * Math.min(1, trackingCoverage / ORCHID_FINGER_FULL_COVERAGE), trackingCoverage, trackingStatus: trackingStatus(trackingCoverage), alignedPairs: path.length, signalScores };
+  const movementCompleteness = calculateMovementCompleteness(trajectory, reference);
+  return { overallScore: softScore * Math.min(1, trackingCoverage / ORCHID_FINGER_FULL_COVERAGE) * movementCompleteness, movementCompleteness, trackingCoverage, trackingStatus: trackingStatus(trackingCoverage), alignedPairs: path.length, signalScores };
 }
+
+function calculateMovementCompleteness(trajectory: OrchidFingerTrajectory, reference: OrchidFingerReferenceEnvelope) {
+  const ratios = [
+    rangeRatio(endpointExcursion(trajectory.samples.map((sample) => sample.leftArm?.elbowFromShoulder)), endpointExcursion(reference.points.map((point) => point.leftElbowPosition?.target))),
+    rangeRatio(endpointExcursion(trajectory.samples.map((sample) => sample.rightArm?.elbowFromShoulder)), endpointExcursion(reference.points.map((point) => point.rightElbowPosition?.target))),
+    rangeRatio(endpointExcursion(trajectory.samples.map((sample) => sample.leftArm?.wristFromShoulder)), endpointExcursion(reference.points.map((point) => point.leftWristPosition?.target))),
+    rangeRatio(endpointExcursion(trajectory.samples.map((sample) => sample.rightArm?.wristFromShoulder)), endpointExcursion(reference.points.map((point) => point.rightWristPosition?.target))),
+    rangeRatio(endpointExcursion(trajectory.samples.map((sample) => sample.leftHand?.palmCenterFromBody)), endpointExcursion(reference.points.map((point) => point.leftHand?.palmPosition.target))),
+    rangeRatio(endpointExcursion(trajectory.samples.map((sample) => sample.rightHand?.palmCenterFromBody)), endpointExcursion(reference.points.map((point) => point.rightHand?.palmPosition.target))),
+  ].filter((ratio): ratio is number => ratio !== null);
+  return ratios.length ? ratios.reduce((sum, ratio) => sum + ratio, 0) / ratios.length : 0;
+}
+function endpointExcursion(values: readonly ({ x: number; y: number } | null | undefined)[]) {
+  const available = values.filter((value): value is { x: number; y: number } => value != null);
+  if (available.length < 4) return null;
+  const windowSize = Math.max(2, Math.ceil(available.length * 0.15));
+  const start = medianPoint(available.slice(0, windowSize));
+  const end = medianPoint(available.slice(-windowSize));
+  return Math.hypot(end.x - start.x, end.y - start.y);
+}
+function medianPoint(values: readonly { x: number; y: number }[]) { return { x: median(values.map(({ x }) => x)), y: median(values.map(({ y }) => y)) }; }
+function median(values: readonly number[]) { const sorted = [...values].sort((a, b) => a - b); const middle = Math.floor(sorted.length / 2); return sorted.length % 2 ? sorted[middle]! : (sorted[middle - 1]! + sorted[middle]!) / 2; }
+function rangeRatio(actual: number | null, expected: number | null) { return actual === null || expected === null || expected <= 0.01 ? null : Math.min(1, actual / (expected * 0.8)); }
 
 function scorePoint(sample: OrchidFingerTrajectory["samples"][number], reference: OrchidFingerEnvelopePoint): PointScores {
   return {
@@ -84,4 +111,4 @@ function weightedAverage(scores: PointScores) { let total = 0; let weight = 0; f
 function requiredSignalCoverage(trajectory: OrchidFingerTrajectory) { if (!trajectory.samples.length) return 0; const available = trajectory.samples.reduce((count, sample) => count + Number(sample.leftArm !== null) + Number(sample.rightArm !== null) + Number(sample.leftArm?.wristFromShoulder != null) + Number(sample.rightArm?.wristFromShoulder != null), 0); return available / (trajectory.samples.length * 4); }
 function trackingStatus(coverage: number): GestureTrackingStatus { return coverage >= ORCHID_FINGER_FULL_COVERAGE ? "good" : coverage >= 0.5 ? "limited" : "insufficient"; }
 function insideWindow(row: number, rows: number, column: number, columns: number) { return Math.abs((rows > 1 ? row / (rows - 1) : 0) - (columns > 1 ? column / (columns - 1) : 0)) <= ORCHID_FINGER_ALIGNMENT_WINDOW; }
-function emptyEvaluation(): OrchidFingerEvaluation { return { overallScore: 0, trackingCoverage: 0, trackingStatus: "insufficient", alignedPairs: 0, signalScores: Object.fromEntries(SIGNALS.map((signal) => [signal, { score: null, coverage: 0 }])) as Record<OrchidFingerScoredSignal, GestureSignalScore> }; }
+function emptyEvaluation(): OrchidFingerEvaluation { return { overallScore: 0, movementCompleteness: 0, trackingCoverage: 0, trackingStatus: "insufficient", alignedPairs: 0, signalScores: Object.fromEntries(SIGNALS.map((signal) => [signal, { score: null, coverage: 0 }])) as Record<OrchidFingerScoredSignal, GestureSignalScore> }; }

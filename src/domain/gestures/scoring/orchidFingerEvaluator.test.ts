@@ -33,6 +33,44 @@ describe("evaluateOrchidFingerTrajectory", () => {
     expect(evaluation.overallScore).toBeLessThan(0.75);
   });
 
+  it("rejects a stationary pose even when its finger shape is visible", () => {
+    const source = referenceTrajectory();
+    const held = source.samples.map((sample) => ({
+      ...sample,
+      leftArm: source.samples[0]!.leftArm,
+      rightArm: source.samples[0]!.rightArm,
+      leftHand: source.samples[0]!.leftHand,
+      rightHand: source.samples[0]!.rightHand,
+    }));
+    const evaluation = evaluateOrchidFingerTrajectory(createOrchidFingerTrajectory("stationary", held), ORCHID_FINGER_REFERENCE);
+    expect(evaluation.movementCompleteness).toBe(0);
+    expect(evaluation.overallScore).toBe(0);
+    expect(evaluation.trackingStatus).toBe("good");
+  });
+
+  it("ignores isolated landmark drift in a stationary attempt", () => {
+    const source = referenceTrajectory();
+    const origin = source.samples[0]!;
+    const noisyHeld = source.samples.map((sample, index) => ({
+      ...sample,
+      leftArm: index % 7 === 0 ? sample.leftArm : origin.leftArm,
+      rightArm: index % 7 === 0 ? sample.rightArm : origin.rightArm,
+      leftHand: index % 7 === 0 ? sample.leftHand : origin.leftHand,
+      rightHand: index % 7 === 0 ? sample.rightHand : origin.rightHand,
+    }));
+    const evaluation = evaluateOrchidFingerTrajectory(createOrchidFingerTrajectory("noisy-stationary", noisyHeld), ORCHID_FINGER_REFERENCE);
+    expect(evaluation.movementCompleteness).toBeLessThan(0.1);
+    expect(evaluation.overallScore).toBeLessThan(0.1);
+  });
+
+  it("penalizes a substantially reduced arm and palm path", () => {
+    const source = referenceTrajectory();
+    const reduced = scaleMovement(source.samples, 0.35);
+    const evaluation = evaluateOrchidFingerTrajectory(createOrchidFingerTrajectory("reduced-range", reduced), ORCHID_FINGER_REFERENCE);
+    expect(evaluation.movementCompleteness).toBeLessThan(0.5);
+    expect(evaluation.overallScore).toBeLessThan(0.5);
+  });
+
   it("marks missing required body tracking as insufficient", () => {
     const samples = referenceSamples().map((sample) => ({ ...sample, leftArm: null, rightArm: null }));
     const evaluation = evaluateOrchidFingerTrajectory(createOrchidFingerTrajectory("missing-pose", samples), ORCHID_FINGER_REFERENCE);
@@ -59,3 +97,22 @@ function distort(handFeatures: OrchidFingerHandFeatures | null): OrchidFingerHan
   const add = <T extends string>(record: Record<T, number>) => Object.fromEntries(Object.entries<number>(record).map(([key, value]) => [key, value + 3])) as Record<T, number>;
   return { ...handFeatures, fingerExtension: add(handFeatures.fingerExtension), fingerCurlRad: add(handFeatures.fingerCurlRad), thumbToFingertip: add(handFeatures.thumbToFingertip) };
 }
+
+function scaleMovement(samples: readonly OrchidFingerTrajectorySample[], scale: number): OrchidFingerTrajectorySample[] {
+  const origin = samples[0]!;
+  return samples.map((sample) => ({
+    ...sample,
+    leftArm: scaleArm(sample.leftArm, origin.leftArm, scale),
+    rightArm: scaleArm(sample.rightArm, origin.rightArm, scale),
+    leftHand: scaleHand(sample.leftHand, origin.leftHand, scale),
+    rightHand: scaleHand(sample.rightHand, origin.rightHand, scale),
+  }));
+}
+function scaleArm(value: OrchidFingerArmFeatures | null, origin: OrchidFingerArmFeatures | null, scale: number): OrchidFingerArmFeatures | null {
+  if (!value || !origin) return null;
+  return { ...value, elbowFromShoulder: scalePoint(value.elbowFromShoulder, origin.elbowFromShoulder, scale), wristFromShoulder: value.wristFromShoulder && origin.wristFromShoulder ? scalePoint(value.wristFromShoulder, origin.wristFromShoulder, scale) : null };
+}
+function scaleHand(value: OrchidFingerHandFeatures | null, origin: OrchidFingerHandFeatures | null, scale: number): OrchidFingerHandFeatures | null {
+  return value && origin ? { ...value, palmCenterFromBody: scalePoint(value.palmCenterFromBody, origin.palmCenterFromBody, scale) } : null;
+}
+function scalePoint(value: { x: number; y: number }, origin: { x: number; y: number }, scale: number) { return { x: origin.x + (value.x - origin.x) * scale, y: origin.y + (value.y - origin.y) * scale }; }

@@ -17,6 +17,7 @@ export interface OrchidFingerLiveScoringState {
 export const ORCHID_FINGER_STILLNESS_DURATION_MS = 2_000;
 export const ORCHID_FINGER_STILLNESS_THRESHOLD = 0.08;
 export const ORCHID_FINGER_MINIMUM_RECORDING_MS = 15_600;
+export const ORCHID_FINGER_MOTION_RESET_DURATION_MS = 1_000;
 export const ORCHID_FINGER_MAXIMUM_DURATION_MS = 30_000;
 export const ORCHID_FINGER_MAXIMUM_SAMPLES = 1_200;
 const epochNow = () => performance.timeOrigin + performance.now();
@@ -27,6 +28,8 @@ export function useOrchidFingerLiveScoring(sessionId: string | null) {
     stillnessDurationMs: ORCHID_FINGER_STILLNESS_DURATION_MS,
     stillnessThreshold: ORCHID_FINGER_STILLNESS_THRESHOLD,
     minimumRecordingMs: ORCHID_FINGER_MINIMUM_RECORDING_MS,
+    requireMovementBeforeCompletion: false,
+    motionResetDurationMs: ORCHID_FINGER_MOTION_RESET_DURATION_MS,
     maximumDurationMs: ORCHID_FINGER_MAXIMUM_DURATION_MS,
     maximumSamples: ORCHID_FINGER_MAXIMUM_SAMPLES,
     motionEstimator: estimateOrchidFingerMotion,
