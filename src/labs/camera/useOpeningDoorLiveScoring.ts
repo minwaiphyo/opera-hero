@@ -21,6 +21,8 @@ export interface OpeningDoorLiveScoringState {
 }
 
 export const OPENING_DOOR_MINIMUM_RECORDING_MS = 8_700;
+export const OPENING_DOOR_STILLNESS_THRESHOLD = 0.06;
+export const OPENING_DOOR_MOTION_RESET_DURATION_MS = 300;
 export const OPENING_DOOR_MAXIMUM_RECORDING_MS = 20_000;
 export const OPENING_DOOR_MAXIMUM_SAMPLES = 900;
 
@@ -43,6 +45,9 @@ const idleState = (): OpeningDoorLiveScoringState => ({
 export function useOpeningDoorLiveScoring(sessionId: string | null) {
   const captureRef = useRef(new WaterSleevesAutomaticCapture({
     minimumRecordingMs: OPENING_DOOR_MINIMUM_RECORDING_MS,
+    stillnessThreshold: OPENING_DOOR_STILLNESS_THRESHOLD,
+    requireMovementBeforeCompletion: false,
+    motionResetDurationMs: OPENING_DOOR_MOTION_RESET_DURATION_MS,
     maximumDurationMs: OPENING_DOOR_MAXIMUM_RECORDING_MS,
     maximumSamples: OPENING_DOOR_MAXIMUM_SAMPLES,
   }));

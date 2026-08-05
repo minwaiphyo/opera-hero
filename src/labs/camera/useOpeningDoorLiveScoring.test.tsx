@@ -5,6 +5,8 @@ import {
   OPENING_DOOR_MAXIMUM_RECORDING_MS,
   OPENING_DOOR_MAXIMUM_SAMPLES,
   OPENING_DOOR_MINIMUM_RECORDING_MS,
+  OPENING_DOOR_STILLNESS_THRESHOLD,
+  OPENING_DOOR_MOTION_RESET_DURATION_MS,
   useOpeningDoorLiveScoring,
 } from "./useOpeningDoorLiveScoring";
 
@@ -13,6 +15,8 @@ afterEach(() => vi.restoreAllMocks());
 describe("useOpeningDoorLiveScoring", () => {
   it("protects the complete first reference cycle from automatic termination", () => {
     expect(OPENING_DOOR_MINIMUM_RECORDING_MS).toBe(8_700);
+    expect(OPENING_DOOR_STILLNESS_THRESHOLD).toBe(0.06);
+    expect(OPENING_DOOR_MOTION_RESET_DURATION_MS).toBe(300);
     expect(OPENING_DOOR_MAXIMUM_RECORDING_MS).toBeGreaterThan(OPENING_DOOR_MINIMUM_RECORDING_MS);
     expect(OPENING_DOOR_MAXIMUM_SAMPLES).toBeGreaterThan(8_700 / 1000 * 60);
   });

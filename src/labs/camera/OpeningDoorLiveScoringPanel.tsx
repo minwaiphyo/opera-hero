@@ -67,6 +67,7 @@ export function OpeningDoorLiveScoringPanel({
           </div>
           <dl className="live-scoring-metrics">
             <div><dt>Tracking coverage</dt><dd>{percent(state.evaluation.trackingCoverage)}</dd></div>
+            <div><dt>Movement completeness</dt><dd>{percent(state.evaluation.movementCompleteness)}</dd></div>
             <div><dt>Tracking status</dt><dd>{state.evaluation.trackingStatus}</dd></div>
             <div><dt>Aligned pairs</dt><dd>{state.evaluation.alignedPairs}</dd></div>
           </dl>

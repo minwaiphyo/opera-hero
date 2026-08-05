@@ -25,7 +25,10 @@ export type OpeningDoorScoredSignal =
   | "leftHandOpenness"
   | "rightHandOpenness";
 
-export type OpeningDoorEvaluation = GestureEvaluation<OpeningDoorScoredSignal>;
+export interface OpeningDoorEvaluation
+  extends GestureEvaluation<OpeningDoorScoredSignal> {
+  movementCompleteness: number;
+}
 
 type PointScores = Record<OpeningDoorScoredSignal, number | null>;
 interface AlignmentCell {
@@ -87,13 +90,60 @@ export function evaluateOpeningDoorTrajectory(
   );
   const trackingCoverage = requiredSignalCoverage(trajectory);
   const coverageFactor = Math.min(1, trackingCoverage / OPENING_DOOR_FULL_COVERAGE);
+  const movementCompleteness = calculateMovementCompleteness(trajectory, reference);
   return {
-    overallScore: softScore * coverageFactor,
+    overallScore: softScore * coverageFactor * movementCompleteness,
+    movementCompleteness,
     trackingCoverage,
     trackingStatus: trackingStatus(trackingCoverage),
     alignedPairs: path.length,
     signalScores,
   };
+}
+
+function calculateMovementCompleteness(
+  trajectory: OpeningDoorTrajectory,
+  reference: OpeningDoorReferenceEnvelope,
+): number {
+  const ratios = [
+    excursionRatio(
+      vectorRange(trajectory.samples.map((sample) => sample.leftArm?.elbowFromShoulder)),
+      vectorRange(reference.points.map((point) => point.leftElbowPosition?.target)),
+    ),
+    excursionRatio(
+      vectorRange(trajectory.samples.map((sample) => sample.rightArm?.elbowFromShoulder)),
+      vectorRange(reference.points.map((point) => point.rightElbowPosition?.target)),
+    ),
+    excursionRatio(
+      vectorRange(trajectory.samples.map((sample) => sample.leftArm?.wristFromShoulder)),
+      vectorRange(reference.points.map((point) => point.leftWristPosition?.target)),
+    ),
+    excursionRatio(
+      vectorRange(trajectory.samples.map((sample) => sample.rightArm?.wristFromShoulder)),
+      vectorRange(reference.points.map((point) => point.rightWristPosition?.target)),
+    ),
+  ].filter((ratio): ratio is number => ratio !== null);
+  return ratios.length
+    ? ratios.reduce((sum, ratio) => sum + ratio, 0) / ratios.length
+    : 0;
+}
+
+function vectorRange(
+  values: readonly ({ x: number; y: number } | null | undefined)[],
+): number | null {
+  const available = values.filter(
+    (value): value is { x: number; y: number } => value != null,
+  );
+  if (available.length < 2) return null;
+  return Math.hypot(
+    Math.max(...available.map(({ x }) => x)) - Math.min(...available.map(({ x }) => x)),
+    Math.max(...available.map(({ y }) => y)) - Math.min(...available.map(({ y }) => y)),
+  );
+}
+
+function excursionRatio(actual: number | null, expected: number | null): number | null {
+  if (actual === null || expected === null || expected <= 0.01) return null;
+  return Math.min(1, actual / (expected * 0.8));
 }
 
 function buildAlignmentMatrix(
@@ -240,6 +290,7 @@ function insideAlignmentWindow(row: number, rows: number, column: number, column
 function emptyEvaluation(): OpeningDoorEvaluation {
   return {
     overallScore: 0,
+    movementCompleteness: 0,
     trackingCoverage: 0,
     trackingStatus: "insufficient",
     alignedPairs: 0,

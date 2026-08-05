@@ -69,6 +69,37 @@ describe("evaluateOpeningDoorTrajectory", () => {
     expect(evaluation.trackingStatus).toBe("good");
   });
 
+  it("rejects a stationary pose even when it resembles the reference", () => {
+    const source = referenceTrajectory();
+    const held = source.samples.map((sample) => ({
+      ...sample,
+      leftArm: source.samples[0]!.leftArm,
+      rightArm: source.samples[0]!.rightArm,
+      leftHand: source.samples[0]!.leftHand,
+      rightHand: source.samples[0]!.rightHand,
+    }));
+    const evaluation = evaluateOpeningDoorTrajectory(
+      createOpeningDoorTrajectory("stationary", held),
+      OPENING_DOOR_REFERENCE,
+    );
+
+    expect(evaluation.movementCompleteness).toBe(0);
+    expect(evaluation.overallScore).toBe(0);
+    expect(evaluation.trackingStatus).toBe("good");
+  });
+
+  it("penalizes a substantially reduced arm-path range", () => {
+    const source = referenceTrajectory();
+    const reduced = scaleMovement(source.samples, 0.35);
+    const evaluation = evaluateOpeningDoorTrajectory(
+      createOpeningDoorTrajectory("reduced-range", reduced),
+      OPENING_DOOR_REFERENCE,
+    );
+
+    expect(evaluation.movementCompleteness).toBeLessThan(0.5);
+    expect(evaluation.overallScore).toBeLessThan(0.5);
+  });
+
   it("marks missing required pose signals as insufficient", () => {
     const samples = referenceSamples().map((sample) => ({
       ...sample,
@@ -148,5 +179,45 @@ function displace(
       x: armFeatures.wristFromShoulder.x + amount,
       y: armFeatures.wristFromShoulder.y,
     } : null,
+  };
+}
+
+function scaleMovement(
+  samples: readonly OpeningDoorTrajectorySample[],
+  scale: number,
+): OpeningDoorTrajectorySample[] {
+  const origin = samples[0]!;
+  return samples.map((sample) => ({
+    ...sample,
+    leftArm: scaleArm(sample.leftArm, origin.leftArm, scale),
+    rightArm: scaleArm(sample.rightArm, origin.rightArm, scale),
+    leftHand: null,
+    rightHand: null,
+  }));
+}
+
+function scaleArm(
+  armFeatures: OpeningDoorArmFeatures | null,
+  origin: OpeningDoorArmFeatures | null,
+  scale: number,
+): OpeningDoorArmFeatures | null {
+  if (!armFeatures || !origin) return null;
+  const scalePoint = (
+    point: { x: number; y: number },
+    start: { x: number; y: number },
+  ) => ({
+    x: start.x + (point.x - start.x) * scale,
+    y: start.y + (point.y - start.y) * scale,
+  });
+  return {
+    ...armFeatures,
+    elbowFromShoulder: scalePoint(
+      armFeatures.elbowFromShoulder,
+      origin.elbowFromShoulder,
+    ),
+    wristFromShoulder:
+      armFeatures.wristFromShoulder && origin.wristFromShoulder
+        ? scalePoint(armFeatures.wristFromShoulder, origin.wristFromShoulder)
+        : null,
   };
 }
