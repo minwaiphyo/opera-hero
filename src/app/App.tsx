@@ -5,6 +5,7 @@ import {
 } from "../platform/capabilities";
 import { CameraLabPage } from "../labs/camera/CameraLabPage";
 import { LandmarkLabPage } from "../labs/landmarks/LandmarkLabPage";
+import { GamePage } from "../gameplay/GamePage";
 import { DevelopmentNav } from "./DevelopmentNav";
 import { HardwareChecks } from "./HardwareChecks";
 import { resolveAppRoute } from "./routes";
@@ -30,6 +31,9 @@ export function App() {
   }
   if (route === "landmark-lab") {
     return <LandmarkLabPage />;
+  }
+  if (route === "game") {
+    return <GamePage />;
   }
 
   return <BaselinePage />;

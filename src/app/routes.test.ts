@@ -10,6 +10,10 @@ describe("application route resolution", () => {
     expect(resolveAppRoute("/lab/landmarks")).toBe("landmark-lab");
   });
 
+  it("resolves the visitor game path", () => {
+    expect(resolveAppRoute("/game")).toBe("game");
+  });
+
   it("falls back to the system baseline for unknown local paths", () => {
     expect(resolveAppRoute("/")).toBe("baseline");
     expect(resolveAppRoute("/unknown")).toBe("baseline");

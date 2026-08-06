@@ -1,0 +1,1159 @@
+/*
+ * Opera Hero — game theme.
+ *
+ * Cantonese opera stage language: lacquer black, cinnabar red, imperial gold, with a
+ * peony / jade / cinnabar accent per movement. Drawn entirely in CSS and inline SVG so
+ * the booth runs offline.
+ *
+ * Booth rules: landscape-first, sized in vmin so it scales from a laptop to a TV, large
+ * type for reading at one to two metres, and no screen ever scrolls.
+ *
+ * Everything is scoped under `.opera-game` so the laboratories are untouched.
+ */
+
+.opera-game {
+  --ink: #08040a;
+  --ink-soft: #140c16;
+  --lacquer: #1d0f1d;
+  --cinnabar: #c8102e;
+  --cinnabar-lit: #ef4040;
+  --gold: #e4b85f;
+  --gold-lit: #f9e3ab;
+  --gold-deep: #a3762a;
+  --jade: #4fb094;
+  --peony: #f2879f;
+  --silk: #fdf6ea;
+  --silk-dim: #bdb0b8;
+  --silk-faint: #8a7d88;
+
+  --accent: var(--gold);
+  --accent-soft: rgba(228, 184, 95, 0.16);
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --han: "Songti SC", "Songti TC", STSong, SimSun, "Noto Serif CJK SC", serif;
+  --sans: Inter, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+
+  --title: clamp(2.4rem, 6.5vmin, 6rem);
+  --han-title: clamp(1.6rem, 4vmin, 3.6rem);
+  --body: clamp(1rem, 1.95vmin, 1.8rem);
+  --small: clamp(0.78rem, 1.3vmin, 1.15rem);
+  --gutter: clamp(1.2rem, 3vmin, 3.5rem);
+
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  color: var(--silk);
+  font-family: var(--sans);
+  background:
+    radial-gradient(ellipse at 50% -12%, rgba(200, 16, 46, 0.3), transparent 60%),
+    radial-gradient(ellipse at 15% 110%, rgba(228, 184, 95, 0.13), transparent 55%),
+    linear-gradient(165deg, var(--ink-soft) 0%, var(--lacquer) 50%, var(--ink) 100%);
+}
+
+/* Woven brocade tooth plus a vignette, so the stage has depth without imagery. */
+.opera-game::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.013) 0 2px, transparent 2px 7px),
+    radial-gradient(circle at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.opera-game > * {
+  position: relative;
+  z-index: 1;
+}
+
+.stage-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+  height: clamp(60px, 10vmin, 140px);
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(200, 16, 46, 0.5), transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Navigation bar                                                              */
+/* -------------------------------------------------------------------------- */
+
+.game-bar {
+  display: flex;
+  gap: var(--gutter);
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.5rem, 1.4vmin, 1.1rem) var(--gutter);
+  border-bottom: 1px solid rgba(228, 184, 95, 0.18);
+}
+
+.game-nav {
+  display: flex;
+  gap: clamp(0.6rem, 1.6vmin, 1.4rem);
+  align-items: center;
+  font-size: var(--small);
+}
+
+.game-nav a {
+  color: var(--silk-dim);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+
+.game-nav a:hover,
+.game-nav a:focus-visible {
+  color: var(--gold-lit);
+}
+
+.game-back {
+  display: inline-flex;
+  gap: 0.45em;
+  align-items: center;
+  padding: 0.4em 0.9em;
+  border: 1px solid rgba(228, 184, 95, 0.4);
+  border-radius: 999px;
+  color: var(--gold) !important;
+  font-weight: 700;
+}
+
+.game-back:hover {
+  background: rgba(228, 184, 95, 0.12);
+}
+
+.game-bar-right {
+  display: flex;
+  gap: clamp(0.8rem, 2vmin, 2rem);
+  align-items: center;
+}
+
+.game-mark {
+  display: flex;
+  gap: 0.6em;
+  align-items: baseline;
+  margin: 0;
+  color: rgba(249, 227, 171, 0.6);
+  font-size: var(--small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.game-mark span {
+  font-family: var(--han);
+  font-size: 1.45em;
+}
+
+.game-mark em {
+  font-style: normal;
+}
+
+/* Camera state, in plain words rather than a mystery. */
+.camera-state {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  margin: 0;
+  color: var(--silk-faint);
+  font-size: var(--small);
+}
+
+.camera-state span {
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.camera-state[data-ready="true"] {
+  color: var(--silk-dim);
+}
+
+.camera-state[data-ready="true"] span {
+  background: #6ed3a0;
+  box-shadow: 0 0 10px #6ed3a0;
+  animation: none;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Screens                                                                     */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * `.game-main` is a <main>, and the global rule in styles.css caps <main> at 1180px with
+ * its own padding. The booth owns the whole display, so reset it here.
+ */
+.game-main {
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  animation: enter 500ms cubic-bezier(0.16, 0.84, 0.3, 1) both;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.2vmin, 0);
+  }
+}
+
+.screen {
+  display: grid;
+  min-height: 0;
+  padding: clamp(0.9rem, 2.4vmin, 2.6rem) var(--gutter);
+  overflow: hidden;
+}
+
+.eyebrow {
+  margin: 0 0 clamp(0.4rem, 1vmin, 0.9rem);
+  color: var(--gold);
+  font-size: var(--small);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.eyebrow span {
+  font-family: var(--han);
+  letter-spacing: 0.1em;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--title);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.title--compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  align-items: baseline;
+  font-size: clamp(1.8rem, 4.2vmin, 3.6rem);
+}
+
+.title--compact span {
+  color: var(--accent);
+  font-family: var(--han);
+  font-size: 0.72em;
+  letter-spacing: 0.14em;
+}
+
+.title-chinese {
+  margin: clamp(0.3rem, 0.9vmin, 0.8rem) 0 0;
+  color: var(--gold);
+  font-family: var(--han);
+  font-size: var(--han-title);
+  letter-spacing: 0.26em;
+}
+
+.lede {
+  max-width: 40ch;
+  margin: clamp(0.6rem, 1.5vmin, 1.3rem) 0 0;
+  color: rgba(253, 246, 234, 0.85);
+  font-size: var(--body);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.note {
+  max-width: 44ch;
+  margin: clamp(0.5rem, 1.2vmin, 1rem) 0 0;
+  color: var(--silk-faint);
+  font-size: var(--small);
+  line-height: 1.5;
+}
+
+.note--quiet {
+  opacity: 0.75;
+}
+
+.privacy {
+  margin: clamp(0.8rem, 2vmin, 1.6rem) 0 0;
+  color: var(--silk-faint);
+  font-size: var(--small);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 1.2vmin, 1rem);
+  align-items: center;
+  margin-top: clamp(0.8rem, 2vmin, 1.6rem);
+}
+
+/* Progress line for screens that move on by themselves. */
+.dwell {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: rgba(253, 246, 234, 0.07);
+}
+
+.dwell span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(228, 184, 95, 0.3), var(--gold));
+  transition: width 140ms linear;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Actions                                                                     */
+/* -------------------------------------------------------------------------- */
+
+.action {
+  min-height: clamp(2.8rem, 5.6vmin, 4.4rem);
+  margin-top: clamp(0.8rem, 2vmin, 1.6rem);
+  padding: 0 clamp(1.4rem, 3vmin, 2.8rem);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: clamp(0.9rem, 1.7vmin, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.row .action {
+  margin-top: 0;
+}
+
+.action--primary {
+  color: #2a1006;
+  background: linear-gradient(180deg, var(--gold-lit), var(--gold));
+  box-shadow: 0 16px 40px -22px rgba(228, 184, 95, 0.9);
+}
+
+.action--primary:hover {
+  transform: translateY(-2px);
+}
+
+.action--secondary {
+  border-color: rgba(249, 227, 171, 0.4);
+  color: var(--silk);
+  background: rgba(253, 246, 234, 0.05);
+}
+
+.action--quiet {
+  min-height: auto;
+  padding: 0.5em 1.1em;
+  color: var(--silk-faint);
+  font-size: var(--small);
+  background: transparent;
+}
+
+.action:focus-visible {
+  outline: 2px solid var(--gold-lit);
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* The mirror: the visitor's own live image                                    */
+/* -------------------------------------------------------------------------- */
+
+.mirror {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(0.3rem, 0.8vmin, 0.7rem);
+  min-height: 0;
+}
+
+.mirror-gate {
+  position: relative;
+  justify-self: center;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, rgba(79, 176, 148, 0.12), transparent 65%), #08050b;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.85);
+}
+
+.mirror-ring {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid rgba(249, 227, 171, 0.5);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 6px rgba(8, 4, 10, 0.9),
+    inset 0 0 0 7px rgba(228, 184, 95, 0.3),
+    0 0 40px -10px rgba(228, 184, 95, 0.35);
+}
+
+.mirror-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mirror-label {
+  margin: 0;
+  color: var(--silk-faint);
+  font-size: var(--small);
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mirror--compact {
+  width: clamp(120px, 20vmin, 280px);
+}
+
+.mirror--compact .mirror-gate {
+  width: 100%;
+  height: auto;
+}
+
+.recording {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  margin: 0;
+  padding: 0.4em 1em;
+  border: 1px solid rgba(200, 16, 46, 0.55);
+  border-radius: 999px;
+  font-size: var(--small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: rgba(8, 4, 10, 0.8);
+  transform: translateX(-50%);
+}
+
+.recording span {
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  background: var(--cinnabar-lit);
+  box-shadow: 0 0 12px var(--cinnabar-lit);
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+/* Hidden source element. Kept in layout at 1px: `display:none` stops frame decoding. */
+.camera-source {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Practitioner guide (placeholder until the footage arrives)                   */
+/* -------------------------------------------------------------------------- */
+
+.guide {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(0.3rem, 0.8vmin, 0.7rem);
+  min-height: 0;
+  margin: 0;
+}
+
+.guide-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid rgba(228, 184, 95, 0.3);
+  background:
+    radial-gradient(circle at 50% 35%, var(--accent-soft), transparent 62%),
+    linear-gradient(180deg, rgba(253, 246, 234, 0.04), transparent);
+}
+
+/* The real <video> drops in here and inherits the frame. */
+.guide-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.guide-placeholder {
+  display: grid;
+  gap: clamp(0.4rem, 1vmin, 0.9rem);
+  place-items: center;
+  padding: var(--gutter);
+  text-align: center;
+}
+
+.guide-glyph {
+  width: clamp(64px, 14vmin, 190px);
+  height: auto;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+.glyph--playing {
+  animation: sway 4.5s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-3%) rotate(1.5deg);
+  }
+}
+
+.guide-placeholder-title {
+  margin: 0;
+  color: var(--gold);
+  font-family: var(--han);
+  font-size: clamp(1.4rem, 3.4vmin, 3rem);
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+}
+
+.guide-placeholder-note {
+  margin: 0;
+  color: var(--silk-faint);
+  font-size: var(--small);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Gilded corner brackets, so the empty frame reads as staging rather than breakage. */
+.guide-corner {
+  position: absolute;
+  width: clamp(14px, 2.4vmin, 30px);
+  height: clamp(14px, 2.4vmin, 30px);
+  border: 2px solid var(--gold);
+  opacity: 0.75;
+}
+
+.guide-corner--tl {
+  top: 8px;
+  left: 8px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.guide-corner--tr {
+  top: 8px;
+  right: 8px;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.guide-corner--bl {
+  bottom: 8px;
+  left: 8px;
+  border-top: 0;
+  border-right: 0;
+}
+
+.guide-corner--br {
+  right: 8px;
+  bottom: 8px;
+  border-top: 0;
+  border-left: 0;
+}
+
+.guide-caption {
+  color: var(--silk-faint);
+  font-size: var(--small);
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Attract                                                                     */
+/* -------------------------------------------------------------------------- */
+
+.screen--attract {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gutter);
+  align-items: center;
+}
+
+.attract-copy {
+  max-width: 34ch;
+  justify-self: end;
+}
+
+.invitation {
+  display: flex;
+  gap: 0.8em;
+  align-items: baseline;
+  margin: clamp(0.8rem, 2vmin, 1.6rem) 0 0;
+  font-size: clamp(1.05rem, 2.2vmin, 2.1rem);
+  white-space: nowrap;
+  animation: breathe 3.6s ease-in-out infinite;
+}
+
+.invitation span:last-child {
+  color: var(--cinnabar-lit);
+  font-family: var(--han);
+  letter-spacing: 0.22em;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Learn                                                                       */
+/* -------------------------------------------------------------------------- */
+
+.screen--learn {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(0.6rem, 1.8vmin, 1.6rem) var(--gutter);
+}
+
+.learn-head {
+  grid-column: 1 / -1;
+}
+
+.learn-side {
+  display: grid;
+  gap: clamp(0.5rem, 1.4vmin, 1.2rem);
+  align-content: center;
+  justify-items: start;
+  min-height: 0;
+}
+
+.steps {
+  display: grid;
+  gap: clamp(0.35rem, 0.9vmin, 0.8rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  display: flex;
+  gap: 0.7em;
+  align-items: center;
+  font-size: var(--body);
+}
+
+.steps span {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.9em;
+  height: 1.9em;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: 0.8em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Perform: countdown and attempt                                              */
+/* -------------------------------------------------------------------------- */
+
+.screen--perform {
+  position: relative;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(0.4rem, 1.2vmin, 1rem);
+}
+
+.perform-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1.4em;
+  align-items: baseline;
+}
+
+.perform-head .lede {
+  margin: 0;
+}
+
+.perform-panes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+  min-height: 0;
+}
+
+.perform-pane {
+  display: grid;
+  min-height: 0;
+}
+
+.perform-pane .guide,
+.perform-pane .mirror {
+  height: 100%;
+}
+
+.perform-hint {
+  position: absolute;
+  right: 0;
+  bottom: clamp(3rem, 8vmin, 6rem);
+  left: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.perform-foot {
+  display: flex;
+  justify-content: center;
+}
+
+.countdown {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  gap: 0.1em;
+  place-content: center;
+  place-items: center;
+  pointer-events: none;
+  background: rgba(8, 4, 10, 0.62);
+}
+
+.countdown::before {
+  position: absolute;
+  width: clamp(190px, 34vmin, 460px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  content: "";
+  background: radial-gradient(circle, rgba(8, 4, 10, 0.96) 55%, transparent 78%);
+}
+
+.countdown strong,
+.countdown span,
+.countdown em {
+  position: relative;
+  z-index: 1;
+}
+
+.countdown strong {
+  color: var(--gold-lit);
+  font-family: var(--serif);
+  font-size: clamp(5rem, 24vmin, 18rem);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 0 50px rgba(228, 184, 95, 0.5);
+  animation: beat 900ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+@keyframes beat {
+  from {
+    opacity: 0.3;
+    transform: scale(1.3);
+  }
+}
+
+.countdown span {
+  color: var(--cinnabar-lit);
+  font-family: var(--han);
+  font-size: clamp(1.1rem, 2.6vmin, 2.4rem);
+  letter-spacing: 0.45em;
+  text-indent: 0.45em;
+}
+
+.countdown em {
+  color: rgba(253, 246, 234, 0.8);
+  font-size: var(--body);
+  font-style: normal;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tracking hint                                                               */
+/* -------------------------------------------------------------------------- */
+
+.hint {
+  display: grid;
+  gap: 0.15em;
+  max-width: min(90%, 34rem);
+  padding: clamp(0.5rem, 1.3vmin, 1.1rem) clamp(0.9rem, 2vmin, 1.8rem);
+  border: 1px solid rgba(228, 184, 95, 0.35);
+  border-radius: 3px;
+  background: rgba(13, 7, 16, 0.92);
+}
+
+.hint strong {
+  font-size: clamp(0.95rem, 1.9vmin, 1.7rem);
+}
+
+.hint span {
+  color: var(--silk-faint);
+  font-size: var(--small);
+}
+
+.hint--act {
+  border-color: rgba(239, 64, 64, 0.5);
+}
+
+.hint--ready {
+  border-color: rgba(79, 176, 148, 0.45);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Result                                                                      */
+/* -------------------------------------------------------------------------- */
+
+.screen--result {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, auto);
+  gap: clamp(0.6rem, 1.8vmin, 1.6rem) var(--gutter);
+  align-content: center;
+  align-items: center;
+}
+
+.result-head {
+  grid-column: 1 / -1;
+}
+
+.dial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(38vmin, 320px);
+  aspect-ratio: 1;
+}
+
+.dial-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dial-track {
+  stroke: rgba(253, 246, 234, 0.1);
+}
+
+.dial-value {
+  stroke: var(--accent);
+  filter: drop-shadow(0 0 12px var(--accent-soft));
+  transition: stroke-dasharray 1s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+
+.dial-tick {
+  stroke: rgba(228, 184, 95, 0.32);
+  stroke-width: 1.4;
+}
+
+.dial-centre {
+  display: grid;
+  gap: 0.1em;
+  place-items: center;
+  text-align: center;
+}
+
+.dial-centre strong {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 7vmin, 5.5rem);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.dial-label {
+  color: var(--silk-faint);
+  font-size: var(--small);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dial-chinese {
+  color: var(--gold);
+  font-family: var(--han);
+  font-size: clamp(0.95rem, 2vmin, 1.8rem);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+}
+
+.result-detail {
+  min-width: 0;
+}
+
+.meter {
+  margin-top: clamp(0.5rem, 1.2vmin, 1rem);
+  max-width: 30rem;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin-bottom: 0.3em;
+  font-size: var(--small);
+}
+
+.meter-head strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.meter-track {
+  height: clamp(5px, 0.8vmin, 10px);
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(253, 246, 234, 0.08);
+}
+
+.meter-track span {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transition: width 800ms cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+
+.meter--jade .meter-track span {
+  background: var(--jade);
+}
+
+.meter--cinnabar .meter-track span {
+  background: var(--cinnabar-lit);
+}
+
+.screen--unseen {
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.screen--unseen .lede {
+  text-align: center;
+}
+
+.unseen-glyph {
+  width: clamp(50px, 10vmin, 130px);
+  height: auto;
+  color: rgba(228, 184, 95, 0.6);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Complete and recovery                                                       */
+/* -------------------------------------------------------------------------- */
+
+.screen--complete,
+.screen--recovery {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--gutter);
+  align-items: center;
+  justify-items: center;
+}
+
+.complete-copy {
+  text-align: center;
+}
+
+.complete-copy .lede,
+.complete-copy .title-chinese {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.performed {
+  display: flex;
+  gap: clamp(0.6rem, 2vmin, 2.4rem);
+  justify-content: center;
+  margin: clamp(0.8rem, 2vmin, 1.8rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.performed li {
+  display: grid;
+  gap: 0.25em;
+  justify-items: center;
+  padding: clamp(0.5rem, 1.4vmin, 1.2rem) clamp(0.7rem, 1.8vmin, 1.6rem);
+  border: 1px solid rgba(228, 184, 95, 0.22);
+  background: linear-gradient(180deg, var(--accent-soft), transparent 70%);
+  font-size: var(--small);
+}
+
+.performed span {
+  color: var(--accent);
+  font-family: var(--han);
+  letter-spacing: 0.16em;
+}
+
+.performed-glyph {
+  width: clamp(28px, 5vmin, 60px);
+  height: auto;
+  color: var(--accent);
+}
+
+.recovery-panel {
+  position: relative;
+  max-width: min(52ch, 90%);
+  padding: clamp(1.2rem, 3.4vmin, 3rem);
+  border: 1px solid rgba(228, 184, 95, 0.28);
+  background: rgba(13, 7, 16, 0.86);
+  text-align: center;
+}
+
+.recovery-panel .lede,
+.recovery-panel .title-chinese,
+.recovery-panel .hint {
+  margin-inline: auto;
+}
+
+.recovery-panel .title--compact,
+.recovery-panel .row {
+  justify-content: center;
+}
+
+.recovery-rule {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(14px, 2vmin, 26px);
+  color: rgba(228, 184, 95, 0.3);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Lanterns                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.lanterns {
+  display: flex;
+  gap: clamp(0.4rem, 1vmin, 0.9rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lantern {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(20px, 2.6vmin, 34px);
+  height: clamp(26px, 3.4vmin, 44px);
+  border: 1px solid rgba(228, 184, 95, 0.35);
+  border-radius: 46% 46% 44% 44% / 38% 38% 52% 52%;
+}
+
+.lantern em {
+  color: rgba(253, 246, 234, 0.4);
+  font-size: var(--small);
+  font-style: normal;
+}
+
+.lantern--done {
+  background: rgba(200, 16, 46, 0.42);
+}
+
+.lantern--now {
+  background: radial-gradient(circle at 50% 40%, var(--cinnabar-lit), var(--cinnabar));
+  box-shadow: 0 0 20px -2px rgba(239, 64, 64, 0.8);
+}
+
+.lantern--done em,
+.lantern--now em {
+  color: var(--gold-lit);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Movement accents                                                            */
+/* -------------------------------------------------------------------------- */
+
+.accent-peony {
+  --accent: var(--peony);
+  --accent-soft: rgba(242, 135, 159, 0.16);
+}
+
+.accent-jade {
+  --accent: var(--jade);
+  --accent-soft: rgba(79, 176, 148, 0.16);
+}
+
+.accent-cinnabar {
+  --accent: var(--cinnabar-lit);
+  --accent-soft: rgba(239, 64, 64, 0.16);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Viewport adaptation                                                         */
+/* -------------------------------------------------------------------------- */
+
+@media (max-height: 780px) {
+  .privacy,
+  .note--quiet {
+    display: none;
+  }
+}
+
+@media (max-aspect-ratio: 1 / 1), (max-width: 880px) {
+  .screen--attract,
+  .screen--learn,
+  .screen--result,
+  .screen--complete,
+  .screen--recovery {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    overflow-y: auto;
+  }
+
+  .attract-copy {
+    justify-self: start;
+  }
+
+  .perform-panes {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .game-nav a:not(.game-back) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opera-game *,
+  .opera-game *::before,
+  .opera-game *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

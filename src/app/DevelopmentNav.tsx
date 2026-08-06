@@ -1,5 +1,5 @@
 type DevelopmentNavProps = {
-  activePage: "m0" | "m1" | "m2";
+  activePage: "m0" | "m1" | "m2" | "game";
 };
 
 export function DevelopmentNav({ activePage }: DevelopmentNavProps) {
@@ -22,6 +22,10 @@ export function DevelopmentNav({ activePage }: DevelopmentNavProps) {
       >
         <span>M2</span>
         Landmark laboratory
+      </a>
+      <a aria-current={activePage === "game" ? "page" : undefined} href="/game">
+        <span>M4</span>
+        Visitor game
       </a>
     </nav>
   );
