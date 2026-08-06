@@ -9,6 +9,9 @@ This folder is the project-management and engineering record for Opera Hero.
 - [Roadmap](./ROADMAP.md) — milestone order, test gates, and definitions of done.
 - [Development status](./DEVELOPMENT_STATUS.md) — current stage, capability-to-code
   mapping, evidence, decisions, and blockers.
+- [Scoring data pipeline](./SCORING_DATA_PIPELINE.md) — the step-by-step path from
+  practitioner videos to annotated fixtures, scoring envelopes, participant
+  validation, and booth-ready gesture evaluators.
 - [Hardware baseline](./hardware-baseline.md) — provisional exhibition hardware and
   display assumptions.
 - [Cultural gameplay scope](./cultural-gameplay-scope.md) — confirmed Dan-role focus,

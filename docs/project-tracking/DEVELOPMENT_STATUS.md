@@ -21,7 +21,7 @@ here.
 | Latest completed milestone | M0 — Decisions and baseline |
 | Current vertical slice | None |
 | Exhibition readiness | 1 — Development shell runs |
-| Last updated | 2026-07-30 |
+| Last updated | 2026-08-01 |
 
 ### Readiness scale
 
@@ -43,7 +43,7 @@ here.
 | M0 | Decisions and baseline | Complete | 100% | [`verification/m0-baseline.md`](./verification/m0-baseline.md) |
 | M1 | Camera laboratory | Implemented — verification pending | 95% | [`verification/m1-increment-1.md`](./verification/m1-increment-1.md), [`verification/m1-increment-2.md`](./verification/m1-increment-2.md), [`verification/m1-increment-3.md`](./verification/m1-increment-3.md), [`verification/m1-increment-4.md`](./verification/m1-increment-4.md), [`verification/m1-increment-5.md`](./verification/m1-increment-5.md), [`verification/m1-increment-6.md`](./verification/m1-increment-6.md) |
 | M2 | Landmark laboratory | In progress | 97% | [`verification/m2-increment-1.md`](./verification/m2-increment-1.md), [`verification/m2-increment-2.md`](./verification/m2-increment-2.md), [`verification/m2-increment-3.md`](./verification/m2-increment-3.md), [`verification/m2-increment-4.md`](./verification/m2-increment-4.md), [`verification/m2-increment-5.md`](./verification/m2-increment-5.md), [`verification/m2-increment-6a.md`](./verification/m2-increment-6a.md), [`verification/m2-increment-6b.md`](./verification/m2-increment-6b.md), [`verification/m2-increment-6c.md`](./verification/m2-increment-6c.md), [`verification/m2-increment-6d.md`](./verification/m2-increment-6d.md), [`verification/m2-increment-7.md`](./verification/m2-increment-7.md) |
-| M3 | Gesture scoring laboratory | Blocked by M2 | 0% | — |
+| M3 | Gesture scoring laboratory | Not started | 0% | [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md); annotation work may begin while M2 exit checks close |
 | M4 | Gameplay state-machine simulator | Blocked by M0 | 0% | — |
 | M5 | First vertical slice | Blocked by M2–M4 | 0% | — |
 | M6 | Content pipeline | Blocked by M5 | 0% | — |
@@ -73,6 +73,7 @@ feature to its source, tests, and proof.
 | PLAN-003 | Development traceability ledger | Planning | Complete | [`DEVELOPMENT_STATUS.md`](./DEVELOPMENT_STATUS.md) | Review only | Ledger structure initialized |
 | PLAN-004 | Dan-role cultural gameplay scope | Planning | Complete | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) | Stakeholder scope review | Three interactions recorded; practitioner detail pending |
 | PLAN-005 | Practitioner reference-capture plan | Planning | Complete | [`practitioner-session-plan.md`](./practitioner-session-plan.md) | Session checklist review | Proposed 1 August session prepared |
+| PLAN-006 | Practitioner footage assessment and scoring-data plan | Planning | Complete | [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md), [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) | Footage inventory and representative-frame review | Positive demonstrations are sufficient to start M3; the festival build will use provisional lenient scoring because formal participant calibration is not feasible before deployment |
 | M0-001 | Strict React/TypeScript application shell | M0 | Complete | [`package.json`](../../package.json), [`src/main.tsx`](../../src/main.tsx), [`vite.config.ts`](../../vite.config.ts) | Build and type checks | EV-M0-001, EV-M0-004 |
 | M0-002 | Browser capability collector | M0 | Complete | [`src/platform/capabilities.ts`](../../src/platform/capabilities.ts) | [`src/platform/capabilities.test.ts`](../../src/platform/capabilities.test.ts) | EV-M0-003 |
 | M0-003 | Hardware baseline dashboard | M0 | Complete | [`src/app/App.tsx`](../../src/app/App.tsx), [`src/styles.css`](../../src/styles.css) | [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M0-005, EV-M0-006 |
@@ -100,6 +101,12 @@ feature to its source, tests, and proof.
 | M2-011 | Landmark replay laboratory and shared live/replay renderer | M2 | Implemented — verification pending | [`src/vision/renderLandmarkFrame.ts`](../../src/vision/renderLandmarkFrame.ts), [`src/vision/replay/replayFixtureCatalog.ts`](../../src/vision/replay/replayFixtureCatalog.ts), [`src/vision/replay/syntheticReplayFixtures.ts`](../../src/vision/replay/syntheticReplayFixtures.ts), [`src/labs/landmarks/LandmarkLabPage.tsx`](../../src/labs/landmarks/LandmarkLabPage.tsx), [`src/labs/landmarks/LandmarkReplayCanvas.tsx`](../../src/labs/landmarks/LandmarkReplayCanvas.tsx), [`src/labs/landmarks/useReplayLandmarkLab.ts`](../../src/labs/landmarks/useReplayLandmarkLab.ts), [`src/labs/landmarks/landmarkLab.css`](../../src/labs/landmarks/landmarkLab.css) | [`src/labs/landmarks/LandmarkLabPage.test.tsx`](../../src/labs/landmarks/LandmarkLabPage.test.tsx), [`tests/e2e/baseline.spec.ts`](../../tests/e2e/baseline.spec.ts) | EV-M2-040–EV-M2-044; physical replay review pending |
 | M2-012 | Readiness-gated landmark capture startup | M2 | Implemented — verification pending | [`src/vision/visionWorkerClient.ts`](../../src/vision/visionWorkerClient.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts) | [`src/vision/visionWorkerClient.test.ts`](../../src/vision/visionWorkerClient.test.ts) | EV-M2-045–EV-M2-049; physical startup review pending |
 | M2-013 | Bounded inference-frame capture | M2 | Complete | [`src/vision/visionCapture.ts`](../../src/vision/visionCapture.ts), [`src/labs/camera/useLandmarkOverlay.ts`](../../src/labs/camera/useLandmarkOverlay.ts), [`src/labs/camera/VisionDiagnosticsPanel.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.tsx) | [`src/vision/visionCapture.test.ts`](../../src/vision/visionCapture.test.ts), [`src/labs/camera/VisionDiagnosticsPanel.test.tsx`](../../src/labs/camera/VisionDiagnosticsPanel.test.tsx) | EV-M2-050–EV-M2-055 |
+| M3-001 | Versioned practitioner-video annotation schema | M3 | Not started | Planned in [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md) | Schema validation and annotated-boundary review | Pilot with Opening Door |
+| M3-002 | Offline normalized-landmark fixture generator | M3 | Not started | Planned in [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md) | Overlay review and deterministic output tests | Python extraction; browser-compatible fixture output |
+| M3-003 | Conservative landmark augmentation generator | M3 | Not started | Planned in [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md) | Invariant, anatomy, determinism, and provenance tests | Augmentation supports tolerance testing, not independent evidence |
+| M3-004 | Phase-aware scoring envelope and evaluator | M3 | Not started | Planned in [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md) | Expert-take, synthetic-boundary, partial, and tracking-loss replay tests | Opening Door first |
+| M3-005 | Deterministic scoring tests and informal team tuning | M3 | Not started | Planned in [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md) | Held-out practitioner takes, synthetic boundary cases, and live teammate trials | Produces provisional lenient thresholds for the festival build |
+| M10-001 | Festival deployment validation and freeze | M10 | Not started | Planned in [`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md) | Final-hardware drills, informal acceptance checks, assisted-completion checks, recovery runbook, and soak evidence | Required before the festival; formal participant calibration is optional future work |
 
 ### Registry rules
 

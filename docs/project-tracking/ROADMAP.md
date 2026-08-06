@@ -226,7 +226,12 @@ A measured, replaceable landmark pipeline—still with no game logic.
 
 ### Goal
 
-Build and validate one lenient placeholder gesture as a pure domain module.
+Turn practitioner-approved demonstrations into one transparent, phase-aware gesture
+evaluator, then tune it provisionally through deterministic fixtures and informal
+team trials. Opening Door is the pilot because its sequential phases are expected to
+be easiest to annotate and inspect. This provisional, lenient evaluator will be used
+for the public festival deployment because formal participant calibration is not
+feasible within the remaining delivery window.
 
 ### Module contract
 
@@ -244,24 +249,55 @@ interface GestureEvaluator {
 }
 ```
 
-### Build
+### Build increments
 
-- Start with a placeholder gesture such as “raise one hand.”
-- Extract normalized features:
-  - hand height relative to shoulder;
-  - elbow angle;
-  - arm distance from torso;
-  - motion direction;
-  - landmark confidence.
-- Use soft scoring, temporal smoothing, a short hold, and hysteresis.
-- Create `/lab/gestures` showing feature values and progress.
-- Allow technician-only threshold adjustment in the lab.
-- Save landmark sequences, not camera images, for consented testing.
-- Create synthetic sequences for success, partial attempt, jitter, loss, and timeout.
+1. **Annotation contract and pilot** — define versioned JSON schemas for recording
+   metadata, attempt boundaries, movement phases, key moments, excluded ranges, view,
+   occlusion, and reviewer notes. Fully annotate Opening Door before copying the
+   process to the other movements.
+2. **Offline landmark extraction** — use a reproducible Python tool to run the pinned
+   MediaPipe models over cleaned videos, normalize coordinates, retain confidence and
+   provenance, and export compact fixtures accepted by the browser replay adapter.
+3. **Fixture inspection and reference alignment** — render extracted overlays, verify
+   annotated boundaries, align repeated front-facing takes phase by phase, and use
+   angled takes to interpret spatial motion rather than as primary booth templates.
+4. **Feature specification** — record practitioner-approved essential, important,
+   expressive, and ignored features for each phase. Keep cultural rules separate
+   from per-video timestamps.
+5. **Conservative augmentation** — generate seeded landmark-space variants using
+   small coordinate noise, bounded timing changes, realistic dropout, and constrained
+   spatial variation. Preserve phase order and anatomy. Mirror only when culturally
+   approved.
+6. **Provisional scoring envelope** — derive expert reference trajectories and broad,
+   soft tolerance bands. Combine relative joint geometry, trajectories, phase order,
+   temporal alignment, smoothing, hold behavior, and essential-feature gates.
+7. **Gesture laboratory** — create `/lab/gestures` showing phase, feature evidence,
+   progress, tracking sufficiency, and technician-only tuning controls.
+8. **Deterministic scoring tests** — verify held-out practitioner takes, conservative
+   acceptable variants, partial attempts, wrong phase order, missing phases,
+   unrelated movement, landmark jitter, dropout, and tracking loss. Adjust one
+   documented rule or parameter at a time and rerun the complete fixture suite.
+9. **Informal live team tuning** — have a small team group perform genuine, partial,
+   deliberately altered, unrelated, and idle attempts at expected camera distances.
+   Use most testers for conservative tuning and keep at least one teammate unseen for
+   the final check. Record results and limitations without presenting them as formal
+   public validation.
+
+Augmented fixtures are for tolerance design and deterministic stress tests. They are
+not independent participants, reliable negative examples, or proof that a trained
+model generalizes. A landmark-sequence ML model remains optional and must not replace
+the interpretable baseline without future participant evidence showing a clear
+benefit.
 
 ### Tests
 
 - Evaluator unit tests contain no browser, MediaPipe, or React dependency.
+- Annotation and fixture schemas reject invalid phase order, timestamps, provenance,
+  and model versions.
+- Landmark extraction is deterministic for a pinned tool and source checksum.
+- Every extracted reference passes a visual overlay and phase-boundary review.
+- Augmentations preserve declared essential features and remain linked to their
+  source recording.
 - Canonical and mirrored attempts work when the gesture allows mirroring.
 - Body size and camera distance do not materially change the outcome.
 - One-frame spikes do not trigger success.
@@ -271,14 +307,19 @@ interface GestureEvaluator {
 
 ### Exit gate
 
-- The placeholder gesture works for a small diverse test group.
+- Opening Door works for the deterministic suite and informal live team checks,
+  including at least one teammate not used during tuning.
 - False activations are acceptable for the experience.
 - Genuine attempts are accepted without precise imitation.
 - Every scoring change can be regression-tested through replay fixtures.
+- All limits of the single-practitioner reference set are documented, and no booth
+  readiness claim relies only on synthetic augmentation.
 
 ### Deliverable
 
-One transparent, testable gesture evaluator and a reusable scoring framework.
+One culturally reviewed, transparent provisional gesture evaluator; a reusable
+annotation, fixture, augmentation, envelope, and testing pipeline; and documented
+evidence from deterministic fixtures and informal live team trials.
 
 ### Cultural decision point
 
@@ -447,9 +488,10 @@ Implement and tune the final culturally approved gestures.
 ### Tests
 
 - Review each gesture interpretation with a Cantonese Opera advisor.
-- Test with participants unfamiliar with Cantonese Opera.
-- Include height, handedness, clothing, movement range, and lighting variation.
-- Measure:
+- Run informal live trials with teammates unfamiliar with the movements.
+- Include as much height, handedness, clothing, movement range, camera-distance, and
+  lighting variation as the team can cover before festival deployment.
+- Observe provisionally:
   - time to first successful attempt;
   - genuine-attempt completion rate;
   - accidental activation rate;
@@ -459,9 +501,12 @@ Implement and tune the final culturally approved gestures.
 ### Exit gate
 
 - Cultural advisor approves meaning and demonstration.
-- Genuine-attempt completion meets the agreed target.
+- Deterministic suites pass and teammates can complete genuine attempts without
+  precise imitation.
 - No participant receives negative or failure language.
 - Thresholds and fixtures are versioned and reproducible.
+- Results are labelled as informal pre-festival evidence; formal participant
+  calibration is optional post-festival improvement work.
 
 ### Deliverable
 
