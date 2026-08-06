@@ -1,5 +1,12 @@
 node_modules/
 dist/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Generated runtime files and private source footage.
+public/mediapipe/
+docs/practitioner-footage/
 
 # Generated from the pinned MediaPipe npm package by the WASM copy script.
 public/mediapipe/
@@ -11,6 +18,7 @@ docs/practitioner-footage/
 coverage/
 playwright-report/
 test-results/
+local-artifacts/
 .vite/
 *.local
 *.log

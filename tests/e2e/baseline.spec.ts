@@ -103,7 +103,7 @@ test("runs the M2 landmark replay laboratory without camera access", async ({
   await expect(
     page.getByRole("heading", { name: "Landmark replay laboratory" }),
   ).toBeVisible();
-  await expect(page.getByLabel("Fixture")).toHaveValue(
+  await expect(page.getByLabel("Fixture", { exact: true })).toHaveValue(
     "tracking-loss-recovery",
   );
   await page.getByRole("button", { name: "Play" }).click();

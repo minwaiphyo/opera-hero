@@ -52,7 +52,7 @@ exhibition-webcam view because it represents what the detector will see.
 |---:|---|
 | 0–5 min | Introductions, purpose, consent, and intended uses |
 | 5–15 min | Dan-role context, movement vocabulary, costume, and story guidance |
-| 15–30 min | Lotus Finger explanation and capture |
+| 15–30 min | Orchid Finger explanation and capture |
 | 30–47 min | Door-opening action explanation and capture |
 | 47–67 min | Water-sleeve explanation, safety, and capture |
 | 67–77 min | Beginner variations, mirroring, and common mistakes |
@@ -79,7 +79,7 @@ Record separate clips rather than one continuous performance:
 11. Example of a variation that should still count.
 12. Example of a similar movement that changes the meaning, if appropriate.
 
-For Lotus Finger, obtain close reference footage of the hand while retaining a full
+For Orchid Finger, obtain close reference footage of the hand while retaining a full
 upper-body take for posture and arm position.
 
 For the door-opening action, establish whether it is one gesture, a left/right

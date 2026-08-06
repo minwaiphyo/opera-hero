@@ -5,29 +5,63 @@ import {
   REPLAY_FIXTURES,
 } from "../../vision/replay/replayFixtureCatalog";
 import type { VisionReplayFixture } from "../../vision/replay/visionReplayTypes";
+import {
+  parseVisionReplayFixture,
+  VisionReplayValidationError,
+} from "../../vision/replay/visionReplayValidation";
 import { LandmarkReplayCanvas } from "./LandmarkReplayCanvas";
+import { WaterSleevesFeaturePanel } from "./WaterSleevesFeaturePanel";
 import { useReplayLandmarkLab } from "./useReplayLandmarkLab";
 import "./landmarkLab.css";
 
 export function LandmarkLabPage() {
-  const [fixtureId, setFixtureId] = useState(REPLAY_FIXTURES[0]!.id);
-  const fixture = findReplayFixture(fixtureId);
+  const [fixture, setFixture] = useState(REPLAY_FIXTURES[0]!);
+  const [fixtureRevision, setFixtureRevision] = useState(0);
+  const [loadMessage, setLoadMessage] = useState("");
+
+  function selectCatalogFixture(fixtureId: string) {
+    setFixture(findReplayFixture(fixtureId));
+    setFixtureRevision((revision) => revision + 1);
+    setLoadMessage("");
+  }
+
+  async function loadLocalFixture(file?: File) {
+    if (!file) return;
+    try {
+      const value: unknown = JSON.parse(await file.text());
+      setFixture(parseVisionReplayFixture(value));
+      setFixtureRevision((revision) => revision + 1);
+      setLoadMessage(`Loaded ${file.name}.`);
+    } catch (error) {
+      const detail =
+        error instanceof VisionReplayValidationError || error instanceof SyntaxError
+          ? error.message
+          : "The selected fixture could not be loaded.";
+      setLoadMessage(`Fixture load failed: ${detail}`);
+    }
+  }
 
   return (
     <LandmarkLabWorkbench
       fixture={fixture}
-      key={fixture.id}
-      onFixtureChange={setFixtureId}
+      key={fixtureRevision}
+      loadMessage={loadMessage}
+      onFixtureChange={selectCatalogFixture}
+      onLocalFixture={loadLocalFixture}
     />
   );
 }
 
 function LandmarkLabWorkbench({
   fixture,
+  loadMessage,
   onFixtureChange,
+  onLocalFixture,
 }: {
   fixture: VisionReplayFixture;
+  loadMessage: string;
   onFixtureChange: (fixtureId: string) => void;
+  onLocalFixture: (file?: File) => void;
 }) {
   const replay = useReplayLandmarkLab(fixture);
   const playing = replay.snapshot.status === "running";
@@ -80,12 +114,29 @@ function LandmarkLabWorkbench({
           <p className="check-kicker">Deterministic source</p>
           <h2 id="replay-controls-title">Replay controls</h2>
 
+          <label className="replay-local-loader">
+            Load local fixture JSON
+            <input
+              accept="application/json,.json"
+              onChange={(event) => onLocalFixture(event.target.files?.[0])}
+              type="file"
+            />
+          </label>
+          {loadMessage ? (
+            <p aria-live="polite" className="replay-load-message">
+              {loadMessage}
+            </p>
+          ) : null}
+
           <label htmlFor="replay-fixture">Fixture</label>
           <select
             id="replay-fixture"
             onChange={(event) => onFixtureChange(event.target.value)}
-            value={fixture.id}
+            value={isCatalogFixture(fixture.id) ? fixture.id : "local"}
           >
+            {!isCatalogFixture(fixture.id) ? (
+              <option value="local">Local · {fixture.id}</option>
+            ) : null}
             {REPLAY_FIXTURES.map((candidate) => (
               <option key={candidate.id} value={candidate.id}>
                 {candidate.id}
@@ -135,9 +186,39 @@ function LandmarkLabWorkbench({
               value={String(replay.snapshot.emittedFrames)}
             />
             <Metric label="Source" value={fixture.source} />
+            <Metric label="Frames" value={String(fixture.frames.length)} />
+            {fixture.extraction ? (
+              <>
+                <Metric label="Source file" value={fixture.extraction.sourceFile} />
+                <Metric
+                  label="Source duration"
+                  value={`${fixture.extraction.sourceDurationMs} ms`}
+                />
+                <Metric
+                  label="Retained range"
+                  value={`${fixture.extraction.trimmedStartMs}–${fixture.extraction.trimmedEndMs} ms`}
+                />
+                <Metric
+                  label="Sample rate"
+                  value={`${fixture.extraction.sampleFps} FPS`}
+                />
+                <Metric
+                  label="Motion detected"
+                  value={fixture.extraction.motionDetected ? "yes" : "no"}
+                />
+                <Metric
+                  label="Edge padding"
+                  value={`${fixture.extraction.edgePaddingMs} ms`}
+                />
+              </>
+            ) : null}
           </dl>
         </section>
       </section>
+
+      {fixture.id.startsWith("water-sleeves-") ? (
+        <WaterSleevesFeaturePanel fixture={fixture} frame={replay.frame} />
+      ) : null}
 
       <footer>
         M2 replay mode drives the same normalized renderer and quality rules as
@@ -145,6 +226,10 @@ function LandmarkLabWorkbench({
       </footer>
     </main>
   );
+}
+
+function isCatalogFixture(fixtureId: string): boolean {
+  return REPLAY_FIXTURES.some((fixture) => fixture.id === fixtureId);
 }
 
 function Metric({ label, value }: { label: string; value: string }) {

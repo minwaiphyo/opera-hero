@@ -21,9 +21,9 @@ cultural explanations more coherent.
 
 | Level | Working interaction | Cultural status | Technical status |
 |---|---|---|---|
-| 1 | The Lotus Finger; footage uses Orchid Finger/Flower | Practitioner demonstration captured; canonical public name and scoring rules require confirmation | Not implemented; annotation pending |
-| 2 | Actions to open the door | Practitioner demonstration captured; phases and essential features require annotation/review | Not implemented; selected as M3 pilot |
-| 3 | The water sleeves | Demonstrations captured with and without sleeves; costume-aware scoring rules require review | Not implemented; annotation pending |
+| 1 | Orchid Finger | Stakeholder-selected; practitioner explanation pending | Not implemented |
+| 2 | Actions to open the door | Stakeholder-selected; exact movement sequence pending | Not implemented |
+| 3 | The water sleeves | Stakeholder-selected; costume and movement constraints pending | Not implemented |
 
 “Level” currently means one gesture-based story beat inside the approximately
 two-minute experience. It does not imply separate menus, difficulty progression,

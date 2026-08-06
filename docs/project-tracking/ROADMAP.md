@@ -226,12 +226,8 @@ A measured, replaceable landmark pipeline—still with no game logic.
 
 ### Goal
 
-Turn practitioner-approved demonstrations into one transparent, phase-aware gesture
-evaluator, then tune it provisionally through deterministic fixtures and informal
-team trials. Opening Door is the pilot because its sequential phases are expected to
-be easiest to annotate and inspect. This provisional, lenient evaluator will be used
-for the public festival deployment because formal participant calibration is not
-feasible within the remaining delivery window.
+Build transparent, replay-testable scoring for the three stakeholder-selected
+festival gestures and prove each one in the live camera laboratory.
 
 ### Module contract
 
@@ -249,83 +245,50 @@ interface GestureEvaluator {
 }
 ```
 
-### Build increments
+### Build
 
-1. **Annotation contract and pilot** — define versioned JSON schemas for recording
-   metadata, attempt boundaries, movement phases, key moments, excluded ranges, view,
-   occlusion, and reviewer notes. Fully annotate Opening Door before copying the
-   process to the other movements.
-2. **Offline landmark extraction** — use a reproducible Python tool to run the pinned
-   MediaPipe models over cleaned videos, normalize coordinates, retain confidence and
-   provenance, and export compact fixtures accepted by the browser replay adapter.
-3. **Fixture inspection and reference alignment** — render extracted overlays, verify
-   annotated boundaries, align repeated front-facing takes phase by phase, and use
-   angled takes to interpret spatial motion rather than as primary booth templates.
-4. **Feature specification** — record practitioner-approved essential, important,
-   expressive, and ignored features for each phase. Keep cultural rules separate
-   from per-video timestamps.
-5. **Conservative augmentation** — generate seeded landmark-space variants using
-   small coordinate noise, bounded timing changes, realistic dropout, and constrained
-   spatial variation. Preserve phase order and anatomy. Mirror only when culturally
-   approved.
-6. **Provisional scoring envelope** — derive expert reference trajectories and broad,
-   soft tolerance bands. Combine relative joint geometry, trajectories, phase order,
-   temporal alignment, smoothing, hold behavior, and essential-feature gates.
-7. **Gesture laboratory** — create `/lab/gestures` showing phase, feature evidence,
-   progress, tracking sufficiency, and technician-only tuning controls.
-8. **Deterministic scoring tests** — verify held-out practitioner takes, conservative
-   acceptable variants, partial attempts, wrong phase order, missing phases,
-   unrelated movement, landmark jitter, dropout, and tracking loss. Adjust one
-   documented rule or parameter at a time and rerun the complete fixture suite.
-9. **Informal live team tuning** — have a small team group perform genuine, partial,
-   deliberately altered, unrelated, and idle attempts at expected camera distances.
-   Use most testers for conservative tuning and keep at least one teammate unseen for
-   the final check. Record results and limitations without presenting them as formal
-   public validation.
-
-Augmented fixtures are for tolerance design and deterministic stress tests. They are
-not independent participants, reliable negative examples, or proof that a trained
-model generalizes. A landmark-sequence ML model remains optional and must not replace
-the interpretable baseline without future participant evidence showing a clear
-benefit.
+- Extract normalized pose and hand landmarks from approved practitioner recordings.
+- Build interpretable features, multi-take reference envelopes where available,
+  dynamic time warping, tracking coverage, and movement completeness.
+- Keep gesture-specific tolerances and evidence visible in developer laboratories.
+- Store compact landmarks and features rather than visitor images or video.
+- Create deterministic success, partial, stationary, jitter, tracking-loss, and
+  incorrect-movement regressions.
+- Integrate all three gestures with worker-owned live inference, reference playback,
+  bounded capture, and clean reset between attempts.
 
 ### Tests
 
 - Evaluator unit tests contain no browser, MediaPipe, or React dependency.
-- Annotation and fixture schemas reject invalid phase order, timestamps, provenance,
-  and model versions.
-- Landmark extraction is deterministic for a pinned tool and source checksum.
-- Every extracted reference passes a visual overlay and phase-boundary review.
-- Augmentations preserve declared essential features and remain linked to their
-  source recording.
-- Canonical and mirrored attempts work when the gesture allows mirroring.
-- Body size and camera distance do not materially change the outcome.
-- One-frame spikes do not trigger success.
-- A genuine partial attempt progresses.
-- Tracking loss pauses rather than fails.
-- Threshold changes are tested against the same fixture suite.
+- Normalization limits sensitivity to body size, camera distance, and translation.
+- Dynamic time warping tolerates slower sincere performances.
+- Stationary and reduced-range attempts cannot pass through positional resemblance.
+- Missing optional hand evidence remains distinct from incorrect movement.
+- Capture tests cover countdown, first-cycle protection, jitter, bounded timeout,
+  cancellation, and session reset.
+- Browser smoke tests retain the camera and replay laboratory entry points.
 
 ### Exit gate
 
-- Opening Door works for the deterministic suite and informal live team checks,
-  including at least one teammate not used during tuning.
-- False activations are acceptable for the experience.
-- Genuine attempts are accepted without precise imitation.
-- Every scoring change can be regression-tested through replay fixtures.
-- All limits of the single-practitioner reference set are documented, and no booth
-  readiness claim relies only on synthetic augmentation.
+- All three festival gestures have practitioner-derived, image-free references.
+- Each evaluator distinguishes a sincere project-owner attempt from a stationary
+  attempt on target hardware, without requiring precise frame timing.
+- Live capture cannot finish before one complete reference cycle and always has a
+  bounded manual or automatic exit.
+- Every scoring change is regression-testable through deterministic landmark data.
+- Formal participant calibration is explicitly deferred; M3 produces provisional
+  soft similarity, not a claimed population-validated pass threshold.
 
 ### Deliverable
 
-One culturally reviewed, transparent provisional gesture evaluator; a reusable
-annotation, fixture, augmentation, envelope, and testing pipeline; and documented
-evidence from deterministic fixtures and informal live team trials.
+Three transparent gesture evaluators, a reusable scoring/capture framework, and a
+live developer laboratory ready to feed the gameplay state machine.
 
 ### Cultural decision point
 
-This is the ideal time to confirm the final two or three opera gestures. For each,
-obtain an expert-approved name, meaning, demonstration reference, important motion
-features, permissible mirroring, and cultural-insight text.
+The three gestures and demonstration references are confirmed. Cultural narration,
+permissible mirroring, and final insight text remain content approvals for later
+gameplay milestones and do not alter the M3 scoring evidence.
 
 ## 8. Milestone 4 — gameplay state-machine simulator
 

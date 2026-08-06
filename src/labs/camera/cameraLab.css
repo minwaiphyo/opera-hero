@@ -7,6 +7,29 @@
   border-bottom: 1px solid rgba(242, 205, 131, 0.25);
 }
 
+.camera-lab-page {
+  padding-top: 32px;
+}
+
+.camera-lab-page .development-nav {
+  margin-bottom: 20px;
+}
+
+.camera-lab-page .lab-page-header {
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.camera-lab-page .lab-page-header h1 {
+  margin: 4px 0 6px;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+}
+
+.camera-lab-page .lab-page-header .lede {
+  max-width: 680px;
+  margin: 0;
+}
+
 .lab-page-header h1 {
   max-width: 760px;
 }
@@ -48,14 +71,148 @@
 
 .camera-workbench {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(350px, 0.8fr);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.38fr);
   gap: 18px;
   align-items: start;
+  padding: 16px 0 32px;
 }
 
 .preview-column,
 .control-column {
   min-width: 0;
+}
+
+.live-visual-comparison {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.65fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.attempt-capture-cue {
+  position: absolute;
+  top: 50%;
+  left: 34%;
+  z-index: 5;
+  display: grid;
+  min-width: 210px;
+  padding: 14px 18px;
+  border: 1px solid rgba(243, 204, 126, 0.55);
+  color: #f7e5bd;
+  background: rgba(8, 5, 13, 0.88);
+  pointer-events: none;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.attempt-capture-cue strong,
+.attempt-capture-cue span {
+  display: block;
+}
+
+.attempt-capture-cue strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.attempt-capture-cue span {
+  margin-top: 3px;
+  color: #c1b3c3;
+  font-size: 0.7rem;
+}
+
+.attempt-capture-cue.ready {
+  border-color: rgba(90, 210, 244, 0.55);
+  color: #bdebf5;
+}
+
+.attempt-capture-cue.recording {
+  border-color: rgba(110, 211, 160, 0.55);
+  color: #bce9ce;
+}
+
+.reference-guide {
+  min-width: 0;
+  padding: 0;
+  border: 1px solid rgba(90, 210, 244, 0.22);
+  background: #08050d;
+}
+
+.reference-guide-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(45, 82, 94, 0.24), transparent 62%);
+}
+
+.reference-guide-stage .landmark-replay-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.reference-guide-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 8px;
+  border: 1px solid rgba(90, 210, 244, 0.35);
+  color: #bdebf5;
+  background: rgba(8, 5, 13, 0.78);
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.reference-guide-progress {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.reference-guide-progress span {
+  display: block;
+  height: 100%;
+  background: #5ad2f4;
+}
+
+.reference-guide-caption {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.reference-guide-caption strong,
+.reference-guide-caption span {
+  display: block;
+}
+
+.reference-guide-caption strong {
+  color: #dceff3;
+  font-size: 0.72rem;
+}
+
+.reference-guide-caption span {
+  margin-top: 2px;
+  color: #748e95;
+  font-size: 0.61rem;
+}
+
+.reference-guide-caption button {
+  flex: none;
+  padding: 6px 8px;
+  font-size: 0.64rem;
 }
 
 .control-column {
@@ -144,8 +301,9 @@
   top: 16px;
   right: 16px;
   z-index: 3;
-  width: min(290px, calc(100% - 32px));
-  padding: 10px 12px;
+  width: auto;
+  min-width: 128px;
+  padding: 0;
   border: 1px solid rgba(110, 211, 160, 0.24);
   border-radius: 2px;
   background: rgba(8, 5, 13, 0.82);
@@ -153,7 +311,37 @@
   backdrop-filter: blur(6px);
 }
 
-.vision-diagnostics > p {
+.vision-diagnostics details[open] {
+  width: min(290px, calc(100vw - 64px));
+  padding: 10px 12px;
+}
+
+.vision-diagnostics summary {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  color: #c4eed4;
+  cursor: pointer;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.vision-diagnostics summary::-webkit-details-marker {
+  display: none;
+}
+
+.vision-diagnostics summary strong {
+  color: #f5eff7;
+  font-size: 0.64rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.vision-diagnostics details > p {
   margin: 0 0 8px;
   color: #c4eed4;
   font-size: 0.66rem;
@@ -162,23 +350,23 @@
   text-transform: uppercase;
 }
 
-.vision-diagnostics dl {
+.vision-diagnostics details > dl {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5px 12px;
   margin: 0;
 }
 
-.vision-diagnostics dl div {
+.vision-diagnostics details > dl div {
   min-width: 0;
 }
 
-.vision-diagnostics dt {
+.vision-diagnostics details > dl dt {
   color: #9c919f;
   font-size: 0.62rem;
 }
 
-.vision-diagnostics dd {
+.vision-diagnostics details > dl dd {
   overflow: hidden;
   margin: 1px 0 0;
   color: #f5eff7;
@@ -366,6 +554,19 @@
   font-size: 0.8rem;
 }
 
+.gesture-lab-selector {
+  width: min(100%, 320px);
+  height: 42px;
+  margin-bottom: 12px;
+  padding: 0 38px 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  color: #eee5ef;
+  background: #17101e;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
 .camera-select-row select:focus-visible {
   outline: 2px solid #f3cc7e;
   outline-offset: 2px;
@@ -528,6 +729,297 @@
   overflow-wrap: anywhere;
 }
 
+.live-scoring-panel {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(243, 204, 126, 0.2);
+  background: rgba(24, 15, 28, 0.72);
+}
+
+.live-scoring-heading {
+  display: grid;
+  grid-template-columns: minmax(170px, auto) auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.live-scoring-heading .eyebrow {
+  margin: 0 0 5px;
+}
+
+.live-scoring-heading h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.live-scoring-copy,
+.scoring-guidance {
+  color: #9c919f;
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.live-scoring-copy {
+  display: none;
+}
+
+.live-scoring-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 8px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.live-scoring-metrics > div {
+  padding: 6px 4px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.live-scoring-metrics dt {
+  color: #827785;
+  font-size: 0.66rem;
+}
+
+.live-scoring-metrics dd {
+  margin: 3px 0 0;
+  color: #e1d7e3;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.72rem;
+  text-transform: capitalize;
+}
+
+.live-scoring-actions button {
+  padding: 8px 10px;
+}
+
+.live-scoring-actions {
+  justify-content: flex-end;
+}
+
+.live-scoring-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.scoring-recording {
+  border-color: rgba(232, 122, 122, 0.42);
+  color: #f0b6b6;
+}
+
+.scoring-completed {
+  border-color: rgba(110, 211, 160, 0.38);
+  color: #88dbae;
+}
+
+.live-score-result {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(243, 204, 126, 0.2);
+}
+
+.live-score-primary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  align-items: end;
+}
+
+.live-score-primary span {
+  color: #d6c9d8;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.live-score-primary strong {
+  grid-row: span 2;
+  color: #f3cc7e;
+  font-size: 1.65rem;
+}
+
+.live-score-primary small {
+  color: #766d7a;
+  font-size: 0.64rem;
+}
+
+.signal-score-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.signal-score-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  padding: 7px 9px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.signal-score-list span,
+.signal-score-list strong {
+  color: #cec2d0;
+  font-size: 0.7rem;
+}
+
+.signal-score-list small {
+  grid-column: 1 / -1;
+  color: #766d7a;
+  font-size: 0.62rem;
+}
+
+.tuning-panel {
+  margin-top: 14px;
+  padding: 16px;
+}
+
+.tuning-heading {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.tuning-heading .eyebrow {
+  margin: 0 0 4px;
+}
+
+.tuning-heading h2 {
+  font-size: 1.05rem;
+}
+
+.tuning-heading button,
+.tuning-label-row button {
+  padding: 7px 9px;
+  font-size: 0.68rem;
+}
+
+.tuning-protocol,
+.tuning-privacy {
+  color: #877b89;
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.tuning-protocol {
+  margin: 10px 0;
+}
+
+.tuning-label-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+
+.tuning-label-row > span {
+  margin-right: 4px;
+  color: #b7abb9;
+  font-size: 0.7rem;
+}
+
+.tuning-label-row button[aria-pressed="true"] {
+  border-color: rgba(243, 204, 126, 0.7);
+  color: #f3d79f;
+  background: rgba(243, 204, 126, 0.12);
+}
+
+.tuning-decision {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.tuning-decision strong {
+  flex: none;
+  color: #d8cdd9;
+  font-size: 0.7rem;
+}
+
+.tuning-decision span {
+  color: #8d828f;
+  font-size: 0.67rem;
+}
+
+.decision-separated {
+  border-color: rgba(110, 211, 160, 0.3);
+}
+
+.decision-overlap {
+  border-color: rgba(226, 108, 108, 0.35);
+}
+
+.tuning-ranges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.tuning-ranges > div {
+  padding: 9px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.tuning-ranges span,
+.tuning-ranges strong,
+.tuning-ranges small {
+  display: block;
+}
+
+.tuning-ranges span {
+  color: #867a88;
+  font-size: 0.64rem;
+}
+
+.tuning-ranges strong {
+  margin: 3px 0;
+  color: #d8cdd9;
+  font-size: 0.72rem;
+}
+
+.tuning-ranges small {
+  color: #a89baa;
+  font-size: 0.64rem;
+}
+
+.tuning-observations {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  max-height: 150px;
+  overflow: auto;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tuning-observations li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 8px;
+  padding: 7px 9px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.tuning-observations span,
+.tuning-observations strong {
+  font-size: 0.68rem;
+}
+
+.tuning-observations small {
+  grid-column: 1 / -1;
+  color: #7d7280;
+  font-size: 0.61rem;
+}
+
+.tuning-privacy {
+  margin: 10px 0 0;
+}
+
 @media (max-width: 940px) {
   .lab-page-header,
   .camera-workbench {
@@ -541,6 +1033,19 @@
 
   .lab-safety-note {
     min-width: 0;
+  }
+
+  .live-visual-comparison {
+    grid-template-columns: minmax(0, 1.2fr) minmax(230px, 0.8fr);
+  }
+
+  .live-scoring-heading {
+    grid-template-columns: 1fr auto;
+  }
+
+  .live-scoring-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
   }
 }
 
@@ -556,5 +1061,18 @@
 
   .diagnostic-list > div:nth-child(odd) {
     padding-right: 4px;
+  }
+
+  .live-visual-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .live-scoring-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tuning-ranges,
+  .tuning-observations {
+    grid-template-columns: 1fr;
   }
 }

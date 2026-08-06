@@ -1,0 +1,2448 @@
+{
+  "schemaVersion": 1,
+  "gestureId": "opening-door",
+  "sourceFixtureIds": [
+    "opening-door-normal-take-1",
+    "opening-door-normal-take-2"
+  ],
+  "derivedFromRecordedImagery": true,
+  "containsRecordedImagery": false,
+  "progressPoints": 41,
+  "smoothingWindow": 0.025,
+  "tolerances": {
+    "positionShoulderWidths": 0.45,
+    "palmDirectionRad": 0.785398,
+    "handOpenness": 0.75
+  },
+  "points": [
+    {
+      "progress": 0,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.142044,
+          "y": -1.496533
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.142447,
+          "y": -1.535511
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.285744,
+          "y": -2.721928
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.292404,
+          "y": -2.61599
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.068879,
+          "y": -3.057955
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": null,
+      "leftPalmDirection": {
+        "target": -2.111369,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": null,
+      "leftHandOpenness": {
+        "target": 1.744661,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": null
+    },
+    {
+      "progress": 0.025,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.142044,
+          "y": -1.52447
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.143802,
+          "y": -1.567644
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.281732,
+          "y": -2.745245
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.312858,
+          "y": -2.657172
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.07241,
+          "y": -3.074853
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": null,
+      "leftPalmDirection": {
+        "target": -2.106025,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": null,
+      "leftHandOpenness": {
+        "target": 1.771007,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": null
+    },
+    {
+      "progress": 0.05,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.143329,
+          "y": -1.532874
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.154834,
+          "y": -1.584709
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.275068,
+          "y": -2.762378
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.312968,
+          "y": -2.702003
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.074515,
+          "y": -3.104221
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": null,
+      "leftPalmDirection": {
+        "target": -2.098685,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": null,
+      "leftHandOpenness": {
+        "target": 1.783975,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": null
+    },
+    {
+      "progress": 0.075,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.140872,
+          "y": -1.531408
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.15745,
+          "y": -1.600153
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.274488,
+          "y": -2.762473
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.30645,
+          "y": -2.7206
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.062778,
+          "y": -3.111211
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": null,
+      "leftPalmDirection": {
+        "target": -2.106314,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": null,
+      "leftHandOpenness": {
+        "target": 1.73343,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": null
+    },
+    {
+      "progress": 0.1,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.146051,
+          "y": -1.531708
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.161302,
+          "y": -1.603686
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.267184,
+          "y": -2.762318
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.30576,
+          "y": -2.732365
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.050178,
+          "y": -3.106173
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": null,
+      "leftPalmDirection": {
+        "target": -2.11929,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": null,
+      "leftHandOpenness": {
+        "target": 1.758,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": null
+    },
+    {
+      "progress": 0.125,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.148438,
+          "y": -1.53413
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.168673,
+          "y": -1.601827
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.267941,
+          "y": -2.755047
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.299035,
+          "y": -2.728788
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.05301,
+          "y": -3.094296
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": null,
+      "leftPalmDirection": {
+        "target": -2.115676,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": null,
+      "leftHandOpenness": {
+        "target": 1.755845,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": null
+    },
+    {
+      "progress": 0.15,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.173555,
+          "y": -1.45513
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.18346,
+          "y": -1.60071
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.270054,
+          "y": -2.742995
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.287185,
+          "y": -2.714342
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.055494,
+          "y": -3.093312
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.704766,
+          "y": -2.165104
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -1.968567,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": -1.122745,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.750607,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 2.755613,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.175,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.246327,
+          "y": -1.374952
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.18938,
+          "y": -1.442267
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.156146,
+          "y": -2.486462
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.059587,
+          "y": -2.458501
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.157555,
+          "y": -3.003969
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.663838,
+          "y": -1.639239
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -1.760984,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": -0.25087,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.697084,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 2.218116,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.2,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.243661,
+          "y": -1.176064
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.18938,
+          "y": -1.298605
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.268664,
+          "y": -1.609279
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.050825,
+          "y": -1.69263
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.745224,
+          "y": -1.534055
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.59274,
+          "y": -1.038061
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -0.863706,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.291418,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.58622,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.653539,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.225,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.290021,
+          "y": -0.805372
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.249442,
+          "y": -1.155253
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.269092,
+          "y": -0.676281
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.075517,
+          "y": -1.024393
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.759783,
+          "y": -0.172874
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.54197,
+          "y": -0.732583
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -0.165273,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.922102,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.852666,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.761199,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.25,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.351507,
+          "y": -0.655499
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.249932,
+          "y": -1.041069
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.315965,
+          "y": -0.347575
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.160941,
+          "y": -0.880018
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.607667,
+          "y": 0.226353
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.480199,
+          "y": -0.667437
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -0.257757,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 2.499201,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 2.580266,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.945291,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.275,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.330477,
+          "y": -0.544208
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.249932,
+          "y": -1.019194
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.207133,
+          "y": -0.166458
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.128002,
+          "y": -0.707767
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.558532,
+          "y": 0.423268
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.506179,
+          "y": -0.790339
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 0.273232,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 2.820396,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 3.878206,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 3.135136,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.3,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.325313,
+          "y": -0.571169
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.307157,
+          "y": -0.959394
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.183345,
+          "y": -0.186801
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.049859,
+          "y": -0.55188
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.546847,
+          "y": 0.365987
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.436735,
+          "y": -0.679986
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -3.125631,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": -0.86341,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 3.273903,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 3.141851,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.325,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.298143,
+          "y": -0.693846
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.310375,
+          "y": -0.953711
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.141705,
+          "y": -0.108611
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.002674,
+          "y": -0.329451
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.527366,
+          "y": 0.343727
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.436339,
+          "y": -0.586846
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -2.751051,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": -0.827489,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 3.251148,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 3.154811,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.35,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.342405,
+          "y": -0.693846
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.364411,
+          "y": -0.99618
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.147258,
+          "y": -0.090861
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.044573,
+          "y": -0.338325
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.520365,
+          "y": 0.345896
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.452645,
+          "y": -0.490208
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -2.887575,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": -0.221057,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 3.49829,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 3.732984,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.375,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.391969,
+          "y": -0.695894
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.361372,
+          "y": -1.008621
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.27109,
+          "y": -0.007753
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.138965,
+          "y": -0.320054
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.72943,
+          "y": 0.345896
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.534315,
+          "y": -0.418072
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": -2.462382,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.17988,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 3.451297,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 3.247399,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.4,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.401994,
+          "y": -0.547053
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.352481,
+          "y": -1.001512
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.476543,
+          "y": 0.194741
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.332952,
+          "y": -0.314231
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.967582,
+          "y": 0.467011
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.770944,
+          "y": -0.202089
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 0.058502,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.961589,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 2.550322,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 3.180599,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.425,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.45113,
+          "y": -0.613767
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.352514,
+          "y": -1.117371
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.462096,
+          "y": 0.160357
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.314854,
+          "y": -0.271962
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.91896,
+          "y": 0.433156
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.762938,
+          "y": -0.062404
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.119169,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 2.216618,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 2.122447,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 2.216896,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.45,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.415564,
+          "y": -1.159729
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.321756,
+          "y": -1.274445
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.210088,
+          "y": -0.096803
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.104556,
+          "y": -0.170623
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.654119,
+          "y": 0.317578
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.631696,
+          "y": 0.114267
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.215662,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.949471,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.364147,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.316131,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.475,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.215188,
+          "y": -1.294572
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.209157,
+          "y": -1.323202
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.009071,
+          "y": -0.450645
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.090934,
+          "y": -0.170623
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.497244,
+          "y": 0.047302
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.481202,
+          "y": 0.114267
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.227862,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.815453,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.311361,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.269203,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.5,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.225822,
+          "y": -1.403865
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.220419,
+          "y": -1.363039
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.004048,
+          "y": -0.450645
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.077476,
+          "y": -0.181419
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.50396,
+          "y": 0.047302
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.487094,
+          "y": 0.157319
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.306176,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.751117,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.321107,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.262223,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.525,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.327612,
+          "y": -1.493509
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.297873,
+          "y": -1.404186
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.029059,
+          "y": -0.467666
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.037853,
+          "y": -0.163676
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.505709,
+          "y": 0.035804
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.49392,
+          "y": 0.171489
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.383577,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.665065,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.297113,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.262038,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.55,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.523986,
+          "y": -1.333774
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.440353,
+          "y": -1.318403
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.010416,
+          "y": -0.467666
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.037853,
+          "y": -0.13622
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.463913,
+          "y": 0.07568
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.380048,
+          "y": 0.247726
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.678414,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.418042,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.322055,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.310938,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.575,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.584295,
+          "y": -0.453992
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.502002,
+          "y": -0.426018
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.003087,
+          "y": 0.008379
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.168771,
+          "y": 0.191909
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.341636,
+          "y": 0.283112
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.19953,
+          "y": 0.360415
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 2.05021,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.12216,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.628205,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.632399,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.6,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.550051,
+          "y": -0.164589
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.513648,
+          "y": -0.144081
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.094626,
+          "y": 0.048132
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.271212,
+          "y": 0.223391
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.317977,
+          "y": 0.316501
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.161563,
+          "y": 0.407697
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 2.415448,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.864974,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 2.441802,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.869809,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.625,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.260134,
+          "y": -0.153428
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.330191,
+          "y": -0.127448
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.128153,
+          "y": 0.05828
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.305811,
+          "y": 0.170322
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.318509,
+          "y": 0.233055
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.13841,
+          "y": 0.43147
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 2.634256,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.890861,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 3.192037,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 2.312987,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.65,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.237719,
+          "y": -0.161057
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.317162,
+          "y": -0.127448
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.077028,
+          "y": 0.05828
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.305352,
+          "y": 0.162427
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.31391,
+          "y": 0.233055
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.077667,
+          "y": 0.202436
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 2.820972,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.687716,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 3.363626,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 2.192294,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.675,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.395964,
+          "y": -0.187491
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.398666,
+          "y": -0.097715
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.039155,
+          "y": 0.142521
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.299704,
+          "y": 0.214108
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.313286,
+          "y": 0.337873
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.077876,
+          "y": 0.280383
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 2.796211,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.475482,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 2.668199,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.562623,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.7,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.721612,
+          "y": -0.207387
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.644047,
+          "y": -0.097685
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.048565,
+          "y": 0.271618
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.143998,
+          "y": 0.370018
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.409519,
+          "y": 0.504625
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.292353,
+          "y": 0.563346
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 2.432257,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.76856,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.843428,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.649645,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.725,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.74375,
+          "y": -0.248796
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.692472,
+          "y": -0.146892
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.22791,
+          "y": 0.271618
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.059925,
+          "y": 0.370018
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.582145,
+          "y": 0.504625
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.439212,
+          "y": 0.573234
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 2.09248,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 0.97505,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.696381,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.612217,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.75,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.718635,
+          "y": -0.726056
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.695243,
+          "y": -0.544715
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.38328,
+          "y": 0.064766
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.2512,
+          "y": 0.21667
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 0.825475,
+          "y": 0.299049
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.672535,
+          "y": 0.494003
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.778563,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.188375,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.617732,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.566166,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.775,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.588384,
+          "y": -1.011259
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.660598,
+          "y": -0.801065
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.520556,
+          "y": -0.267555
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.422956,
+          "y": 0.000804
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.025252,
+          "y": 0.10313
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -0.921718,
+          "y": 0.144175
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.604876,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.311661,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.597484,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.591817,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.8,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.456633,
+          "y": -1.088929
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.511192,
+          "y": -0.90421
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.644545,
+          "y": -0.506647
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.626097,
+          "y": -0.210377
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.207497,
+          "y": -0.112999
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.183708,
+          "y": -0.00178
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.505744,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.449233,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.593934,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.634282,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.825,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.436725,
+          "y": -1.090866
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.509628,
+          "y": -0.984508
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.732293,
+          "y": -0.633622
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.775135,
+          "y": -0.309641
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.345493,
+          "y": -0.248201
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.357173,
+          "y": -0.17828
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.438935,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.601132,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.599795,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.639091,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.85,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.454658,
+          "y": -1.100037
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.506808,
+          "y": -1.018741
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.860742,
+          "y": -0.773044
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.899958,
+          "y": -0.565871
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.525011,
+          "y": -0.426306
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.549212,
+          "y": -0.404315
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.368879,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.691089,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.615375,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.675622,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.875,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.455189,
+          "y": -1.100037
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.509416,
+          "y": -1.012612
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.968106,
+          "y": -0.863242
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -1.027321,
+          "y": -0.64221
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.637989,
+          "y": -0.539914
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.680628,
+          "y": -0.503829
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.314321,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.732313,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.650504,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.732124,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.9,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.452834,
+          "y": -1.094355
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.509773,
+          "y": -1.008819
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.981125,
+          "y": -0.909778
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -1.054146,
+          "y": -0.669921
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.664634,
+          "y": -0.557385
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.698617,
+          "y": -0.515366
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.268753,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.776884,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.657239,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.749147,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.925,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.450362,
+          "y": -1.090468
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.512267,
+          "y": -0.999383
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.9741,
+          "y": -0.909778
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -1.059831,
+          "y": -0.64615
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.666214,
+          "y": -0.557385
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.698475,
+          "y": -0.507585
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.252713,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.797495,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.666947,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.756201,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.95,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.452343,
+          "y": -1.090312
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.512761,
+          "y": -0.994466
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.976026,
+          "y": -0.914086
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -1.059247,
+          "y": -0.65159
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.666554,
+          "y": -0.554588
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.695976,
+          "y": -0.495108
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.243031,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.805456,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.657409,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.762953,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 0.975,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.458506,
+          "y": -1.094975
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.512175,
+          "y": -0.99799
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.97755,
+          "y": -0.893564
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -1.046963,
+          "y": -0.656029
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.667245,
+          "y": -0.544769
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.692443,
+          "y": -0.487358
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.234721,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.808962,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.655885,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.76932,
+        "tolerance": 0.75
+      }
+    },
+    {
+      "progress": 1,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.457999,
+          "y": -1.092275
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.514388,
+          "y": -1.001528
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": 0.977352,
+          "y": -0.888648
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -1.037725,
+          "y": -0.651001
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmPosition": {
+        "target": {
+          "x": 1.666886,
+          "y": -0.542692
+        },
+        "tolerance": 0.45
+      },
+      "rightPalmPosition": {
+        "target": {
+          "x": -1.697256,
+          "y": -0.483015
+        },
+        "tolerance": 0.45
+      },
+      "leftPalmDirection": {
+        "target": 1.230294,
+        "tolerance": 0.785398
+      },
+      "rightPalmDirection": {
+        "target": 1.809037,
+        "tolerance": 0.785398
+      },
+      "leftHandOpenness": {
+        "target": 1.655812,
+        "tolerance": 0.75
+      },
+      "rightHandOpenness": {
+        "target": 1.752124,
+        "tolerance": 0.75
+      }
+    }
+  ]
+}

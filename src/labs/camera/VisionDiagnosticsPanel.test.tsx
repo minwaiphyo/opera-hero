@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { VisionDiagnosticsSnapshot } from "../../vision/visionDiagnostics";
 import { VisionDiagnosticsPanel } from "./VisionDiagnosticsPanel";
@@ -42,11 +42,15 @@ describe("VisionDiagnosticsPanel", () => {
       />,
     );
 
-    expect(
-      screen.getByRole("complementary", {
+    const panel = screen.getByRole("complementary", {
         name: "Vision worker diagnostics",
-      }),
-    ).toBeInTheDocument();
+      });
+    expect(panel).toBeInTheDocument();
+    const disclosure = panel.querySelector("details")!;
+    expect(disclosure).not.toHaveAttribute("open");
+    expect(screen.getAllByText("24.8 FPS")).toHaveLength(2);
+    fireEvent.click(panel.querySelector("summary")!);
+    expect(disclosure).toHaveAttribute("open");
     expect(screen.getByText("MediaPipe 1.0.0")).toBeInTheDocument();
     expect(screen.getByText("GPU · Pose lite")).toBeInTheDocument();
     expect(screen.getByText("Aspect-fit · max 640 px")).toBeInTheDocument();
@@ -58,7 +62,6 @@ describe("VisionDiagnosticsPanel", () => {
     expect(screen.getByText("31.3 ms latest")).toBeInTheDocument();
     expect(screen.getByText("28.5 ms / 46.8 ms")).toBeInTheDocument();
     expect(screen.getByText("36.0 ms / 61.5 ms")).toBeInTheDocument();
-    expect(screen.getByText("24.8 FPS")).toBeInTheDocument();
     expect(screen.getByText("84 completed / 100 submitted")).toBeInTheDocument();
     expect(screen.getByText("14 replaced · 14.0%")).toBeInTheDocument();
     expect(screen.getByText("1 active · none pending")).toBeInTheDocument();

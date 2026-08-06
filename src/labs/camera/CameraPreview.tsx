@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { CameraSession, CameraStatus } from "../../camera/cameraTypes";
+import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 import {
   useLandmarkOverlay,
   type LandmarkOverlayState,
@@ -10,12 +11,14 @@ type CameraPreviewProps = {
   session: CameraSession | null;
   status: CameraStatus;
   onVideoElement?: (element: HTMLVideoElement | null) => void;
+  onLandmarkFrame?: (frame: VisionLandmarkFrame) => void;
 };
 
 export function CameraPreview({
   session,
   status,
   onVideoElement,
+  onLandmarkFrame,
 }: CameraPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,6 +26,7 @@ export function CameraPreview({
     videoRef,
     canvasRef,
     Boolean(session),
+    onLandmarkFrame,
   );
 
   useEffect(() => {

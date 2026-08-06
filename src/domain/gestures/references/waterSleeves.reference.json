@@ -1,0 +1,1040 @@
+{
+  "schemaVersion": 1,
+  "gestureId": "water-sleeves",
+  "sourceFixtureId": "water-sleeves-front-with-sleeves",
+  "derivedFromRecordedImagery": true,
+  "containsRecordedImagery": false,
+  "progressPoints": 41,
+  "smoothingWindow": 0.025,
+  "tolerances": {
+    "upperArmAngleRad": 0.523599,
+    "elbowPositionShoulderWidths": 0.5
+  },
+  "points": [
+    {
+      "progress": 0,
+      "leftUpperArmAngle": {
+        "target": -1.424603,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.732047,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.203232,
+          "y": -1.370421
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.214513,
+          "y": -1.275211
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.025,
+      "leftUpperArmAngle": {
+        "target": -1.431733,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.716339,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.186373,
+          "y": -1.369434
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.18109,
+          "y": -1.342602
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.05,
+      "leftUpperArmAngle": {
+        "target": -1.438387,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.698313,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.182984,
+          "y": -1.366751
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.174486,
+          "y": -1.348648
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.075,
+      "leftUpperArmAngle": {
+        "target": -1.437441,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.690552,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.184042,
+          "y": -1.365355
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.162548,
+          "y": -1.354329
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.1,
+      "leftUpperArmAngle": {
+        "target": -1.438497,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.687654,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.179891,
+          "y": -1.363058
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.162229,
+          "y": -1.358026
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.125,
+      "leftUpperArmAngle": {
+        "target": -1.442075,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.696469,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.175055,
+          "y": -1.356573
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.168936,
+          "y": -1.332885
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.15,
+      "leftUpperArmAngle": {
+        "target": -1.443176,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.702103,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.173346,
+          "y": -1.355059
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.175774,
+          "y": -1.314275
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.175,
+      "leftUpperArmAngle": {
+        "target": -1.441847,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.70369,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.17411,
+          "y": -1.346236
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.17635,
+          "y": -1.320334
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.2,
+      "leftUpperArmAngle": {
+        "target": -1.448218,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.703586,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.175051,
+          "y": -1.370527
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.17635,
+          "y": -1.324168
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.225,
+      "leftUpperArmAngle": {
+        "target": -1.469993,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.692868,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.14616,
+          "y": -1.520713
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.169675,
+          "y": -1.339403
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.25,
+      "leftUpperArmAngle": {
+        "target": -1.457736,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.674897,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.157686,
+          "y": -1.542066
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.142911,
+          "y": -1.421232
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.275,
+      "leftUpperArmAngle": {
+        "target": -1.393279,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.665962,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.266584,
+          "y": -1.47797
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.142481,
+          "y": -1.468539
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.3,
+      "leftUpperArmAngle": {
+        "target": -1.388807,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.655369,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.316591,
+          "y": -1.500411
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.125388,
+          "y": -1.451444
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.325,
+      "leftUpperArmAngle": {
+        "target": -1.537281,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.641071,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.128171,
+          "y": -1.758899
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.102055,
+          "y": -1.464652
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.35,
+      "leftUpperArmAngle": {
+        "target": -1.684131,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.628692,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.154674,
+          "y": -1.577733
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.082293,
+          "y": -1.537944
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.375,
+      "leftUpperArmAngle": {
+        "target": -1.656444,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.63946,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.139369,
+          "y": -1.590655
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.088373,
+          "y": -1.560518
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.4,
+      "leftUpperArmAngle": {
+        "target": -1.647162,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.690527,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.116049,
+          "y": -1.667248
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.186507,
+          "y": -1.531291
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.425,
+      "leftUpperArmAngle": {
+        "target": -1.695801,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.743626,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.21327,
+          "y": -1.665475
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.261021,
+          "y": -1.448799
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.45,
+      "leftUpperArmAngle": {
+        "target": -1.847748,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.786533,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.356587,
+          "y": -1.257616
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.292851,
+          "y": -1.418918
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.475,
+      "leftUpperArmAngle": {
+        "target": -2.045027,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -1.847994,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.568998,
+          "y": -1.162568
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.34033,
+          "y": -1.196143
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.5,
+      "leftUpperArmAngle": {
+        "target": -2.240348,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.62881,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.651239,
+          "y": -0.809575
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.595382,
+          "y": -0.335211
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.525,
+      "leftUpperArmAngle": {
+        "target": -2.41518,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.705555,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.703588,
+          "y": -0.627581
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.76009,
+          "y": -0.357189
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.55,
+      "leftUpperArmAngle": {
+        "target": -2.572537,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.870431,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.879949,
+          "y": -0.56072
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.7482,
+          "y": -0.192337
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.575,
+      "leftUpperArmAngle": {
+        "target": -2.68389,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.964957,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.888136,
+          "y": -0.408553
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.722523,
+          "y": -0.146705
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.6,
+      "leftUpperArmAngle": {
+        "target": -2.680097,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.830996,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.830678,
+          "y": -0.40271
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.651605,
+          "y": -0.217203
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.625,
+      "leftUpperArmAngle": {
+        "target": -2.591267,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.758542,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.786224,
+          "y": -0.453521
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.617354,
+          "y": -0.36093
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.65,
+      "leftUpperArmAngle": {
+        "target": -2.568734,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": 3.117253,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.754605,
+          "y": -0.512555
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.58014,
+          "y": 0.116447
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.675,
+      "leftUpperArmAngle": {
+        "target": -2.56177,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": 2.58403,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.692882,
+          "y": -0.480001
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.541071,
+          "y": 0.35894
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.7,
+      "leftUpperArmAngle": {
+        "target": -2.493028,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": 2.815193,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.692148,
+          "y": -0.538902
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.561226,
+          "y": 0.236023
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.725,
+      "leftUpperArmAngle": {
+        "target": -2.487926,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": 3.102173,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.691076,
+          "y": -0.532989
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.57861,
+          "y": 0.014348
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.75,
+      "leftUpperArmAngle": {
+        "target": -2.505611,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -3.044947,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.692568,
+          "y": -0.490578
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.556849,
+          "y": -0.082845
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.775,
+      "leftUpperArmAngle": {
+        "target": -2.471586,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.919826,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.694795,
+          "y": -0.564894
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.556241,
+          "y": -0.13205
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.8,
+      "leftUpperArmAngle": {
+        "target": -2.472183,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.651056,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.714711,
+          "y": -0.572265
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.552851,
+          "y": -0.244498
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.825,
+      "leftUpperArmAngle": {
+        "target": -2.498002,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.547918,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.75262,
+          "y": -0.570735
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.543665,
+          "y": -0.384563
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.85,
+      "leftUpperArmAngle": {
+        "target": -2.495581,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.564734,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.733825,
+          "y": -0.545611
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.521355,
+          "y": -0.317254
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.875,
+      "leftUpperArmAngle": {
+        "target": -2.493556,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.605203,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.708574,
+          "y": -0.55574
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.525279,
+          "y": -0.301512
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.9,
+      "leftUpperArmAngle": {
+        "target": -2.493298,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.719859,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.716613,
+          "y": -0.591022
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.543011,
+          "y": -0.28524
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.925,
+      "leftUpperArmAngle": {
+        "target": -2.468343,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.790987,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.736346,
+          "y": -0.596169
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.56468,
+          "y": -0.172337
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.95,
+      "leftUpperArmAngle": {
+        "target": -2.466015,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.803163,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.724242,
+          "y": -0.594411
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.575752,
+          "y": -0.217476
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 0.975,
+      "leftUpperArmAngle": {
+        "target": -2.46365,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.83518,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.703453,
+          "y": -0.571281
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.570566,
+          "y": -0.16979
+        },
+        "tolerance": 0.5
+      }
+    },
+    {
+      "progress": 1,
+      "leftUpperArmAngle": {
+        "target": -2.465261,
+        "tolerance": 0.523599
+      },
+      "rightUpperArmAngle": {
+        "target": -2.911494,
+        "tolerance": 0.523599
+      },
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.697994,
+          "y": -0.555586
+        },
+        "tolerance": 0.5
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.56084,
+          "y": -0.119177
+        },
+        "tolerance": 0.5
+      }
+    }
+  ]
+}

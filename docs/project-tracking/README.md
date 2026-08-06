@@ -32,6 +32,19 @@ This folder is the project-management and engineering record for Opera Hero.
   guide, aspect-ratio reporting, and bounded camera recovery.
 - [M1 Increment 6 verification](./verification/m1-increment-6.md) — lifecycle
   stress coverage, live stability metrics, and the final Target A soak procedure.
+- [M3 Fixture Extraction Increment 1](./verification/m3-fixture-extraction-1.md) —
+  offline practitioner landmark extraction, edge-only stationary trimming, and
+  replay provenance validation.
+- [M3 Fixture Visualization Increment 2](./verification/m3-fixture-visualization-2.md)
+- [M3 Practitioner Fixture Batch Increment 3](./verification/m3-fixture-batch-3.md)
+- [M3 Water Sleeves Feature Foundation Increment 4](./verification/m3-water-sleeves-features-4.md)
+- [M3 Water Sleeves Feature Observability Increment 5](./verification/m3-water-sleeves-observability-5.md)
+- [M3 Water Sleeves Temporal Trajectory Increment 6](./verification/m3-water-sleeves-trajectory-6.md)
+- [M3 Water Sleeves Reference Envelope Increment 7](./verification/m3-water-sleeves-envelope-7.md)
+- [M3 Water Sleeves Temporal Evaluator Increment 8](./verification/m3-water-sleeves-evaluator-8.md)
+- [M3 Water Sleeves Deterministic Regressions Increment 9](./verification/m3-water-sleeves-regressions-9.md)
+- [M3 Live Water Sleeves Attempt Buffer Increment 10](./verification/m3-live-attempt-buffer-10.md)
+  — local practitioner fixture loading, validation, metadata, and replay rendering.
 - [M2 Increment 1 verification](./verification/m2-increment-1.md) — real Pose Lite
   and Hand Landmarker overlay baseline plus normalized application contracts.
 - [M2 Increment 2 verification](./verification/m2-increment-2.md) — typed worker

@@ -1,0 +1,7113 @@
+{
+  "schemaVersion": 1,
+  "gestureId": "orchid-finger",
+  "sourceFixtureIds": [
+    "orchid-finger-normal-take-1",
+    "orchid-finger-normal-take-2",
+    "orchid-finger-normal-take-3"
+  ],
+  "derivedFromRecordedImagery": true,
+  "containsRecordedImagery": false,
+  "progressPoints": 41,
+  "smoothingWindow": 0.025,
+  "tolerances": {
+    "positionShoulderWidths": 0.45,
+    "palmDirectionRad": 0.785398,
+    "handShape": 0.6
+  },
+  "points": [
+    {
+      "progress": 0,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.336911,
+          "y": -1.52013
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.249697,
+          "y": -1.536569
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.299765,
+          "y": -1.496894
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.210682,
+          "y": -1.220153
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.062283,
+            "y": -1.538155
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.062369,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.70318,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.235317,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.299782,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.303393,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.574836,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.067408,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.035217,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.048456,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.089485,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.892301,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.303593,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.006146,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.963274,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.148213,
+            "y": -1.05893
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.590319,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.533763,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.92263,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.132285,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.00639,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.152731,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.064019,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.035261,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.096548,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.990063,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.731455,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.740763,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.025502,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.629419,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.025,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.30864,
+          "y": -1.511574
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.244133,
+          "y": -1.523989
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.302624,
+          "y": -1.46971
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.205933,
+          "y": -1.136909
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.059048,
+            "y": -1.495787
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.091257,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.755836,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.316935,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.382529,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.356042,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.586816,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.016339,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.011568,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.102669,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.09311,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.94949,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.344633,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.055982,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.042035,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.148213,
+            "y": -1.036451
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.514246,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.556541,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.670623,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.14518,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.016372,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.185221,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.064019,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.015839,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.094445,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.980772,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.754018,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.941562,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.052004,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.653314,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.05,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.284385,
+          "y": -1.489611
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.226155,
+          "y": -1.522008
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.303653,
+          "y": -1.469577
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.188047,
+          "y": -1.117946
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.053586,
+            "y": -1.491065
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.122754,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.774361,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.332591,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.376559,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.375254,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.675301,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.011276,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.010688,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.113159,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.096736,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.967771,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.354801,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.087357,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.094024,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.151586,
+            "y": -1.025241
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.488623,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.571317,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.378768,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.174575,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.030399,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.191748,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.073435,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.987317,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.08556,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.976441,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.943466,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.03903,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.446662,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.671343,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.075,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.278928,
+          "y": -1.484806
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.224967,
+          "y": -1.497616
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.303015,
+          "y": -1.476191
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.184139,
+          "y": -1.1211
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.053586,
+            "y": -1.494503
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.114076,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.763898,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.332591,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.366558,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.352482,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.641331,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.99986,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.007113,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.107665,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.096736,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.930145,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.331427,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.990023,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.058418,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.162777,
+            "y": -1.026572
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.590603,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.587047,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.329451,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.470676,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.019547,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.187016,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.073789,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.043693,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.04337,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.902576,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.764439,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.068854,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.423195,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.671343,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.1,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.275293,
+          "y": -1.486077
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.228554,
+          "y": -1.494797
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.311082,
+          "y": -1.479871
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.184678,
+          "y": -1.11882
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.055293,
+            "y": -1.504879
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.131701,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.769722,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.448377,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.450961,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.348806,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.631363,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.919348,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.002293,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.108725,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.110845,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.940653,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.351011,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.078547,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.060549,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.180939,
+            "y": -1.027179
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.642749,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.56608,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.448625,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.151647,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.997785,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.18432,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.07272,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.056052,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.07652,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.942834,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.749944,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.146118,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.335454,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.755723,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.125,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.269212,
+          "y": -1.482989
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.227265,
+          "y": -1.487225
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.317857,
+          "y": -1.481127
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.18326,
+          "y": -1.124708
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.061736,
+            "y": -1.514099
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.054822,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.908217,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.496577,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.496637,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.348909,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.649956,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.978957,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.001463,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.113108,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.117193,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.962159,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.378186,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.124609,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.336106,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.162792,
+            "y": -1.033101
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.595574,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.521625,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 3.059579,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.080618,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.956823,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.156782,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.073152,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.05741,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.097251,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.007256,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.737806,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.783761,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.245101,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.650284,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.15,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.268209,
+          "y": -1.48404
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.208979,
+          "y": -1.473444
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.339132,
+          "y": -1.443237
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.175145,
+          "y": -1.151601
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.04717,
+            "y": -1.505239
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.071319,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.05645,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.5495,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.535667,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.359396,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.760039,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.997609,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.00549,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.101873,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.110392,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.955462,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.378186,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.174942,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.610395,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.140361,
+            "y": -1.026689
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.647957,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.490738,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.981694,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.946693,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.853898,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.125549,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.056736,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.9934,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.102618,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.011114,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.742789,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.702411,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.016004,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.604302,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.175,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.265956,
+          "y": -1.487419
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.201256,
+          "y": -1.463519
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.354933,
+          "y": -1.348138
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.154904,
+          "y": -1.064134
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.037194,
+            "y": -1.360701
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.100998,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.252736,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.62176,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.588993,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.442592,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.721698,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.031308,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.047242,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.08479,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.109763,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.971278,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.420802,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.290616,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.637661,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.167368,
+            "y": -0.744917
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.001311,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.475552,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.826689,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.861199,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.764635,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.980857,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.04448,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.994809,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.078352,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.963426,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.635142,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.568454,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.880342,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.415023,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.2,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.266458,
+          "y": -1.509674
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.193506,
+          "y": -1.478529
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.350431,
+          "y": -1.322354
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.140053,
+          "y": -0.888654
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": 0.00892,
+            "y": -1.293949
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.058291,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.426591,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.586033,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.543568,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.422557,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.640731,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.027148,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.078112,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.07547,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.117326,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.987078,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.425663,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.405423,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.672723,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.217723,
+            "y": -0.616567
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.322461,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.143091,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.329712,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.690675,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.970031,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.570037,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.057264,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.994972,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.051362,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.97492,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.782301,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.483972,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.675453,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.310709,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.225,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.267202,
+          "y": -1.521999
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.191715,
+          "y": -1.473197
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.371508,
+          "y": -1.348831
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.134779,
+          "y": -0.913724
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.019892,
+            "y": -1.373081
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.120493,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.13521,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.473802,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.356299,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.349836,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.639103,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.031813,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.072756,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.07547,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.121625,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.987078,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.318935,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.437649,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.593279,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.243544,
+            "y": -0.639033
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.302415,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.522187,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.209961,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.606789,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.718057,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.574571,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.082131,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.393178,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.930589,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.98645,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.872166,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.268733,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.601626,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.832894,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.25,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.266631,
+          "y": -1.498414
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.217225,
+          "y": -1.431457
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.406189,
+          "y": -1.401423
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.110394,
+          "y": -0.951626
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.087101,
+            "y": -1.45859
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.10183,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.052156,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.223814,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.33995,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.29315,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.585113,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.0434,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.042662,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.070574,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.120338,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.879983,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.26647,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.374831,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.307824,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.257516,
+            "y": -0.624399
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.055575,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.361172,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.139418,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.250507,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.695288,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.591474,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.0795,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.102232,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.858331,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.015742,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.868353,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.246163,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.596755,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.851906,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.275,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.229332,
+          "y": -1.470436
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.241987,
+          "y": -1.411315
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.429325,
+          "y": -1.443339
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.074021,
+          "y": -1.149713
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.125498,
+            "y": -1.538077
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.051499,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 2.027739,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.146064,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.310972,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.219066,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.487955,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.063771,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.021618,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.038485,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.11889,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.631384,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.125678,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.117927,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.152976,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.266622,
+            "y": -0.71867
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.253959,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.247561,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.019246,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.364238,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.659913,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.862818,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.893205,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.767507,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.809793,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.01344,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.908111,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.597228,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.882211,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.602406,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.3,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.228502,
+          "y": -1.466347
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.216595,
+          "y": -1.417428
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.376026,
+          "y": -1.462446
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.035266,
+          "y": -1.20931
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.065852,
+            "y": -1.549605
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -3.078743,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.989328,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.376772,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.310972,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.214585,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.355665,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.030701,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.027444,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.047945,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.116267,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.642539,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.110039,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.092126,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.124139,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.263337,
+            "y": -1.074065
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": -0.146227,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.624761,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.103267,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.015011,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.988895,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.240849,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.938062,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.929047,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.79196,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.988649,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.221261,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.968188,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.178042,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.662757,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.325,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.242355,
+          "y": -1.482358
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.209202,
+          "y": -1.427012
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.380939,
+          "y": -1.433808
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.02998,
+          "y": -1.173523
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.076495,
+            "y": -1.488859
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.090551,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.999907,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.351471,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.227152,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.176125,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.186868,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.023485,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.040353,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.060402,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.096339,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.745305,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.191704,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.197512,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.025158,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.263337,
+            "y": -0.655549
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.512521,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.874382,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.019169,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.671121,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.37958,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.027143,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.944021,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.912317,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.876412,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.805445,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.995464,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.062562,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.171882,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.381563,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.35,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.240708,
+          "y": -1.496432
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.213813,
+          "y": -1.42708
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.43614,
+          "y": -1.308772
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.030536,
+          "y": -1.137501
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.174244,
+            "y": -1.391877
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.900955,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.962441,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.331705,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.21344,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.119362,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.162788,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.091664,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.048914,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.052124,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.081751,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.645111,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.144564,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.000306,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.8685,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.269482,
+            "y": -0.530415
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.190115,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.157156,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.033428,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.224237,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.608127,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.446491,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.034814,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.284861,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.857543,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.026213,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.989478,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.470784,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.54619,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.856583,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.375,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.227411,
+          "y": -1.528248
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.228435,
+          "y": -1.381901
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.436552,
+          "y": -1.284211
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.092366,
+          "y": -1.110695
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.159519,
+            "y": -1.395191
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.875763,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.863679,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.328433,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.218447,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.132296,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.162737,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.063529,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.02511,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.050642,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.09275,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.631795,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.141654,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.939501,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.734259,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.253596,
+            "y": -0.505041
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.436967,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.134033,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.100857,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.120337,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.611606,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.595613,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.077373,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.203145,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.838675,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.095698,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.967156,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.202804,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.518922,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.781408,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.4,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.244369,
+          "y": -1.529654
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.234549,
+          "y": -1.407455
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.420146,
+          "y": -1.325386
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.124969,
+          "y": -0.969535
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.123688,
+            "y": -1.410994
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.031202,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.73962,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.279379,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.198743,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.235918,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.170694,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.063369,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.02511,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.050642,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.106837,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.664939,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.165599,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.924683,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.661035,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.251522,
+            "y": -0.591072
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.26636,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.105613,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.041301,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.004498,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.495401,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.608048,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.073267,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.045206,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.581997,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.09489,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.790642,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.197048,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.505607,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.912068,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.425,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.243547,
+          "y": -1.481884
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.240102,
+          "y": -1.429222
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.417669,
+          "y": -1.37505
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.099007,
+          "y": -1.027232
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.107792,
+            "y": -1.431833
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 3.060448,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.667006,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.152796,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.260367,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.265168,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.144093,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.003852,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.027158,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.029714,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.10217,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.725498,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.220245,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.950102,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.728438,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.247493,
+            "y": -0.704349
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.479251,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.253496,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 1.999194,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.19239,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.466098,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.812595,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.995084,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.587118,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.566332,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.068581,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.949304,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.340064,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.505475,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.932443,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.45,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.222785,
+          "y": -1.457991
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.302888,
+          "y": -1.405507
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.458455,
+          "y": -1.401015
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.080501,
+          "y": -1.122598
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.104946,
+            "y": -1.447557
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.93548,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.930814,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.266206,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.372619,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.221239,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.021495,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.006513,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.02827,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.032123,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.093113,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.794827,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.073561,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.672857,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.682059,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.247014,
+            "y": -0.774978
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.21584,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.547474,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.049931,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.967525,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.101769,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.120116,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.005557,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.765982,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.639545,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.061624,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.045387,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.662146,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.720426,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.965587,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.475,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.209642,
+          "y": -1.485848
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.342751,
+          "y": -1.352748
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.496507,
+          "y": -1.314545
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.071565,
+          "y": -1.098059
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.139004,
+            "y": -1.355343
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.84937,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.954436,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.558843,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.470731,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.201232,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.109322,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.067735,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.038379,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.032123,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.093078,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.786958,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.988663,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.581837,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.510393,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.282514,
+            "y": -0.478081
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.159738,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.904433,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.03617,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.865551,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.203631,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.747053,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.032906,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.948995,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.323878,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.082184,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.015056,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.324064,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.612875,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.234553,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.5,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.220064,
+          "y": -1.553099
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.310261,
+          "y": -1.391365
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.476133,
+          "y": -1.306471
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.06932,
+          "y": -0.896406
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.127048,
+            "y": -1.350487
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.826614,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.935596,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.65126,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.504127,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.266438,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.23752,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.043661,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.043379,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.050057,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.092196,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.910498,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.011739,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.500782,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.566478,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.276211,
+            "y": -0.448628
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.412016,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.972415,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.133578,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.837711,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.375503,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.653067,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.096974,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.931412,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.388586,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.082946,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.968667,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.103673,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.568293,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.092432,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.525,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.220425,
+          "y": -1.536888
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.302652,
+          "y": -1.375127
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.457892,
+          "y": -1.406314
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.075492,
+          "y": -0.942448
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.113598,
+            "y": -1.471853
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.878201,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.825034,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.645268,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.565952,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.331324,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.302069,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.027125,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.052702,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.085075,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.080323,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.906188,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.039306,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.598226,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.772815,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.262608,
+            "y": -0.639846
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.262552,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.003917,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.08454,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.069147,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.315145,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.644285,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.116798,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.07696,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.222722,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.098009,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.062219,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.085693,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.526653,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.060858,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.55,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.219875,
+          "y": -1.536888
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.312488,
+          "y": -1.341047
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.457892,
+          "y": -1.394774
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.095244,
+          "y": -1.108349
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.120397,
+            "y": -1.466145
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.982869,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.818658,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.572918,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.545931,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.367536,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.373019,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.032779,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.053575,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.090528,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.081628,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.827837,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.123163,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.733206,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.836247,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.263273,
+            "y": -0.77928
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 0.990135,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.965162,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.077535,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.099305,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.27194,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.638337,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.081227,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.079048,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.021468,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.095243,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.113289,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.151459,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.47597,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 0.995117,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.575,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.218994,
+          "y": -1.552244
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.318138,
+          "y": -1.286517
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.50557,
+          "y": -1.250104
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": 0.076981,
+          "y": -1.164974
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.159792,
+            "y": -1.336333
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.927466,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.629479,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.547075,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.482474,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.266221,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.336158,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.013394,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.046957,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.097987,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.10016,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.8059,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.00249,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.748773,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.764428,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.279996,
+            "y": -0.738427
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.166527,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.885749,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.089782,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.943053,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.075418,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.597539,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.081227,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.962173,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.754948,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.082082,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.113739,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.151522,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.332213,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.043191,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.6,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.209712,
+          "y": -1.547253
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.311437,
+          "y": -1.37693
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.516894,
+          "y": -1.07131
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.015336,
+          "y": -0.995121
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.206423,
+            "y": -1.190012
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.816264,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.48661,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.282515,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.283772,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.074285,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.769752,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.941755,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.037032,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.101344,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.114387,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.854988,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.941187,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.941137,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.840182,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.356197,
+            "y": -0.596437
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.45594,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.748304,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.115498,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.754259,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.027857,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.65456,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.099876,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.721707,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.598789,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.086327,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.380618,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.173608,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.332213,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.167135,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.625,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.177618,
+          "y": -1.530592
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.317728,
+          "y": -1.390173
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.557027,
+          "y": -1.285649
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.103577,
+          "y": -1.054621
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.256788,
+            "y": -1.425328
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.874955,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.433971,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.293443,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.293105,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.037395,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.767052,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.94306,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.021386,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.101356,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.096809,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.87869,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.997736,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.030625,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.862756,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.493619,
+            "y": -0.667188
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.556717,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.714556,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.120119,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.719818,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.079387,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.673892,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.107652,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.755657,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.653552,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.086327,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.445907,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.12967,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.363347,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.09915,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.65,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.133595,
+          "y": -1.50727
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.327917,
+          "y": -1.358229
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.601101,
+          "y": -1.383812
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.213303,
+          "y": -1.249337
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.323014,
+            "y": -1.529287
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.964387,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.463359,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.294019,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.337194,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.216955,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.342902,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.974729,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.01442,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.099894,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.113848,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.851556,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.084427,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.536951,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.463573,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.632278,
+            "y": -0.87826
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.604803,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.624887,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.116179,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.65337,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.032644,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.645693,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.10327,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.605788,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.187515,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.092359,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.493988,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.065729,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.441372,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.075956,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.675,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.124643,
+          "y": -1.508783
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.310675,
+          "y": -1.309189
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.636472,
+          "y": -1.335784
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.272725,
+          "y": -1.199351
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.363286,
+            "y": -1.436331
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.999443,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.412941,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.23137,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.325685,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.287478,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.387421,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.978091,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.045066,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.075757,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.109479,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.864394,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.06006,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.362732,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.231179,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.725267,
+            "y": -0.8306
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.654499,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.630849,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.125225,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.685196,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.005519,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.633379,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.095989,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.340178,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.126481,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.107444,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.499829,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.063521,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.461624,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.0556,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.7,
+      "leftElbowPosition": {
+        "target": {
+          "x": 0.045092,
+          "y": -1.483544
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.303275,
+          "y": -1.28195
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.795893,
+          "y": -1.132167
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.300047,
+          "y": -0.849716
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.419201,
+            "y": -1.204759
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.938778,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.518153,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.453616,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.402717,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.232941,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.354522,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.012032,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.065093,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.064151,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.104872,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.900877,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.988388,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.265638,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.175977,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.812979,
+            "y": -0.536091
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.713549,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.628712,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.127263,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.672427,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.031221,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.63891,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.099735,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.258425,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.227919,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.092191,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.512844,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.047085,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.474193,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.041887,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.725,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.016491,
+          "y": -1.385063
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.369398,
+          "y": -1.181318
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.884499,
+          "y": -0.999304
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.398947,
+          "y": -0.586979
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.467299,
+            "y": -1.057054
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.825368,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.527627,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.469188,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.420634,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.184121,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.140521,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.032033,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.07184,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.094728,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.115941,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.929871,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.98827,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.201166,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 2.122633,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.907889,
+            "y": -0.342635
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.7698,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.602711,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.1485,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.617262,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.037329,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.649691,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.106263,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.376188,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.802252,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.080549,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.564502,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.037988,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.53849,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.07122,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.75,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.089557,
+          "y": -1.308599
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.40472,
+          "y": -1.151032
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.974511,
+          "y": -0.91536
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.435248,
+          "y": -0.583985
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.479701,
+            "y": -0.954219
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.697102,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.474389,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.459055,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.380651,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.053227,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.909585,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.030627,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.058881,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.067694,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.112075,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 0.954095,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.962523,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.005553,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.840527,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.917714,
+            "y": -0.29678
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.844569,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.491489,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.249358,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.515524,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.088398,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.730419,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.109955,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.92805,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.187585,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.062923,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.818232,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.082277,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.65045,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.291532,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.775,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.136095,
+          "y": -1.289581
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.404949,
+          "y": -0.941979
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -0.999408,
+          "y": -0.816985
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.446422,
+          "y": -0.415323
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.489822,
+            "y": -0.916709
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.602471,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.375021,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.438576,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.343736,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.934647,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.708911,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.005204,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.048923,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.067694,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.105128,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.032942,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.947265,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.808483,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.484599,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.946398,
+            "y": -0.283308
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.91717,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.435399,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.351539,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.474007,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.082071,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.841889,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.111248,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 1.77883,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.41657,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.061736,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.135338,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.123732,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.736709,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.481272,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.8,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.124048,
+          "y": -1.207019
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.41988,
+          "y": -0.766398
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.017944,
+          "y": -0.811558
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.488486,
+          "y": -0.311742
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.525811,
+            "y": -0.896615
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.552833,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.339808,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.394019,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.262356,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.881511,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.595124,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.992871,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.039456,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.047688,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.09126,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.110472,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.919717,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.747945,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.296912,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.008944,
+            "y": -0.172684
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.962296,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.42159,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.331874,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.440053,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.98792,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.823347,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.114675,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.158143,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.511815,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.067035,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.247511,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.154193,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.688951,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.641032,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.825,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.139381,
+          "y": -1.12018
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.43172,
+          "y": -0.702925
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.043854,
+          "y": -0.778765
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.529321,
+          "y": -0.264269
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.570111,
+            "y": -0.832127
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.529889,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.307009,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.361397,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.139708,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.873808,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.417814,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.980757,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.036243,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.024417,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.090532,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.124624,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.87036,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.747006,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.111781,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.062351,
+            "y": -0.116799
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.002029,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.385151,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.329278,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.480785,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.0646,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.826559,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.117784,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.27531,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.573778,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.073965,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.365848,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.141802,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.794263,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.682181,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.85,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.153289,
+          "y": -1.093556
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.433755,
+          "y": -0.695689
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.053643,
+          "y": -0.730266
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.539533,
+          "y": -0.263758
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.587291,
+            "y": -0.789735
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.518149,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.306098,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.360222,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.114702,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.872245,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.352817,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.97789,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.037543,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.024962,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.019027,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.15037,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.871041,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.757332,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.040183,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.092947,
+            "y": -0.054419
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.031818,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.45025,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.318987,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.504899,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.218075,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.877785,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.112742,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.331285,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.690152,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.072614,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.377807,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.114292,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.044276,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.744686,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.875,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.149559,
+          "y": -1.105168
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.433755,
+          "y": -0.702617
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.045251,
+          "y": -0.724531
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.532519,
+          "y": -0.266387
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.587291,
+            "y": -0.788979
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.512788,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.322551,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.358837,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.098579,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.875179,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.344852,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.982216,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.034173,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.038181,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.009151,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.15037,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.871485,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.756418,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.038365,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.089756,
+            "y": -0.040798
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.025169,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.467955,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.294326,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.52317,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.203176,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.89206,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.103826,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.350952,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.769985,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.057661,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.350113,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.114292,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.021802,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.791534,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.9,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.137059,
+          "y": -1.125376
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.435264,
+          "y": -0.803738
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.024244,
+          "y": -0.73815
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.52112,
+          "y": -0.285427
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.583406,
+            "y": -0.799093
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.511136,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.320855,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.359895,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.100641,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.870554,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.362523,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.967748,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.032034,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.054087,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.024754,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.139479,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.877771,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.758471,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.046643,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.07798,
+            "y": -0.028283
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.990488,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.410725,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.272338,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.491927,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.121846,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.854465,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.113982,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.364229,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.790169,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.081536,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.266152,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.128794,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.917589,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.777889,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.925,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.158198,
+          "y": -1.134422
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.434565,
+          "y": -0.830537
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.037719,
+          "y": -0.742533
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.512803,
+          "y": -0.29474
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.580927,
+            "y": -0.802124
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.515938,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.322929,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.357598,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.101193,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.873866,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.368403,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.974907,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.027269,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.054882,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.086148,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.1639,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.879285,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.761627,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.051319,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.060856,
+            "y": -0.029387
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.967633,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.360071,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.257812,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.430323,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.067332,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.837337,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.115129,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.358461,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.783888,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.105256,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.214935,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.151219,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.886956,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.745779,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.95,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.158198,
+          "y": -1.149835
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.442474,
+          "y": -0.80937
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.039063,
+          "y": -0.743219
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.525546,
+          "y": -0.287467
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.58413,
+            "y": -0.812439
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.519924,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.314814,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.35204,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.10599,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.848524,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.376253,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.974907,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.02956,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.067583,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.083192,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.138316,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.85994,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.736834,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.060966,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.065149,
+            "y": -0.033047
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.95501,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.334019,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.240356,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.417535,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.994878,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.827182,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.123901,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.325291,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.577844,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.0983,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.193529,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.159265,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.76235,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.708255,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 0.975,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.13433,
+          "y": -1.117047
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.442474,
+          "y": -0.832115
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.015386,
+          "y": -0.751212
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.525546,
+          "y": -0.287467
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.58413,
+            "y": -0.804493
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.518924,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.318225,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.352421,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.125281,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.854239,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.384753,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.985276,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.042115,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.058117,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.055141,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.128241,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.859205,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.736834,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.083305,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.065149,
+            "y": -0.024893
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.932272,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.322047,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.213077,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.380168,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.936647,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.796691,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.132134,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.290357,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.42207,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.0983,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.139697,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.146369,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.649154,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.664106,
+            "tolerance": 0.6
+          }
+        }
+      }
+    },
+    {
+      "progress": 1,
+      "leftElbowPosition": {
+        "target": {
+          "x": -0.13284,
+          "y": -1.11201
+        },
+        "tolerance": 0.45
+      },
+      "rightElbowPosition": {
+        "target": {
+          "x": -0.432964,
+          "y": -0.865088
+        },
+        "tolerance": 0.45
+      },
+      "leftWristPosition": {
+        "target": {
+          "x": -1.007449,
+          "y": -0.750488
+        },
+        "tolerance": 0.45
+      },
+      "rightWristPosition": {
+        "target": {
+          "x": -0.504498,
+          "y": -0.295798
+        },
+        "tolerance": 0.45
+      },
+      "leftHand": {
+        "palmPosition": {
+          "target": {
+            "x": -0.569152,
+            "y": -0.799835
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 2.514462,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 1.339669,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.365472,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.134984,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 1.883269,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.40761,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 2.986174,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 3.051181,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 3.05225,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.068048,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 1.089357,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.864898,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.772918,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.087318,
+            "tolerance": 0.6
+          }
+        }
+      },
+      "rightHand": {
+        "palmPosition": {
+          "target": {
+            "x": -1.037935,
+            "y": -0.018994
+          },
+          "tolerance": 0.45
+        },
+        "palmDirection": {
+          "target": 1.902834,
+          "tolerance": 0.785398
+        },
+        "fingerExtension": {
+          "thumb": {
+            "target": 0.290213,
+            "tolerance": 0.6
+          },
+          "index": {
+            "target": 2.18259,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.341295,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.868263,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.779157,
+            "tolerance": 0.6
+          }
+        },
+        "fingerCurlRad": {
+          "index": {
+            "target": 3.13225,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 2.271505,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 2.38029,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 3.096855,
+            "tolerance": 0.6
+          }
+        },
+        "thumbToFingertip": {
+          "index": {
+            "target": 2.106083,
+            "tolerance": 0.6
+          },
+          "middle": {
+            "target": 0.140409,
+            "tolerance": 0.6
+          },
+          "ring": {
+            "target": 0.603015,
+            "tolerance": 0.6
+          },
+          "pinky": {
+            "target": 1.588867,
+            "tolerance": 0.6
+          }
+        }
+      }
+    }
+  ]
+}

@@ -16,8 +16,13 @@ export function VisionDiagnosticsPanel({
       aria-label="Vision worker diagnostics"
       className="vision-diagnostics"
     >
-      <p>Worker diagnostics</p>
-      <dl>
+      <details>
+        <summary>
+          <span>Worker</span>
+          <strong>{diagnostics.effectiveFps.toFixed(1)} FPS</strong>
+        </summary>
+        <p>Worker diagnostics</p>
+        <dl>
         <Metric
           label="Runtime"
           value={`MediaPipe ${worker.runtimeVersion}`}
@@ -90,7 +95,8 @@ export function VisionDiagnosticsPanel({
             diagnostics.pending ? "1 pending" : "none pending"
           }`}
         />
-      </dl>
+        </dl>
+      </details>
     </aside>
   );
 }

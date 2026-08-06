@@ -1,4 +1,4 @@
-import { useEffect, useState, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import type { VisionLandmarkFrame } from "../../vision/visionTypes";
 import { renderLandmarkFrame } from "../../vision/renderLandmarkFrame";
 import { calculateVisionCaptureSize } from "../../vision/visionCapture";
@@ -26,11 +26,17 @@ export function useLandmarkOverlay(
   videoRef: RefObject<HTMLVideoElement | null>,
   canvasRef: RefObject<HTMLCanvasElement | null>,
   enabled: boolean,
+  onFrame?: (frame: VisionLandmarkFrame) => void,
 ): LandmarkOverlayState {
+  const onFrameRef = useRef(onFrame);
   const [state, setState] = useState<LandmarkOverlayState>({
     worker: { status: "loading" },
     diagnostics: EMPTY_VISION_DIAGNOSTICS,
   });
+
+  useEffect(() => {
+    onFrameRef.current = onFrame;
+  }, [onFrame]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -56,6 +62,7 @@ export function useLandmarkOverlay(
       onFrame: (frame) => {
         if (!cancelled) {
           drawFrame(frame, canvas, context);
+          onFrameRef.current?.(frame);
           const snapshot = diagnostics.record(frame, client.getStats());
           const now = performance.now();
           if (now - lastDiagnosticsPublishedAt >= 250) {

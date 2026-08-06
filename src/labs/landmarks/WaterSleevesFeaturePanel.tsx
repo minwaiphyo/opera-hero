@@ -1,0 +1,282 @@
+import { useMemo } from "react";
+import { extractWaterSleevesFrameFeatures } from "../../domain/gestures/features/waterSleevesFeatures";
+import { extractWaterSleevesTrajectory } from "../../domain/gestures/features/waterSleevesTrajectory";
+import { WATER_SLEEVES_REFERENCE } from "../../domain/gestures/references/waterSleevesReference";
+import { compareWaterSleevesTrajectory } from "../../domain/gestures/scoring/waterSleevesEnvelope";
+import { evaluateWaterSleevesTrajectory } from "../../domain/gestures/scoring/waterSleevesEvaluator";
+import { runWaterSleevesRegressions } from "../../domain/gestures/scoring/waterSleevesRegressions";
+import type { VisionReplayFixture } from "../../vision/replay/visionReplayTypes";
+import type { VisionLandmarkFrame } from "../../vision/visionTypes";
+
+export function WaterSleevesFeaturePanel({
+  fixture,
+  frame,
+}: {
+  fixture: VisionReplayFixture;
+  frame: VisionLandmarkFrame | null;
+}) {
+  const features = frame ? extractWaterSleevesFrameFeatures(frame) : null;
+  const trajectory = useMemo(
+    () => extractWaterSleevesTrajectory(fixture),
+    [fixture],
+  );
+  const comparison = useMemo(
+    () => compareWaterSleevesTrajectory(trajectory, WATER_SLEEVES_REFERENCE),
+    [trajectory],
+  );
+  const evaluation = useMemo(
+    () => evaluateWaterSleevesTrajectory(trajectory, WATER_SLEEVES_REFERENCE),
+    [trajectory],
+  );
+  const regressions = useMemo(
+    () => runWaterSleevesRegressions(WATER_SLEEVES_REFERENCE),
+    [],
+  );
+
+  return (
+    <section
+      aria-labelledby="water-sleeves-features-title"
+      className="gesture-feature-panel"
+    >
+      <p className="check-kicker">Scoring observability</p>
+      <h2 id="water-sleeves-features-title">Water Sleeves features</h2>
+      <p>
+        Pose arms are required. Hand Landmarker detections are ignored because
+        costume sleeves obscure the hands.
+      </p>
+
+      <section aria-labelledby="water-sleeves-coverage-title">
+        <h3 id="water-sleeves-coverage-title">Sequence coverage</h3>
+        <p>
+          {trajectory.usableFrames}/{trajectory.totalFrames} frames contain at
+          least one usable pose arm. Coverage measures availability, not
+          cultural correctness.
+        </p>
+        <div className="feature-coverage-table" role="table">
+          <div className="feature-coverage-header" role="row">
+            <span role="columnheader">Signal</span>
+            <span role="columnheader">Coverage</span>
+            <span role="columnheader">Use</span>
+          </div>
+          {trajectory.signals.map((assessment) => (
+            <div key={assessment.signal} role="row">
+              <span role="cell">{signalLabel(assessment.signal)}</span>
+              <span role="cell">
+                {(assessment.coverage * 100).toFixed(1)}%
+              </span>
+              <span className={`feature-use ${assessment.recommendedUse}`} role="cell">
+                {assessment.recommendedUse}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="water-sleeves-envelope-title">
+        <h3 id="water-sleeves-envelope-title">Reference envelope</h3>
+        <p>
+          Provisional developer comparison against {WATER_SLEEVES_REFERENCE.progressPoints}
+          {" "}smoothed progress points. This is not yet a visitor pass score.
+        </p>
+        <dl className="gesture-feature-summary envelope-summary">
+          <FeatureMetric
+            label="Overall fit"
+            value={percentage(comparison.overallFit)}
+          />
+          <FeatureMetric
+            label="Left arm angle"
+            value={percentage(comparison.signalFit.leftUpperArmAngle)}
+          />
+          <FeatureMetric
+            label="Right arm angle"
+            value={percentage(comparison.signalFit.rightUpperArmAngle)}
+          />
+          <FeatureMetric
+            label="Left elbow path"
+            value={percentage(comparison.signalFit.leftElbowPosition)}
+          />
+          <FeatureMetric
+            label="Right elbow path"
+            value={percentage(comparison.signalFit.rightElbowPosition)}
+          />
+        </dl>
+      </section>
+
+      <section aria-labelledby="water-sleeves-evaluator-title">
+        <h3 id="water-sleeves-evaluator-title">Temporal evaluator</h3>
+        <p>
+          Soft feature membership after constrained temporal alignment. These
+          diagnostics are not a completion threshold.
+        </p>
+        <dl className="gesture-feature-summary envelope-summary">
+          <FeatureMetric
+            label="Soft score"
+            value={percentage(evaluation.overallScore)}
+          />
+          <FeatureMetric
+            label="Tracking coverage"
+            value={percentage(evaluation.trackingCoverage)}
+          />
+          <FeatureMetric
+            label="Tracking status"
+            value={evaluation.trackingStatus}
+          />
+          <FeatureMetric
+            label="Aligned pairs"
+            value={String(evaluation.alignedPairs)}
+          />
+        </dl>
+        <div className="feature-coverage-table" role="table">
+          <div className="feature-coverage-header" role="row">
+            <span role="columnheader">Required signal</span>
+            <span role="columnheader">Soft score</span>
+            <span role="columnheader">Coverage</span>
+          </div>
+          {Object.entries(evaluation.signalScores).map(([signal, result]) => (
+            <div key={signal} role="row">
+              <span role="cell">{signalLabel(signal)}</span>
+              <span role="cell">
+                {result.score === null ? "unavailable" : percentage(result.score)}
+              </span>
+              <span role="cell">{percentage(result.coverage)}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="water-sleeves-regressions-title">
+        <h3 id="water-sleeves-regressions-title">Deterministic regressions</h3>
+        <p>
+          Synthetic landmark-derived scenarios protect evaluator behaviour. Their
+          expectations are engineering regression bounds, not visitor thresholds.
+        </p>
+        <div className="regression-table" role="table">
+          <div className="feature-coverage-header" role="row">
+            <span role="columnheader">Scenario</span>
+            <span role="columnheader">Score</span>
+            <span role="columnheader">Tracking</span>
+            <span role="columnheader">Result</span>
+          </div>
+          {regressions.map((regression) => (
+            <div key={regression.id} role="row">
+              <span role="cell" title={regression.description}>
+                {signalLabel(regression.id)}
+              </span>
+              <span role="cell">
+                {percentage(regression.evaluation.overallScore)}
+              </span>
+              <span role="cell">{regression.evaluation.trackingStatus}</span>
+              <span
+                className={`regression-result ${regression.passed ? "passed" : "failed"}`}
+                role="cell"
+              >
+                {regression.passed ? "pass" : "fail"}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {!frame ? (
+        <p className="feature-empty">Start the replay to inspect measurements.</p>
+      ) : !features ? (
+        <p className="feature-empty">
+          Frame unavailable: reliable shoulders are required for body-scale
+          normalization.
+        </p>
+      ) : (
+        <>
+          <dl className="gesture-feature-summary">
+            <FeatureMetric
+              label="Usable arms"
+              value={`${features.usableArmCount}/2`}
+            />
+            <FeatureMetric label="Hand influence" value="none" />
+            <FeatureMetric
+              label="Shoulder scale"
+              value={features.shoulderWidth.toFixed(3)}
+            />
+          </dl>
+          <div className="arm-feature-grid">
+            <ArmFeatures label="Left arm" arm={features.leftArm} />
+            <ArmFeatures label="Right arm" arm={features.rightArm} />
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
+
+function signalLabel(signal: string): string {
+  return signal
+    .replace(/([A-Z])/g, " $1")
+    .replace(/^./, (character) => character.toUpperCase());
+}
+
+function ArmFeatures({
+  label,
+  arm,
+}: {
+  label: string;
+  arm: NonNullable<
+    ReturnType<typeof extractWaterSleevesFrameFeatures>
+  >["leftArm"];
+}) {
+  return (
+    <section aria-label={label} className="arm-feature-card">
+      <h3>{label}</h3>
+      {!arm ? (
+        <p>Unavailable: shoulder or elbow visibility is too low.</p>
+      ) : (
+        <dl>
+          <FeatureMetric label="Availability" value="usable" />
+          <FeatureMetric
+            label="Upper-arm angle"
+            value={degrees(arm.upperArmAngleRad)}
+          />
+          <FeatureMetric
+            label="Elbow position"
+            value={coordinates(arm.elbowFromShoulder)}
+          />
+          <FeatureMetric
+            label="Elbow angle"
+            value={arm.elbowAngleRad === null ? "occluded" : degrees(arm.elbowAngleRad)}
+          />
+          <FeatureMetric
+            label="Wrist position"
+            value={
+              arm.wristFromShoulder === null
+                ? "occluded"
+                : coordinates(arm.wristFromShoulder)
+            }
+          />
+          <FeatureMetric
+            label="Confidence"
+            value={`${(arm.confidence * 100).toFixed(0)}%`}
+          />
+        </dl>
+      )}
+    </section>
+  );
+}
+
+function FeatureMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  );
+}
+
+function degrees(radians: number): string {
+  return `${((radians * 180) / Math.PI).toFixed(1)}°`;
+}
+
+function coordinates(point: { x: number; y: number }): string {
+  return `x ${point.x.toFixed(2)} · y ${point.y.toFixed(2)}`;
+}
+
+function percentage(value: number): string {
+  return `${(value * 100).toFixed(1)}%`;
+}
