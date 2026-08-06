@@ -35,15 +35,18 @@ The organisers indicated that Kong Chow Wui Koon can arrange a session with
 **Master Aw Yeong Peng Mun**, described by the organisers as a well-known teacher and
 Singaporean disciple of Cantonese Opera master Hung Sin Nui.
 
-Proposed session:
+Session recorded:
 
 - Date: Saturday, 1 August 2026
 - Time: 9:00–10:30 AM
 - Location: clan association; exact address and room pending
 - Purpose: practitioner demonstration, cultural explanation, and reference capture
 
-Availability and final logistics must be confirmed by the project team with the
-organisers.
+Cleaned positive demonstrations are available for all three movements. These videos
+are canonical reference material from one practitioner, not a diverse training or
+validation dataset. Follow the annotation, fixture, augmentation, scoring-envelope,
+and participant-validation gates in
+[`SCORING_DATA_PIPELINE.md`](./SCORING_DATA_PIPELINE.md).
 
 ## Costume direction
 

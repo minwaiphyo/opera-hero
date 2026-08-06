@@ -451,9 +451,10 @@ Implement and tune the final culturally approved gestures.
 ### Tests
 
 - Review each gesture interpretation with a Cantonese Opera advisor.
-- Test with participants unfamiliar with Cantonese Opera.
-- Include height, handedness, clothing, movement range, and lighting variation.
-- Measure:
+- Run informal live trials with teammates unfamiliar with the movements.
+- Include as much height, handedness, clothing, movement range, camera-distance, and
+  lighting variation as the team can cover before festival deployment.
+- Observe provisionally:
   - time to first successful attempt;
   - genuine-attempt completion rate;
   - accidental activation rate;
@@ -463,9 +464,12 @@ Implement and tune the final culturally approved gestures.
 ### Exit gate
 
 - Cultural advisor approves meaning and demonstration.
-- Genuine-attempt completion meets the agreed target.
+- Deterministic suites pass and teammates can complete genuine attempts without
+  precise imitation.
 - No participant receives negative or failure language.
 - Thresholds and fixtures are versioned and reproducible.
+- Results are labelled as informal pre-festival evidence; formal participant
+  calibration is optional post-festival improvement work.
 
 ### Deliverable
 
