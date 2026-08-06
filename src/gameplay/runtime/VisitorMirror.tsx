@@ -10,11 +10,8 @@
  */
 
 import { useEffect, useRef, type RefObject } from "react";
-import type { VisionLandmark } from "../../vision/visionTypes";
-import { ARMS, BODY, HAND, JOINTS } from "./poseGraph";
+import { paintOverlay } from "./overlayPainter";
 import type { LatestFrame } from "./useVisionFrames";
-
-const VISIBLE = 0.4;
 
 export function VisitorMirror({
   videoRef,
@@ -78,32 +75,11 @@ export function VisitorMirror({
 
       // Landmarks are normalized to the camera image, so they map through the same
       // transform as the picture, including the mirroring.
-      const toX = (x: number) => width - (offsetX + x * drawWidth);
-      const toY = (y: number) => offsetY + y * drawHeight;
-      const pose = frame.pose?.landmarks;
-
-      if (pose) {
-        stroke(context, pose, BODY, toX, toY, "rgba(228, 184, 95, 0.5)", 3 * dpr);
-
-        context.shadowBlur = 16 * dpr;
-        context.shadowColor = "rgba(249, 227, 171, 0.65)";
-        stroke(context, pose, ARMS, toX, toY, "rgba(249, 227, 171, 0.95)", 5 * dpr);
-        context.shadowBlur = 0;
-
-        context.fillStyle = "rgba(249, 227, 171, 0.95)";
-        for (const index of JOINTS) {
-          const point = pose[index];
-          if (point && point.visibility >= VISIBLE) {
-            context.beginPath();
-            context.arc(toX(point.x), toY(point.y), 4 * dpr, 0, Math.PI * 2);
-            context.fill();
-          }
-        }
-      }
-
-      for (const hand of frame.hands) {
-        stroke(context, hand.landmarks, HAND, toX, toY, "rgba(242, 135, 159, 0.9)", 2.5 * dpr);
-      }
+      paintOverlay(context, frame, {
+        toX: (x) => width - (offsetX + x * drawWidth),
+        toY: (y) => offsetY + y * drawHeight,
+        scale: dpr,
+      });
     };
 
     handle = requestAnimationFrame(paint);
@@ -111,29 +87,4 @@ export function VisitorMirror({
   }, [read, showOverlay, videoRef]);
 
   return <canvas aria-hidden="true" className="mirror-canvas" ref={canvasRef} />;
-}
-
-function stroke(
-  context: CanvasRenderingContext2D,
-  points: readonly VisionLandmark[],
-  connections: readonly (readonly [number, number])[],
-  toX: (x: number) => number,
-  toY: (y: number) => number,
-  color: string,
-  lineWidth: number,
-): void {
-  context.strokeStyle = color;
-  context.lineWidth = lineWidth;
-  context.lineCap = "round";
-  context.beginPath();
-  for (const [from, to] of connections) {
-    const a = points[from];
-    const b = points[to];
-    if (!a || !b || (a.visibility ?? 1) < VISIBLE || (b.visibility ?? 1) < VISIBLE) {
-      continue;
-    }
-    context.moveTo(toX(a.x), toY(a.y));
-    context.lineTo(toX(b.x), toY(b.y));
-  }
-  context.stroke();
 }

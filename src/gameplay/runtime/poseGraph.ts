@@ -53,3 +53,6 @@ export const HAND: readonly Connection[] = [
 
 /** Landmarks drawn as joints, so the visitor can see the tracker following them. */
 export const JOINTS = [11, 12, 13, 14, 15, 16] as const;
+
+/** Thumb and fingertips. Marked so the orchid shape is readable at two metres. */
+export const FINGERTIPS = [4, 8, 12, 16, 20] as const;
