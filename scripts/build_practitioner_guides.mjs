@@ -27,9 +27,9 @@
  *   node scripts/build_practitioner_guides.mjs [--force]
  *
  * Needs ffmpeg on PATH and the cleaned practitioner footage under
- * `docs/practitioner-footage/` (both are local development material; neither the
- * footage nor the generated `public/guides/` is committed, exactly as with the
- * MediaPipe runtime files under `public/mediapipe/`).
+ * `docs/practitioner-footage/`, which is restricted local material and is not in this
+ * repository. The clips this produces ARE committed, so running the booth does not
+ * require the footage — only regenerating the clips does.
  * ──────────────────────────────────────────────────────────────────────────────
  */
 
@@ -95,8 +95,8 @@ async function main() {
   }
 
   console.log(
-    "\nGuides are generated development output and are not committed. Rebuild them on any\n" +
-      "machine that runs the booth, and after any change to the committed reference guides.",
+    "\nThe clips under public/guides/ are committed. Commit any regenerated output too, so\n" +
+      "the footage on screen stays in step with the references the evaluator scores against.",
   );
 }
 

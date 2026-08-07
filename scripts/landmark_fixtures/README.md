@@ -65,24 +65,26 @@ ignored local development artifacts.
 
 ## Visitor guide videos
 
-The game shows the visitor the movement before scoring it. Build those clips from the
-same footage, on every machine that runs the booth:
+The game shows the visitor the movement before scoring it. Those clips are committed
+under `public/guides/`, so a checkout runs the booth without the restricted footage.
+Nothing needs to be built for the game to work.
+
+Regenerate them — after any change to the committed reference guides, or to the chosen
+takes — with:
 
 ```powershell
-node scripts\build_practitioner_guides.mjs
+node scripts\build_practitioner_guides.mjs --force
 ```
 
-This writes `public/guides/<gesture-id>.mp4` and a poster frame for each gesture. Each
-clip is cut from the primary take named in `practitioner_fixture_manifest.json` and
+Each clip is cut from the primary take named in `practitioner_fixture_manifest.json` and
 trimmed to the length of the committed reference guide in
 `src/domain/gestures/references/`, so the visitor watches the same performance, over the
 same window, that the evaluator compares them against. The script reads that length from
-the reference itself and fails if a clip cannot match it — regenerate the guides whenever
-a reference is regenerated.
+the reference itself and fails if a clip cannot match it, so a regenerated reference
+cannot silently leave the footage behind.
 
-Like the footage they are cut from, the videos are recorded practitioner imagery and are
-not committed. Until they are built the game falls back to a framed gesture glyph and
-stays playable, and the browser console names the script to run.
+The committed clips are cut-down derivatives. The raw session footage stays in approved
+local/restricted storage and out of this repository.
 
 ## Tests
 

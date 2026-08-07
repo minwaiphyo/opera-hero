@@ -12,10 +12,11 @@
  *   playing     whether it should be running
  *   restartKey  changes per attempt; playback returns to the top of the movement
  *
- * The videos are recorded practitioner imagery, so like the footage they are cut from
- * they are generated locally rather than committed. A checkout that has not built them
- * yet falls back to the framed glyph instead of an empty rectangle, and the game stays
- * playable: the movement's written steps are on the learn screen either way.
+ * The clips are committed under `public/guides/`, so a fresh checkout can run the booth
+ * without the restricted source footage. The fallback below stays regardless: if a file
+ * is ever missing or unplayable the frame shows the gesture glyph rather than an empty
+ * rectangle, and the game stays playable — the movement's written steps are on the learn
+ * screen either way.
  */
 
 import { useEffect, useRef, useState } from "react";
