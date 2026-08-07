@@ -72,14 +72,16 @@ describe("GameShell", () => {
   });
 
   /**
-   * The mirror is what tells somebody the stage is awake and where to stand. The scored
-   * result is the exception: the movement is over, and watching yourself there competes
-   * with reading how it went.
+   * The mirror is what tells somebody the stage is awake and where to stand. Once the
+   * performing is over it stops earning its place: on the score and the curtain call,
+   * watching yourself competes with what the screen is actually for.
    */
-  it("shows the visitor their own image on every screen but the score", () => {
+  it("shows the visitor their own image while there is still performing to do", () => {
+    const afterPerforming = new Set(["result", "complete"]);
+
     for (const gameScreen of GAME_SCREENS) {
       renderShell(view({ ...level1, screen: gameScreen, score: goodScore }));
-      if (gameScreen === "result") {
+      if (afterPerforming.has(gameScreen)) {
         expect(screen.queryByTestId("camera-stage")).toBeNull();
       } else {
         expect(screen.getByTestId("camera-stage")).toBeInTheDocument();

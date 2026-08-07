@@ -1026,11 +1026,16 @@
 /* Complete and recovery                                                       */
 /* -------------------------------------------------------------------------- */
 
-.screen--complete,
+/* Recovery keeps the mirror beside its copy: framing is the problem it is solving. */
 .screen--recovery {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--gutter);
   align-items: center;
+  justify-items: center;
+}
+
+.screen--complete {
+  place-content: center;
   justify-items: center;
 }
 

@@ -308,13 +308,11 @@ export function ResultScreen({
   );
 }
 
-export function CompleteScreen({
-  cameraStage,
-  onFinish,
-}: {
-  cameraStage: ReactNode;
-  onFinish: () => void;
-}) {
+/**
+ * The curtain call. No mirror: the performance is over, and the last thing the visitor
+ * should be looking at is the three movements they just performed, not themselves.
+ */
+export function CompleteScreen({ onFinish }: { onFinish: () => void }) {
   return (
     <section className="screen screen--complete" aria-labelledby="title">
       <div className="complete-copy">
@@ -341,9 +339,6 @@ export function CompleteScreen({
         </ul>
         <Button autoFocus label={COPY.finish} onClick={onFinish} />
       </div>
-      <Mirror label={COPY.mirrorLabel} size="compact">
-        {cameraStage}
-      </Mirror>
     </section>
   );
 }

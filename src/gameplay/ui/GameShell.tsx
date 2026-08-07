@@ -132,7 +132,7 @@ function renderScreen(
       );
 
     case "complete":
-      return <CompleteScreen cameraStage={cameraStage} onFinish={actions.next} />;
+      return <CompleteScreen onFinish={actions.next} />;
 
     case "recovery":
       return recovery;
