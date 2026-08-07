@@ -179,6 +179,40 @@ describe("booth flow", () => {
     expect(apply(readyToPerform(), { type: "quit" }).screen).toBe("attract");
   });
 
+  /**
+   * There is one scorer per gesture and it holds its last phase, so a gesture can still
+   * be reporting a finished attempt when the next visitor arrives at it. Nobody may be
+   * shown a score they did not perform.
+   */
+  it("ignores a capture report that arrives outside an attempt", () => {
+    for (const screen of ["learn", "result", "complete"] as const) {
+      const state: FlowState = { ...readyToPerform(), screen, score: null };
+      const reported = apply(state, {
+        type: "capture-phase",
+        phase: "completed",
+        score: SCORE,
+      });
+
+      expect(reported.screen).toBe(screen);
+      expect(reported.score).toBeNull();
+    }
+  });
+
+  it("clears the incoming gesture's scorer as each level begins", () => {
+    const scored = apply(readyToPerform(), {
+      type: "capture-phase",
+      phase: "completed",
+      score: SCORE,
+    });
+
+    const nextLevel = apply(scored, { type: "next" });
+
+    expect(nextLevel.screen).toBe("learn");
+    expect(nextLevel.gestureId).toBe("opening-door");
+    expect(nextLevel.captureIntent).toBe("cancel");
+    expect(nextLevel.score).toBeNull();
+  });
+
   it("reports dwell progress only for screens that advance themselves", () => {
     const learn = wait(booth(), PRESENCE_TO_START_MS + 400);
     expect(dwellProgress(learn)).toBeCloseTo(0, 1);

@@ -171,7 +171,13 @@ function capturePhase(
   phase: CapturePhase,
   score: GameScore | null,
 ): FlowState {
-  if (state.screen === "attract" || state.screen === "recovery") {
+  // Only follow the capture policy for an attempt this machine actually asked for.
+  //
+  // There is one scorer per gesture and it keeps its last phase, so the gesture a new
+  // visitor starts on can still be reporting `completed` from the previous visitor's
+  // attempt. Honouring that would throw them from the guide straight to somebody else's
+  // score. A report that arrives outside an attempt describes the past, not the visitor.
+  if (!capturing(state.screen)) {
     return state;
   }
   switch (phase) {
@@ -249,6 +255,9 @@ function enterLevel(state: FlowState, level: Level): FlowState {
     level,
     gestureId: gestureForLevel(level).id,
     score: null,
+    // Clear the incoming gesture's scorer before the visitor reaches it: it may still be
+    // holding the attempt and evaluation from whoever performed this level last.
+    captureIntent: "cancel",
   };
 }
 
