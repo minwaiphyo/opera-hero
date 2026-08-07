@@ -651,14 +651,16 @@
 /* -------------------------------------------------------------------------- */
 
 .screen--learn {
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: clamp(0.6rem, 1.8vmin, 1.6rem);
+  grid-template-rows: minmax(0, 1fr);
 }
 
-/* Guide and mirror share the row, exactly as they do during the attempt. */
+/*
+ * The mirror column is the wider of the two and carries no other content, so the
+ * visitor's own image is bounded only by the height of the screen.
+ */
 .learn-panes {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: var(--gutter);
   min-height: 0;
 }
@@ -668,18 +670,27 @@
   min-height: 0;
 }
 
+/*
+ * Name, demonstration, steps and the way on, stacked; the guide takes the height the
+ * text does not. Nothing here spans the screen, so no row of it is charged to the mirror.
+ */
+.learn-pane--guide {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: clamp(0.5rem, 1.4vmin, 1.2rem);
+  align-content: center;
+}
+
 .learn-pane .guide,
 .learn-pane .mirror {
   height: 100%;
 }
 
-/* Steps, tracking guidance and the way on, in one line under the panes. */
+/* Tracking guidance and the way on, side by side under the steps. */
 .learn-cues {
   display: flex;
   flex-wrap: wrap;
   gap: clamp(0.5rem, 1.4vmin, 1.2rem) clamp(1rem, 2.6vmin, 2.6rem);
   align-items: center;
-  justify-content: center;
 }
 
 .steps {
@@ -717,7 +728,7 @@
 
 .screen--perform {
   position: relative;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
   gap: clamp(0.4rem, 1.2vmin, 1rem);
 }
 
@@ -732,9 +743,10 @@
   margin: 0;
 }
 
+/* As on the learn screen: the wider column is the visitor's, and it holds nothing else. */
 .perform-panes {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: var(--gutter);
   min-height: 0;
 }
@@ -742,6 +754,12 @@
 .perform-pane {
   display: grid;
   min-height: 0;
+}
+
+.perform-pane--guide {
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(0.4rem, 1.2vmin, 1rem);
+  align-content: center;
 }
 
 .perform-pane .guide,
@@ -759,7 +777,15 @@
   pointer-events: none;
 }
 
+/*
+ * Cancelling is a development and recovery affordance, not part of performing, so it sits
+ * out of the flow in the corner under the guide. Keeping it in a row of its own cost the
+ * visitor's image the height of a button.
+ */
 .perform-foot {
+  position: absolute;
+  bottom: clamp(0.5rem, 1.6vmin, 1.6rem);
+  left: var(--gutter);
   display: flex;
   justify-content: center;
 }
@@ -858,12 +884,19 @@
 /* Result                                                                      */
 /* -------------------------------------------------------------------------- */
 
+/*
+ * Score and dial only. The visitor's own image is deliberately absent here: the movement
+ * is over, and watching yourself is a distraction from reading how it went.
+ */
 .screen--result {
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 44rem);
   grid-template-rows: auto minmax(0, auto);
   gap: clamp(0.6rem, 1.8vmin, 1.6rem) var(--gutter);
   align-content: center;
   align-items: center;
+  /* Both columns size to their content, so the score sits in the middle of the stage
+     rather than against the edge the mirror used to hold down. */
+  justify-content: center;
 }
 
 .result-head {

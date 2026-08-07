@@ -95,42 +95,45 @@ export function LearnScreen({
       className={`screen screen--learn accent-${gesture.accent}`}
       aria-labelledby="title"
     >
-      <header className="learn-head">
-        <p className="eyebrow">
-          <span lang="zh-Hant">{gesture.act}</span> · {COPY.watchLabel}
-        </p>
-        <h1 className="title title--compact" id="title">
-          {gesture.name}
-          <span lang="zh-Hant">{gesture.chinese}</span>
-        </h1>
-        <p className="lede">{gesture.meaning}</p>
-      </header>
-
       {/*
-        The same two panes as the attempt, at the same size. This is the screen where the
-        visitor works out where to stand, so their own image has to be big enough to read
-        from one to two metres — and nothing jumps when the countdown starts.
+        Everything about the movement lives in the left column — its name, the
+        demonstration, the steps — which leaves the whole height of the right column to
+        the visitor's own image. This is the screen where somebody works out where to
+        stand, so that image is the largest thing on it.
       */}
       <div className="learn-panes">
-        <div className="learn-pane">
+        <div className="learn-pane learn-pane--guide">
+          <header className="learn-head">
+            <p className="eyebrow">
+              <span lang="zh-Hant">{gesture.act}</span> · {COPY.watchLabel}
+            </p>
+            <h1 className="title title--compact" id="title">
+              {gesture.name}
+              <span lang="zh-Hant">{gesture.chinese}</span>
+            </h1>
+            <p className="lede">{gesture.meaning}</p>
+          </header>
+
           <PractitionerGuide gestureId={gesture.id} playing restartKey={attemptKey} />
+
+          <ol className="steps">
+            {gesture.steps.map((step, index) => (
+              <li key={step}>
+                <span aria-hidden="true">{index + 1}</span>
+                {step}
+              </li>
+            ))}
+          </ol>
+
+          <div className="learn-cues">
+            <TrackingHint prompt={prompt} />
+            <Button autoFocus label={COPY.ready} onClick={onReady} />
+          </div>
         </div>
+
         <div className="learn-pane">
           <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
         </div>
-      </div>
-
-      <div className="learn-cues">
-        <ol className="steps">
-          {gesture.steps.map((step, index) => (
-            <li key={step}>
-              <span aria-hidden="true">{index + 1}</span>
-              {step}
-            </li>
-          ))}
-        </ol>
-        <TrackingHint prompt={prompt} />
-        <Button autoFocus label={COPY.ready} onClick={onReady} />
       </div>
     </section>
   );
@@ -159,16 +162,22 @@ export function PerformScreen({
       aria-labelledby="title"
       data-phase={view.screen}
     >
-      <header className="perform-head">
-        <h1 className="title title--compact" id="title">
-          {gesture.name}
-          <span lang="zh-Hant">{gesture.chinese}</span>
-        </h1>
-        <p className="lede">{gesture.steps[0]}</p>
-      </header>
-
+      {/*
+        The heading sits with the guide rather than above both panes, and the cancel
+        action is lifted out of the flow. Every row of chrome across the screen comes
+        straight off the height of the visitor's own image, which is what they are
+        actually watching while they perform.
+      */}
       <div className="perform-panes">
-        <div className="perform-pane">
+        <div className="perform-pane perform-pane--guide">
+          <header className="perform-head">
+            <h1 className="title title--compact" id="title">
+              {gesture.name}
+              <span lang="zh-Hant">{gesture.chinese}</span>
+            </h1>
+            <p className="lede">{gesture.steps[0]}</p>
+          </header>
+
           <PractitionerGuide
             gestureId={gesture.id}
             playing
@@ -295,10 +304,6 @@ export function ResultScreen({
           <Button label={COPY.retry} onClick={onRetry} variant="secondary" />
         </div>
       </div>
-
-      <Mirror label={COPY.mirrorLabel} size="compact">
-        {cameraStage}
-      </Mirror>
     </section>
   );
 }

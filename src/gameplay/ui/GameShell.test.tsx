@@ -71,12 +71,28 @@ describe("GameShell", () => {
     }
   });
 
-  it("shows the visitor their own image on every screen", () => {
+  /**
+   * The mirror is what tells somebody the stage is awake and where to stand. The scored
+   * result is the exception: the movement is over, and watching yourself there competes
+   * with reading how it went.
+   */
+  it("shows the visitor their own image on every screen but the score", () => {
     for (const gameScreen of GAME_SCREENS) {
       renderShell(view({ ...level1, screen: gameScreen, score: goodScore }));
-      expect(screen.getByTestId("camera-stage")).toBeInTheDocument();
+      if (gameScreen === "result") {
+        expect(screen.queryByTestId("camera-stage")).toBeNull();
+      } else {
+        expect(screen.getByTestId("camera-stage")).toBeInTheDocument();
+      }
       cleanup();
     }
+  });
+
+  it("keeps the mirror when it could not see the visitor, who needs their framing", () => {
+    renderShell(view({ ...level1, screen: "result", score: null }));
+
+    expect(screen.getByText(/We couldn't see enough/)).toBeInTheDocument();
+    expect(screen.getByTestId("camera-stage")).toBeInTheDocument();
   });
 
   it("starts a session from the attract screen", () => {
