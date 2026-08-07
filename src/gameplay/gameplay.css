@@ -651,26 +651,41 @@
 /* -------------------------------------------------------------------------- */
 
 .screen--learn {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: clamp(0.6rem, 1.8vmin, 1.6rem) var(--gutter);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(0.6rem, 1.8vmin, 1.6rem);
 }
 
-.learn-head {
-  grid-column: 1 / -1;
-}
-
-.learn-side {
+/* Guide and mirror share the row, exactly as they do during the attempt. */
+.learn-panes {
   display: grid;
-  gap: clamp(0.5rem, 1.4vmin, 1.2rem);
-  align-content: center;
-  justify-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
   min-height: 0;
 }
 
-.steps {
+.learn-pane {
   display: grid;
-  gap: clamp(0.35rem, 0.9vmin, 0.8rem);
+  min-height: 0;
+}
+
+.learn-pane .guide,
+.learn-pane .mirror {
+  height: 100%;
+}
+
+/* Steps, tracking guidance and the way on, in one line under the panes. */
+.learn-cues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 1.4vmin, 1.2rem) clamp(1rem, 2.6vmin, 2.6rem);
+  align-items: center;
+  justify-content: center;
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.35rem, 0.9vmin, 0.8rem) clamp(0.9rem, 2.2vmin, 2.2rem);
   margin: 0;
   padding: 0;
   list-style: none;

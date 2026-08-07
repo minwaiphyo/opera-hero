@@ -106,12 +106,21 @@ export function LearnScreen({
         <p className="lede">{gesture.meaning}</p>
       </header>
 
-      <PractitionerGuide gestureId={gesture.id} playing restartKey={attemptKey} />
+      {/*
+        The same two panes as the attempt, at the same size. This is the screen where the
+        visitor works out where to stand, so their own image has to be big enough to read
+        from one to two metres — and nothing jumps when the countdown starts.
+      */}
+      <div className="learn-panes">
+        <div className="learn-pane">
+          <PractitionerGuide gestureId={gesture.id} playing restartKey={attemptKey} />
+        </div>
+        <div className="learn-pane">
+          <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
+        </div>
+      </div>
 
-      <div className="learn-side">
-        <Mirror label={COPY.mirrorLabel} size="compact">
-          {cameraStage}
-        </Mirror>
+      <div className="learn-cues">
         <ol className="steps">
           {gesture.steps.map((step, index) => (
             <li key={step}>
