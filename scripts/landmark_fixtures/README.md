@@ -63,6 +63,27 @@ The output contains 41 smoothed progress points, broad provisional tolerances, a
 no recorded imagery. It is small enough to commit. The full landmark fixtures remain
 ignored local development artifacts.
 
+## Visitor guide videos
+
+The game shows the visitor the movement before scoring it. Build those clips from the
+same footage, on every machine that runs the booth:
+
+```powershell
+node scripts\build_practitioner_guides.mjs
+```
+
+This writes `public/guides/<gesture-id>.mp4` and a poster frame for each gesture. Each
+clip is cut from the primary take named in `practitioner_fixture_manifest.json` and
+trimmed to the length of the committed reference guide in
+`src/domain/gestures/references/`, so the visitor watches the same performance, over the
+same window, that the evaluator compares them against. The script reads that length from
+the reference itself and fails if a clip cannot match it — regenerate the guides whenever
+a reference is regenerated.
+
+Like the footage they are cut from, the videos are recorded practitioner imagery and are
+not committed. Until they are built the game falls back to a framed gesture glyph and
+stays playable, and the browser console names the script to run.
+
 ## Tests
 
 ```powershell

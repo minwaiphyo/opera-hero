@@ -15,6 +15,11 @@ public/mediapipe/
 # only consented, anonymized landmark fixtures derived from it.
 docs/practitioner-footage/
 
+# The visitor-facing guide videos are recorded practitioner imagery, so the same rule
+# applies: they are cut from the restricted footage on each machine by
+# scripts/build_practitioner_guides.mjs rather than committed.
+public/guides/
+
 coverage/
 playwright-report/
 test-results/

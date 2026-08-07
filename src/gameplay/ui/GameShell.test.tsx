@@ -90,7 +90,10 @@ describe("GameShell", () => {
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Orchid Finger");
     expect(screen.getByText("Middle finger meets thumb")).toBeInTheDocument();
-    expect(screen.getByText(/Practitioner video coming soon/)).toBeInTheDocument();
+    expect(screen.getByLabelText("Orchid Finger demonstration")).toHaveAttribute(
+      "src",
+      "/guides/orchid-finger.mp4",
+    );
 
     fireEvent.click(screen.getByRole("button", { name: /I'm ready/ }));
     expect(actions.next).toHaveBeenCalledOnce();
@@ -101,7 +104,7 @@ describe("GameShell", () => {
 
     expect(screen.getByTestId("camera-stage")).toBeInTheDocument();
     expect(within(screen.getByTestId("countdown")).getByText("3")).toBeInTheDocument();
-    expect(screen.getByText(/Practitioner video coming soon/)).toBeInTheDocument();
+    expect(screen.getByLabelText("Orchid Finger demonstration")).toBeInTheDocument();
   });
 
   it("marks the attempt as being followed", () => {

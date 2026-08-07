@@ -109,6 +109,8 @@ export const COPY = {
   start: "Start",
   mirrorLabel: "You",
   guideLabel: "The movement",
+  /** Shown in the guide frame when the local guide videos have not been built. */
+  guideUnavailable: "Demonstration unavailable",
   watchLabel: "Watch, then try it",
   ready: "I'm ready",
   countdownCue: "準備",
