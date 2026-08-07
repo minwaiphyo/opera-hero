@@ -6,8 +6,9 @@
  *
  * Two rules shape it:
  *
- * 1. The booth is unmanned. Every screen advances on its own, and the buttons are a
- *    manual path rather than the only path.
+ * 1. The visitor starts the session deliberately, by pressing Start. Once they have, the
+ *    booth carries them: every later screen advances on its own, and an abandoned session
+ *    finds its own way back to attract without anybody attending to it.
  * 2. Attempt timing is NOT decided here. `capturePhase` comes from the approved capture
  *    policy in `src/domain/gestures/live/`; this machine follows it.
  */
@@ -22,9 +23,6 @@ export type CapturePhase =
   | "completed"
   | "timed-out"
   | "cancelled";
-
-/** Standing in frame this long starts a session. */
-export const PRESENCE_TO_START_MS = 1_500;
 
 /** Reading time per screen before it moves on by itself. */
 export const DWELL_MS = {
@@ -50,7 +48,6 @@ export interface FlowState {
   readonly message: string | null;
   readonly dwellLeftMs: number | null;
   readonly dwellTotalMs: number | null;
-  readonly presentMs: number;
   readonly absentMs: number;
   readonly cameraDownMs: number;
   readonly cameraReady: boolean;
@@ -80,7 +77,6 @@ export function createFlowState(): FlowState {
     message: null,
     dwellLeftMs: null,
     dwellTotalMs: null,
-    presentMs: 0,
     absentMs: 0,
     cameraDownMs: 0,
     cameraReady: false,
@@ -100,7 +96,11 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
     case "camera":
       return camera(state, event.ready);
     case "start":
-      return state.screen === "attract" ? enterLevel(state, 1) : state;
+      // Never begin a turn the booth cannot see. Attract shows the camera's state, and
+      // `tick` asks for staff if it stays down.
+      return state.screen === "attract" && state.cameraReady
+        ? enterLevel(state, 1)
+        : state;
     case "next":
       return next(state);
     case "retry":
@@ -115,15 +115,13 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
 }
 
 function tick(state: FlowState, deltaMs: number, present: boolean): FlowState {
-  const presentMs = present ? state.presentMs + deltaMs : 0;
   const absentMs = present ? 0 : state.absentMs + deltaMs;
   const cameraDownMs = state.cameraReady ? 0 : state.cameraDownMs + deltaMs;
-  let now: FlowState = { ...state, presentMs, absentMs, cameraDownMs };
+  let now: FlowState = { ...state, absentMs, cameraDownMs };
 
+  // Attract waits for the visitor to press Start. Standing in front of the booth is not
+  // the same as wanting a turn: people walk past, queue, and watch somebody else.
   if (state.screen === "attract") {
-    if (state.cameraReady && presentMs >= PRESENCE_TO_START_MS) {
-      return enterLevel(now, 1);
-    }
     // Only ask for help once the camera has had a fair chance to open.
     if (!state.cameraReady && cameraDownMs >= CAMERA_GRACE_MS) {
       return { ...enter(now, "recovery"), message: CAMERA_MESSAGE, resumeScreen: null };
@@ -135,6 +133,8 @@ function tick(state: FlowState, deltaMs: number, present: boolean): FlowState {
     if (!state.cameraReady) {
       return now;
     }
+    // Stepping back into frame resumes a session, but never begins one: this visitor
+    // already pressed Start, and losing their turn to a stumble would be unkind.
     if (present) {
       return state.resumeScreen
         ? { ...enter(now, state.resumeScreen), resumeScreen: null, message: null }

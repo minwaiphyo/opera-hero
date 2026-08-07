@@ -6,7 +6,6 @@ import {
   CAMERA_GRACE_MS,
   CAMERA_MESSAGE,
   DWELL_MS,
-  PRESENCE_TO_START_MS,
   createFlowState,
   dwellProgress,
   flowReducer,
@@ -37,22 +36,30 @@ function booth(): FlowState {
   return apply(createFlowState(), { type: "camera", ready: true });
 }
 
+/** Attract → learn, the way a visitor gets there: by pressing Start. */
+function learning(): FlowState {
+  const state = apply(booth(), { type: "start" });
+  expect(state.screen).toBe("learn");
+  expect(state.gestureId).toBe("orchid-finger");
+  return state;
+}
+
 /** Attract → learn → capture handover for level one. */
 function readyToPerform(): FlowState {
-  const learning = wait(booth(), PRESENCE_TO_START_MS + 400);
-  expect(learning.screen).toBe("learn");
-  expect(learning.gestureId).toBe("orchid-finger");
-  return apply(learning, { type: "next" });
+  return apply(learning(), { type: "next" });
 }
 
 describe("booth flow", () => {
-  it("waits on attract until somebody stands in front of the booth", () => {
-    expect(wait(booth(), 12_000, false).screen).toBe("attract");
-    expect(wait(booth(), PRESENCE_TO_START_MS + 400).screen).toBe("learn");
+  it("waits on attract until the visitor presses start", () => {
+    // Somebody standing there is not somebody who wants a turn: people walk past the
+    // booth, queue at it, and watch a friend perform.
+    expect(wait(booth(), 30_000).screen).toBe("attract");
+    expect(apply(booth(), { type: "start" }).screen).toBe("learn");
   });
 
   it("does not start a session before the camera is running", () => {
-    expect(wait(createFlowState(), PRESENCE_TO_START_MS + 2_000).screen).toBe("attract");
+    const noCamera = wait(createFlowState(), 2_000);
+    expect(apply(noCamera, { type: "start" }).screen).toBe("attract");
   });
 
   it("hands the countdown and attempt to the capture policy", () => {
@@ -103,7 +110,7 @@ describe("booth flow", () => {
   });
 
   it("hands back to recovery when the visitor leaves, and resumes when they return", () => {
-    let state = wait(booth(), PRESENCE_TO_START_MS + 400);
+    let state = learning();
     state = wait(state, ABSENT_GRACE_MS + 400, false);
     expect(state.screen).toBe("recovery");
     expect(state.resumeScreen).toBe("learn");
@@ -120,7 +127,7 @@ describe("booth flow", () => {
   });
 
   it("returns an abandoned session to attract", () => {
-    let state = wait(booth(), PRESENCE_TO_START_MS + 400);
+    let state = learning();
     state = wait(state, ABANDON_AFTER_MS + ABSENT_GRACE_MS + 1_000, false);
     expect(state.screen).toBe("attract");
     expect(state.level).toBeNull();
@@ -143,7 +150,7 @@ describe("booth flow", () => {
   });
 
   it("reports a camera loss mid-session and resumes afterwards", () => {
-    let state = wait(booth(), PRESENCE_TO_START_MS + 400);
+    let state = learning();
     state = apply(state, { type: "camera", ready: false });
     expect(state.screen).toBe("recovery");
     expect(state.message).toBe(CAMERA_MESSAGE);
@@ -214,7 +221,7 @@ describe("booth flow", () => {
   });
 
   it("reports dwell progress only for screens that advance themselves", () => {
-    const learn = wait(booth(), PRESENCE_TO_START_MS + 400);
+    const learn = learning();
     expect(dwellProgress(learn)).toBeCloseTo(0, 1);
     expect(dwellProgress(wait(learn, DWELL_MS.learn / 2))).toBeGreaterThan(0.4);
 

@@ -18,7 +18,7 @@ Captured on 2026-07-24 for Milestone M0.
 | Provisional exhibition browser | Google Chrome 150.0.7871.182 |
 | Node used for development | 24.13.1 |
 | Visitor interaction zone | Approximately 1–2 metres from the integrated camera |
-| Activation | Sustained camera presence |
+| Activation | Visitor presses the on-screen Start button |
 
 The laptop appears to use 200% Windows display scaling: its 3200 × 2000 physical panel
 is exposed to browser layout as approximately 1600 × 1000 CSS pixels. This is expected
@@ -68,21 +68,23 @@ testing on one browser.
 The exact exhibition browser version must be frozen and retested before release.
 Automatic updates should not occur during exhibition hours.
 
-## Camera-presence activation decision
+## Session activation decision
 
-Presence activation is provisional and will be implemented after landmark tracking is
-available. It must not start from a single noisy frame.
+The visitor begins a session by pressing the on-screen Start button (DEC-009, which
+supersedes DEC-004). Sustained presence was the earlier plan, but standing in front of
+the booth is not the same as wanting a turn: people walk past, queue, and watch a friend
+perform, and all of them sustain presence. The booth stays unmanned either way — every
+screen after Start advances on its own, and an abandoned session returns to attract
+without anybody attending to it.
 
-Planned policy:
+Camera presence still drives everything inside a session somebody chose to start:
 
-1. Detect one sufficiently visible upper body inside the framing zone.
-2. Require stable presence for a configurable dwell period.
-3. Enter the welcome state, not immediate gameplay.
-4. Apply a cooldown after reset so departing visitors do not retrigger the session.
-5. Return to attract mode after a bounded no-presence period.
+1. tracking guidance while the visitor positions themselves;
+2. recovery when the frame empties mid-session;
+3. return to attract after a bounded no-presence period.
 
-Thresholds will be tuned in M2–M5. Until pose inference exists, M1 will provide manual
-camera start/stop and framing diagnostics only.
+A session cannot begin while the camera is unavailable, and attract asks for staff if
+the camera stays down.
 
 ## Assumptions requiring later validation
 

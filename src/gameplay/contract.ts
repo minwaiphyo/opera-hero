@@ -89,7 +89,7 @@ export interface GameView {
 }
 
 export interface GameActions {
-  /** Attract → learn. Presence does this on its own; the button is the manual path. */
+  /** Attract → learn. The visitor presses Start; nothing else begins a session. */
   start(): void;
   /** Move on: learn → attempt, result → next level, complete → attract. */
   next(): void;

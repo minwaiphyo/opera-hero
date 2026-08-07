@@ -20,7 +20,7 @@ const provisionalProfile = [
   ["Primary display", "1600 × 1000, landscape"],
   ["Browser", "Google Chrome 150 (provisional pin)"],
   ["Visitor zone", "1–2 metres"],
-  ["Session trigger", "Sustained camera presence"],
+  ["Session trigger", "Visitor presses Start"],
 ] as const;
 
 export function App() {

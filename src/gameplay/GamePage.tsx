@@ -2,8 +2,8 @@
  * The Opera Hero game. Route: `/game`.
  *
  * Runs the real pipeline end to end — the booth camera opens on load, the vision worker
- * tracks the visitor, presence starts a session, and the approved capture policy and
- * gesture evaluators produce the score. There is no simulated mode.
+ * tracks the visitor, pressing Start begins a session, and the approved capture policy
+ * and gesture evaluators produce the score. There is no simulated mode.
  */
 
 import { useRef } from "react";
@@ -20,8 +20,9 @@ export function GamePage() {
     <>
       {/*
         A single hidden video element is the source for both the vision worker and the
-        on-screen mirror. It runs on every screen so presence can start a session, and
-        its frames are never recorded or uploaded.
+        on-screen mirror. It runs on every screen, including attract, so the visitor can
+        see themselves before they commit and tracking is warm the moment they press
+        Start. Its frames are never recorded or uploaded.
       */}
       <video
         aria-hidden="true"
