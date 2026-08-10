@@ -8,7 +8,9 @@
  *
  * 1. The visitor starts the session deliberately, by pressing Start. Once they have, the
  *    booth carries them: every later screen advances on its own, and an abandoned session
- *    finds its own way back to attract without anybody attending to it.
+ *    finds its own way back to attract without anybody attending to it. Before that, the
+ *    menu also offers a tutorial, which previews the movements without starting a session
+ *    and therefore never advances by itself.
  * 2. Attempt timing is NOT decided here. `capturePhase` comes from the approved capture
  *    policy in `src/domain/gestures/live/`; this machine follows it.
  */
@@ -60,6 +62,7 @@ export type FlowEvent =
   | { type: "capture-phase"; phase: CapturePhase; score: GameScore | null }
   | { type: "capture-handled" }
   | { type: "camera"; ready: boolean }
+  | { type: "tutorial" }
   | { type: "start" }
   | { type: "next" }
   | { type: "retry" }
@@ -95,6 +98,12 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
       return { ...state, captureIntent: null };
     case "camera":
       return camera(state, event.ready);
+    case "tutorial":
+      // The tutorial previews the movements before the visitor commits. It is gated the
+      // same way as Start, so nobody is led into a booth that cannot see them.
+      return state.screen === "attract" && state.cameraReady
+        ? enter(state, "tutorial")
+        : state;
     case "start":
       // Never begin a turn the booth cannot see. Attract shows the camera's state, and
       // `tick` asks for staff if it stays down.
@@ -227,6 +236,9 @@ function camera(state: FlowState, ready: boolean): FlowState {
 function next(state: FlowState): FlowState {
   switch (state.screen) {
     case "attract":
+      return enterLevel(state, 1);
+    case "tutorial":
+      // The preview is over; the visitor begins for real, at the first movement.
       return enterLevel(state, 1);
     case "learn":
       // Hand over to the capture policy: it owns the countdown and the attempt.

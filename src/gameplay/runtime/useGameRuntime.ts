@@ -148,6 +148,7 @@ export function useGameRuntime(
 
   const actions = useMemo<GameActions>(
     () => ({
+      tutorial: () => dispatch({ type: "tutorial" }),
       start: () => dispatch({ type: "start" }),
       next: () => dispatch({ type: "next" }),
       retry: () => dispatch({ type: "retry" }),

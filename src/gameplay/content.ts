@@ -107,6 +107,13 @@ export const COPY = {
   chineseInvitation: "請入場",
   intro: "Copy three movements of the Dan. Two minutes.",
   start: "Start",
+  howToPlay: "How to play",
+  tutorialTitle: "Learn the movements",
+  tutorialChinese: "學藝",
+  tutorialBody:
+    "Three movements, one after another. Watch each guide, then copy what you see.",
+  playNow: "Start playing",
+  back: "Back",
   mirrorLabel: "You",
   guideLabel: "The movement",
   /** Shown in the guide frame when the local guide videos have not been built. */

@@ -62,6 +62,49 @@ describe("booth flow", () => {
     expect(apply(noCamera, { type: "start" }).screen).toBe("attract");
   });
 
+  it("opens the tutorial from the menu without starting a session", () => {
+    const state = apply(booth(), { type: "tutorial" });
+    expect(state.screen).toBe("tutorial");
+    // A preview, not a performance: no level, no gesture, no capture requested.
+    expect(state.level).toBeNull();
+    expect(state.gestureId).toBeNull();
+    expect(state.captureIntent).toBeNull();
+  });
+
+  it("does not open the tutorial before the camera is running", () => {
+    const noCamera = wait(createFlowState(), 2_000);
+    expect(apply(noCamera, { type: "tutorial" }).screen).toBe("attract");
+  });
+
+  it("waits on the tutorial for a choice instead of advancing by itself", () => {
+    const tutorial = apply(booth(), { type: "tutorial" });
+    expect(wait(tutorial, 60_000).screen).toBe("tutorial");
+    expect(dwellProgress(tutorial)).toBeNull();
+  });
+
+  it("begins the first movement when the visitor starts playing from the tutorial", () => {
+    const state = apply(booth(), { type: "tutorial" }, { type: "next" });
+    expect(state.screen).toBe("learn");
+    expect(state.level).toBe(1);
+    expect(state.gestureId).toBe("orchid-finger");
+    expect(state.captureIntent).toBe("cancel");
+  });
+
+  it("returns to the menu when the visitor leaves the tutorial", () => {
+    const state = apply(booth(), { type: "tutorial" }, { type: "quit" });
+    expect(state.screen).toBe("attract");
+  });
+
+  it("hands back to recovery when the visitor leaves during the tutorial", () => {
+    let state = apply(booth(), { type: "tutorial" });
+    state = wait(state, ABSENT_GRACE_MS + 400, false);
+    expect(state.screen).toBe("recovery");
+    expect(state.resumeScreen).toBe("tutorial");
+
+    state = wait(state, 400);
+    expect(state.screen).toBe("tutorial");
+  });
+
   it("hands the countdown and attempt to the capture policy", () => {
     let state = readyToPerform();
     expect(state.screen).toBe("countdown");

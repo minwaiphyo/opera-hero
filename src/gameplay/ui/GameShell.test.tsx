@@ -16,7 +16,13 @@ function view(overrides: Partial<GameView> = {}): GameView {
 }
 
 function stubActions(): GameActions {
-  return { start: vi.fn(), next: vi.fn(), retry: vi.fn(), quit: vi.fn() };
+  return {
+    tutorial: vi.fn(),
+    start: vi.fn(),
+    next: vi.fn(),
+    retry: vi.fn(),
+    quit: vi.fn(),
+  };
 }
 
 function renderShell(current: GameView, actions: GameActions = stubActions()) {
@@ -55,33 +61,37 @@ describe("GameShell", () => {
     }
   });
 
-  it("always offers a way back to the dashboard and the laboratories", () => {
+  /**
+   * The stage advertises nothing but the game. The dashboard and the laboratories are
+   * development surfaces, reachable by URL only — no link on any screen leads to them.
+   */
+  it("offers no links away from the game on any screen", () => {
     for (const gameScreen of GAME_SCREENS) {
-      renderShell(view({ ...level1, screen: gameScreen }));
-      expect(screen.getByRole("link", { name: /Dashboard/ })).toHaveAttribute("href", "/");
-      expect(screen.getByRole("link", { name: /Camera lab/ })).toHaveAttribute(
-        "href",
-        "/lab/camera",
+      renderShell(
+        view({
+          ...level1,
+          screen: gameScreen,
+          countdownSeconds: gameScreen === "countdown" ? 3 : null,
+          score: gameScreen === "result" ? goodScore : null,
+        }),
       );
-      expect(screen.getByRole("link", { name: /Landmark lab/ })).toHaveAttribute(
-        "href",
-        "/lab/landmarks",
-      );
+      expect(screen.queryAllByRole("link")).toHaveLength(0);
       cleanup();
     }
   });
 
   /**
-   * The mirror is what tells somebody the stage is awake and where to stand. Once the
-   * performing is over it stops earning its place: on the score and the curtain call,
-   * watching yourself competes with what the screen is actually for.
+   * The mirror is what tells somebody the stage is awake and where to stand. It stops
+   * earning its place where performing is not happening: on the tutorial the visitor
+   * watches the guides, and on the score and the curtain call watching yourself competes
+   * with what the screen is actually for.
    */
   it("shows the visitor their own image while there is still performing to do", () => {
-    const afterPerforming = new Set(["result", "complete"]);
+    const withoutMirror = new Set(["tutorial", "result", "complete"]);
 
     for (const gameScreen of GAME_SCREENS) {
       renderShell(view({ ...level1, screen: gameScreen, score: goodScore }));
-      if (afterPerforming.has(gameScreen)) {
+      if (withoutMirror.has(gameScreen)) {
         expect(screen.queryByTestId("camera-stage")).toBeNull();
       } else {
         expect(screen.getByTestId("camera-stage")).toBeInTheDocument();
@@ -101,6 +111,37 @@ describe("GameShell", () => {
     const actions = renderShell(view({ screen: "attract" }));
     fireEvent.click(screen.getByRole("button", { name: "Start" }));
     expect(actions.start).toHaveBeenCalledOnce();
+  });
+
+  it("offers the tutorial from the attract screen", () => {
+    const actions = renderShell(view({ screen: "attract" }));
+    fireEvent.click(screen.getByRole("button", { name: "How to play" }));
+    expect(actions.tutorial).toHaveBeenCalledOnce();
+  });
+
+  it("previews all three movements on the tutorial screen", () => {
+    renderShell(view({ screen: "tutorial" }));
+
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      "Learn the movements",
+    );
+    for (const name of ["Orchid Finger", "Opening Door", "Water Sleeves"]) {
+      // The heading's accessible name pairs the English name with the Chinese.
+      expect(
+        screen.getByRole("heading", { level: 2, name: new RegExp(name) }),
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText(`${name} demonstration`)).toBeInTheDocument();
+    }
+  });
+
+  it("begins the game or returns to the menu from the tutorial", () => {
+    const actions = renderShell(view({ screen: "tutorial" }));
+
+    fireEvent.click(screen.getByRole("button", { name: "Start playing" }));
+    expect(actions.next).toHaveBeenCalledOnce();
+
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    expect(actions.quit).toHaveBeenCalledOnce();
   });
 
   it("shows the movement, its steps and the guide while learning", () => {

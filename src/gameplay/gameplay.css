@@ -82,49 +82,20 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* Navigation bar                                                              */
+/* Top bar                                                                     */
 /* -------------------------------------------------------------------------- */
 
+/*
+ * Status, lanterns and the mark only. The bar carries no links: the development
+ * surfaces are reachable by URL, never from the visitor's stage.
+ */
 .game-bar {
   display: flex;
   gap: var(--gutter);
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: clamp(0.5rem, 1.4vmin, 1.1rem) var(--gutter);
   border-bottom: 1px solid rgba(228, 184, 95, 0.18);
-}
-
-.game-nav {
-  display: flex;
-  gap: clamp(0.6rem, 1.6vmin, 1.4rem);
-  align-items: center;
-  font-size: var(--small);
-}
-
-.game-nav a {
-  color: var(--silk-dim);
-  text-decoration: none;
-  letter-spacing: 0.06em;
-}
-
-.game-nav a:hover,
-.game-nav a:focus-visible {
-  color: var(--gold-lit);
-}
-
-.game-back {
-  display: inline-flex;
-  gap: 0.45em;
-  align-items: center;
-  padding: 0.4em 0.9em;
-  border: 1px solid rgba(228, 184, 95, 0.4);
-  border-radius: 999px;
-  color: var(--gold) !important;
-  font-weight: 700;
-}
-
-.game-back:hover {
-  background: rgba(228, 184, 95, 0.12);
 }
 
 .game-bar-right {
@@ -636,6 +607,18 @@
   letter-spacing: 0.22em;
 }
 
+/* The menu's two ways in: begin now, or see the movements first. */
+.menu-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 1.2vmin, 1rem);
+  align-items: center;
+}
+
+.menu-actions .action {
+  margin-top: clamp(0.8rem, 2vmin, 1.6rem);
+}
+
 @keyframes breathe {
   0%,
   100% {
@@ -644,6 +627,62 @@
   50% {
     opacity: 1;
   }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tutorial                                                                    */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * Head, the three movements and the way on, stacked. The movements take the height the
+ * text does not; each is a self-contained card with its own demonstration and steps.
+ */
+.screen--tutorial {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(0.6rem, 1.6vmin, 1.4rem);
+  align-content: center;
+}
+
+.tutorial-head {
+  max-width: 60ch;
+}
+
+.tutorial-movements {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gutter);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tutorial-movement {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(0.5rem, 1.4vmin, 1.2rem);
+  min-height: 0;
+  padding: clamp(0.8rem, 2vmin, 1.6rem);
+  border: 1px solid rgba(228, 184, 95, 0.16);
+  border-radius: 6px;
+  background: var(--accent-soft);
+}
+
+.tutorial-movement-head .title--compact {
+  font-size: clamp(1.3rem, 2.8vmin, 2.2rem);
+}
+
+.tutorial-movement .guide {
+  height: 100%;
+}
+
+.tutorial-movement .steps {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.tutorial-actions {
+  justify-content: center;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1184,6 +1223,7 @@
 
 @media (max-aspect-ratio: 1 / 1), (max-width: 880px) {
   .screen--attract,
+  .screen--tutorial,
   .screen--learn,
   .screen--result,
   .screen--complete,
@@ -1202,8 +1242,8 @@
     grid-template-rows: repeat(2, minmax(0, 1fr));
   }
 
-  .game-nav a:not(.game-back) {
-    display: none;
+  .tutorial-movements {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

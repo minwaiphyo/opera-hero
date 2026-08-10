@@ -13,6 +13,7 @@ import type { ReactNode } from "react";
 import {
   bandFor,
   COPY,
+  GESTURES,
   gestureFor,
   RECOVERY,
   UNSEEN,
@@ -50,9 +51,11 @@ export function Mirror({
 export function AttractScreen({
   cameraStage,
   onStart,
+  onTutorial,
 }: {
   cameraStage: ReactNode;
   onStart: () => void;
+  onTutorial: () => void;
 }) {
   return (
     <section className="screen screen--attract" aria-labelledby="title">
@@ -69,10 +72,76 @@ export function AttractScreen({
           <span>{COPY.invitation}</span>
           <span lang="zh-Hant">{COPY.chineseInvitation}</span>
         </p>
-        <Button label={COPY.start} onClick={onStart} />
+        <div className="menu-actions">
+          <Button autoFocus label={COPY.start} onClick={onStart} />
+          <Button label={COPY.howToPlay} onClick={onTutorial} variant="secondary" />
+        </div>
         <p className="privacy">{COPY.privacy}</p>
       </div>
       <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
+    </section>
+  );
+}
+
+/**
+ * The tutorial: a preview of all three movements before the visitor commits.
+ *
+ * No camera stage and no scoring here — this screen is read and watched, not performed.
+ * Each movement shows its demonstration and its three steps, exactly as they will appear
+ * in the game itself, so nothing about the performance is a surprise.
+ */
+export function TutorialScreen({
+  onBack,
+  onStart,
+}: {
+  onBack: () => void;
+  onStart: () => void;
+}) {
+  return (
+    <section className="screen screen--tutorial" aria-labelledby="title">
+      <header className="tutorial-head">
+        <p className="eyebrow">{COPY.subtitle}</p>
+        <h1 className="title title--compact" id="title">
+          {COPY.tutorialTitle}
+          <span lang="zh-Hant">{COPY.tutorialChinese}</span>
+        </h1>
+        <p className="lede">{COPY.tutorialBody}</p>
+      </header>
+
+      <ol className="tutorial-movements">
+        {GESTURES.map((gesture) => (
+          <li className={`tutorial-movement accent-${gesture.accent}`} key={gesture.id}>
+            <header className="tutorial-movement-head">
+              <p className="eyebrow">
+                <span lang="zh-Hant">{gesture.act}</span>
+              </p>
+              <h2 className="title title--compact">
+                {gesture.name}
+                <span lang="zh-Hant">{gesture.chinese}</span>
+              </h2>
+            </header>
+            <PractitionerGuide
+              gestureId={gesture.id}
+              playing
+              restartKey={gesture.id}
+              size="compact"
+            />
+            <ol className="steps">
+              {gesture.steps.map((step, index) => (
+                <li key={step}>
+                  <span aria-hidden="true">{index + 1}</span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </li>
+        ))}
+      </ol>
+
+      <div className="row tutorial-actions">
+        <Button autoFocus label={COPY.playNow} onClick={onStart} />
+        <Button label={COPY.back} onClick={onBack} variant="secondary" />
+      </div>
     </section>
   );
 }

@@ -6,7 +6,6 @@ import {
 import { CameraLabPage } from "../labs/camera/CameraLabPage";
 import { LandmarkLabPage } from "../labs/landmarks/LandmarkLabPage";
 import { GamePage } from "../gameplay/GamePage";
-import { DevelopmentNav } from "./DevelopmentNav";
 import { HardwareChecks } from "./HardwareChecks";
 import { resolveAppRoute } from "./routes";
 
@@ -45,7 +44,6 @@ function BaselinePage() {
 
   return (
     <main>
-      <DevelopmentNav activePage="m0" />
       <header className="hero">
         <div>
           <p className="eyebrow">Opera Hero · Milestone M0</p>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DevelopmentNav } from "../../app/DevelopmentNav";
 import {
   findReplayFixture,
   REPLAY_FIXTURES,
@@ -68,7 +67,6 @@ function LandmarkLabWorkbench({
 
   return (
     <main>
-      <DevelopmentNav activePage="m2" />
       <header className="lab-page-header">
         <div>
           <p className="eyebrow">Opera Hero · Milestone M2</p>

@@ -1,12 +1,12 @@
 /**
- * The game shell: navigation, chrome, and the screen for the current state.
+ * The game shell: chrome and the screen for the current state.
  *
  * Renders one view model and emits actions. Owns no timers, no camera access and no
  * scoring.
  *
- * The top bar is always present. An exhibition build would hide it, but while the booth
- * is being built there must always be a way back to the milestone dashboard and the
- * laboratories — a fullscreen takeover with no exit is not something anyone can work on.
+ * The shell carries no links away from the game. The milestone dashboard and the
+ * laboratories are development surfaces: they remain reachable by URL for the people
+ * building the booth, but nothing on the visitor's stage advertises them.
  */
 
 import type { ReactNode } from "react";
@@ -20,6 +20,7 @@ import {
   PerformScreen,
   RecoveryScreen,
   ResultScreen,
+  TutorialScreen,
 } from "./screens";
 
 export type GameShellProps = {
@@ -39,14 +40,6 @@ export function GameShell({ view, actions, cameraStage, status }: GameShellProps
       <div aria-hidden="true" className="stage-glow" />
 
       <header className="game-bar">
-        <nav aria-label="Milestones" className="game-nav">
-          <a className="game-back" href="/">
-            <span aria-hidden="true">←</span> Dashboard
-          </a>
-          <a href="/lab/camera">M1 · Camera lab</a>
-          <a href="/lab/landmarks">M2 · Landmark lab</a>
-        </nav>
-
         <div className="game-bar-right">
           {status}
           {view.level !== null ? <Lanterns level={view.level} /> : null}
@@ -89,7 +82,17 @@ function renderScreen(
 
   switch (view.screen) {
     case "attract":
-      return <AttractScreen cameraStage={cameraStage} onStart={actions.start} />;
+      return (
+        <AttractScreen
+          cameraStage={cameraStage}
+          onStart={actions.start}
+          onTutorial={actions.tutorial}
+        />
+      );
+
+    case "tutorial":
+      // The tutorial is not a session: `next` begins the game, `quit` returns to the menu.
+      return <TutorialScreen onBack={actions.quit} onStart={actions.next} />;
 
     case "learn":
       return gesture ? (

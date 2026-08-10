@@ -11,19 +11,22 @@
  *
  *   handoff                              here
  *   attract, welcome                  →  attract
- *   instructions, demonstration       →  learn
+ *   instructions, demonstration       →  tutorial, learn
  *   countdown                         →  countdown
  *   attempt                           →  attempt
  *   feedback, cultural-insight        →  result
  *   level-transition, completion      →  complete
  *   recovery                          →  recovery
  *
+ * `tutorial` is the addition: from the menu the visitor may preview all three movements
+ * before committing, or press Start and go straight into the performance.
  * The score fields are unchanged from the handoff: they map one-to-one onto what the
  * gesture evaluators already return.
  */
 
 export const GAME_SCREENS = [
   "attract",
+  "tutorial",
   "learn",
   "countdown",
   "attempt",
@@ -89,13 +92,18 @@ export interface GameView {
 }
 
 export interface GameActions {
+  /** Attract → tutorial. The visitor wants to see the movements before committing. */
+  tutorial(): void;
   /** Attract → learn. The visitor presses Start; nothing else begins a session. */
   start(): void;
-  /** Move on: learn → attempt, result → next level, complete → attract. */
+  /**
+   * Move on: tutorial → level one, learn → attempt, result → next level,
+   * complete → attract.
+   */
   next(): void;
   /** Perform the current gesture again. */
   retry(): void;
-  /** Abandon the session and return to attract. */
+  /** Abandon the session (or leave the tutorial) and return to attract. */
   quit(): void;
 }
 
