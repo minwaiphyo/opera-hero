@@ -247,9 +247,14 @@ export function PerformScreen({
             <p className="lede">{gesture.steps[0]}</p>
           </header>
 
+          {/*
+            The demonstration holds its opening frame through the countdown — the visitor
+            is getting into position, not watching — and plays from the top once capture
+            begins. The mirror never pauses with it.
+          */}
           <PractitionerGuide
             gestureId={gesture.id}
-            playing
+            playing={recording}
             restartKey={view.attemptKey}
             size="compact"
           />

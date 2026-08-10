@@ -166,6 +166,30 @@ describe("GameShell", () => {
     expect(screen.getByLabelText("Orchid Finger demonstration")).toBeInTheDocument();
   });
 
+  /**
+   * The countdown is for getting into position: the demonstration holds still while the
+   * visitor's own image keeps running, and playback begins from the top with capture.
+   */
+  it("holds the demonstration paused during the countdown and plays it for the attempt", () => {
+    const play = vi
+      .spyOn(HTMLMediaElement.prototype, "play")
+      .mockImplementation(() => Promise.resolve());
+    const pause = vi
+      .spyOn(HTMLMediaElement.prototype, "pause")
+      .mockImplementation(() => undefined);
+
+    renderShell(view({ ...level1, screen: "countdown", countdownSeconds: 3 }));
+    expect(pause).toHaveBeenCalled();
+    expect(play).not.toHaveBeenCalled();
+    cleanup();
+
+    renderShell(view({ ...level1, screen: "attempt" }));
+    expect(play).toHaveBeenCalled();
+
+    play.mockRestore();
+    pause.mockRestore();
+  });
+
   it("marks the attempt as being followed", () => {
     const actions = renderShell(view({ ...level1, screen: "attempt" }));
 
