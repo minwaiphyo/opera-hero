@@ -253,6 +253,17 @@ export function PerformScreen({
             restartKey={view.attemptKey}
             size="compact"
           />
+
+          {/*
+            Repositioning guidance stays over the guide column, never the mirror: the
+            visitor is watching themselves perform, and the hint must not cover their
+            image. It floats, so its coming and going never shifts the layout mid-attempt.
+          */}
+          {view.trackingPrompt !== "ready" ? (
+            <div className="perform-hint">
+              <TrackingHint prompt={view.trackingPrompt} />
+            </div>
+          ) : null}
         </div>
         <div className="perform-pane">
           <Mirror
@@ -281,12 +292,6 @@ export function PerformScreen({
           <strong key={view.countdownSeconds}>{view.countdownSeconds}</strong>
           <span lang="zh-Hant">{COPY.countdownCue}</span>
           <em>{COPY.countdownHint}</em>
-        </div>
-      ) : null}
-
-      {view.trackingPrompt !== "ready" ? (
-        <div className="perform-hint">
-          <TrackingHint prompt={view.trackingPrompt} />
         </div>
       ) : null}
 

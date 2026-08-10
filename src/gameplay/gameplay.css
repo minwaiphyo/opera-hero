@@ -795,7 +795,12 @@
   min-height: 0;
 }
 
+/*
+ * The positioning context for the tracking hint: the hint floats inside this column,
+ * over the demonstration, so it never covers the visitor's mirror in the next column.
+ */
 .perform-pane--guide {
+  position: relative;
   grid-template-rows: auto minmax(0, 1fr);
   gap: clamp(0.4rem, 1.2vmin, 1rem);
   align-content: center;

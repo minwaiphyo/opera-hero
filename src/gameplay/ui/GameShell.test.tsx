@@ -230,6 +230,19 @@ describe("GameShell", () => {
     expect(screen.getByRole("status")).toHaveAttribute("data-prompt", "move-closer");
   });
 
+  /**
+   * The visitor performs while watching their own image. Repositioning guidance must
+   * float over the demonstration column, never the mirror, or it covers the one thing
+   * they are looking at.
+   */
+  it("keeps repositioning guidance off the visitor's mirror during an attempt", () => {
+    renderShell(view({ ...level1, screen: "attempt", trackingPrompt: "move-farther" }));
+
+    const hint = screen.getByText("Step back");
+    expect(hint.closest(".mirror")).toBeNull();
+    expect(hint.closest(".perform-pane--guide")).not.toBeNull();
+  });
+
   it("shows recovery guidance without leaking a raw error", () => {
     const actions = renderShell(
       view({ screen: "recovery", message: "The camera isn't available." }),
