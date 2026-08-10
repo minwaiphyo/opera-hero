@@ -7,8 +7,11 @@ export function resolveAppRoute(pathname: string): AppRoute {
   if (pathname === "/lab/landmarks") {
     return "landmark-lab";
   }
-  if (pathname === "/game") {
-    return "game";
+  if (pathname === "/baseline") {
+    return "baseline";
   }
-  return "baseline";
+  // The game is the exhibition's front door: it answers the root, /game, and any
+  // path that is not a development surface. The baseline and the laboratories are
+  // reached by typing their URLs.
+  return "game";
 }

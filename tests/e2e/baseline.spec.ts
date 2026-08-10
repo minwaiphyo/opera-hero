@@ -17,6 +17,18 @@ test.afterAll(async () => {
   await server?.close();
 });
 
+test("serves the visitor game at the root", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(
+    page.getByRole("heading", { name: "Opera Hero" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Start" })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "How to play" }),
+  ).toBeVisible();
+});
+
 test("shows the M0 baseline and required capability result", async ({ page }) => {
   const externalRequests: string[] = [];
   await page.route("**/*", async (route) => {
@@ -29,7 +41,7 @@ test("shows the M0 baseline and required capability result", async ({ page }) =>
     await route.continue();
   });
 
-  await page.goto("/");
+  await page.goto("/baseline");
 
   await expect(
     page.getByRole("heading", { name: "System baseline" }),
