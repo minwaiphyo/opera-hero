@@ -11,6 +11,7 @@
  *
  *   handoff                              here
  *   attract, welcome                  →  attract
+ *   visitor positioning               →  calibration
  *   instructions, demonstration       →  tutorial, learn
  *   countdown                         →  countdown
  *   attempt                           →  attempt
@@ -27,6 +28,7 @@
 export const GAME_SCREENS = [
   "attract",
   "tutorial",
+  "calibration",
   "learn",
   "countdown",
   "attempt",
@@ -80,6 +82,8 @@ export interface GameView {
   gestureId: GestureId | null;
   /** Counts down to the start of an attempt; null at all other times. */
   countdownSeconds: number | null;
+  /** 0..1 through the required still hold on the calibration screen. */
+  calibrationProgress: number;
   trackingPrompt: TrackingPrompt;
   /** Present on `result` only. Null means the attempt could not be scored. */
   score: GameScore | null;
@@ -94,7 +98,7 @@ export interface GameView {
 export interface GameActions {
   /** Attract → tutorial. The visitor wants to see the movements before committing. */
   tutorial(): void;
-  /** Attract → learn. The visitor presses Start; nothing else begins a session. */
+  /** Attract → calibration. The visitor presses Start; nothing else begins a session. */
   start(): void;
   /**
    * Move on: tutorial → level one, learn → attempt, result → next level,
@@ -112,6 +116,7 @@ export const INITIAL_VIEW: GameView = {
   level: null,
   gestureId: null,
   countdownSeconds: null,
+  calibrationProgress: 0,
   trackingPrompt: "step-into-frame",
   score: null,
   attemptKey: null,

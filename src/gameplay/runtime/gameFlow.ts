@@ -62,6 +62,7 @@ export type FlowEvent =
   | { type: "capture-phase"; phase: CapturePhase; score: GameScore | null }
   | { type: "capture-handled" }
   | { type: "camera"; ready: boolean }
+  | { type: "calibration-complete" }
   | { type: "tutorial" }
   | { type: "start" }
   | { type: "next" }
@@ -98,6 +99,8 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
       return { ...state, captureIntent: null };
     case "camera":
       return camera(state, event.ready);
+    case "calibration-complete":
+      return state.screen === "calibration" ? enterLevel(state, 1) : state;
     case "tutorial":
       // The tutorial previews the movements before the visitor commits. It is gated the
       // same way as Start, so nobody is led into a booth that cannot see them.
@@ -108,7 +111,7 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
       // Never begin a turn the booth cannot see. Attract shows the camera's state, and
       // `tick` asks for staff if it stays down.
       return state.screen === "attract" && state.cameraReady
-        ? enterLevel(state, 1)
+        ? enter(state, "calibration")
         : state;
     case "next":
       return next(state);
@@ -238,8 +241,10 @@ function next(state: FlowState): FlowState {
     case "attract":
       return enterLevel(state, 1);
     case "tutorial":
-      // The preview is over; the visitor begins for real, at the first movement.
-      return enterLevel(state, 1);
+      // The preview is over; position the visitor before beginning level one.
+      return enter(state, "calibration");
+    case "calibration":
+      return state;
     case "learn":
       // Hand over to the capture policy: it owns the countdown and the attempt.
       return { ...enter(state, "countdown"), captureIntent: "start" };

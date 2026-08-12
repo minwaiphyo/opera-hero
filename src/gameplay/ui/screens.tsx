@@ -21,7 +21,7 @@ import {
 } from "../content";
 import type { GameScore, GameView, TrackingPrompt } from "../contract";
 import { CloudRule, GestureGlyph } from "./components/Ornaments";
-import { Button, Meter, ScoreDial, TrackingHint } from "./components/Pieces";
+import { Button, ScoreDial, TrackingHint } from "./components/Pieces";
 import { PractitionerGuide } from "./PractitionerGuide";
 
 /** The visitor's mirror, framed as a moon gate. */
@@ -79,6 +79,52 @@ export function AttractScreen({
         <p className="privacy">{COPY.privacy}</p>
       </div>
       <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
+    </section>
+  );
+}
+
+export function CalibrationScreen({
+  cameraStage,
+  progress,
+  prompt,
+  onCancel,
+}: {
+  cameraStage: ReactNode;
+  progress: number;
+  prompt: TrackingPrompt;
+  onCancel: () => void;
+}) {
+  const positioned = prompt === "ready";
+  return (
+    <section className="screen screen--calibration" aria-labelledby="title">
+      <header className="calibration-head">
+        <p className="eyebrow">Before you perform</p>
+        <h1 className="title title--compact" id="title">Find your stage position</h1>
+        <p className="lede">
+          Make sure your full upper body and arms fit comfortably in the mirror.
+        </p>
+      </header>
+
+      <div className="calibration-stage">
+        <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
+        <div className="calibration-direction">
+          {positioned ? (
+            <div aria-live="polite" className="calibration-hold" role="status">
+              <strong>Stand still</strong>
+              <span>Hold your position while we prepare the stage.</span>
+              <div aria-hidden="true" className="calibration-progress">
+                <span style={{ width: `${Math.round(progress * 100)}%` }} />
+              </div>
+            </div>
+          ) : (
+            <TrackingHint prompt={prompt} />
+          )}
+        </div>
+      </div>
+
+      <div className="calibration-action">
+        <Button label={COPY.stop} onClick={onCancel} variant="quiet" />
+      </div>
     </section>
   );
 }
@@ -353,14 +399,11 @@ export function ResultScreen({
 
       <div className="result-detail">
         <p className="lede">{band.body}</p>
-        <Meter label={COPY.completenessLabel} value={score.movementCompleteness} />
-        <Meter
-          label={COPY.coverageLabel}
-          tone={score.trackingStatus === "limited" ? "cinnabar" : "jade"}
-          value={score.trackingCoverage}
-        />
-        <p className="note">{gesture.note}</p>
-        <p className="note note--quiet">{COPY.supportive}</p>
+        <aside className="cultural-insight">
+          <p className="eyebrow">Behind the movement</p>
+          <strong>{gesture.meaning}</strong>
+          <p>{gesture.note}</p>
+        </aside>
         <div className="row">
           <Button autoFocus label={lastLevel ? COPY.finish : COPY.next} onClick={onNext} />
           <Button label={COPY.retry} onClick={onRetry} variant="secondary" />

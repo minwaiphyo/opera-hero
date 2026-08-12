@@ -649,6 +649,82 @@
 }
 
 /* -------------------------------------------------------------------------- */
+/* Calibration                                                                */
+/* -------------------------------------------------------------------------- */
+
+.screen--calibration {
+  grid-template-columns: minmax(18rem, 0.75fr) minmax(24rem, 1.25fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: var(--gutter);
+  align-items: center;
+}
+
+.calibration-head {
+  max-width: 38rem;
+  justify-self: end;
+}
+
+.calibration-stage {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(0.6rem, 1.4vmin, 1.2rem);
+  min-height: 0;
+  height: 100%;
+}
+
+.calibration-stage .mirror {
+  height: 100%;
+}
+
+.calibration-direction {
+  min-height: clamp(5rem, 9vmin, 8rem);
+}
+
+.calibration-direction .hint,
+.calibration-hold {
+  width: min(100%, 40rem);
+  max-width: none;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.calibration-hold {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.calibration-hold strong {
+  color: var(--jade);
+  font-size: clamp(1.2rem, 2.5vmin, 2.2rem);
+}
+
+.calibration-hold span {
+  color: var(--silk-faint);
+  font-size: var(--small);
+}
+
+.calibration-progress {
+  height: clamp(5px, 0.7vmin, 9px);
+  margin-top: 0.5rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(253, 246, 234, 0.1);
+}
+
+.calibration-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--jade), var(--gold-lit));
+  transition: width 100ms linear;
+}
+
+.calibration-action {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+}
+
+/* -------------------------------------------------------------------------- */
 /* Tutorial                                                                    */
 /* -------------------------------------------------------------------------- */
 
@@ -832,6 +908,13 @@
   aspect-ratio: 1;
 }
 
+/* Fill the square beside the circular mirror; crop equally from the horizontal edges. */
+.learn-pane--guide .guide-video,
+.perform-pane--guide .guide-video {
+  object-fit: cover;
+  object-position: center;
+}
+
 .mirror-action {
   display: flex;
   min-height: 2.75rem;
@@ -864,6 +947,17 @@
 
 .play-hint .hint--ready strong {
   color: var(--jade);
+}
+
+.play-hint .hint strong,
+.calibration-direction .hint strong {
+  font-size: clamp(1.45rem, 3.2vmin, 2.8rem);
+  line-height: 1.05;
+}
+
+.play-hint .hint span,
+.calibration-direction .hint span {
+  font-size: clamp(0.95rem, 1.65vmin, 1.45rem);
 }
 
 .perform-pane .guide,
@@ -1046,6 +1140,34 @@
 
 .result-detail {
   min-width: 0;
+}
+
+.cultural-insight {
+  max-width: 38rem;
+  margin-top: clamp(1rem, 2.6vmin, 2.4rem);
+  padding: clamp(1rem, 2.4vmin, 2.2rem) 0;
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid rgba(228, 184, 95, 0.25);
+}
+
+.cultural-insight .eyebrow {
+  margin-bottom: clamp(0.5rem, 1vmin, 0.9rem);
+}
+
+.cultural-insight strong {
+  display: block;
+  color: var(--gold-lit);
+  font-family: var(--serif);
+  font-size: clamp(1.45rem, 3vmin, 2.7rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.cultural-insight > p:last-child {
+  margin: clamp(0.5rem, 1.2vmin, 1rem) 0 0;
+  color: var(--silk-dim);
+  font-size: clamp(1rem, 1.8vmin, 1.55rem);
+  line-height: 1.45;
 }
 
 .meter {
@@ -1307,6 +1429,7 @@
 
 @media (max-aspect-ratio: 1 / 1), (max-width: 880px) {
   .screen--attract,
+  .screen--calibration,
   .screen--tutorial,
   .screen--learn,
   .screen--result,
@@ -1315,6 +1438,10 @@
     grid-template-columns: minmax(0, 1fr);
     align-content: start;
     overflow-y: auto;
+  }
+
+  .calibration-action {
+    grid-column: 1;
   }
 
   .attract-copy {

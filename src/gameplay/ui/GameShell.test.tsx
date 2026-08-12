@@ -128,6 +128,32 @@ describe("GameShell", () => {
     expect(actions.start).toHaveBeenCalledOnce();
   });
 
+  it("guides framing and stillness during calibration", () => {
+    const { rerender } = render(
+      <GameShell
+        actions={stubActions()}
+        cameraStage={<div data-testid="camera-stage" />}
+        view={view({ screen: "calibration", trackingPrompt: "move-farther" })}
+      />,
+    );
+    expect(screen.getByText("Step back")).toBeInTheDocument();
+    expect(screen.getByTestId("camera-stage")).toBeInTheDocument();
+
+    rerender(
+      <GameShell
+        actions={stubActions()}
+        cameraStage={<div data-testid="camera-stage" />}
+        view={view({
+          screen: "calibration",
+          trackingPrompt: "ready",
+          calibrationProgress: 0.5,
+        })}
+      />,
+    );
+    expect(screen.getByText("Stand still")).toBeInTheDocument();
+    expect(document.querySelector(".calibration-progress span")).toHaveStyle({ width: "50%" });
+  });
+
   it("offers the tutorial from the attract screen", () => {
     const actions = renderShell(view({ screen: "attract" }));
     fireEvent.click(screen.getByRole("button", { name: "How to play" }));
@@ -218,10 +244,9 @@ describe("GameShell", () => {
 
     expect(screen.getByText("82%")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Graceful");
-    expect(screen.getByRole("meter", { name: /Movement completed/ })).toHaveAttribute(
-      "aria-valuenow",
-      "90",
-    );
+    expect(screen.queryByRole("meter")).toBeNull();
+    expect(screen.getByText("Behind the movement")).toBeInTheDocument();
+    expect(screen.getByText("The hand of the Dan speaks before she sings.")).toBeInTheDocument();
     expect(screen.queryByText(/pass|fail/i)).toBeNull();
 
     fireEvent.click(screen.getByRole("button", { name: /Try again/ }));

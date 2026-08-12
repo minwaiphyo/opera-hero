@@ -15,6 +15,7 @@ import type { GameActions, GameView } from "../contract";
 import { Lanterns } from "./components/Ornaments";
 import {
   AttractScreen,
+  CalibrationScreen,
   CompleteScreen,
   LearnScreen,
   PerformScreen,
@@ -95,6 +96,16 @@ function renderScreen(
     case "tutorial":
       // The tutorial is not a session: `next` begins the game, `quit` returns to the menu.
       return <TutorialScreen onBack={actions.quit} onStart={actions.next} />;
+
+    case "calibration":
+      return (
+        <CalibrationScreen
+          cameraStage={cameraStage}
+          onCancel={actions.quit}
+          progress={view.calibrationProgress}
+          prompt={view.trackingPrompt}
+        />
+      );
 
     case "learn":
       return gesture ? (
