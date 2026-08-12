@@ -153,6 +153,16 @@ describe("booth flow", () => {
     expect(state.screen).toBe("result");
   });
 
+  it("retains each completed movement score for the curtain call", () => {
+    let state = readyToPerform();
+    state = apply(state, { type: "capture-phase", phase: "completed", score: SCORE });
+    expect(state.scores["orchid-finger"]).toEqual(SCORE);
+
+    state = apply(state, { type: "next" });
+    expect(state.scores["orchid-finger"]).toEqual(SCORE);
+    expect(state.scores["opening-door"]).toBeUndefined();
+  });
+
   it("advances every reading screen without anybody pressing a button", () => {
     let state = readyToPerform();
 

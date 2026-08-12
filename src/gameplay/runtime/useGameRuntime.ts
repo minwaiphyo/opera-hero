@@ -206,6 +206,7 @@ export function useGameRuntime(
       calibrationProgress: flow.screen === "calibration" ? calibrationProgress : 0,
       trackingPrompt,
       score: flow.screen === "result" ? flow.score : null,
+      scores: flow.scores,
       attemptKey: active?.state.snapshot.attemptId ?? flow.gestureId,
       message: flow.message,
       autoAdvance: dwellProgress(flow),

@@ -175,6 +175,24 @@ describe("GameShell", () => {
     }
   });
 
+  it("explains the complete booth flow before the gesture previews", () => {
+    renderShell(view({ screen: "tutorial" }));
+
+    for (const step of [
+      /stand still for calibration/i,
+      /watch the practitioner/i,
+      /copy the full movement/i,
+      /review your score/i,
+    ]) {
+      expect(screen.getByText(step)).toBeInTheDocument();
+    }
+    expect(screen.queryByText("Interactive Cantonese Opera Game")).toBeNull();
+    expect(screen.queryByText("學藝")).toBeNull();
+    for (const gestureName of ["蘭花指", "開門", "水袖"]) {
+      expect(screen.getByText(gestureName)).toBeInTheDocument();
+    }
+  });
+
   it("begins the game or returns to the menu from the tutorial", () => {
     const actions = renderShell(view({ screen: "tutorial" }));
 
@@ -287,6 +305,24 @@ describe("GameShell", () => {
   it("offers a finish rather than a next movement on the last level", () => {
     renderShell(view({ level: 3, gestureId: "water-sleeves", screen: "result", score: goodScore }));
     expect(screen.getByRole("button", { name: "Finish" })).toBeInTheDocument();
+  });
+
+  it("shows all three retained scores and tailored encouragement at the curtain call", () => {
+    renderShell(
+      view({
+        screen: "complete",
+        scores: {
+          "orchid-finger": { ...goodScore, overallScore: 0.91 },
+          "opening-door": { ...goodScore, overallScore: 0.86 },
+          "water-sleeves": { ...goodScore, overallScore: 0.88 },
+        },
+      }),
+    );
+
+    for (const score of ["91%", "86%", "88%"]) {
+      expect(screen.getByText(score)).toBeInTheDocument();
+    }
+    expect(screen.getByText("A radiant performance")).toBeInTheDocument();
   });
 
   it("surfaces tracking guidance during an attempt", () => {

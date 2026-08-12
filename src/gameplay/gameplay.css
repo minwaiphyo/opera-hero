@@ -65,6 +65,40 @@
     radial-gradient(circle at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
 }
 
+/*
+ * A restrained proscenium around the booth: fine gold rules, a quiet geometric repeat
+ * on the sides and brighter corner joints. It frames the stage without competing with
+ * the visitor, guide or score.
+ */
+.opera-game::before {
+  position: absolute;
+  inset: clamp(7px, 1.1vmin, 16px);
+  z-index: 3;
+  pointer-events: none;
+  content: "";
+  border: 1px solid rgba(228, 184, 95, 0.24);
+  background:
+    linear-gradient(90deg, var(--gold), transparent) top left / clamp(60px, 10vmin, 140px) 2px no-repeat,
+    linear-gradient(-90deg, var(--gold), transparent) top right / clamp(60px, 10vmin, 140px) 2px no-repeat,
+    linear-gradient(90deg, var(--gold), transparent) bottom left / clamp(60px, 10vmin, 140px) 2px no-repeat,
+    linear-gradient(-90deg, var(--gold), transparent) bottom right / clamp(60px, 10vmin, 140px) 2px no-repeat,
+    repeating-linear-gradient(
+      180deg,
+      rgba(228, 184, 95, 0.08) 0 7px,
+      rgba(228, 184, 95, 0.32) 7px 9px,
+      transparent 9px 18px
+    ) left center / 3px calc(100% - clamp(90px, 15vmin, 190px)) no-repeat,
+    repeating-linear-gradient(
+      180deg,
+      rgba(228, 184, 95, 0.08) 0 7px,
+      rgba(228, 184, 95, 0.32) 7px 9px,
+      transparent 9px 18px
+    ) right center / 3px calc(100% - clamp(90px, 15vmin, 190px)) no-repeat;
+  box-shadow:
+    inset 0 0 0 4px rgba(8, 4, 10, 0.4),
+    0 0 24px rgba(228, 184, 95, 0.08);
+}
+
 .opera-game > * {
   position: relative;
   z-index: 1;
@@ -79,6 +113,69 @@
   height: clamp(60px, 10vmin, 140px);
   pointer-events: none;
   background: linear-gradient(180deg, rgba(200, 16, 46, 0.5), transparent);
+}
+
+.stage-motifs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.stage-motifs svg {
+  position: absolute;
+  color: var(--gold);
+  filter: drop-shadow(0 0 12px rgba(228, 184, 95, 0.3));
+}
+
+.stage-peony {
+  bottom: clamp(12px, 2vmin, 32px);
+  width: clamp(135px, 20vmin, 270px);
+  opacity: 0.34;
+  stroke-width: 2;
+}
+
+.stage-peony--left {
+  left: clamp(14px, 2.5vmin, 40px);
+  transform: rotate(-12deg);
+}
+
+.stage-peony--right {
+  right: clamp(14px, 2.5vmin, 40px);
+  transform: scaleX(-1) rotate(-12deg);
+}
+
+.stage-clouds {
+  right: 6%;
+  bottom: 0;
+  left: 6%;
+  width: 88%;
+  height: clamp(80px, 15vmin, 200px);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.5;
+  opacity: 0.22;
+}
+
+.stage-sleeve {
+  top: 12%;
+  width: clamp(75px, 10vmin, 145px);
+  height: 72%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 4;
+  opacity: 0.24;
+}
+
+.stage-sleeve--left {
+  left: clamp(13px, 2vmin, 32px);
+}
+
+.stage-sleeve--right {
+  right: clamp(13px, 2vmin, 32px);
+  transform: scaleX(-1);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -116,15 +213,19 @@
   align-items: baseline;
   margin: 0;
   justify-self: start;
-  color: rgba(249, 227, 171, 0.6);
-  font-size: var(--small);
+  color: var(--gold-lit);
+  font-size: clamp(0.95rem, 1.7vmin, 1.5rem);
+  font-weight: 700;
   letter-spacing: 0.2em;
+  text-shadow: 0 0 14px rgba(228, 184, 95, 0.38);
   text-transform: uppercase;
 }
 
 .game-mark span {
+  color: var(--cinnabar-lit);
   font-family: var(--han);
-  font-size: 1.45em;
+  font-size: 1.65em;
+  text-shadow: 0 0 16px rgba(239, 64, 64, 0.38);
 }
 
 .game-mark em {
@@ -183,6 +284,26 @@
   margin: 0;
   padding: 0;
   animation: enter 500ms cubic-bezier(0.16, 0.84, 0.3, 1) both;
+}
+
+/* A faint footlight arc gives otherwise empty lower corners a deliberate stage shape. */
+.game-main::after {
+  position: absolute;
+  right: 8%;
+  bottom: -5vmin;
+  left: 8%;
+  z-index: 0;
+  height: clamp(40px, 8vmin, 110px);
+  pointer-events: none;
+  content: "";
+  border-top: 1px solid rgba(228, 184, 95, 0.12);
+  border-radius: 50% 50% 0 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(200, 16, 46, 0.12), transparent 68%);
+}
+
+.game-main > * {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes enter {
@@ -588,14 +709,53 @@
 /* -------------------------------------------------------------------------- */
 
 .screen--attract {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: var(--gutter);
   align-items: center;
 }
 
 .attract-copy {
-  max-width: 34ch;
+  width: min(100%, 52rem);
+  max-width: 52rem;
   justify-self: end;
+  padding-left: 0;
+}
+
+.attract-wordmark {
+  display: flex;
+  gap: clamp(0.65rem, 1.6vmin, 1.5rem);
+  align-items: baseline;
+  justify-content: flex-start;
+  justify-self: stretch;
+  width: 100%;
+  margin: 0;
+  color: var(--gold-lit);
+  font-family: var(--sans);
+  font-size: clamp(2.8rem, 7.2vmin, 6.8rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.14em;
+  text-shadow: 0 0 24px rgba(228, 184, 95, 0.32);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.attract-wordmark span {
+  color: var(--cinnabar-lit);
+  font-family: var(--han);
+  font-size: 0.55em;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 18px rgba(239, 64, 64, 0.4);
+}
+
+.attract-subtitle,
+.invitation {
+  margin: clamp(0.7rem, 1.5vmin, 1.3rem) 0 0;
+  color: var(--gold);
+  font-size: clamp(0.9rem, 1.55vmin, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 /* Make the visitor the visual hero of the menu, not a small diagnostic preview. */
@@ -611,19 +771,9 @@
 }
 
 .invitation {
-  display: flex;
-  gap: 0.8em;
-  align-items: baseline;
-  margin: clamp(0.8rem, 2vmin, 1.6rem) 0 0;
-  font-size: clamp(1.05rem, 2.2vmin, 2.1rem);
+  margin: clamp(2rem, 5vmin, 4.5rem) 0 0;
   white-space: nowrap;
   animation: breathe 3.6s ease-in-out infinite;
-}
-
-.invitation span:last-child {
-  color: var(--cinnabar-lit);
-  font-family: var(--han);
-  letter-spacing: 0.22em;
 }
 
 /* The menu's two ways in: begin now, or see the movements first. */
@@ -688,6 +838,25 @@
   text-align: center;
 }
 
+.calibration-direction .hint {
+  gap: 0.25rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.calibration-direction .hint strong {
+  color: var(--cinnabar-lit);
+  text-shadow: 0 0 14px rgba(239, 64, 64, 0.28);
+}
+
+.calibration-direction .hint span,
+.calibration-hold > span {
+  color: var(--silk);
+  text-shadow: 0 0 10px rgba(253, 246, 234, 0.14);
+}
+
 .calibration-hold {
   display: grid;
   gap: 0.25rem;
@@ -739,7 +908,55 @@
 }
 
 .tutorial-head {
-  max-width: 60ch;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4.2vmin, 3.8rem);
+  align-items: center;
+  margin-bottom: clamp(1rem, 2.6vmin, 2.4rem);
+}
+
+.tutorial-head > .title {
+  color: var(--gold-lit);
+  font-family: var(--sans);
+  font-size: clamp(1.8rem, 3.6vmin, 3.4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tutorial-howto {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.7rem, 1.4vmin, 1.2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tutorial-howto li {
+  display: flex;
+  gap: clamp(0.55rem, 1.1vmin, 1rem);
+  align-items: center;
+}
+
+.tutorial-howto li > span {
+  display: grid;
+  place-items: center;
+  width: clamp(2.35rem, 3.8vmin, 3.5rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-lit);
+  font-weight: 700;
+}
+
+.tutorial-howto p {
+  margin: 0;
+  color: var(--silk);
+  font-size: clamp(1rem, 1.7vmin, 1.5rem);
+  line-height: 1.3;
+  text-shadow: 0 0 10px rgba(253, 246, 234, 0.14);
 }
 
 .tutorial-movements {
@@ -754,21 +971,46 @@
 
 .tutorial-movement {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: clamp(0.5rem, 1.4vmin, 1.2rem);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: clamp(0.25rem, 0.65vmin, 0.55rem);
+  align-content: stretch;
   min-height: 0;
-  padding: clamp(0.8rem, 2vmin, 1.6rem);
+  padding: clamp(0.65rem, 1.5vmin, 1.2rem);
   border: 1px solid rgba(228, 184, 95, 0.16);
   border-radius: 6px;
   background: var(--accent-soft);
 }
 
 .tutorial-movement-head .title--compact {
+  justify-content: center;
+  color: var(--silk);
+  font-family: var(--sans);
   font-size: clamp(1.3rem, 2.8vmin, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.tutorial-movement-head {
+  margin-bottom: clamp(0.35rem, 0.8vmin, 0.7rem);
 }
 
 .tutorial-movement .guide {
-  height: 100%;
+  height: auto;
+}
+
+.tutorial-movement .guide-frame {
+  width: 84%;
+}
+
+.tutorial-movement .steps {
+  width: 84%;
+  align-self: center;
+  justify-self: center;
+}
+
+.tutorial-movement .guide-caption {
+  display: none;
 }
 
 .tutorial-movement .steps {
@@ -1243,7 +1485,27 @@
 }
 
 .complete-copy {
+  width: min(100%, 68rem);
   text-align: center;
+}
+
+.finale-message {
+  margin: clamp(0.8rem, 2vmin, 1.8rem) auto 0;
+}
+
+.finale-message strong {
+  color: var(--gold-lit);
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.2vmin, 3rem);
+  font-weight: 400;
+}
+
+.finale-message p {
+  max-width: 52rem;
+  margin: 0.4rem auto 0;
+  color: var(--silk-dim);
+  font-size: var(--body);
+  line-height: 1.4;
 }
 
 .complete-copy .lede,
@@ -1253,22 +1515,43 @@
 }
 
 .performed {
-  display: flex;
-  gap: clamp(0.6rem, 2vmin, 2.4rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(12rem, 1fr));
+  gap: clamp(1rem, 2.5vmin, 2.8rem);
   justify-content: center;
-  margin: clamp(0.8rem, 2vmin, 1.8rem) 0 0;
+  margin: clamp(1.2rem, 3vmin, 2.8rem) 0 0;
   padding: 0;
   list-style: none;
 }
 
 .performed li {
   display: grid;
-  gap: 0.25em;
+  gap: 0.35em;
   justify-items: center;
-  padding: clamp(0.5rem, 1.4vmin, 1.2rem) clamp(0.7rem, 1.8vmin, 1.6rem);
-  border: 1px solid rgba(228, 184, 95, 0.22);
-  background: linear-gradient(180deg, var(--accent-soft), transparent 70%);
-  font-size: var(--small);
+  min-height: clamp(12rem, 24vmin, 19rem);
+  padding: clamp(1rem, 2.5vmin, 2.2rem);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 25%, var(--accent-soft), transparent 58%),
+    rgba(13, 7, 16, 0.72);
+  box-shadow:
+    inset 0 0 28px rgba(0, 0, 0, 0.32),
+    0 12px 36px rgba(0, 0, 0, 0.28);
+  font-size: clamp(0.95rem, 1.65vmin, 1.4rem);
+}
+
+.performed li > strong {
+  font-size: clamp(1.15rem, 2.2vmin, 2rem);
+}
+
+.performed em {
+  margin-top: auto;
+  color: var(--gold-lit);
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6.5vmin, 5.8rem);
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
 }
 
 .performed span {
@@ -1278,7 +1561,7 @@
 }
 
 .performed-glyph {
-  width: clamp(28px, 5vmin, 60px);
+  width: clamp(52px, 8vmin, 100px);
   height: auto;
   color: var(--accent);
 }
@@ -1459,6 +1742,11 @@
   }
 
   .tutorial-movements {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tutorial-head,
+  .tutorial-howto {
     grid-template-columns: minmax(0, 1fr);
   }
 }

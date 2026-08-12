@@ -12,7 +12,7 @@
 import type { ReactNode } from "react";
 import { COPY, gestureFor, TOTAL_LEVELS } from "../content";
 import type { GameActions, GameView } from "../contract";
-import { Lanterns } from "./components/Ornaments";
+import { Lanterns, StageMotifs } from "./components/Ornaments";
 import {
   AttractScreen,
   CalibrationScreen,
@@ -39,11 +39,12 @@ export function GameShell({ view, actions, cameraStage, status }: GameShellProps
   return (
     <div className="opera-game" data-screen={view.screen}>
       <div aria-hidden="true" className="stage-glow" />
+      <StageMotifs />
 
       <header className="game-bar">
         <p className="game-mark">
-          <span lang="zh-Hant">粵劇英雄</span>
           <em>{COPY.title}</em>
+          <span lang="zh-Hant">粵劇英雄</span>
         </p>
         <div className="game-bar-progress">
           {view.level !== null ? <Lanterns level={view.level} /> : null}
@@ -148,7 +149,7 @@ function renderScreen(
       );
 
     case "complete":
-      return <CompleteScreen onFinish={actions.next} />;
+      return <CompleteScreen onFinish={actions.next} scores={view.scores} />;
 
     case "recovery":
       return recovery;

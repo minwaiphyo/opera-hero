@@ -87,6 +87,8 @@ export interface GameView {
   trackingPrompt: TrackingPrompt;
   /** Present on `result` only. Null means the attempt could not be scored. */
   score: GameScore | null;
+  /** Best/latest result retained for each completed movement in this session. */
+  scores: Partial<Record<GestureId, GameScore>>;
   /** Changes per attempt, so the practitioner guide restarts from the top. */
   attemptKey: string | null;
   /** Recovery guidance. Never a raw error. */
@@ -119,6 +121,7 @@ export const INITIAL_VIEW: GameView = {
   calibrationProgress: 0,
   trackingPrompt: "step-into-frame",
   score: null,
+  scores: {},
   attemptKey: null,
   message: null,
   autoAdvance: null,

@@ -107,6 +107,43 @@ export function CloudRule({ className }: { className?: string }) {
   );
 }
 
+/** Quiet costume-embroidery motifs used around the edge of the digital stage. */
+export function StageMotifs() {
+  return (
+    <div aria-hidden="true" className="stage-motifs">
+      <svg className="stage-peony stage-peony--left" viewBox="0 0 160 160">
+        <PeonyPaths />
+      </svg>
+      <svg className="stage-peony stage-peony--right" viewBox="0 0 160 160">
+        <PeonyPaths />
+      </svg>
+      <svg className="stage-clouds" preserveAspectRatio="none" viewBox="0 0 1000 150">
+        <path d="M5 112c55 0 55-44 110-44s55 35 110 35 55-68 110-68 55 53 110 53 55-38 110-38 55 63 110 63 55-45 110-45 55 32 110 32 55-54 110-54 55 38 110 38" />
+        <path d="M0 135c70 0 70-25 140-25s70 19 140 19 70-42 140-42 70 34 140 34 70-24 140-24 70 31 140 31 70-22 140-22 70 18 140 18" />
+      </svg>
+      <svg className="stage-sleeve stage-sleeve--left" viewBox="0 0 180 520">
+        <path d="M16 6c112 78 8 151 96 224S43 370 156 510" />
+        <path d="M52 4c85 88-12 144 72 230S61 391 174 488" />
+      </svg>
+      <svg className="stage-sleeve stage-sleeve--right" viewBox="0 0 180 520">
+        <path d="M16 6c112 78 8 151 96 224S43 370 156 510" />
+        <path d="M52 4c85 88-12 144 72 230S61 391 174 488" />
+      </svg>
+    </div>
+  );
+}
+
+function PeonyPaths() {
+  return (
+    <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="80" cy="80" r="9" />
+      <path d="M80 70c-22-34-43-4-25 16-34-9-37 25-8 28-10 29 24 37 34 10 21 27 49 4 31-20 31-13 13-44-15-26 3-31-28-46-37-8Z" />
+      <path d="M80 70c-8-31 30-33 28-2 26-15 45 18 17 34 14 25-20 44-38 20-18 23-53 4-39-21-28-16-8-49 18-34-2-29 36-28 28 3Z" opacity=".6" />
+      <path d="M52 124c-16 9-25 21-30 34M108 124c18 8 28 19 34 33M37 143c8-2 15 0 21 7M123 142c-8-1-15 2-21 9" opacity=".7" />
+    </g>
+  );
+}
+
 /** Session progress as three stage lanterns. */
 export function Lanterns({ level }: { level: number | null }) {
   return (

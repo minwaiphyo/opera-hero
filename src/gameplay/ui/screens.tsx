@@ -13,13 +13,13 @@ import type { ReactNode } from "react";
 import {
   bandFor,
   COPY,
+  finaleFor,
   GESTURES,
-  gestureFor,
   RECOVERY,
   UNSEEN,
   type Gesture,
 } from "../content";
-import type { GameScore, GameView, TrackingPrompt } from "../contract";
+import type { GameScore, GameView, GestureId, TrackingPrompt } from "../contract";
 import { CloudRule, GestureGlyph } from "./components/Ornaments";
 import { Button, ScoreDial, TrackingHint } from "./components/Pieces";
 import { PractitionerGuide } from "./PractitionerGuide";
@@ -27,7 +27,6 @@ import { PractitionerGuide } from "./PractitionerGuide";
 /** The visitor's mirror, framed as a moon gate. */
 export function Mirror({
   children,
-  label,
   size = "full",
   badge,
 }: {
@@ -43,7 +42,6 @@ export function Mirror({
         {children}
         {badge}
       </div>
-      {label ? <p className="mirror-label">{label}</p> : null}
     </div>
   );
 }
@@ -60,18 +58,12 @@ export function AttractScreen({
   return (
     <section className="screen screen--attract" aria-labelledby="title">
       <div className="attract-copy">
-        <p className="eyebrow">{COPY.subtitle}</p>
-        <h1 className="title" id="title">
+        <h1 className="attract-wordmark" id="title">
           {COPY.title}
+          <span lang="zh-Hant">{COPY.chineseTitle}</span>
         </h1>
-        <p className="title-chinese" lang="zh-Hant">
-          {COPY.chineseTitle}
-        </p>
-        <p className="lede">{COPY.intro}</p>
-        <p className="invitation">
-          <span>{COPY.invitation}</span>
-          <span lang="zh-Hant">{COPY.chineseInvitation}</span>
-        </p>
+        <p className="attract-subtitle">{COPY.subtitle}</p>
+        <p className="invitation">{COPY.invitation}</p>
         <div className="menu-actions">
           <Button autoFocus label={COPY.start} onClick={onStart} />
           <Button label={COPY.howToPlay} onClick={onTutorial} variant="secondary" />
@@ -146,21 +138,23 @@ export function TutorialScreen({
   return (
     <section className="screen screen--tutorial" aria-labelledby="title">
       <header className="tutorial-head">
-        <p className="eyebrow">{COPY.subtitle}</p>
         <h1 className="title title--compact" id="title">
           {COPY.tutorialTitle}
-          <span lang="zh-Hant">{COPY.tutorialChinese}</span>
         </h1>
-        <p className="lede">{COPY.tutorialBody}</p>
+        <ol className="tutorial-howto">
+          {COPY.tutorialSteps.map((step, index) => (
+            <li key={step}>
+              <span aria-hidden="true">{index + 1}</span>
+              <p>{step}</p>
+            </li>
+          ))}
+        </ol>
       </header>
 
       <ol className="tutorial-movements">
         {GESTURES.map((gesture) => (
           <li className={`tutorial-movement accent-${gesture.accent}`} key={gesture.id}>
             <header className="tutorial-movement-head">
-              <p className="eyebrow">
-                <span lang="zh-Hant">{gesture.act}</span>
-              </p>
               <h2 className="title title--compact">
                 {gesture.name}
                 <span lang="zh-Hant">{gesture.chinese}</span>
@@ -417,7 +411,22 @@ export function ResultScreen({
  * The curtain call. No mirror: the performance is over, and the last thing the visitor
  * should be looking at is the three movements they just performed, not themselves.
  */
-export function CompleteScreen({ onFinish }: { onFinish: () => void }) {
+export function CompleteScreen({
+  onFinish,
+  scores,
+}: {
+  onFinish: () => void;
+  scores: Partial<Record<GestureId, GameScore>>;
+}) {
+  const values = GESTURES.flatMap((gesture) => {
+    const score = scores[gesture.id];
+    return score ? [score.overallScore] : [];
+  });
+  const average = values.length > 0
+    ? values.reduce((sum, score) => sum + score, 0) / values.length
+    : 0;
+  const finale = finaleFor(average);
+
   return (
     <section className="screen screen--complete" aria-labelledby="title">
       <div className="complete-copy">
@@ -427,17 +436,19 @@ export function CompleteScreen({ onFinish }: { onFinish: () => void }) {
         <p className="title-chinese" lang="zh-Hant">
           {COPY.completeChinese}
         </p>
-        <p className="lede">{COPY.completeBody}</p>
+        <div className="finale-message">
+          <strong>{finale.title}</strong>
+          {finale.body ? <p>{finale.body}</p> : null}
+        </div>
         <ul className="performed">
-          {[1, 2, 3].map((level) => {
-            const gesture = gestureFor(
-              level === 1 ? "orchid-finger" : level === 2 ? "opening-door" : "water-sleeves",
-            );
+          {GESTURES.map((gesture) => {
+            const score = scores[gesture.id];
             return (
               <li className={`accent-${gesture.accent}`} key={gesture.id}>
                 <GestureGlyph className="performed-glyph" motif={gesture.motif} />
                 <strong>{gesture.name}</strong>
                 <span lang="zh-Hant">{gesture.chinese}</span>
+                <em>{score ? `${Math.round(score.overallScore * 100)}%` : "—"}</em>
               </li>
             );
           })}

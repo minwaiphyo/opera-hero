@@ -30,7 +30,9 @@ export type CapturePhase =
 export const DWELL_MS = {
   learn: 14_000,
   result: 12_000,
-  complete: 15_000,
+  // Leave the curtain call up for photos and social sharing; visitors may still use
+  // Finish to return the booth immediately.
+  complete: 120_000,
 } as const satisfies Partial<Record<GameScreen, number>>;
 
 /** Empty frame for this long mid-session hands back to recovery. */
@@ -47,6 +49,7 @@ export interface FlowState {
   readonly level: Level | null;
   readonly gestureId: GestureId | null;
   readonly score: GameScore | null;
+  readonly scores: Partial<Record<GestureId, GameScore>>;
   readonly message: string | null;
   readonly dwellLeftMs: number | null;
   readonly dwellTotalMs: number | null;
@@ -78,6 +81,7 @@ export function createFlowState(): FlowState {
     level: null,
     gestureId: null,
     score: null,
+    scores: {},
     message: null,
     dwellLeftMs: null,
     dwellTotalMs: null,
@@ -199,7 +203,16 @@ function capturePhase(
       return state.screen === "attempt" ? state : enter(state, "attempt");
     case "completed":
     case "timed-out":
-      return state.screen === "result" ? state : { ...enter(state, "result"), score };
+      return state.screen === "result"
+        ? state
+        : {
+            ...enter(state, "result"),
+            score,
+            scores:
+              score && state.gestureId
+                ? { ...state.scores, [state.gestureId]: score }
+                : state.scores,
+          };
     case "cancelled":
       return capturing(state.screen) ? enter(state, "learn") : state;
     default:
