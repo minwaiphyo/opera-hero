@@ -15,6 +15,9 @@ public/mediapipe/
 # only consented, anonymized landmark fixtures derived from it.
 docs/practitioner-footage/
 
+# Local stakeholder and outreach documents
+/docs/outreach/
+
 # NOTE: public/guides/ is deliberately NOT ignored. The three visitor-facing guide clips
 # are committed so a checkout can run the booth without access to the restricted footage.
 # They are cleared, cut-down derivatives — not the raw session material, which stays out
