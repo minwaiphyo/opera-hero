@@ -63,6 +63,29 @@ The output contains 41 smoothed progress points, broad provisional tolerances, a
 no recorded imagery. It is small enough to commit. The full landmark fixtures remain
 ignored local development artifacts.
 
+## Visitor guide videos
+
+The game shows the visitor the movement before scoring it. Those clips are committed
+under `public/guides/`, so a checkout runs the booth without the restricted footage.
+Nothing needs to be built for the game to work.
+
+Regenerate them — after any change to the committed reference guides, or to the chosen
+takes — with:
+
+```powershell
+node scripts\build_practitioner_guides.mjs --force
+```
+
+Each clip is cut from the primary take named in `practitioner_fixture_manifest.json` and
+trimmed to the length of the committed reference guide in
+`src/domain/gestures/references/`, so the visitor watches the same performance, over the
+same window, that the evaluator compares them against. The script reads that length from
+the reference itself and fails if a clip cannot match it, so a regenerated reference
+cannot silently leave the footage behind.
+
+The committed clips are cut-down derivatives. The raw session footage stays in approved
+local/restricted storage and out of this repository.
+
 ## Tests
 
 ```powershell

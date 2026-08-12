@@ -6,6 +6,26 @@ This repository is currently in the system-design phase. The proposed proof-of-c
 architecture, exhibition operating model, gesture scoring strategy, and delivery plan
 are documented in [ARCHITECTURE.md](./docs/project-tracking/ARCHITECTURE.md).
 
+## Try the game
+
+```bash
+npm install
+npm run dev
+```
+
+Open the printed `http://127.0.0.1:5173` URL in **Google Chrome** and allow camera
+access when prompted. The root URL is the game itself — no extra route or flag needed.
+The pose/hand models and the three practitioner guide clips are committed to this repo,
+so a fresh checkout has everything it needs; nothing downloads at runtime.
+
+Chrome is recommended because MediaPipe's GPU-accelerated inference path is most
+reliable there. Other browsers, or a laptop with only integrated graphics, may silently
+fall back to a much slower CPU path — the game still works, but tracking will lag. To
+check which path a given machine landed on, open the browser devtools console: on
+startup the vision worker logs `delegate=GPU` or `delegate=CPU`. You can also visit
+`/baseline` for a plain capability report (WebGL2, WebGPU, Web Worker, etc.) on that
+machine.
+
 Implementation is deliberately incremental. See [ROADMAP.md](./docs/project-tracking/ROADMAP.md) for the
 module boundaries, build order, test gates, and definition of done for each milestone.
 

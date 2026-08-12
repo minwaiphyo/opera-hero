@@ -40,44 +40,6 @@ main {
   padding: 72px 0 40px;
 }
 
-.development-nav {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 42px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.development-nav a {
-  display: flex;
-  gap: 9px;
-  align-items: center;
-  padding: 10px 13px;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  color: #928798;
-  font-size: 0.78rem;
-  text-decoration: none;
-}
-
-.development-nav a span {
-  color: #e4b85f;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
-.development-nav a:hover {
-  color: #e8dfe9;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.development-nav a[aria-current="page"] {
-  border-color: rgba(228, 184, 95, 0.28);
-  color: #f8f2e7;
-  background: rgba(228, 184, 95, 0.08);
-}
-
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

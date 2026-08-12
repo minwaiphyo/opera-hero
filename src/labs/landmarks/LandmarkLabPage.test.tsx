@@ -37,9 +37,9 @@ describe("LandmarkLabPage", () => {
     expect(screen.getByLabelText("Playback speed")).toHaveValue("1");
     expect(screen.getByText("Replay · idle")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Pause" })).toBeDisabled();
-    expect(
-      screen.getByRole("link", { name: /M1\s*Camera laboratory/ }),
-    ).toBeInTheDocument();
+    // The laboratory is a development surface reached by URL; it advertises no
+    // navigation to the other milestones.
+    expect(screen.queryAllByRole("link")).toHaveLength(0);
   });
 
   it("starts, pauses, and switches to the empty fixture", () => {

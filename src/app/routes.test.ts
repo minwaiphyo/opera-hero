@@ -10,8 +10,16 @@ describe("application route resolution", () => {
     expect(resolveAppRoute("/lab/landmarks")).toBe("landmark-lab");
   });
 
-  it("falls back to the system baseline for unknown local paths", () => {
-    expect(resolveAppRoute("/")).toBe("baseline");
-    expect(resolveAppRoute("/unknown")).toBe("baseline");
+  it("resolves the system baseline path", () => {
+    expect(resolveAppRoute("/baseline")).toBe("baseline");
+  });
+
+  it("resolves the visitor game path", () => {
+    expect(resolveAppRoute("/game")).toBe("game");
+  });
+
+  it("answers the root and unknown paths with the visitor game", () => {
+    expect(resolveAppRoute("/")).toBe("game");
+    expect(resolveAppRoute("/unknown")).toBe("game");
   });
 });

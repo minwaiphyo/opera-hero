@@ -17,6 +17,18 @@ test.afterAll(async () => {
   await server?.close();
 });
 
+test("serves the visitor game at the root", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(
+    page.getByRole("heading", { name: "Opera Hero" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Start" })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "How to play" }),
+  ).toBeVisible();
+});
+
 test("shows the M0 baseline and required capability result", async ({ page }) => {
   const externalRequests: string[] = [];
   await page.route("**/*", async (route) => {
@@ -29,7 +41,7 @@ test("shows the M0 baseline and required capability result", async ({ page }) =>
     await route.continue();
   });
 
-  await page.goto("/");
+  await page.goto("/baseline");
 
   await expect(
     page.getByRole("heading", { name: "System baseline" }),
@@ -48,12 +60,9 @@ test("shows the M0 baseline and required capability result", async ({ page }) =>
     page.getByRole("button", { name: "Test camera" }),
   ).toBeVisible();
   await expect(page.getByRole("button", { name: "Test audio" })).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "M1 Camera laboratory" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "M2 Landmark laboratory" }),
-  ).toBeVisible();
+  // The baseline is a development surface reached by URL; it advertises no
+  // navigation to the laboratories.
+  await expect(page.getByRole("link")).toHaveCount(0);
   expect(externalRequests).toEqual([]);
 });
 
@@ -70,9 +79,8 @@ test("opens the M1 camera laboratory", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Stability monitor" }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "M0 System baseline" }),
-  ).toBeVisible();
+  // Development surfaces are reached by URL only; no milestone navigation is shown.
+  await expect(page.getByRole("link")).toHaveCount(0);
 });
 
 test("runs the M2 landmark replay laboratory without camera access", async ({

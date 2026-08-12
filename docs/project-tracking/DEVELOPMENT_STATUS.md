@@ -202,7 +202,7 @@ exhibition environment.
 | Exhibition computer specification | Project owner | Provisional baseline recorded | Must be revisited if hardware changes |
 | Camera model | Project owner | Integrated camera selected | Field of view requires M1 validation |
 | Display dimensions/orientation | Project owner | Landscape laptop profile recorded | Final booth display remains provisional |
-| Visitor start method | Project owner | Camera presence selected | Dwell/cooldown tuning waits for M2–M5 |
+| Visitor start method | Project owner | On-screen Start button selected (DEC-009) | Presence still drives tracking guidance, recovery, and abandonment |
 | Chrome permission persistence | Project owner + developer | Passed | EV-M0-015 |
 | Audio interaction check | Project owner + developer | Passed | EV-M0-016 |
 | Final booth television | Project owner | Deferred | Create Target B profile when model and dimensions are known |
@@ -501,6 +501,7 @@ substantial trade-off reasoning.
 | 2026-07-26 | DEC-006 | Planning | Focus the experience on the female Dan role | Stakeholder direction narrows cultural and technical scope | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
 | 2026-07-26 | DEC-007 | Planning | Use Orchid Finger, door-opening actions, and water sleeves as the three interactions | Stakeholder-selected movement progression; canonical English name clarified by the project owner | [`cultural-gameplay-scope.md`](./cultural-gameplay-scope.md) |
 | 2026-07-26 | DEC-008 | Planning | Treat practitioner footage as canonical reference, not a sufficient training dataset | One expert reference does not represent visitor variation | [`practitioner-session-plan.md`](./practitioner-session-plan.md) |
+| 2026-08-07 | DEC-009 | M4 | Begin a session from the on-screen Start button, superseding DEC-004 | Standing in front of the booth is not the same as wanting a turn; passers-by, queues, and onlookers all sustain presence. Presence still drives tracking guidance, recovery, and abandonment, so the booth remains unmanned | [`hardware-baseline.md`](./hardware-baseline.md), [`src/gameplay/runtime/gameFlow.ts`](../../src/gameplay/runtime/gameFlow.ts) |
 
 Recommended decision ID format: `DEC-###`.
 

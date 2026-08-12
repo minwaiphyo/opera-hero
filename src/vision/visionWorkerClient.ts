@@ -114,6 +114,11 @@ export class VisionWorkerClient {
 
     if (value.type === "ready") {
       this.ready = true;
+      // GPU falling back to CPU is the single biggest cause of lag reports on
+      // weaker/integrated-graphics hardware; this is the only place that knows it.
+      console.info(
+        `[opera-hero] vision worker ready — delegate=${value.delegate} poseModel=${value.poseModel}`,
+      );
       this.callbacks.onStateChange({
         status: "tracking",
         delegate: value.delegate,

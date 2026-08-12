@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DevelopmentNav } from "../../app/DevelopmentNav";
 import { CameraControls } from "./CameraControls";
 import { CameraDiagnostics } from "./CameraDiagnostics";
 import { CameraPreview } from "./CameraPreview";
@@ -35,7 +34,6 @@ export function CameraLabPage({ runtimeFactory }: CameraLabPageProps) {
 
   return (
     <main className="camera-lab-page">
-      <DevelopmentNav activePage="m1" />
       <header className="lab-page-header">
         <div>
           <p className="eyebrow">Opera Hero · Milestone M1</p>

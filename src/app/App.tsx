@@ -5,7 +5,7 @@ import {
 } from "../platform/capabilities";
 import { CameraLabPage } from "../labs/camera/CameraLabPage";
 import { LandmarkLabPage } from "../labs/landmarks/LandmarkLabPage";
-import { DevelopmentNav } from "./DevelopmentNav";
+import { GamePage } from "../gameplay/GamePage";
 import { HardwareChecks } from "./HardwareChecks";
 import { resolveAppRoute } from "./routes";
 
@@ -19,7 +19,7 @@ const provisionalProfile = [
   ["Primary display", "1600 × 1000, landscape"],
   ["Browser", "Google Chrome 150 (provisional pin)"],
   ["Visitor zone", "1–2 metres"],
-  ["Session trigger", "Sustained camera presence"],
+  ["Session trigger", "Visitor presses Start"],
 ] as const;
 
 export function App() {
@@ -31,6 +31,9 @@ export function App() {
   if (route === "landmark-lab") {
     return <LandmarkLabPage />;
   }
+  if (route === "game") {
+    return <GamePage />;
+  }
 
   return <BaselinePage />;
 }
@@ -41,7 +44,6 @@ function BaselinePage() {
 
   return (
     <main>
-      <DevelopmentNav activePage="m0" />
       <header className="hero">
         <div>
           <p className="eyebrow">Opera Hero · Milestone M0</p>
