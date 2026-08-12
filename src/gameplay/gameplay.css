@@ -90,18 +90,24 @@
  * surfaces are reachable by URL, never from the visitor's stage.
  */
 .game-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   gap: var(--gutter);
   align-items: center;
-  justify-content: flex-end;
   padding: clamp(0.5rem, 1.4vmin, 1.1rem) var(--gutter);
   border-bottom: 1px solid rgba(228, 184, 95, 0.18);
 }
 
-.game-bar-right {
+.game-bar-progress {
   display: flex;
-  gap: clamp(0.8rem, 2vmin, 2rem);
   align-items: center;
+  justify-content: center;
+}
+
+.game-bar-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .game-mark {
@@ -109,6 +115,7 @@
   gap: 0.6em;
   align-items: baseline;
   margin: 0;
+  justify-self: start;
   color: rgba(249, 227, 171, 0.6);
   font-size: var(--small);
   letter-spacing: 0.2em;
@@ -702,16 +709,30 @@
 /* -------------------------------------------------------------------------- */
 
 .screen--learn {
-  grid-template-rows: minmax(0, 1fr);
+  position: relative;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: clamp(0.6rem, 1.4vmin, 1.2rem);
 }
 
-/*
- * The mirror column is the wider of the two and carries no other content, so the
- * visitor's own image is bounded only by the height of the screen.
- */
+.play-toolbar {
+  display: flex;
+  gap: var(--gutter);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.play-toolbar .title,
+.play-toolbar .action {
+  margin: 0;
+}
+
+.play-toolbar .action {
+  flex: none;
+}
+
 .learn-panes {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gutter);
   min-height: 0;
 }
@@ -721,27 +742,20 @@
   min-height: 0;
 }
 
-/*
- * Name, demonstration, steps and the way on, stacked; the guide takes the height the
- * text does not. Nothing here spans the screen, so no row of it is charged to the mirror.
- */
 .learn-pane--guide {
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
-  gap: clamp(0.5rem, 1.4vmin, 1.2rem);
-  align-content: center;
+  grid-template-rows: auto auto;
+  gap: clamp(0.25rem, 0.7vmin, 0.6rem);
+  align-content: start;
+}
+
+.learn-pane--mirror {
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(0.25rem, 0.7vmin, 0.6rem);
 }
 
 .learn-pane .guide,
 .learn-pane .mirror {
   height: 100%;
-}
-
-/* Tracking guidance and the way on, side by side under the steps. */
-.learn-cues {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(0.5rem, 1.4vmin, 1.2rem) clamp(1rem, 2.6vmin, 2.6rem);
-  align-items: center;
 }
 
 .steps {
@@ -779,25 +793,13 @@
 
 .screen--perform {
   position: relative;
-  grid-template-rows: minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
   gap: clamp(0.4rem, 1.2vmin, 1rem);
 }
 
-.perform-head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4em 1.4em;
-  align-items: baseline;
-}
-
-.perform-head .lede {
-  margin: 0;
-}
-
-/* As on the learn screen: the wider column is the visitor's, and it holds nothing else. */
 .perform-panes {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gutter);
   min-height: 0;
 }
@@ -807,43 +809,66 @@
   min-height: 0;
 }
 
-/*
- * The positioning context for the tracking hint: the hint floats inside this column,
- * over the demonstration, so it never covers the visitor's mirror in the next column.
- */
 .perform-pane--guide {
-  position: relative;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: clamp(0.4rem, 1.2vmin, 1rem);
-  align-content: center;
+  grid-template-rows: auto auto;
+  gap: clamp(0.25rem, 0.7vmin, 0.6rem);
+  align-content: start;
+}
+
+.perform-pane--mirror {
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(0.25rem, 0.7vmin, 0.6rem);
+}
+
+/* Treat the demonstration and its steps as one top-aligned instructional group. */
+.learn-pane--guide .guide,
+.perform-pane--guide .guide {
+  height: auto;
+}
+
+.learn-pane--guide .guide-frame,
+.perform-pane--guide .guide-frame {
+  place-self: start center;
+  aspect-ratio: 1;
+}
+
+.mirror-action {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.mirror-action .action {
+  margin: 0;
+}
+
+.play-hint {
+  width: 100%;
+}
+
+.play-hint .hint {
+  gap: 0.15em;
+  place-items: center;
+  max-width: none;
+  min-height: clamp(3rem, 6vmin, 5.5rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: center;
+}
+
+.play-hint .hint--act strong {
+  color: var(--cinnabar-lit);
+}
+
+.play-hint .hint--ready strong {
+  color: var(--jade);
 }
 
 .perform-pane .guide,
 .perform-pane .mirror {
   height: 100%;
-}
-
-.perform-hint {
-  position: absolute;
-  right: 0;
-  bottom: clamp(3rem, 8vmin, 6rem);
-  left: 0;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-}
-
-/*
- * Cancelling is a development and recovery affordance, not part of performing, so it sits
- * out of the flow in the corner under the guide. Keeping it in a row of its own cost the
- * visitor's image the height of a button.
- */
-.perform-foot {
-  position: absolute;
-  bottom: clamp(0.5rem, 1.6vmin, 1.6rem);
-  left: var(--gutter);
-  display: flex;
-  justify-content: center;
 }
 
 .countdown {
@@ -1171,21 +1196,59 @@
 /* -------------------------------------------------------------------------- */
 
 .lanterns {
+  --lantern-gap: clamp(1.5rem, 3vmin, 3.2rem);
+  --lantern-width: clamp(30px, 4vmin, 50px);
+
+  position: relative;
   display: flex;
-  gap: clamp(0.4rem, 1vmin, 0.9rem);
+  gap: var(--lantern-gap);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.lanterns::before,
+.lanterns::after {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--lantern-width) / 2);
+  height: 3px;
+  content: "";
+  transform: translateY(-50%);
+}
+
+.lanterns::before {
+  right: calc(var(--lantern-width) / 2);
+  background: rgba(228, 184, 95, 0.24);
+  box-shadow: 0 0 8px rgba(228, 184, 95, 0.12);
+}
+
+.lanterns::after {
+  width: 0;
+  background: linear-gradient(90deg, var(--cinnabar), var(--gold-lit));
+  box-shadow: 0 0 10px rgba(228, 184, 95, 0.55);
+  transition: width 500ms ease;
+}
+
+.lanterns[data-level="2"]::after {
+  width: calc((100% - var(--lantern-width)) / 2);
+}
+
+.lanterns[data-level="3"]::after {
+  width: calc(100% - var(--lantern-width));
+}
+
 .lantern {
   position: relative;
+  z-index: 1;
   display: grid;
   place-items: center;
-  width: clamp(20px, 2.6vmin, 34px);
-  height: clamp(26px, 3.4vmin, 44px);
-  border: 1px solid rgba(228, 184, 95, 0.35);
+  width: var(--lantern-width);
+  height: clamp(38px, 5vmin, 62px);
+  border: 2px solid rgba(228, 184, 95, 0.5);
   border-radius: 46% 46% 44% 44% / 38% 38% 52% 52%;
+  background: var(--ink-soft);
+  box-shadow: 0 0 0 4px rgba(8, 4, 10, 0.8);
 }
 
 .lantern em {
@@ -1195,12 +1258,16 @@
 }
 
 .lantern--done {
-  background: rgba(200, 16, 46, 0.42);
+  border-color: rgba(228, 184, 95, 0.75);
+  background: rgba(200, 16, 46, 0.72);
 }
 
 .lantern--now {
+  border-color: var(--gold-lit);
   background: radial-gradient(circle at 50% 40%, var(--cinnabar-lit), var(--cinnabar));
-  box-shadow: 0 0 20px -2px rgba(239, 64, 64, 0.8);
+  box-shadow:
+    0 0 0 4px rgba(8, 4, 10, 0.8),
+    0 0 24px 2px rgba(239, 64, 64, 0.72);
 }
 
 .lantern--done em,

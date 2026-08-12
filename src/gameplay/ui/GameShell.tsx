@@ -40,13 +40,15 @@ export function GameShell({ view, actions, cameraStage, status }: GameShellProps
       <div aria-hidden="true" className="stage-glow" />
 
       <header className="game-bar">
-        <div className="game-bar-right">
-          {status}
+        <p className="game-mark">
+          <span lang="zh-Hant">粵劇英雄</span>
+          <em>{COPY.title}</em>
+        </p>
+        <div className="game-bar-progress">
           {view.level !== null ? <Lanterns level={view.level} /> : null}
-          <p className="game-mark">
-            <span lang="zh-Hant">粵劇英雄</span>
-            <em>{COPY.title}</em>
-          </p>
+        </div>
+        <div className="game-bar-status">
+          {status}
         </div>
       </header>
 

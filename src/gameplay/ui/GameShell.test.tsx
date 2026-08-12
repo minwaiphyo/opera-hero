@@ -80,6 +80,21 @@ describe("GameShell", () => {
     }
   });
 
+  it("places brand, progress and camera status in distinct navbar zones", () => {
+    render(
+      <GameShell
+        actions={stubActions()}
+        cameraStage={<div data-testid="camera-stage" />}
+        status={<p>Camera live</p>}
+        view={view({ ...level1, screen: "learn" })}
+      />,
+    );
+
+    expect(screen.getByText("Opera Hero").closest(".game-mark")).not.toBeNull();
+    expect(screen.getByTestId("lantern-1").closest(".game-bar-progress")).not.toBeNull();
+    expect(screen.getByText("Camera live").closest(".game-bar-status")).not.toBeNull();
+  });
+
   /**
    * The mirror is what tells somebody the stage is awake and where to stand. It stops
    * earning its place where performing is not happening: on the tutorial the visitor
@@ -254,17 +269,21 @@ describe("GameShell", () => {
     expect(screen.getByRole("status")).toHaveAttribute("data-prompt", "move-closer");
   });
 
-  /**
-   * The visitor performs while watching their own image. Repositioning guidance must
-   * float over the demonstration column, never the mirror, or it covers the one thing
-   * they are looking at.
-   */
-  it("keeps repositioning guidance off the visitor's mirror during an attempt", () => {
+  it("centres repositioning guidance over both performance panes", () => {
     renderShell(view({ ...level1, screen: "attempt", trackingPrompt: "move-farther" }));
 
     const hint = screen.getByText("Step back");
+    expect(hint.closest(".play-hint")).not.toBeNull();
+    expect(hint.closest(".perform-pane")).toBeNull();
     expect(hint.closest(".mirror")).toBeNull();
-    expect(hint.closest(".perform-pane--guide")).not.toBeNull();
+  });
+
+  it("places the attempt action below the visitor's mirror", () => {
+    renderShell(view({ ...level1, screen: "attempt" }));
+
+    const stop = screen.getByRole("button", { name: "Stop" });
+    expect(stop.closest(".perform-pane--mirror")).not.toBeNull();
+    expect(stop.closest(".mirror")).toBeNull();
   });
 
   it("shows recovery guidance without leaking a raw error", () => {

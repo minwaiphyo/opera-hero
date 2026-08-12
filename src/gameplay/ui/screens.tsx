@@ -164,25 +164,19 @@ export function LearnScreen({
       className={`screen screen--learn accent-${gesture.accent}`}
       aria-labelledby="title"
     >
-      {/*
-        Everything about the movement lives in the left column — its name, the
-        demonstration, the steps — which leaves the whole height of the right column to
-        the visitor's own image. This is the screen where somebody works out where to
-        stand, so that image is the largest thing on it.
-      */}
+      <header className="play-toolbar">
+        <h1 className="title title--compact" id="title">
+          {gesture.name}
+          <span lang="zh-Hant">{gesture.chinese}</span>
+        </h1>
+      </header>
+
+      <div className="play-hint">
+        <TrackingHint prompt={prompt} />
+      </div>
+
       <div className="learn-panes">
         <div className="learn-pane learn-pane--guide">
-          <header className="learn-head">
-            <p className="eyebrow">
-              <span lang="zh-Hant">{gesture.act}</span> · {COPY.watchLabel}
-            </p>
-            <h1 className="title title--compact" id="title">
-              {gesture.name}
-              <span lang="zh-Hant">{gesture.chinese}</span>
-            </h1>
-            <p className="lede">{gesture.meaning}</p>
-          </header>
-
           <PractitionerGuide gestureId={gesture.id} playing restartKey={attemptKey} />
 
           <ol className="steps">
@@ -194,16 +188,16 @@ export function LearnScreen({
             ))}
           </ol>
 
-          <div className="learn-cues">
-            <TrackingHint prompt={prompt} />
+        </div>
+
+        <div className="learn-pane learn-pane--mirror">
+          <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
+          <div className="mirror-action">
             <Button autoFocus label={COPY.ready} onClick={onReady} />
           </div>
         </div>
-
-        <div className="learn-pane">
-          <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
-        </div>
       </div>
+
     </section>
   );
 }
@@ -231,46 +225,35 @@ export function PerformScreen({
       aria-labelledby="title"
       data-phase={view.screen}
     >
-      {/*
-        The heading sits with the guide rather than above both panes, and the cancel
-        action is lifted out of the flow. Every row of chrome across the screen comes
-        straight off the height of the visitor's own image, which is what they are
-        actually watching while they perform.
-      */}
+      <header className="play-toolbar">
+        <h1 className="title title--compact" id="title">
+          {gesture.name}
+          <span lang="zh-Hant">{gesture.chinese}</span>
+        </h1>
+      </header>
+
+      <div className="play-hint">
+        <TrackingHint prompt={view.trackingPrompt} />
+      </div>
+
       <div className="perform-panes">
         <div className="perform-pane perform-pane--guide">
-          <header className="perform-head">
-            <h1 className="title title--compact" id="title">
-              {gesture.name}
-              <span lang="zh-Hant">{gesture.chinese}</span>
-            </h1>
-            <p className="lede">{gesture.steps[0]}</p>
-          </header>
-
-          {/*
-            The demonstration holds its opening frame through the countdown — the visitor
-            is getting into position, not watching — and plays from the top once capture
-            begins. The mirror never pauses with it.
-          */}
           <PractitionerGuide
             gestureId={gesture.id}
             playing={recording}
             restartKey={view.attemptKey}
             size="compact"
           />
-
-          {/*
-            Repositioning guidance stays over the guide column, never the mirror: the
-            visitor is watching themselves perform, and the hint must not cover their
-            image. It floats, so its coming and going never shifts the layout mid-attempt.
-          */}
-          {view.trackingPrompt !== "ready" ? (
-            <div className="perform-hint">
-              <TrackingHint prompt={view.trackingPrompt} />
-            </div>
-          ) : null}
+          <ol className="steps">
+            {gesture.steps.map((step, index) => (
+              <li key={step}>
+                <span aria-hidden="true">{index + 1}</span>
+                {step}
+              </li>
+            ))}
+          </ol>
         </div>
-        <div className="perform-pane">
+        <div className="perform-pane perform-pane--mirror">
           <Mirror
             badge={
               recording ? (
@@ -284,6 +267,9 @@ export function PerformScreen({
           >
             {cameraStage}
           </Mirror>
+          <div className="mirror-action">
+            <Button label={COPY.stop} onClick={onStop} variant="quiet" />
+          </div>
         </div>
       </div>
 
@@ -300,9 +286,6 @@ export function PerformScreen({
         </div>
       ) : null}
 
-      <div className="perform-foot">
-        <Button label={COPY.stop} onClick={onStop} variant="quiet" />
-      </div>
     </section>
   );
 }
