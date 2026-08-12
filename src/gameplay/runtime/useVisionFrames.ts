@@ -35,6 +35,13 @@ export interface VisionFeed {
 
 const EMPTY: LatestFrame = { frame: null, assessment: null, receivedAt: 0 };
 
+/**
+ * The visitor game favours response time over laboratory-grade landmark detail.
+ * 512px contains 36% fewer pixels than the 640px lab baseline while remaining a
+ * conservative input for upper-body pose and two visible hands at booth distance.
+ */
+export const GAME_VISION_MAX_EDGE_PX = 512;
+
 export function useVisionFrames(
   videoRef: RefObject<HTMLVideoElement | null>,
   enabled: boolean,
@@ -97,7 +104,11 @@ export function useVisionFrames(
       const frameId = nextFrameId++;
       // The worker can have a different time origin, so carry an epoch timestamp.
       const capturedAtMs = performance.timeOrigin + performance.now();
-      const size = calculateVisionCaptureSize(video.videoWidth, video.videoHeight);
+      const size = calculateVisionCaptureSize(
+        video.videoWidth,
+        video.videoHeight,
+        GAME_VISION_MAX_EDGE_PX,
+      );
 
       void createImageBitmap(video, {
         resizeWidth: size.width,

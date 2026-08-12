@@ -386,6 +386,18 @@
   height: 100%;
 }
 
+/* Persistent inference source. The visible mirror uses a separate native video layer. */
+.camera-source {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .mirror-label {
   margin: 0;
   color: var(--silk-faint);
@@ -431,18 +443,6 @@
   background: var(--cinnabar-lit);
   box-shadow: 0 0 12px var(--cinnabar-lit);
   animation: blink 1.5s ease-in-out infinite;
-}
-
-/* Hidden source element. Kept in layout at 1px: `display:none` stops frame decoding. */
-.camera-source {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -589,6 +589,18 @@
 .attract-copy {
   max-width: 34ch;
   justify-self: end;
+}
+
+/* Make the visitor the visual hero of the menu, not a small diagnostic preview. */
+.screen--attract .mirror {
+  width: min(44vw, 72vh, 1100px);
+  max-width: 100%;
+  justify-self: start;
+}
+
+.screen--attract .mirror-gate {
+  width: 100%;
+  height: auto;
 }
 
 .invitation {
@@ -1240,6 +1252,11 @@
 
   .attract-copy {
     justify-self: start;
+  }
+
+  .screen--attract .mirror {
+    width: min(82vw, 52vh, 620px);
+    justify-self: center;
   }
 
   .perform-panes {
