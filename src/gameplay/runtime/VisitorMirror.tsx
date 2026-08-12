@@ -10,8 +10,11 @@
  */
 
 import { useEffect, useRef, type RefObject } from "react";
-import { paintOverlay } from "./overlayPainter";
+import { paintCostumeOverlay } from "./costumeOverlay";
+import { paintOverlay, type OverlayProjection } from "./overlayPainter";
 import type { LatestFrame } from "./useVisionFrames";
+
+const COSTUME_ASSET = "/overlays/dan-star-frame.png";
 
 export function VisitorMirror({
   videoRef,
@@ -23,6 +26,25 @@ export function VisitorMirror({
   showOverlay?: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const costumeRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const image = new Image();
+    image.decoding = "async";
+    image.src = COSTUME_ASSET;
+    const ready = () => {
+      costumeRef.current = image;
+    };
+    if (image.complete && image.naturalWidth > 0) {
+      ready();
+    } else {
+      image.addEventListener("load", ready, { once: true });
+    }
+    return () => {
+      image.removeEventListener("load", ready);
+      costumeRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -94,11 +116,16 @@ export function VisitorMirror({
 
       // Landmarks are normalized to the camera image, so they map through the same
       // transform as the picture, including the mirroring.
-      paintOverlay(context, frame, {
+      const projection: OverlayProjection = {
         toX: (x) => width - (offsetX + x * drawWidth),
         toY: (y) => offsetY + y * drawHeight,
         scale: dpr,
-      });
+      };
+      const costume = costumeRef.current;
+      if (costume && frame.pose) {
+        paintCostumeOverlay(context, costume, frame.pose.landmarks, projection);
+      }
+      paintOverlay(context, frame, projection);
     };
 
     schedule();
