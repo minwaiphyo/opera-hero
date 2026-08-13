@@ -133,6 +133,7 @@ describe("GameShell", () => {
 
     const aboutActions = renderShell(view({ screen: "about" }));
     expect(screen.getByRole("heading", { name: "Meet the creators" })).toBeInTheDocument();
+    expect(screen.queryByText(/team\s*16/i)).toBeNull();
     expect(screen.getByText("In order from left to right")).toBeInTheDocument();
     expect(screen.getByAltText(/four Opera Hero creators/i)).toHaveAttribute(
       "src",

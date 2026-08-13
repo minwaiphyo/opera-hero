@@ -70,7 +70,7 @@ export function AttractScreen({
         <div className="menu-actions">
           <Button autoFocus label={COPY.start} onClick={onStart} />
           <Button label={COPY.howToPlay} onClick={onTutorial} variant="secondary" />
-          <Button label={COPY.about} onClick={onAbout} variant="quiet" />
+          <Button label={COPY.about} onClick={onAbout} variant="secondary" />
         </div>
         <p className="privacy">{COPY.privacy}</p>
       </div>
@@ -90,7 +90,6 @@ export function AboutScreen({ onBack }: { onBack: () => void }) {
       </figure>
 
       <div className="about-copy">
-        <p className="eyebrow">Team 16</p>
         <h1 className="about-title" id="title">{COPY.aboutTitle}</h1>
         <p className="about-attribution">{COPY.aboutAttribution}</p>
 

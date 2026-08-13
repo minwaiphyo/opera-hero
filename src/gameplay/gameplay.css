@@ -742,7 +742,7 @@
   animation: breathe 3.6s ease-in-out infinite;
 }
 
-/* The menu's two ways in: begin now, or see the movements first. */
+/* The menu's primary action and its two clearly visible supporting destinations. */
 .menu-actions {
   display: flex;
   flex-wrap: wrap;
