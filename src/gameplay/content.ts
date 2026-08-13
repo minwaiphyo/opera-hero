@@ -102,16 +102,19 @@ export function gestureForLevel(level: Level): Gesture {
 export const COPY = {
   title: "Opera Hero",
   chineseTitle: "粵劇英雄",
-  subtitle: "Cantonese Opera · 粵劇",
+  subtitle: "Interactive Cantonese Opera Game",
   invitation: "Step into the light",
   chineseInvitation: "請入場",
   intro: "Copy three movements of the Dan. Two minutes.",
   start: "Start",
   howToPlay: "How to play",
   tutorialTitle: "Learn the movements",
-  tutorialChinese: "學藝",
-  tutorialBody:
-    "Three movements, one after another. Watch each guide, then copy what you see.",
+  tutorialSteps: [
+    "Follow the distance guide, then stand still for calibration.",
+    "Watch the practitioner and read the three movement cues.",
+    "After the countdown, copy the full movement and hold the final posture for scoring.",
+    "Review your score, then continue or try the movement again.",
+  ],
   playNow: "Start playing",
   back: "Back",
   mirrorLabel: "You",
@@ -213,6 +216,32 @@ export const SCORE_BANDS: readonly ScoreBand[] = [
 export function bandFor(score: number): ScoreBand {
   const value = clamp01(score);
   return SCORE_BANDS.find((band) => value >= band.min) ?? SCORE_BANDS[SCORE_BANDS.length - 1]!;
+}
+
+export function finaleFor(score: number): { title: string; body: string } {
+  const value = clamp01(score);
+  if (value >= 0.85) {
+    return {
+      title: "A radiant performance",
+      body: "You brought precision, rhythm and expressive stage presence to all three movements.",
+    };
+  }
+  if (value >= 0.7) {
+    return {
+      title: "A graceful performance",
+      body: "Your movement shapes came through clearly across the full Opera Hero journey.",
+    };
+  }
+  if (value >= 0.5) {
+    return {
+      title: "Your stage presence is taking shape",
+      body: "You completed all three traditions—keep refining the timing and final postures.",
+    };
+  }
+  return {
+    title: "Every performer begins with a first step",
+    body: "",
+  };
 }
 
 export function percent(value: number): string {

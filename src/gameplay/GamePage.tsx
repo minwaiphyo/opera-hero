@@ -18,12 +18,7 @@ export function GamePage() {
 
   return (
     <>
-      {/*
-        A single hidden video element is the source for both the vision worker and the
-        on-screen mirror. It runs on every screen, including attract, so the visitor can
-        see themselves before they commit and tracking is warm the moment they press
-        Start. Its frames are never recorded or uploaded.
-      */}
+      {/* Persistent source for the worker. It must not remount as screens change. */}
       <video
         aria-hidden="true"
         autoPlay

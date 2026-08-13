@@ -10,8 +10,11 @@
  */
 
 import { useEffect, useRef, type RefObject } from "react";
-import { paintOverlay } from "./overlayPainter";
+import { paintCostumeOverlay } from "./costumeOverlay";
+import { paintOverlay, type OverlayProjection } from "./overlayPainter";
 import type { LatestFrame } from "./useVisionFrames";
+
+const COSTUME_ASSET = "/overlays/dan-star-frame.png";
 
 export function VisitorMirror({
   videoRef,
@@ -23,24 +26,63 @@ export function VisitorMirror({
   showOverlay?: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const costumeRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const image = new Image();
+    image.decoding = "async";
+    image.src = COSTUME_ASSET;
+    const ready = () => {
+      costumeRef.current = image;
+    };
+    if (image.complete && image.naturalWidth > 0) {
+      ready();
+    } else {
+      image.addEventListener("load", ready, { once: true });
+    }
+    return () => {
+      image.removeEventListener("load", ready);
+      costumeRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas?.getContext("2d") ?? null;
-    if (!canvas || !context) {
+    const video = videoRef.current;
+    const context = canvas?.getContext("2d", {
+      alpha: false,
+      desynchronized: true,
+    }) ?? null;
+    if (!canvas || !context || !video) {
       return;
     }
 
-    let handle = 0;
+    let animationHandle = 0;
+    let videoFrameHandle = 0;
+    let stopped = false;
+
+    const schedule = () => {
+      if (stopped) {
+        return;
+      }
+      if (video && "requestVideoFrameCallback" in video) {
+        videoFrameHandle = video.requestVideoFrameCallback(() => paint());
+      } else {
+        animationHandle = requestAnimationFrame(paint);
+      }
+    };
+
     const paint = () => {
-      handle = requestAnimationFrame(paint);
-      const video = videoRef.current;
-      if (!video || video.readyState < 2 || video.videoWidth === 0) {
+      schedule();
+      if (video.readyState < 2 || video.videoWidth === 0) {
         return;
       }
 
       const box = canvas.getBoundingClientRect();
-      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      // The camera mirror is motion feedback, not a still image. Painting it at 2x on
+      // the 3200x2000 development display quadrupled the per-frame pixel workload and
+      // made the game lag while the native-video camera lab stayed smooth.
+      const dpr = 1;
       const width = Math.round(box.width * dpr);
       const height = Math.round(box.height * dpr);
       if (width === 0 || height === 0) {
@@ -51,14 +93,13 @@ export function VisitorMirror({
         canvas.height = height;
       }
 
-      // Cover-fit the camera picture into the circle, mirrored like a mirror.
+      // Match the native video's object-fit: cover projection, including its mirror.
       const scale = Math.max(width / video.videoWidth, height / video.videoHeight);
       const drawWidth = video.videoWidth * scale;
       const drawHeight = video.videoHeight * scale;
       const offsetX = (width - drawWidth) / 2;
       const offsetY = (height - drawHeight) / 2;
 
-      context.clearRect(0, 0, width, height);
       context.save();
       context.translate(width, 0);
       context.scale(-1, 1);
@@ -75,15 +116,26 @@ export function VisitorMirror({
 
       // Landmarks are normalized to the camera image, so they map through the same
       // transform as the picture, including the mirroring.
-      paintOverlay(context, frame, {
+      const projection: OverlayProjection = {
         toX: (x) => width - (offsetX + x * drawWidth),
         toY: (y) => offsetY + y * drawHeight,
         scale: dpr,
-      });
+      };
+      const costume = costumeRef.current;
+      if (costume && frame.pose) {
+        paintCostumeOverlay(context, costume, frame.pose.landmarks, projection);
+      }
+      paintOverlay(context, frame, projection);
     };
 
-    handle = requestAnimationFrame(paint);
-    return () => cancelAnimationFrame(handle);
+    schedule();
+    return () => {
+      stopped = true;
+      cancelAnimationFrame(animationHandle);
+      if (videoFrameHandle) {
+        video.cancelVideoFrameCallback(videoFrameHandle);
+      }
+    };
   }, [read, showOverlay, videoRef]);
 
   return <canvas aria-hidden="true" className="mirror-canvas" ref={canvasRef} />;

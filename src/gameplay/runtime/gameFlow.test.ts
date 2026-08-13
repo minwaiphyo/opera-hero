@@ -36,9 +36,11 @@ function booth(): FlowState {
   return apply(createFlowState(), { type: "camera", ready: true });
 }
 
-/** Attract → learn, the way a visitor gets there: by pressing Start. */
+/** Attract → calibration → learn, the way a visitor begins a session. */
 function learning(): FlowState {
-  const state = apply(booth(), { type: "start" });
+  const calibration = apply(booth(), { type: "start" });
+  expect(calibration.screen).toBe("calibration");
+  const state = apply(calibration, { type: "calibration-complete" });
   expect(state.screen).toBe("learn");
   expect(state.gestureId).toBe("orchid-finger");
   return state;
@@ -54,7 +56,7 @@ describe("booth flow", () => {
     // Somebody standing there is not somebody who wants a turn: people walk past the
     // booth, queue at it, and watch a friend perform.
     expect(wait(booth(), 30_000).screen).toBe("attract");
-    expect(apply(booth(), { type: "start" }).screen).toBe("learn");
+    expect(apply(booth(), { type: "start" }).screen).toBe("calibration");
   });
 
   it("does not start a session before the camera is running", () => {
@@ -83,11 +85,29 @@ describe("booth flow", () => {
   });
 
   it("begins the first movement when the visitor starts playing from the tutorial", () => {
-    const state = apply(booth(), { type: "tutorial" }, { type: "next" });
+    const calibration = apply(booth(), { type: "tutorial" }, { type: "next" });
+    expect(calibration.screen).toBe("calibration");
+    const state = apply(calibration, { type: "calibration-complete" });
     expect(state.screen).toBe("learn");
     expect(state.level).toBe(1);
     expect(state.gestureId).toBe("orchid-finger");
     expect(state.captureIntent).toBe("cancel");
+  });
+
+  it("waits in calibration until sustained stillness completes", () => {
+    const calibration = apply(booth(), { type: "start" });
+    expect(wait(calibration, 30_000).screen).toBe("calibration");
+
+    const ready = apply(calibration, { type: "calibration-complete" });
+    expect(ready.screen).toBe("learn");
+    expect(ready.gestureId).toBe("orchid-finger");
+  });
+
+  it("recovers if the visitor leaves during calibration", () => {
+    let state = apply(booth(), { type: "start" });
+    state = wait(state, ABSENT_GRACE_MS + 400, false);
+    expect(state.screen).toBe("recovery");
+    expect(state.resumeScreen).toBe("calibration");
   });
 
   it("returns to the menu when the visitor leaves the tutorial", () => {
@@ -131,6 +151,16 @@ describe("booth flow", () => {
       score: SCORE,
     });
     expect(state.screen).toBe("result");
+  });
+
+  it("retains each completed movement score for the curtain call", () => {
+    let state = readyToPerform();
+    state = apply(state, { type: "capture-phase", phase: "completed", score: SCORE });
+    expect(state.scores["orchid-finger"]).toEqual(SCORE);
+
+    state = apply(state, { type: "next" });
+    expect(state.scores["orchid-finger"]).toEqual(SCORE);
+    expect(state.scores["opening-door"]).toBeUndefined();
   });
 
   it("advances every reading screen without anybody pressing a button", () => {

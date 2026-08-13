@@ -80,6 +80,21 @@ describe("GameShell", () => {
     }
   });
 
+  it("places brand, progress and camera status in distinct navbar zones", () => {
+    render(
+      <GameShell
+        actions={stubActions()}
+        cameraStage={<div data-testid="camera-stage" />}
+        status={<p>Camera live</p>}
+        view={view({ ...level1, screen: "learn" })}
+      />,
+    );
+
+    expect(screen.getByText("Opera Hero").closest(".game-mark")).not.toBeNull();
+    expect(screen.getByTestId("lantern-1").closest(".game-bar-progress")).not.toBeNull();
+    expect(screen.getByText("Camera live").closest(".game-bar-status")).not.toBeNull();
+  });
+
   /**
    * The mirror is what tells somebody the stage is awake and where to stand. It stops
    * earning its place where performing is not happening: on the tutorial the visitor
@@ -113,6 +128,32 @@ describe("GameShell", () => {
     expect(actions.start).toHaveBeenCalledOnce();
   });
 
+  it("guides framing and stillness during calibration", () => {
+    const { rerender } = render(
+      <GameShell
+        actions={stubActions()}
+        cameraStage={<div data-testid="camera-stage" />}
+        view={view({ screen: "calibration", trackingPrompt: "move-farther" })}
+      />,
+    );
+    expect(screen.getByText("Step back")).toBeInTheDocument();
+    expect(screen.getByTestId("camera-stage")).toBeInTheDocument();
+
+    rerender(
+      <GameShell
+        actions={stubActions()}
+        cameraStage={<div data-testid="camera-stage" />}
+        view={view({
+          screen: "calibration",
+          trackingPrompt: "ready",
+          calibrationProgress: 0.5,
+        })}
+      />,
+    );
+    expect(screen.getByText("Stand still")).toBeInTheDocument();
+    expect(document.querySelector(".calibration-progress span")).toHaveStyle({ width: "50%" });
+  });
+
   it("offers the tutorial from the attract screen", () => {
     const actions = renderShell(view({ screen: "attract" }));
     fireEvent.click(screen.getByRole("button", { name: "How to play" }));
@@ -131,6 +172,24 @@ describe("GameShell", () => {
         screen.getByRole("heading", { level: 2, name: new RegExp(name) }),
       ).toBeInTheDocument();
       expect(screen.getByLabelText(`${name} demonstration`)).toBeInTheDocument();
+    }
+  });
+
+  it("explains the complete booth flow before the gesture previews", () => {
+    renderShell(view({ screen: "tutorial" }));
+
+    for (const step of [
+      /stand still for calibration/i,
+      /watch the practitioner/i,
+      /copy the full movement/i,
+      /review your score/i,
+    ]) {
+      expect(screen.getByText(step)).toBeInTheDocument();
+    }
+    expect(screen.queryByText("Interactive Cantonese Opera Game")).toBeNull();
+    expect(screen.queryByText("學藝")).toBeNull();
+    for (const gestureName of ["蘭花指", "開門", "水袖"]) {
+      expect(screen.getByText(gestureName)).toBeInTheDocument();
     }
   });
 
@@ -203,10 +262,9 @@ describe("GameShell", () => {
 
     expect(screen.getByText("82%")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Graceful");
-    expect(screen.getByRole("meter", { name: /Movement completed/ })).toHaveAttribute(
-      "aria-valuenow",
-      "90",
-    );
+    expect(screen.queryByRole("meter")).toBeNull();
+    expect(screen.getByText("Behind the movement")).toBeInTheDocument();
+    expect(screen.getByText("The hand of the Dan speaks before she sings.")).toBeInTheDocument();
     expect(screen.queryByText(/pass|fail/i)).toBeNull();
 
     fireEvent.click(screen.getByRole("button", { name: /Try again/ }));
@@ -249,22 +307,44 @@ describe("GameShell", () => {
     expect(screen.getByRole("button", { name: "Finish" })).toBeInTheDocument();
   });
 
+  it("shows all three retained scores and tailored encouragement at the curtain call", () => {
+    renderShell(
+      view({
+        screen: "complete",
+        scores: {
+          "orchid-finger": { ...goodScore, overallScore: 0.91 },
+          "opening-door": { ...goodScore, overallScore: 0.86 },
+          "water-sleeves": { ...goodScore, overallScore: 0.88 },
+        },
+      }),
+    );
+
+    for (const score of ["91%", "86%", "88%"]) {
+      expect(screen.getByText(score)).toBeInTheDocument();
+    }
+    expect(screen.getByText("A radiant performance")).toBeInTheDocument();
+  });
+
   it("surfaces tracking guidance during an attempt", () => {
     renderShell(view({ ...level1, screen: "attempt", trackingPrompt: "move-closer" }));
     expect(screen.getByRole("status")).toHaveAttribute("data-prompt", "move-closer");
   });
 
-  /**
-   * The visitor performs while watching their own image. Repositioning guidance must
-   * float over the demonstration column, never the mirror, or it covers the one thing
-   * they are looking at.
-   */
-  it("keeps repositioning guidance off the visitor's mirror during an attempt", () => {
+  it("centres repositioning guidance over both performance panes", () => {
     renderShell(view({ ...level1, screen: "attempt", trackingPrompt: "move-farther" }));
 
     const hint = screen.getByText("Step back");
+    expect(hint.closest(".play-hint")).not.toBeNull();
+    expect(hint.closest(".perform-pane")).toBeNull();
     expect(hint.closest(".mirror")).toBeNull();
-    expect(hint.closest(".perform-pane--guide")).not.toBeNull();
+  });
+
+  it("places the attempt action below the visitor's mirror", () => {
+    renderShell(view({ ...level1, screen: "attempt" }));
+
+    const stop = screen.getByRole("button", { name: "Stop" });
+    expect(stop.closest(".perform-pane--mirror")).not.toBeNull();
+    expect(stop.closest(".mirror")).toBeNull();
   });
 
   it("shows recovery guidance without leaking a raw error", () => {

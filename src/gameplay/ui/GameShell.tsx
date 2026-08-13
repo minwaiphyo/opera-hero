@@ -12,9 +12,10 @@
 import type { ReactNode } from "react";
 import { COPY, gestureFor, TOTAL_LEVELS } from "../content";
 import type { GameActions, GameView } from "../contract";
-import { Lanterns } from "./components/Ornaments";
+import { Lanterns, StageMotifs } from "./components/Ornaments";
 import {
   AttractScreen,
+  CalibrationScreen,
   CompleteScreen,
   LearnScreen,
   PerformScreen,
@@ -38,15 +39,18 @@ export function GameShell({ view, actions, cameraStage, status }: GameShellProps
   return (
     <div className="opera-game" data-screen={view.screen}>
       <div aria-hidden="true" className="stage-glow" />
+      <StageMotifs />
 
       <header className="game-bar">
-        <div className="game-bar-right">
-          {status}
+        <p className="game-mark">
+          <em>{COPY.title}</em>
+          <span lang="zh-Hant">粵劇英雄</span>
+        </p>
+        <div className="game-bar-progress">
           {view.level !== null ? <Lanterns level={view.level} /> : null}
-          <p className="game-mark">
-            <span lang="zh-Hant">粵劇英雄</span>
-            <em>{COPY.title}</em>
-          </p>
+        </div>
+        <div className="game-bar-status">
+          {status}
         </div>
       </header>
 
@@ -94,6 +98,16 @@ function renderScreen(
       // The tutorial is not a session: `next` begins the game, `quit` returns to the menu.
       return <TutorialScreen onBack={actions.quit} onStart={actions.next} />;
 
+    case "calibration":
+      return (
+        <CalibrationScreen
+          cameraStage={cameraStage}
+          onCancel={actions.quit}
+          progress={view.calibrationProgress}
+          prompt={view.trackingPrompt}
+        />
+      );
+
     case "learn":
       return gesture ? (
         <LearnScreen
@@ -135,7 +149,7 @@ function renderScreen(
       );
 
     case "complete":
-      return <CompleteScreen onFinish={actions.next} />;
+      return <CompleteScreen onFinish={actions.next} scores={view.scores} />;
 
     case "recovery":
       return recovery;
