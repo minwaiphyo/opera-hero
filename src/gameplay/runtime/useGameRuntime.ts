@@ -184,6 +184,7 @@ export function useGameRuntime(
 
   const actions = useMemo<GameActions>(
     () => ({
+      about: () => dispatch({ type: "about" }),
       tutorial: () => dispatch({ type: "tutorial" }),
       start: () => {
         calibrationRef.current.reset();

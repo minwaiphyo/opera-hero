@@ -5,8 +5,8 @@
  * camera, the vision worker, or the gesture evaluators. `cameraStage` is a slot, so no
  * screen ever touches a video frame.
  *
- * Every screen shows the visitor their own live image. In an unmanned booth that mirror
- * is what proves the stage is awake and what tells people where to stand.
+ * Performance screens show the visitor their own live image. In an unmanned booth that
+ * mirror proves the stage is awake and tells people where to stand.
  */
 
 import type { ReactNode } from "react";
@@ -16,6 +16,7 @@ import {
   finaleFor,
   GESTURES,
   RECOVERY,
+  TEAM_MEMBERS,
   UNSEEN,
   type Gesture,
 } from "../content";
@@ -50,10 +51,12 @@ export function AttractScreen({
   cameraStage,
   onStart,
   onTutorial,
+  onAbout,
 }: {
   cameraStage: ReactNode;
   onStart: () => void;
   onTutorial: () => void;
+  onAbout: () => void;
 }) {
   return (
     <section className="screen screen--attract" aria-labelledby="title">
@@ -67,10 +70,48 @@ export function AttractScreen({
         <div className="menu-actions">
           <Button autoFocus label={COPY.start} onClick={onStart} />
           <Button label={COPY.howToPlay} onClick={onTutorial} variant="secondary" />
+          <Button label={COPY.about} onClick={onAbout} variant="quiet" />
         </div>
         <p className="privacy">{COPY.privacy}</p>
       </div>
       <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
+    </section>
+  );
+}
+
+export function AboutScreen({ onBack }: { onBack: () => void }) {
+  return (
+    <section className="screen screen--about" aria-labelledby="title">
+      <figure className="team-photo">
+        <img
+          alt="The four Opera Hero creators wearing CTRL+ Heritage hackathon shirts"
+          src="/team/opera-hero-team.jpg"
+        />
+      </figure>
+
+      <div className="about-copy">
+        <p className="eyebrow">Team 16</p>
+        <h1 className="about-title" id="title">{COPY.aboutTitle}</h1>
+        <p className="about-attribution">{COPY.aboutAttribution}</p>
+
+        <ul className="creator-list">
+          {TEAM_MEMBERS.map((member) => (
+            <li key={member.name}>
+              <div>
+                <strong>{member.name}</strong>
+                <span>{member.course}</span>
+              </div>
+              <span className="creator-linkedin">
+                <span>LinkedIn</span>
+                {member.linkedIn.replace(/^https?:\/\//, "")}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="creator-order">{COPY.teamOrderCaption}</p>
+
+        <Button autoFocus label={COPY.back} onClick={onBack} variant="secondary" />
+      </div>
     </section>
   );
 }
@@ -441,9 +482,6 @@ export function CompleteScreen({
         <h1 className="title" id="title">
           {COPY.completeTitle}
         </h1>
-        <p className="title-chinese" lang="zh-Hant">
-          {COPY.completeChinese}
-        </p>
         <div className="finale-message">
           <strong>{finale.title}</strong>
           {finale.body ? <p>{finale.body}</p> : null}
