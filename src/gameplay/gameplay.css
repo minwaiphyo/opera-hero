@@ -831,7 +831,8 @@
 }
 
 .calibration-direction .hint,
-.calibration-hold {
+.calibration-hold,
+.calibration-preparing {
   width: min(100%, 40rem);
   max-width: none;
   margin-inline: auto;
@@ -852,12 +853,14 @@
 }
 
 .calibration-direction .hint span,
-.calibration-hold > span {
+.calibration-hold > span,
+.calibration-preparing > span {
   color: var(--silk);
   text-shadow: 0 0 10px rgba(253, 246, 234, 0.14);
 }
 
-.calibration-hold {
+.calibration-hold,
+.calibration-preparing {
   display: grid;
   gap: 0.25rem;
 }
@@ -867,7 +870,14 @@
   font-size: clamp(1.2rem, 2.5vmin, 2.2rem);
 }
 
-.calibration-hold span {
+.calibration-preparing strong {
+  color: var(--cinnabar-lit);
+  font-size: clamp(1.2rem, 2.5vmin, 2.2rem);
+  text-shadow: 0 0 14px rgba(239, 64, 64, 0.28);
+}
+
+.calibration-hold span,
+.calibration-preparing span {
   color: var(--silk-faint);
   font-size: var(--small);
 }

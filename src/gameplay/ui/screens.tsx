@@ -78,15 +78,18 @@ export function AttractScreen({
 export function CalibrationScreen({
   cameraStage,
   progress,
+  ready,
   prompt,
   onCancel,
 }: {
   cameraStage: ReactNode;
   progress: number;
+  ready: boolean;
   prompt: TrackingPrompt;
   onCancel: () => void;
 }) {
   const positioned = prompt === "ready";
+  const canHold = positioned && ready;
   return (
     <section className="screen screen--calibration" aria-labelledby="title">
       <header className="calibration-head">
@@ -100,13 +103,18 @@ export function CalibrationScreen({
       <div className="calibration-stage">
         <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
         <div className="calibration-direction">
-          {positioned ? (
+          {canHold ? (
             <div aria-live="polite" className="calibration-hold" role="status">
               <strong>Stand still</strong>
               <span>Hold your position while we prepare the stage.</span>
               <div aria-hidden="true" className="calibration-progress">
                 <span style={{ width: `${Math.round(progress * 100)}%` }} />
               </div>
+            </div>
+          ) : positioned ? (
+            <div aria-live="polite" className="calibration-preparing" role="status">
+              <strong>Adjust your stance</strong>
+              <span>Keep your shoulders, arms and waist visible in the mirror.</span>
             </div>
           ) : (
             <TrackingHint prompt={prompt} />

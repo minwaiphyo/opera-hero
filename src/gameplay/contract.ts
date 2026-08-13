@@ -84,6 +84,8 @@ export interface GameView {
   countdownSeconds: number | null;
   /** 0..1 through the required still hold on the calibration screen. */
   calibrationProgress: number;
+  /** True only after the stillness detector accepts a usable calibration frame. */
+  calibrationReady: boolean;
   trackingPrompt: TrackingPrompt;
   /** Present on `result` only. Null means the attempt could not be scored. */
   score: GameScore | null;
@@ -119,6 +121,7 @@ export const INITIAL_VIEW: GameView = {
   gestureId: null,
   countdownSeconds: null,
   calibrationProgress: 0,
+  calibrationReady: false,
   trackingPrompt: "step-into-frame",
   score: null,
   scores: {},

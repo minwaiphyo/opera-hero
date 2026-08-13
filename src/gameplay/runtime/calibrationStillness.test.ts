@@ -5,6 +5,11 @@ import { CALIBRATION_HOLD_MS, CalibrationStillness } from "./calibrationStillnes
 describe("calibration stillness", () => {
   it("completes after a sustained stable hold", () => {
     const detector = new CalibrationStillness();
+    expect(detector.push(frame(0))).toEqual({
+      ready: true,
+      progress: 0,
+      complete: false,
+    });
     expect(hold(detector, CALIBRATION_HOLD_MS / 2).progress).toBeCloseTo(0.5);
     expect(hold(detector, CALIBRATION_HOLD_MS, CALIBRATION_HOLD_MS / 2 + 100).complete).toBe(true);
   });
@@ -28,7 +33,16 @@ describe("calibration stillness", () => {
 
     const missing = frame(2_100);
     missing.pose = undefined;
-    expect(detector.push(missing)).toEqual({ progress: 0, complete: false });
+    expect(detector.push(missing)).toEqual({ ready: false, progress: 0, complete: false });
+  });
+
+  it("starts when the upper body is usable even if hip visibility is imperfect", () => {
+    const detector = new CalibrationStillness();
+    const partial = frame(0);
+    partial.pose!.landmarks[23]!.visibility = 0.3;
+    partial.pose!.landmarks[24]!.visibility = 0.3;
+
+    expect(detector.push(partial).ready).toBe(true);
   });
 });
 
@@ -37,7 +51,7 @@ function hold(
   untilMs: number,
   fromMs = 0,
 ) {
-  let snapshot = { progress: 0, complete: false };
+  let snapshot = { ready: false, progress: 0, complete: false };
   for (let at = fromMs; at <= untilMs; at += 100) snapshot = detector.push(frame(at));
   return snapshot;
 }

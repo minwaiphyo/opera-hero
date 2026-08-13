@@ -104,6 +104,7 @@ function renderScreen(
           cameraStage={cameraStage}
           onCancel={actions.quit}
           progress={view.calibrationProgress}
+          ready={view.calibrationReady}
           prompt={view.trackingPrompt}
         />
       );

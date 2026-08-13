@@ -56,6 +56,7 @@ export function useGameRuntime(
   const [flow, dispatch] = useReducer(flowReducer, undefined, createFlowState);
   const [trackingPrompt, setTrackingPrompt] = useState<TrackingPrompt>("step-into-frame");
   const [calibrationProgress, setCalibrationProgress] = useState(0);
+  const [calibrationReady, setCalibrationReady] = useState(false);
   const calibrationRef = useRef(new CalibrationStillness());
   const calibrationCompletedRef = useRef(false);
   const flowRef = useRef(flow);
@@ -100,10 +101,12 @@ export function useGameRuntime(
       if (trackingPromptRef.current !== "ready") {
         calibrationRef.current.reset();
         setCalibrationProgress(0);
+        setCalibrationReady(false);
         return;
       }
       const snapshot = calibrationRef.current.push(frame);
       setCalibrationProgress(snapshot.progress);
+      setCalibrationReady(snapshot.ready);
       if (snapshot.complete && !calibrationCompletedRef.current) {
         calibrationCompletedRef.current = true;
         dispatch({ type: "calibration-complete" });
@@ -182,8 +185,22 @@ export function useGameRuntime(
   const actions = useMemo<GameActions>(
     () => ({
       tutorial: () => dispatch({ type: "tutorial" }),
-      start: () => dispatch({ type: "start" }),
-      next: () => dispatch({ type: "next" }),
+      start: () => {
+        calibrationRef.current.reset();
+        calibrationCompletedRef.current = false;
+        setCalibrationProgress(0);
+        setCalibrationReady(false);
+        dispatch({ type: "start" });
+      },
+      next: () => {
+        if (flowRef.current.screen === "tutorial") {
+          calibrationRef.current.reset();
+          calibrationCompletedRef.current = false;
+          setCalibrationProgress(0);
+          setCalibrationReady(false);
+        }
+        dispatch({ type: "next" });
+      },
       retry: () => dispatch({ type: "retry" }),
       quit: () => {
         activeRef.current?.cancel();
@@ -204,6 +221,7 @@ export function useGameRuntime(
           ? Math.max(1, Math.ceil(active.state.countdownRemainingMs / 1000))
           : null,
       calibrationProgress: flow.screen === "calibration" ? calibrationProgress : 0,
+      calibrationReady: flow.screen === "calibration" && calibrationReady,
       trackingPrompt,
       score: flow.screen === "result" ? flow.score : null,
       scores: flow.scores,
@@ -211,7 +229,7 @@ export function useGameRuntime(
       message: flow.message,
       autoAdvance: dwellProgress(flow),
     }),
-    [active, calibrationProgress, flow, trackingPrompt],
+    [active, calibrationProgress, calibrationReady, flow, trackingPrompt],
   );
 
   return {

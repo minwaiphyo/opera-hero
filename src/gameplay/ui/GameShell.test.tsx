@@ -147,11 +147,26 @@ describe("GameShell", () => {
           screen: "calibration",
           trackingPrompt: "ready",
           calibrationProgress: 0.5,
+          calibrationReady: true,
         })}
       />,
     );
     expect(screen.getByText("Stand still")).toBeInTheDocument();
     expect(document.querySelector(".calibration-progress span")).toHaveStyle({ width: "50%" });
+  });
+
+  it("does not ask the visitor to stand still before calibration can progress", () => {
+    renderShell(
+      view({
+        screen: "calibration",
+        trackingPrompt: "ready",
+        calibrationReady: false,
+      }),
+    );
+
+    expect(screen.getByText("Adjust your stance")).toBeInTheDocument();
+    expect(screen.getByText(/shoulders, arms and waist visible/i)).toBeInTheDocument();
+    expect(screen.queryByText("Stand still")).toBeNull();
   });
 
   it("offers the tutorial from the attract screen", () => {
