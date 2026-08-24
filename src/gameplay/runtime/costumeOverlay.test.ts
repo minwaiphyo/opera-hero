@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import type { VisionLandmark } from "../../vision/visionTypes";
-import { calculateCostumePlacement } from "./costumeOverlay";
+import {
+  calculateCostumePlacement,
+  COSTUME_TRACKING_GRACE_MS,
+  updateCostumeTracking,
+} from "./costumeOverlay";
 
 const projection = {
   toX: (x: number) => 1000 - x * 1000,
@@ -43,5 +47,29 @@ describe("costume overlay placement", () => {
     collapsed[12] = { ...collapsed[12]!, x: 0.5 };
 
     expect(calculateCostumePlacement(collapsed, projection)).toBeNull();
+  });
+
+  it("bridges an isolated low-confidence frame without flickering", () => {
+    const detected = calculateCostumePlacement(pose(), projection)!;
+    const tracked = updateCostumeTracking(null, detected, 1_000);
+
+    expect(updateCostumeTracking(tracked, null, 1_200)).toEqual(tracked);
+    expect(
+      updateCostumeTracking(tracked, null, 1_000 + COSTUME_TRACKING_GRACE_MS + 1),
+    ).toBeNull();
+  });
+
+  it("smooths sudden placement changes between reliable frames", () => {
+    const first = calculateCostumePlacement(pose(), projection)!;
+    const shiftedPose = pose();
+    shiftedPose[11] = { ...shiftedPose[11]!, x: 0.25 };
+    shiftedPose[12] = { ...shiftedPose[12]!, x: 0.55 };
+    const shifted = calculateCostumePlacement(shiftedPose, projection)!;
+
+    const initial = updateCostumeTracking(null, first, 1_000)!;
+    const smoothed = updateCostumeTracking(initial, shifted, 1_050)!;
+
+    expect(smoothed.placement.x).toBeGreaterThan(first.x);
+    expect(smoothed.placement.x).toBeLessThan(shifted.x);
   });
 });

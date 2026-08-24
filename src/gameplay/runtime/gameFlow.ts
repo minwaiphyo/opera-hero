@@ -65,6 +65,7 @@ export type FlowEvent =
   | { type: "capture-phase"; phase: CapturePhase; score: GameScore | null }
   | { type: "capture-handled" }
   | { type: "camera"; ready: boolean }
+  | { type: "about" }
   | { type: "calibration-complete" }
   | { type: "tutorial" }
   | { type: "start" }
@@ -103,6 +104,8 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
       return { ...state, captureIntent: null };
     case "camera":
       return camera(state, event.ready);
+    case "about":
+      return state.screen === "attract" ? enter(state, "about") : state;
     case "calibration-complete":
       return state.screen === "calibration" ? enterLevel(state, 1) : state;
     case "tutorial":
@@ -137,9 +140,9 @@ function tick(state: FlowState, deltaMs: number, present: boolean): FlowState {
 
   // Attract waits for the visitor to press Start. Standing in front of the booth is not
   // the same as wanting a turn: people walk past, queue, and watch somebody else.
-  if (state.screen === "attract") {
+  if (state.screen === "attract" || state.screen === "about") {
     // Only ask for help once the camera has had a fair chance to open.
-    if (!state.cameraReady && cameraDownMs >= CAMERA_GRACE_MS) {
+    if (state.screen === "attract" && !state.cameraReady && cameraDownMs >= CAMERA_GRACE_MS) {
       return { ...enter(now, "recovery"), message: CAMERA_MESSAGE, resumeScreen: null };
     }
     return now;
@@ -237,7 +240,7 @@ function camera(state: FlowState, ready: boolean): FlowState {
 
   // On attract the camera is simply still warming up; `tick` decides when that has
   // taken long enough to be worth telling anyone about.
-  if (state.screen === "attract" || state.screen === "recovery") {
+  if (state.screen === "attract" || state.screen === "about" || state.screen === "recovery") {
     return { ...state, cameraReady: false };
   }
   return {
@@ -253,6 +256,8 @@ function next(state: FlowState): FlowState {
   switch (state.screen) {
     case "attract":
       return enterLevel(state, 1);
+    case "about":
+      return state;
     case "tutorial":
       // The preview is over; position the visitor before beginning level one.
       return enter(state, "calibration");

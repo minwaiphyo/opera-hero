@@ -147,7 +147,7 @@ function PeonyPaths() {
 /** Session progress as three stage lanterns. */
 export function Lanterns({ level }: { level: number | null }) {
   return (
-    <ol className="lanterns" aria-label="Progress" data-level={level ?? 0}>
+    <ol className="lanterns" aria-label="Progress">
       {[1, 2, 3].map((step) => {
         const state =
           level === null ? "waiting" : step < level ? "done" : step === level ? "now" : "waiting";

@@ -10,7 +10,12 @@
  */
 
 import { useEffect, useRef, type RefObject } from "react";
-import { paintCostumeOverlay } from "./costumeOverlay";
+import {
+  calculateCostumePlacement,
+  paintCostumePlacement,
+  updateCostumeTracking,
+  type CostumeTrackingState,
+} from "./costumeOverlay";
 import { paintOverlay, type OverlayProjection } from "./overlayPainter";
 import type { LatestFrame } from "./useVisionFrames";
 
@@ -27,6 +32,8 @@ export function VisitorMirror({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const costumeRef = useRef<HTMLImageElement | null>(null);
+  const costumeTrackingRef = useRef<CostumeTrackingState | null>(null);
+  const costumeFrameIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     const image = new Image();
@@ -109,7 +116,7 @@ export function VisitorMirror({
       if (!showOverlay) {
         return;
       }
-      const { frame } = read();
+      const { frame, receivedAt } = read();
       if (!frame) {
         return;
       }
@@ -122,8 +129,29 @@ export function VisitorMirror({
         scale: dpr,
       };
       const costume = costumeRef.current;
-      if (costume && frame.pose) {
-        paintCostumeOverlay(context, costume, frame.pose.landmarks, projection);
+      if (costume && costumeFrameIdRef.current !== frame.frameId) {
+        costumeFrameIdRef.current = frame.frameId;
+        costumeTrackingRef.current = updateCostumeTracking(
+          costumeTrackingRef.current,
+          frame.pose
+            ? calculateCostumePlacement(frame.pose.landmarks, projection)
+            : null,
+          receivedAt,
+        );
+      }
+      costumeTrackingRef.current = updateCostumeTracking(
+        costumeTrackingRef.current,
+        null,
+        performance.now(),
+      );
+      const costumeTracking = costumeTrackingRef.current;
+      if (costume && costumeTracking) {
+        paintCostumePlacement(
+          context,
+          costume,
+          costumeTracking.placement,
+          projection.scale,
+        );
       }
       paintOverlay(context, frame, projection);
     };
@@ -131,6 +159,8 @@ export function VisitorMirror({
     schedule();
     return () => {
       stopped = true;
+      costumeTrackingRef.current = null;
+      costumeFrameIdRef.current = null;
       cancelAnimationFrame(animationHandle);
       if (videoFrameHandle) {
         video.cancelVideoFrameCallback(videoFrameHandle);

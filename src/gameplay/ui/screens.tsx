@@ -5,8 +5,8 @@
  * camera, the vision worker, or the gesture evaluators. `cameraStage` is a slot, so no
  * screen ever touches a video frame.
  *
- * Every screen shows the visitor their own live image. In an unmanned booth that mirror
- * is what proves the stage is awake and what tells people where to stand.
+ * Performance screens show the visitor their own live image. In an unmanned booth that
+ * mirror proves the stage is awake and tells people where to stand.
  */
 
 import type { ReactNode } from "react";
@@ -16,6 +16,7 @@ import {
   finaleFor,
   GESTURES,
   RECOVERY,
+  TEAM_MEMBERS,
   UNSEEN,
   type Gesture,
 } from "../content";
@@ -50,23 +51,25 @@ export function AttractScreen({
   cameraStage,
   onStart,
   onTutorial,
+  onAbout,
 }: {
   cameraStage: ReactNode;
   onStart: () => void;
   onTutorial: () => void;
+  onAbout: () => void;
 }) {
   return (
     <section className="screen screen--attract" aria-labelledby="title">
       <div className="attract-copy">
         <h1 className="attract-wordmark" id="title">
           {COPY.title}
-          <span lang="zh-Hant">{COPY.chineseTitle}</span>
         </h1>
         <p className="attract-subtitle">{COPY.subtitle}</p>
         <p className="invitation">{COPY.invitation}</p>
         <div className="menu-actions">
           <Button autoFocus label={COPY.start} onClick={onStart} />
           <Button label={COPY.howToPlay} onClick={onTutorial} variant="secondary" />
+          <Button label={COPY.about} onClick={onAbout} variant="secondary" />
         </div>
         <p className="privacy">{COPY.privacy}</p>
       </div>
@@ -75,18 +78,57 @@ export function AttractScreen({
   );
 }
 
+export function AboutScreen({ onBack }: { onBack: () => void }) {
+  return (
+    <section className="screen screen--about" aria-labelledby="title">
+      <figure className="team-photo">
+        <img
+          alt="The four Opera Hero creators wearing CTRL+ Heritage hackathon shirts"
+          src="/team/opera-hero-team.jpg"
+        />
+      </figure>
+
+      <div className="about-copy">
+        <h1 className="about-title" id="title">{COPY.aboutTitle}</h1>
+        <p className="about-attribution">{COPY.aboutAttribution}</p>
+
+        <ul className="creator-list">
+          {TEAM_MEMBERS.map((member) => (
+            <li key={member.name}>
+              <div>
+                <strong>{member.name}</strong>
+                <span>{member.course}</span>
+              </div>
+              <span className="creator-linkedin">
+                <span>LinkedIn</span>
+                {member.linkedIn.replace(/^https?:\/\//, "")}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="creator-order">{COPY.teamOrderCaption}</p>
+
+        <Button autoFocus label={COPY.back} onClick={onBack} variant="secondary" />
+      </div>
+    </section>
+  );
+}
+
 export function CalibrationScreen({
   cameraStage,
   progress,
+  ready,
   prompt,
   onCancel,
 }: {
   cameraStage: ReactNode;
   progress: number;
+  ready: boolean;
   prompt: TrackingPrompt;
   onCancel: () => void;
 }) {
   const positioned = prompt === "ready";
+  const canHold = positioned && ready;
   return (
     <section className="screen screen--calibration" aria-labelledby="title">
       <header className="calibration-head">
@@ -100,13 +142,18 @@ export function CalibrationScreen({
       <div className="calibration-stage">
         <Mirror label={COPY.mirrorLabel}>{cameraStage}</Mirror>
         <div className="calibration-direction">
-          {positioned ? (
+          {canHold ? (
             <div aria-live="polite" className="calibration-hold" role="status">
               <strong>Stand still</strong>
               <span>Hold your position while we prepare the stage.</span>
               <div aria-hidden="true" className="calibration-progress">
                 <span style={{ width: `${Math.round(progress * 100)}%` }} />
               </div>
+            </div>
+          ) : positioned ? (
+            <div aria-live="polite" className="calibration-preparing" role="status">
+              <strong>Adjust your stance</strong>
+              <span>Keep your shoulders, arms and waist visible in the mirror.</span>
             </div>
           ) : (
             <TrackingHint prompt={prompt} />
@@ -433,9 +480,6 @@ export function CompleteScreen({
         <h1 className="title" id="title">
           {COPY.completeTitle}
         </h1>
-        <p className="title-chinese" lang="zh-Hant">
-          {COPY.completeChinese}
-        </p>
         <div className="finale-message">
           <strong>{finale.title}</strong>
           {finale.body ? <p>{finale.body}</p> : null}

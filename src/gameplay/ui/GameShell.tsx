@@ -4,9 +4,9 @@
  * Renders one view model and emits actions. Owns no timers, no camera access and no
  * scoring.
  *
- * The shell carries no links away from the game. The milestone dashboard and the
- * laboratories are development surfaces: they remain reachable by URL for the people
- * building the booth, but nothing on the visitor's stage advertises them.
+ * The milestone dashboard and laboratories remain reachable by URL for the people
+ * building the booth, but nothing on the visitor's stage advertises them. The visitor
+ * experience contains no clickable links that could navigate away from the local app.
  */
 
 import type { ReactNode } from "react";
@@ -15,6 +15,7 @@ import type { GameActions, GameView } from "../contract";
 import { Lanterns, StageMotifs } from "./components/Ornaments";
 import {
   AttractScreen,
+  AboutScreen,
   CalibrationScreen,
   CompleteScreen,
   LearnScreen,
@@ -89,10 +90,14 @@ function renderScreen(
       return (
         <AttractScreen
           cameraStage={cameraStage}
+          onAbout={actions.about}
           onStart={actions.start}
           onTutorial={actions.tutorial}
         />
       );
+
+    case "about":
+      return <AboutScreen onBack={actions.quit} />;
 
     case "tutorial":
       // The tutorial is not a session: `next` begins the game, `quit` returns to the menu.
@@ -104,6 +109,7 @@ function renderScreen(
           cameraStage={cameraStage}
           onCancel={actions.quit}
           progress={view.calibrationProgress}
+          ready={view.calibrationReady}
           prompt={view.trackingPrompt}
         />
       );

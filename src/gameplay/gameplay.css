@@ -65,40 +65,6 @@
     radial-gradient(circle at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
 }
 
-/*
- * A restrained proscenium around the booth: fine gold rules, a quiet geometric repeat
- * on the sides and brighter corner joints. It frames the stage without competing with
- * the visitor, guide or score.
- */
-.opera-game::before {
-  position: absolute;
-  inset: clamp(7px, 1.1vmin, 16px);
-  z-index: 3;
-  pointer-events: none;
-  content: "";
-  border: 1px solid rgba(228, 184, 95, 0.24);
-  background:
-    linear-gradient(90deg, var(--gold), transparent) top left / clamp(60px, 10vmin, 140px) 2px no-repeat,
-    linear-gradient(-90deg, var(--gold), transparent) top right / clamp(60px, 10vmin, 140px) 2px no-repeat,
-    linear-gradient(90deg, var(--gold), transparent) bottom left / clamp(60px, 10vmin, 140px) 2px no-repeat,
-    linear-gradient(-90deg, var(--gold), transparent) bottom right / clamp(60px, 10vmin, 140px) 2px no-repeat,
-    repeating-linear-gradient(
-      180deg,
-      rgba(228, 184, 95, 0.08) 0 7px,
-      rgba(228, 184, 95, 0.32) 7px 9px,
-      transparent 9px 18px
-    ) left center / 3px calc(100% - clamp(90px, 15vmin, 190px)) no-repeat,
-    repeating-linear-gradient(
-      180deg,
-      rgba(228, 184, 95, 0.08) 0 7px,
-      rgba(228, 184, 95, 0.32) 7px 9px,
-      transparent 9px 18px
-    ) right center / 3px calc(100% - clamp(90px, 15vmin, 190px)) no-repeat;
-  box-shadow:
-    inset 0 0 0 4px rgba(8, 4, 10, 0.4),
-    0 0 24px rgba(228, 184, 95, 0.08);
-}
-
 .opera-game > * {
   position: relative;
   z-index: 1;
@@ -776,7 +742,7 @@
   animation: breathe 3.6s ease-in-out infinite;
 }
 
-/* The menu's two ways in: begin now, or see the movements first. */
+/* The menu's primary action and its two clearly visible supporting destinations. */
 .menu-actions {
   display: flex;
   flex-wrap: wrap;
@@ -831,7 +797,8 @@
 }
 
 .calibration-direction .hint,
-.calibration-hold {
+.calibration-hold,
+.calibration-preparing {
   width: min(100%, 40rem);
   max-width: none;
   margin-inline: auto;
@@ -852,12 +819,14 @@
 }
 
 .calibration-direction .hint span,
-.calibration-hold > span {
+.calibration-hold > span,
+.calibration-preparing > span {
   color: var(--silk);
   text-shadow: 0 0 10px rgba(253, 246, 234, 0.14);
 }
 
-.calibration-hold {
+.calibration-hold,
+.calibration-preparing {
   display: grid;
   gap: 0.25rem;
 }
@@ -867,7 +836,14 @@
   font-size: clamp(1.2rem, 2.5vmin, 2.2rem);
 }
 
-.calibration-hold span {
+.calibration-preparing strong {
+  color: var(--cinnabar-lit);
+  font-size: clamp(1.2rem, 2.5vmin, 2.2rem);
+  text-shadow: 0 0 14px rgba(239, 64, 64, 0.28);
+}
+
+.calibration-hold span,
+.calibration-preparing span {
   color: var(--silk-faint);
   font-size: var(--small);
 }
@@ -891,6 +867,133 @@
   grid-column: 2;
   display: flex;
   justify-content: center;
+}
+
+/* -------------------------------------------------------------------------- */
+/* About the creators                                                         */
+/* -------------------------------------------------------------------------- */
+
+.screen--about {
+  grid-template-columns: minmax(20rem, 0.88fr) minmax(30rem, 1.12fr);
+  gap: var(--gutter);
+  align-items: center;
+}
+
+.team-photo {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 36rem);
+  height: min(72vh, 48rem);
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid rgba(228, 184, 95, 0.55);
+  border-radius: 8px;
+  background: var(--ink-soft);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.42);
+}
+
+.team-photo::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  box-shadow: inset 0 0 42px rgba(8, 4, 10, 0.36);
+}
+
+.team-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.about-copy {
+  width: min(100%, 56rem);
+}
+
+.about-title {
+  margin: 0;
+  color: var(--gold-lit);
+  font-family: var(--sans);
+  font-size: clamp(2.2rem, 5vmin, 4.8rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.about-attribution {
+  max-width: 46rem;
+  margin: clamp(0.7rem, 1.7vmin, 1.5rem) 0 0;
+  color: var(--silk);
+  font-size: clamp(1rem, 1.75vmin, 1.55rem);
+  line-height: 1.4;
+}
+
+.creator-order {
+  margin: clamp(-0.5rem, -0.8vmin, -0.2rem) 0 clamp(0.8rem, 1.5vmin, 1.3rem);
+  color: var(--silk-dim);
+  font-size: clamp(0.72rem, 1.15vmin, 0.95rem);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.creator-list {
+  display: grid;
+  gap: clamp(0.45rem, 1vmin, 0.9rem);
+  margin: clamp(1rem, 2.4vmin, 2.2rem) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.creator-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: clamp(0.65rem, 1.35vmin, 1.15rem) clamp(0.8rem, 1.6vmin, 1.4rem);
+  border-left: 3px solid var(--gold);
+  background: linear-gradient(90deg, rgba(228, 184, 95, 0.11), transparent 82%);
+}
+
+.creator-list li > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.creator-list strong {
+  color: var(--silk);
+  font-size: clamp(1rem, 1.7vmin, 1.5rem);
+}
+
+.creator-list span {
+  color: var(--silk-dim);
+  font-size: var(--small);
+}
+
+.creator-linkedin {
+  display: grid;
+  justify-items: end;
+  gap: 0.15rem;
+  width: clamp(15rem, 22vw, 23rem);
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.55em 0.9em;
+  border: 1px solid rgba(228, 184, 95, 0.48);
+  border-radius: 0.7rem;
+  color: var(--gold-lit);
+  font-size: clamp(0.68rem, 1.1vmin, 0.95rem);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.creator-linkedin > span {
+  color: var(--gold-lit);
+  font-size: 0.75em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1030,6 +1133,7 @@
   position: relative;
   grid-template-rows: auto auto minmax(0, 1fr);
   gap: clamp(0.6rem, 1.4vmin, 1.2rem);
+  padding-bottom: clamp(1.8rem, 4vmin, 4rem);
 }
 
 .play-toolbar {
@@ -1113,6 +1217,7 @@
   position: relative;
   grid-template-rows: auto auto minmax(0, 1fr);
   gap: clamp(0.4rem, 1.2vmin, 1rem);
+  padding-bottom: clamp(1.8rem, 4vmin, 4rem);
 }
 
 .perform-panes {
@@ -1604,7 +1709,6 @@
   --lantern-gap: clamp(1.5rem, 3vmin, 3.2rem);
   --lantern-width: clamp(30px, 4vmin, 50px);
 
-  position: relative;
   display: flex;
   gap: var(--lantern-gap);
   margin: 0;
@@ -1612,40 +1716,8 @@
   list-style: none;
 }
 
-.lanterns::before,
-.lanterns::after {
-  position: absolute;
-  top: 50%;
-  left: calc(var(--lantern-width) / 2);
-  height: 3px;
-  content: "";
-  transform: translateY(-50%);
-}
-
-.lanterns::before {
-  right: calc(var(--lantern-width) / 2);
-  background: rgba(228, 184, 95, 0.24);
-  box-shadow: 0 0 8px rgba(228, 184, 95, 0.12);
-}
-
-.lanterns::after {
-  width: 0;
-  background: linear-gradient(90deg, var(--cinnabar), var(--gold-lit));
-  box-shadow: 0 0 10px rgba(228, 184, 95, 0.55);
-  transition: width 500ms ease;
-}
-
-.lanterns[data-level="2"]::after {
-  width: calc((100% - var(--lantern-width)) / 2);
-}
-
-.lanterns[data-level="3"]::after {
-  width: calc(100% - var(--lantern-width));
-}
-
 .lantern {
   position: relative;
-  z-index: 1;
   display: grid;
   place-items: center;
   width: var(--lantern-width);
@@ -1712,6 +1784,7 @@
 
 @media (max-aspect-ratio: 1 / 1), (max-width: 880px) {
   .screen--attract,
+  .screen--about,
   .screen--calibration,
   .screen--tutorial,
   .screen--learn,
@@ -1725,6 +1798,12 @@
 
   .calibration-action {
     grid-column: 1;
+  }
+
+  .team-photo {
+    justify-self: center;
+    width: min(82vw, 32rem);
+    height: min(50vh, 38rem);
   }
 
   .attract-copy {

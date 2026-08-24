@@ -83,6 +83,29 @@ export const GESTURES: readonly Gesture[] = [
 
 export const TOTAL_LEVELS = GESTURES.length;
 
+export const TEAM_MEMBERS = [
+  {
+    name: "Mani Kumar Prateek",
+    course: "NUS Year 3 · Computer Science",
+    linkedIn: "https://www.linkedin.com/in/prateek-abc12/",
+  },
+  {
+    name: "Min Wai Phyo",
+    course: "NUS Year 3 · Computer Science and Business Administration",
+    linkedIn: "https://www.linkedin.com/in/min-wai-phyo/",
+  },
+  {
+    name: "Stalin Muthukumar Bill Sujith Kumaar",
+    course: "NUS Year 3 · Computer Science",
+    linkedIn: "https://www.linkedin.com/in/bill-sujith-kumaar/",
+  },
+  {
+    name: "Kaung Khant Minn",
+    course: "NUS Year 3 · Computer Science",
+    linkedIn: "https://www.linkedin.com/in/kaung-khant-minn21/",
+  },
+] as const;
+
 export function gestureFor(id: GestureId): Gesture {
   const found = GESTURES.find((gesture) => gesture.id === id);
   if (!found) {
@@ -108,6 +131,10 @@ export const COPY = {
   intro: "Copy three movements of the Dan. Two minutes.",
   start: "Start",
   howToPlay: "How to play",
+  about: "About the creators",
+  aboutTitle: "Meet the creators",
+  aboutAttribution: "Built for the CTRL+ Heritage Youth Symposium and Hackathon 2026",
+  teamOrderCaption: "In order from left to right",
   tutorialTitle: "Learn the movements",
   tutorialSteps: [
     "Follow the distance guide, then stand still for calibration.",

@@ -8,12 +8,43 @@ const MIN_VISIBILITY = 0.55;
 const SHOULDER_WIDTH_SCALE = 1.55;
 const HEAD_TO_SHOULDER_SCALE = 2;
 const VERTICAL_ANCHOR_SCALE = 0.9;
+export const COSTUME_TRACKING_GRACE_MS = 400;
+const PLACEMENT_SMOOTHING = 0.35;
 
 export interface CostumePlacement {
   x: number;
   y: number;
   width: number;
   height: number;
+}
+
+export interface CostumeTrackingState {
+  placement: CostumePlacement;
+  lastReliableAt: number;
+}
+
+/**
+ * Smooths small landmark shifts and bridges isolated low-confidence frames.
+ * Four tenths of a second is long enough to prevent a blink, but short enough for the
+ * costume to disappear promptly when the visitor actually leaves the mirror.
+ */
+export function updateCostumeTracking(
+  previous: CostumeTrackingState | null,
+  detected: CostumePlacement | null,
+  now: number,
+): CostumeTrackingState | null {
+  if (detected) {
+    return {
+      placement: previous
+        ? interpolatePlacement(previous.placement, detected, PLACEMENT_SMOOTHING)
+        : detected,
+      lastReliableAt: now,
+    };
+  }
+
+  return previous && now - previous.lastReliableAt <= COSTUME_TRACKING_GRACE_MS
+    ? previous
+    : null;
 }
 
 /**
@@ -78,9 +109,20 @@ export function paintCostumeOverlay(
     return false;
   }
 
+  paintCostumePlacement(context, image, placement, projection.scale);
+  return true;
+}
+
+export function paintCostumePlacement(
+  context: CanvasRenderingContext2D,
+  image: CanvasImageSource,
+  placement: CostumePlacement,
+  scale: number,
+): void {
+
   context.save();
   context.globalAlpha = 0.94;
-  context.shadowBlur = 12 * projection.scale;
+  context.shadowBlur = 12 * scale;
   context.shadowColor = "rgba(228, 184, 95, 0.42)";
   context.drawImage(
     image,
@@ -90,7 +132,23 @@ export function paintCostumeOverlay(
     placement.height,
   );
   context.restore();
-  return true;
+}
+
+function interpolatePlacement(
+  previous: CostumePlacement,
+  next: CostumePlacement,
+  amount: number,
+): CostumePlacement {
+  return {
+    x: interpolate(previous.x, next.x, amount),
+    y: interpolate(previous.y, next.y, amount),
+    width: interpolate(previous.width, next.width, amount),
+    height: interpolate(previous.height, next.height, amount),
+  };
+}
+
+function interpolate(previous: number, next: number, amount: number): number {
+  return previous + (next - previous) * amount;
 }
 
 function visible(point: VisionLandmark | undefined): point is VisionLandmark {

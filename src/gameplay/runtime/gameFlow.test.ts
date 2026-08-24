@@ -73,6 +73,18 @@ describe("booth flow", () => {
     expect(state.captureIntent).toBeNull();
   });
 
+  it("opens the creator page without starting or interrupting a session", () => {
+    let state = apply(booth(), { type: "about" });
+    expect(state.screen).toBe("about");
+    expect(state.level).toBeNull();
+    expect(state.gestureId).toBeNull();
+    expect(state.captureIntent).toBeNull();
+
+    state = wait(state, 60_000, false);
+    expect(state.screen).toBe("about");
+    expect(apply(state, { type: "quit" }).screen).toBe("attract");
+  });
+
   it("does not open the tutorial before the camera is running", () => {
     const noCamera = wait(createFlowState(), 2_000);
     expect(apply(noCamera, { type: "tutorial" }).screen).toBe("attract");

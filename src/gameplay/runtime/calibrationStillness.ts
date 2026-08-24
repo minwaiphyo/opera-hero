@@ -8,6 +8,7 @@ const MIN_VISIBILITY = 0.55;
 const POSE_POINTS = [0, 11, 12, 13, 14, 15, 16, 23, 24] as const;
 
 export interface CalibrationSnapshot {
+  ready: boolean;
   progress: number;
   complete: boolean;
 }
@@ -35,7 +36,7 @@ export class CalibrationStillness {
     this.previous = frame;
     if (motion === null) {
       this.stillSinceMs = frame.capturedAtMs;
-      return EMPTY;
+      return { ready: true, progress: 0, complete: false };
     }
 
     if (motion <= CALIBRATION_MOTION_THRESHOLD) {
@@ -52,7 +53,7 @@ export class CalibrationStillness {
       ? 0
       : frame.capturedAtMs - this.stillSinceMs;
     const progress = Math.min(1, heldMs / CALIBRATION_HOLD_MS);
-    return { progress, complete: progress >= 1 };
+    return { ready: true, progress, complete: progress >= 1 };
   }
 
   reset(): void {
@@ -62,7 +63,7 @@ export class CalibrationStillness {
   }
 }
 
-const EMPTY: CalibrationSnapshot = { progress: 0, complete: false };
+const EMPTY: CalibrationSnapshot = { ready: false, progress: 0, complete: false };
 
 function normalizedPoseMotion(
   previous: VisionLandmarkFrame,
@@ -90,8 +91,7 @@ function usablePose(frame: VisionLandmarkFrame): boolean {
     landmarks &&
     visible(landmarks[11]) &&
     visible(landmarks[12]) &&
-    visible(landmarks[23]) &&
-    visible(landmarks[24]),
+    POSE_POINTS.filter((index) => visible(landmarks[index])).length >= 6,
   );
 }
 

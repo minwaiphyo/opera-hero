@@ -11,6 +11,7 @@
  *
  *   handoff                              here
  *   attract, welcome                  →  attract
+ *   team attribution                  →  about
  *   visitor positioning               →  calibration
  *   instructions, demonstration       →  tutorial, learn
  *   countdown                         →  countdown
@@ -27,6 +28,7 @@
 
 export const GAME_SCREENS = [
   "attract",
+  "about",
   "tutorial",
   "calibration",
   "learn",
@@ -84,6 +86,8 @@ export interface GameView {
   countdownSeconds: number | null;
   /** 0..1 through the required still hold on the calibration screen. */
   calibrationProgress: number;
+  /** True only after the stillness detector accepts a usable calibration frame. */
+  calibrationReady: boolean;
   trackingPrompt: TrackingPrompt;
   /** Present on `result` only. Null means the attempt could not be scored. */
   score: GameScore | null;
@@ -98,6 +102,8 @@ export interface GameView {
 }
 
 export interface GameActions {
+  /** Attract → about. Show the team behind the project. */
+  about(): void;
   /** Attract → tutorial. The visitor wants to see the movements before committing. */
   tutorial(): void;
   /** Attract → calibration. The visitor presses Start; nothing else begins a session. */
@@ -119,6 +125,7 @@ export const INITIAL_VIEW: GameView = {
   gestureId: null,
   countdownSeconds: null,
   calibrationProgress: 0,
+  calibrationReady: false,
   trackingPrompt: "step-into-frame",
   score: null,
   scores: {},

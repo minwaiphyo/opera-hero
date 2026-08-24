@@ -17,6 +17,7 @@ function view(overrides: Partial<GameView> = {}): GameView {
 
 function stubActions(): GameActions {
   return {
+    about: vi.fn(),
     tutorial: vi.fn(),
     start: vi.fn(),
     next: vi.fn(),
@@ -61,11 +62,7 @@ describe("GameShell", () => {
     }
   });
 
-  /**
-   * The stage advertises nothing but the game. The dashboard and the laboratories are
-   * development surfaces, reachable by URL only — no link on any screen leads to them.
-   */
-  it("offers no links away from the game on any screen", () => {
+  it("offers no links away from the locally deployed game", () => {
     for (const gameScreen of GAME_SCREENS) {
       renderShell(
         view({
@@ -102,7 +99,7 @@ describe("GameShell", () => {
    * with what the screen is actually for.
    */
   it("shows the visitor their own image while there is still performing to do", () => {
-    const withoutMirror = new Set(["tutorial", "result", "complete"]);
+    const withoutMirror = new Set(["about", "tutorial", "result", "complete"]);
 
     for (const gameScreen of GAME_SCREENS) {
       renderShell(view({ ...level1, screen: gameScreen, score: goodScore }));
@@ -124,8 +121,42 @@ describe("GameShell", () => {
 
   it("starts a session from the attract screen", () => {
     const actions = renderShell(view({ screen: "attract" }));
+    expect(
+      screen.getByRole("heading", { name: /^Opera Hero$/ }),
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Start" }));
     expect(actions.start).toHaveBeenCalledOnce();
+  });
+
+  it("opens the creator page from the menu and returns", () => {
+    const actions = renderShell(view({ screen: "attract" }));
+    fireEvent.click(screen.getByRole("button", { name: "About the creators" }));
+    expect(actions.about).toHaveBeenCalledOnce();
+    cleanup();
+
+    const aboutActions = renderShell(view({ screen: "about" }));
+    expect(screen.getByRole("heading", { name: "Meet the creators" })).toBeInTheDocument();
+    expect(screen.queryByText(/team\s*16/i)).toBeNull();
+    expect(screen.getByText("In order from left to right")).toBeInTheDocument();
+    expect(screen.getByAltText(/four Opera Hero creators/i)).toHaveAttribute(
+      "src",
+      "/team/opera-hero-team.jpg",
+    );
+    expect(screen.getByText("www.linkedin.com/in/min-wai-phyo/")).toBeInTheDocument();
+    expect(screen.getByText("www.linkedin.com/in/kaung-khant-minn21/")).toBeInTheDocument();
+    expect(screen.getByText("www.linkedin.com/in/bill-sujith-kumaar/")).toBeInTheDocument();
+    expect(screen.getByText("www.linkedin.com/in/prateek-abc12/")).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("listitem").map((item) => item.querySelector("strong")?.textContent),
+    ).toEqual([
+      "Mani Kumar Prateek",
+      "Min Wai Phyo",
+      "Stalin Muthukumar Bill Sujith Kumaar",
+      "Kaung Khant Minn",
+    ]);
+    expect(screen.queryByText(/@gmail\.com/i)).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    expect(aboutActions.quit).toHaveBeenCalledOnce();
   });
 
   it("guides framing and stillness during calibration", () => {
@@ -147,11 +178,26 @@ describe("GameShell", () => {
           screen: "calibration",
           trackingPrompt: "ready",
           calibrationProgress: 0.5,
+          calibrationReady: true,
         })}
       />,
     );
     expect(screen.getByText("Stand still")).toBeInTheDocument();
     expect(document.querySelector(".calibration-progress span")).toHaveStyle({ width: "50%" });
+  });
+
+  it("does not ask the visitor to stand still before calibration can progress", () => {
+    renderShell(
+      view({
+        screen: "calibration",
+        trackingPrompt: "ready",
+        calibrationReady: false,
+      }),
+    );
+
+    expect(screen.getByText("Adjust your stance")).toBeInTheDocument();
+    expect(screen.getByText(/shoulders, arms and waist visible/i)).toBeInTheDocument();
+    expect(screen.queryByText("Stand still")).toBeNull();
   });
 
   it("offers the tutorial from the attract screen", () => {
