@@ -8,14 +8,31 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BrowserMediaDevices } from "../../camera/browserMediaDevices";
+import { CameraDeviceCatalog } from "../../camera/cameraDeviceCatalog";
+import { CameraPreferenceStore } from "../../camera/cameraPreferences";
 import { DEFAULT_CAMERA_CONFIG } from "../../camera/cameraConstraints";
 import { planCameraRecovery } from "../../camera/cameraRecovery";
 import { CameraService } from "../../camera/cameraService";
 import type {
+  CameraConfig,
   CameraFailure,
   CameraSession,
   CameraStatus,
 } from "../../camera/cameraTypes";
+
+type CameraSelectionResolver = Pick<CameraDeviceCatalog, "resolveSelection">;
+
+export async function resolveBoothCameraConfig(
+  catalog: CameraSelectionResolver,
+): Promise<CameraConfig> {
+  const selection = await catalog.resolveSelection().catch(() => ({
+    device: null,
+  }));
+  return {
+    ...DEFAULT_CAMERA_CONFIG,
+    ...(selection.device ? { deviceId: selection.device.deviceId } : {}),
+  };
+}
 
 export interface BoothCamera {
   status: CameraStatus;
@@ -26,13 +43,23 @@ export interface BoothCamera {
   retry(): void;
 }
 
-export type CameraServiceFactory = () => CameraService;
+export interface BoothCameraRuntime {
+  service: CameraService;
+  catalog: CameraDeviceCatalog;
+}
 
-const browserCameraService: CameraServiceFactory = () =>
-  new CameraService(new BrowserMediaDevices());
+export type BoothCameraRuntimeFactory = () => BoothCameraRuntime;
+
+const createBrowserBoothCameraRuntime: BoothCameraRuntimeFactory = () => {
+  const mediaDevices = new BrowserMediaDevices();
+  return {
+    service: new CameraService(mediaDevices),
+    catalog: new CameraDeviceCatalog(mediaDevices, new CameraPreferenceStore()),
+  };
+};
 
 export function useBoothCamera(
-  createService: CameraServiceFactory = browserCameraService,
+  createRuntime: BoothCameraRuntimeFactory = createBrowserBoothCameraRuntime,
 ): BoothCamera {
   const [state, setState] = useState<Omit<BoothCamera, "retry">>({
     status: "idle",
@@ -40,7 +67,7 @@ export function useBoothCamera(
     failure: null,
     ready: false,
   });
-  const serviceRef = useRef<CameraService | null>(null);
+  const runtimeRef = useRef<BoothCameraRuntime | null>(null);
   const attemptsRef = useRef(0);
   const timerRef = useRef<number | null>(null);
 
@@ -51,17 +78,18 @@ export function useBoothCamera(
     }
   }, []);
 
-  const open = useCallback(async (service: CameraService) => {
+  const open = useCallback(async (runtime: BoothCameraRuntime) => {
     try {
-      await service.start(DEFAULT_CAMERA_CONFIG);
+      await runtime.service.start(await resolveBoothCameraConfig(runtime.catalog));
     } catch {
       // The service publishes a normalized failure event.
     }
   }, []);
 
   useEffect(() => {
-    const service = createService();
-    serviceRef.current = service;
+    const runtime = createRuntime();
+    const { service } = runtime;
+    runtimeRef.current = runtime;
     let active = true;
 
     const unsubscribe = service.subscribe((event) => {
@@ -96,31 +124,31 @@ export function useBoothCamera(
         clearTimer();
         timerRef.current = window.setTimeout(() => {
           timerRef.current = null;
-          void open(service);
+          void open(runtime);
         }, plan.delayMs);
       }
     });
 
-    void open(service);
+    void open(runtime);
 
     return () => {
       active = false;
       clearTimer();
       unsubscribe();
-      serviceRef.current = null;
+      runtimeRef.current = null;
       service.dispose();
     };
-  }, [clearTimer, createService, open]);
+  }, [clearTimer, createRuntime, open]);
 
   const retry = useCallback(() => {
-    const service = serviceRef.current;
-    if (!service) {
+    const runtime = runtimeRef.current;
+    if (!runtime) {
       return;
     }
     clearTimer();
     attemptsRef.current = 0;
     setState((current) => ({ ...current, failure: null }));
-    void open(service);
+    void open(runtime);
   }, [clearTimer, open]);
 
   return { ...state, retry };
