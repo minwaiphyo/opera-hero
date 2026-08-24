@@ -121,6 +121,9 @@ describe("GameShell", () => {
 
   it("starts a session from the attract screen", () => {
     const actions = renderShell(view({ screen: "attract" }));
+    expect(
+      screen.getByRole("heading", { name: /^Opera Hero$/ }),
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Start" }));
     expect(actions.start).toHaveBeenCalledOnce();
   });

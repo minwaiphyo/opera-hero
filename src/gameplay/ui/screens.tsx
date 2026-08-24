@@ -63,7 +63,6 @@ export function AttractScreen({
       <div className="attract-copy">
         <h1 className="attract-wordmark" id="title">
           {COPY.title}
-          <span lang="zh-Hant">{COPY.chineseTitle}</span>
         </h1>
         <p className="attract-subtitle">{COPY.subtitle}</p>
         <p className="invitation">{COPY.invitation}</p>
